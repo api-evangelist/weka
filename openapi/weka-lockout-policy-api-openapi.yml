@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Lockout policy API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Lockout policy
+paths:
+  /lockoutPolicy:
+    get:
+      tags:
+      - Lockout policy
+      summary: Get lockout policy
+      description: Returns the account lockout threshold policy details.
+      operationId: getLockoutPolicy
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/lockoutPolicy'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - Lockout policy
+      summary: Update lockout policy
+      description: Modifies the account lockout threshold policy.
+      operationId: setLockoutPolicy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/lockoutPolicy'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/lockoutPolicy'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - Lockout policy
+      summary: Reset lockout policy
+      description: Clears the failed login attempts counter and unlocks any currently locked accounts.
+      operationId: resetLockoutPolicy
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    lockoutPolicy:
+      type: object
+      properties:
+        num_failed_logins:
+          type: number
+          example: 5
+        lockout_duration:
+          type: number
+          example: 120
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,248 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Object store API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Object store
+paths:
+  /objectStores/{uid}:
+    put:
+      tags:
+      - Object store
+      summary: Update a specific object store
+      description: Updates the connection details for an existing object store.
+      operationId: updateObs
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the object store to update.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: A new unique name for the object store configuration.
+                  example: ON_PREM1
+                protocol:
+                  type: string
+                  description: The connection protocol to use for the object store endpoint.
+                  enum:
+                  - HTTP
+                  - HTTPS
+                  - HTTPS_UNVERIFIED
+                hostname:
+                  type: string
+                  description: The hostname or IP address of the object store endpoint.
+                  example: s3.eu-west-1.amazonaws.com
+                port:
+                  type: number
+                  description: The network port of the object store endpoint.
+                  example: 80
+                auth_method:
+                  type: string
+                  description: The authentication method to use. `AWSSignature4` is recommended for modern services like AWS S3.
+                  enum:
+                  - None
+                  - AWSSignature2
+                  - AWSSignature4
+                region:
+                  type: string
+                  description: The provider-specific region of the object store (e.g., `eu-west-1` for AWS). Required for some cloud providers.
+                  example: eu-west-1
+                access_key_id:
+                  type: string
+                  description: The access key ID for authentication. Required for `AWSSignature2` and `AWSSignature4` methods.
+                  example: some_key
+                secret_key:
+                  type: string
+                  description: The secret access key for authentication. Required for `AWSSignature2` and `AWSSignature4` methods.
+                  example: some_secret_key
+                bandwidth:
+                  type: number
+                  description: The maximum bandwidth per I/O process to be used for this object store, in megabits per second (Mbps).
+                  example: 1000
+                max_concurrent_downloads:
+                  type: number
+                  description: The maximum number of concurrent download operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_concurrent_uploads:
+                  type: number
+                  description: The maximum number of concurrent upload operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_concurrent_removals:
+                  type: number
+                  description: The maximum number of concurrent removal operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_extents_in_data_blob:
+                  type: number
+                  description: The maximum number of data extents to include in a single uploaded data blob.
+                  example: 10
+                max_blocks_in_data_blob:
+                  type: number
+                  description: The maximum size of a single uploaded data blob. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 10
+                sts_operation_type:
+                  type: string
+                  description: The AWS Security Token Service (STS) operation type for authentication. Currently, only `ASSUME_ROLE` is supported.
+                  enum:
+                  - ASSUME_ROLE
+                sts_role_arn:
+                  type: string
+                  description: The Amazon Resource Name (ARN) of the IAM role to assume when using STS authentication.
+                  example: arn:aws:iam::123456789012:role/MyRole
+                sts_role_session_name:
+                  type: string
+                  description: A unique identifier for the assumed role session. Must be 2-64 characters long and can only contain alphanumeric characters and the following symbols - `_` `=` `,` `.` `@` `-`.
+                  example: weka-session
+                sts_session_duration:
+                  type: number
+                  description: The duration, in seconds, for the temporary security credentials. The value must be between 900 and 43200. Defaults to 3600.
+                  example: 3600
+  /objectStores/capacities:
+    get:
+      tags:
+      - Object store
+      summary: Get OBS bucket capacity utilization information
+      description: Retrieves capacity usage details for object store buckets. This includes total consumed bytes, active user data, and reclaimable space percentages per filesystem. Use this endpoint to monitor tiered storage health and trigger data refreshes for accurate capacity reporting.
+      parameters:
+      - in: query
+        name: filesystem
+        schema:
+          type: string
+        description: Optional filesystem name to filter results.
+      - in: query
+        name: force_fresh
+        schema:
+          type: boolean
+        description: Force refresh of capacity data.
+      operationId: getObsCapacities
+      responses:
+        '200':
+          description: OBS bucket capacity information with total consumed, used, and reclaimable data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        filesystem_name:
+                          type: string
+                          example: default
+                        filesystem_uid:
+                          type: string
+                          example: 12345678-1234-1234-1234-123456789012
+                        obs_bucket_name:
+                          type: string
+                          example: obs-bucket-1
+                        obs_bucket_uid:
+                          type: string
+                          example: 87654321-4321-4321-4321-210987654321
+                        total_consumed_bytes:
+                          type: integer
+                          format: int64
+                          example: 22548578304
+                          description: The capacity used by user data in the bucket and capacity pending reclamation.
+                        used_bytes:
+                          type: integer
+                          format: int64
+                          example: 5456609280
+                          description: The capacity used by user data.
+                        reclaimable_percent:
+                          type: number
+                          format: double
+                          example: 76.09
+                          description: The percentage of unused capacity available for reclamation.
+                        reclaimable_threshold:
+                          type: number
+                          format: double
+                          example: 80
+                        reclaimable_low_threshold:
+                          type: number
+                          format: double
+                          example: 70
+                        reclaimable_high_threshold:
+                          type: number
+                          format: double
+                          example: 90
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

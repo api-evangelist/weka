@@ -1,0 +1,257 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Weka home API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Weka home
+paths:
+  /wekaHome:
+    get:
+      tags:
+      - Weka home
+      summary: Get WEKA Home configuration
+      description: Returns the current configuration for the WEKA Home cloud service.
+      operationId: getCloud
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      cloud_stats_enabled:
+                        type: boolean
+                        example: false
+                      status:
+                        type: string
+                        example: healthy
+                      isRegistered:
+                        type: boolean
+                        example: true
+                      hosts:
+                        type: object
+                        properties:
+                          HostId<0>:
+                            type: object
+                            properties:
+                              load:
+                                type: number
+                                example: 0
+                              health:
+                                type: string
+                                example: READY
+                      url:
+                        type: string
+                        example: https://company.com
+        '401':
+          $ref: '#/components/responses/401'
+  /wekaHome/proxy:
+    get:
+      tags:
+      - Weka home
+      summary: Get WEKA Home proxy URL
+      description: Returns the configured proxy URL for accessing WEKA Home.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      proxy:
+                        type: string
+                        example: proxy.some
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Weka home
+      summary: Set WEKA Home proxy URL
+      description: Sets or updates the proxy URL used for accessing WEKA Home.
+      operationId: setCloudProxy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                proxy:
+                  type: string
+                  description: HTTP proxy used to connect to cloud services.
+              required:
+              - proxy
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      proxy:
+                        type: string
+                        example: proxy.some
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /wekaHome/uploadRate:
+    get:
+      tags:
+      - Weka home
+      summary: Get WEKA Home upload rate
+      description: Returns the current data upload rate limit for WEKA Home.
+      operationId: getCloudUploadRate
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: number
+                    example: 1048576
+                    description: Maximum uploaded bytes per second.
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - Weka home
+      summary: Set WEKA Home upload rate
+      description: Sets the maximum data upload rate to WEKA Home in bytes per second.
+      operationId: updateCloudUploadRate
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bytes_per_second:
+                  type: number
+                  description: Maximum uploaded bytes per second.
+              required:
+              - bytes_per_second
+  /wekaHome/url:
+    get:
+      tags:
+      - Weka home
+      summary: Get WEKA Home URL
+      description: Returns the base URL for the WEKA Home cloud service.
+      operationId: getCloudUrl
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                    example: https://some_cloud.com
+        '401':
+          $ref: '#/components/responses/401'
+  /wekaHome/enable:
+    post:
+      tags:
+      - Weka home
+      summary: Enable WEKA Home
+      description: Enables and configures the connection to the WEKA Home cloud service.
+      operationId: enableCloud
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cloud_url:
+                  type: string
+                  description: The base url of the cloud service.
+                enable_cloud_stats:
+                  type: boolean
+                  description: Enable or disable uploading stats to the cloud.
+  /wekaHome/disable:
+    post:
+      tags:
+      - Weka home
+      summary: Disable WEKA Home
+      description: Disables the connection to the WEKA Home cloud service.
+      operationId: disableCloud
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

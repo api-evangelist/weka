@@ -1,0 +1,152 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory TLS API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: TLS
+paths:
+  /tls:
+    get:
+      tags:
+      - TLS
+      summary: Get TLS status
+      description: Returns the current TLS configuration, including certificate details and status.
+      operationId: getTls
+      responses:
+        '200':
+          description: TLS status and certificate details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        example: true
+                      organization:
+                        type: string
+                        example: company
+                      country:
+                        type: string
+                        example: IL
+                      state:
+                        type: string
+                        example: TA
+                      expiredDate:
+                        type: string
+                        example: '2021-03-20T08:17:34Z'
+                      email:
+                        type: string
+                        example: mail@company.io
+                      commonName:
+                        type: string
+                        example: t1831-*.company.io
+                      locality:
+                        type: string
+                        example: Tel-Aviv
+                      organizationUnit:
+                        type: string
+                        example: qa
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - TLS
+      summary: Configure TLS certificate
+      description: Uploads and enables a new TLS certificate and key for the cluster.
+      operationId: enableTls
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - tls_cert_pem
+              - tls_key_pem
+              properties:
+                tls_cert_pem:
+                  type: string
+                  example: '-----BEGIN CERTIFICATE-----\n<certificate_content\n>\n-----END CERTIFICATE-----"'
+                tls_key_pem:
+                  type: string
+                  example: 'REDACTED_PRIVATE_KEY_EXAMPLE"'
+    delete:
+      tags:
+      - TLS
+      summary: Disable TLS certificate
+      description: Removes the current TLS certificate configuration from the cluster.
+      operationId: disableTls
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /tls/certificate:
+    get:
+      tags:
+      - TLS
+      summary: Get TLS certificate
+      description: Returns the full TLS certificate configured for the cluster.
+      operationId: getTlsCertificate
+      responses:
+        '200':
+          description: TLS certificate data.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/tlsCertificate'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  schemas:
+    tlsCertificate:
+      type: object
+      properties:
+        config_state:
+          type: string
+          example: USER_DEFINED
+        enabled:
+          type: boolean
+          example: true
+        certificate:
+          type: string
+          example: '-----BEGIN CERTIFICATE-----\n<all_the_content_of_cert.pem_with_\n>\n-----END CERTIFICATE-----"'
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

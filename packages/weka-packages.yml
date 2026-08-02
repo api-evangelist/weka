@@ -1,0 +1,73 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/weka
+notes: >-
+  First-party WEKA client libraries, IaC modules, Kubernetes tooling, and CLIs
+  published by the github.com/weka organization and public registries. The
+  cluster's own `weka` CLI ships inside the WEKA software; wekactl/portcli are
+  distributed via Homebrew/Scoop/RPM/DEB taps. See cli/weka-cli.yml for the
+  command surface.
+packages:
+- language: hcl
+  registry: terraform
+  name: weka/weka/aws
+  url: https://registry.terraform.io/modules/weka/weka/aws
+  install: 'module "weka" { source = "weka/weka/aws" }'
+  official: true
+  description: Deploy a WEKA cluster on AWS via Terraform.
+- language: hcl
+  registry: terraform
+  name: weka/weka/azure
+  url: https://registry.terraform.io/modules/weka/weka/azure
+  install: 'module "weka" { source = "weka/weka/azure" }'
+  official: true
+  description: Deploy a WEKA cluster on Azure via Terraform.
+- language: hcl
+  registry: terraform
+  name: weka/weka/gcp
+  url: https://registry.terraform.io/modules/weka/weka/gcp
+  install: 'module "weka" { source = "weka/weka/gcp" }'
+  official: true
+  description: Deploy a WEKA cluster on GCP via Terraform.
+- language: typescript
+  registry: npm
+  name: weka-ui-components
+  url: https://www.npmjs.com/package/weka-ui-components
+  install: npm install weka-ui-components
+  official: true
+  description: WEKA React UI component library.
+- language: go
+  registry: github
+  name: csi-wekafs
+  url: https://github.com/weka/csi-wekafs
+  install: 'helm repo add csi-wekafs https://weka.github.io/csi-wekafs'
+  official: true
+  description: WekaFS Container Storage Interface (CSI) plugin for Kubernetes.
+- language: go
+  registry: github
+  name: weka-operator
+  url: https://github.com/weka/weka-operator
+  install: 'kubectl / helm install weka-operator'
+  official: true
+  description: Kubernetes Operator for WEKA.
+- language: go
+  registry: krew
+  name: kubectl-weka
+  url: https://github.com/weka/kubectl-weka
+  install: kubectl krew install weka
+  official: true
+  description: kubectl krew plugin to manage WEKA objects.
+- language: go
+  registry: github
+  name: go-weka-observability
+  url: https://github.com/weka/go-weka-observability
+  install: go get github.com/weka/go-weka-observability
+  official: true
+  description: WEKA Go library for observability (metrics, logs, traces).
+- language: shell
+  registry: homebrew
+  name: weka/wekactl
+  url: https://github.com/weka/homebrew-wekactl
+  install: brew install weka/wekactl/wekactl
+  official: true
+  description: wekactl cloud cluster control CLI (also on Scoop, RPM, DEB).

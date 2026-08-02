@@ -1,0 +1,128 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Login API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Login
+paths:
+  /login:
+    post:
+      summary: Log in to the cluster
+      description: Authenticates and grants access to the cluster using valid credentials.<br> Securely saves user credentials in the user's home directory upon successful login.
+      operationId: login
+      tags:
+      - Login
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/tokens'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - username
+              - password
+              properties:
+                username:
+                  type: string
+                  description: User's username.
+                  example: admin
+                password:
+                  type: string
+                  description: User's password.
+                  example: Password123
+                org:
+                  type: string
+                  description: Organization name, default 'Root'.
+                  example: root
+  /login/refresh:
+    post:
+      summary: Get access token
+      description: Obtains a new access token using an existing refresh token.<br> The system creates an authentication token file and saves it in `~/.weka/auth-token.json`.<br> The token file contains both the access token and the refresh token.
+      operationId: refreshToken
+      tags:
+      - Login
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/tokens'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - refresh_token
+              properties:
+                refresh_token:
+                  type: string
+                  description: Refresh token.
+                  example: refresh_token_string
+                access_token_expiry:
+                  type: number
+                  description: Access token expiration time.
+                  example: 300
+                refresh_token_expiry:
+                  type: number
+                  description: Refresh token expiration time.
+                  example: 300
+components:
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    tokens:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: access_token_string
+        token_type:
+          type: string
+          example: Bearer
+        expires_in:
+          type: number
+          example: 3000
+        refresh_token:
+          type: string
+          example: refresh_token_string
+        password_change_required:
+          type: boolean
+          example: false
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

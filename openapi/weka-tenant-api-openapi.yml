@@ -1,0 +1,762 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Tenant API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Tenant
+paths:
+  /tenants/multipleTenantsExist:
+    get:
+      tags:
+      - Tenant
+      summary: Check if multiple tenants exist
+      description: Checks if more than one tenant is configured in the cluster. This is useful for determining if multi-tenancy is active.
+      operationId: getMultipleTenantsExist
+      responses:
+        '200':
+          description: A boolean value indicating if multiple tenants exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: boolean
+                    example: true
+  /tenants:
+    get:
+      tags:
+      - Tenant
+      summary: Get a list of all tenants
+      description: Returns a list of all tenants configured in the cluster.
+      operationId: getTenants
+      responses:
+        '200':
+          description: A list of tenants was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/organization'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Tenant
+      summary: Create a new tenant
+      description: Creates a new tenant within the cluster. A tenant is a logical partition that isolates users and data for multi-tenancy.
+      operationId: createTenant
+      responses:
+        '200':
+          description: The tenant was created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - username
+              - password
+              properties:
+                name:
+                  type: string
+                  description: A unique name for the new tenant.
+                  example: TENANT-1
+                username:
+                  type: string
+                  description: The username for the initial administrator of the new tenant.
+                  example: tenant1-user
+                password:
+                  type: string
+                  description: The password for the initial tenant administrator.
+                  example: Tenant1User
+                ssd_quota:
+                  type: number
+                  description: The storage quota for the tenant on the SSD tier. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 10000000000
+                total_quota:
+                  type: number
+                  description: The total storage quota for the tenant, including SSD and object store capacity. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 20000000000
+                enforce_fs_authentication:
+                  type: boolean
+                  description: Enforce every filesystem created under this tenant requires authentication.
+                enforce_mount_netspace_access:
+                  type: boolean
+                  description: Enforce every mount requested coming from network space belonging to this tenant.
+                network_space_names:
+                  type: array
+                  items:
+                    type: string
+                  description: Network space names to assign to the new tenant.
+                  example:
+                  - netspace-1
+  /tenants/{uid}:
+    get:
+      tags:
+      - Tenant
+      summary: Get a specific tenant
+      description: Returns the details of a specific tenant, identified by its UID.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant.
+      operationId: getTenant
+      responses:
+        '200':
+          description: The tenant details were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+      - Tenant
+      summary: Delete a specific tenant
+      description: Removes a specific tenant from the cluster. This operation is only possible if the tenant does not contain any resources.
+      operationId: deleteTenant
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant to delete.
+    put:
+      tags:
+      - Tenant
+      summary: Rename a tenant
+      description: Updates the name of a specific tenant.
+      operationId: updateTenant
+      responses:
+        '200':
+          description: The tenant was renamed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant to rename.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: The new unique name for the tenant.
+                  example: TENANT-2
+  /tenants/{uid}/limits:
+    put:
+      tags:
+      - Tenant
+      summary: Set or update tenant quotas
+      description: Sets or updates the storage capacity quotas for a specific tenant.
+      operationId: setTenantLimit
+      responses:
+        '200':
+          description: The tenant quotas were updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ssd_quota:
+                  type: number
+                  description: The storage quota for the tenant on the SSD tier. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 10000000000
+                total_quota:
+                  type: number
+                  description: The total storage quota for the tenant, including SSD and object store capacity. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 20000000000
+  /tenants/{uid}/options:
+    put:
+      tags:
+      - Tenant
+      summary: Update tenant options
+      description: Updates enforcement options for a specific tenant, such as filesystem authentication and mount network space access enforcement.
+      operationId: updateTenantOptions
+      responses:
+        '200':
+          description: The tenant options were updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enforce_fs_authentication:
+                  type: boolean
+                  description: Enforce every filesystem created under this tenant requires authentication.
+                enforce_mount_netspace_access:
+                  type: boolean
+                  description: Enforce every mount requested coming from network space belonging to this tenant.
+  /tenants/{uid}/networkSpaces:
+    get:
+      tags:
+      - Tenant
+      summary: Get network spaces for a tenant
+      description: Returns a list of network spaces assigned to a specific tenant.
+      operationId: getTenantNetworkSpaces
+      responses:
+        '200':
+          description: A list of network space names was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - netspace-1
+                    - netspace-2
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant.
+  /tenants/{uid}/networkSpaces/add:
+    post:
+      tags:
+      - Tenant
+      summary: Add network spaces to a tenant
+      description: Assigns one or more network spaces to a specific tenant without affecting existing assignments.
+      operationId: addTenantNetworkSpaces
+      responses:
+        '200':
+          description: The network spaces were successfully added.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - netspace-1
+                    - netspace-2
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - network_space_names
+              properties:
+                network_space_names:
+                  description: An array of network space names to add to the tenant.
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - netspace-1
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant.
+  /tenants/{uid}/networkSpaces/remove:
+    post:
+      tags:
+      - Tenant
+      summary: Remove network spaces from a tenant
+      description: Removes one or more network spaces from a specific tenant.
+      operationId: removeTenantNetworkSpaces
+      responses:
+        '200':
+          description: The network spaces were successfully removed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - netspace-2
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - network_space_names
+              properties:
+                network_space_names:
+                  description: An array of network space names to remove from the tenant.
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - netspace-1
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant.
+  /tenants/{uid}/revoke:
+    delete:
+      tags:
+      - Tenant
+      summary: Revoke all user tokens for a tenant
+      description: Immediately invalidates all active login sessions (GUI, CLI, API) for all users within a specific tenant.
+      operationId: revokeTenantTokens
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the tenant.
+  /tenants/{uid}/securityPolicy:
+    delete:
+      tags:
+      - Tenant
+      summary: Reset security policies for a tenant
+      description: Removes all attached security policies from a specific tenant.
+      operationId: resetTenantSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully removed from the tenant.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the tenant.
+        example: 00000000-0000-0000-0000-000000000000
+    get:
+      tags:
+      - Tenant
+      summary: Get security policies for a tenant
+      description: Returns a list of all security policies attached to a specific tenant.
+      operationId: getTenantSecurityPolicies
+      responses:
+        '200':
+          description: A list of attached security policies was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the tenant.
+        example: 00000000-0000-0000-0000-000000000000
+    put:
+      tags:
+      - Tenant
+      summary: Set security policies for a tenant
+      description: Replaces all existing security policies on a tenant with a new set. Any policies not included in the request will be detached.
+      operationId: setTenantSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully set for the tenant.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: An array of security policy UIDs to apply to the tenant.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the tenant.
+        example: 00000000-0000-0000-0000-000000000000
+  /tenants/{uid}/securityPolicy/attach:
+    post:
+      tags:
+      - Tenant
+      summary: Attach security policies to a tenant
+      description: Attaches one or more security policies to a specific tenant without affecting existing attachments.
+      operationId: attachTenantSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully attached.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: An array of security policy UIDs to attach to the tenant.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the tenant.
+        example: 00000000-0000-0000-0000-000000000000
+  /tenants/{uid}/securityPolicy/detach:
+    post:
+      tags:
+      - Tenant
+      summary: Detach security policies from a tenant
+      description: Detaches one or more security policies from a specific tenant.
+      operationId: detachTenantSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully detached.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: An array of security policy UIDs to detach from the tenant.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the tenant.
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+    organization:
+      type: object
+      properties:
+        total_quota:
+          type: number
+          example: 20000002048
+        id:
+          type: number
+          example: 1
+        ssd_quota:
+          type: number
+          example: 10000003072
+        ssd_allocated:
+          type: number
+          example: 0
+        name:
+          type: string
+          example: ORG-1
+        total_allocated:
+          type: number
+          example: 0
+        uid:
+          type: string
+          example: uid_string
+        security_policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/securityPolicyInfo'
+        enforce_fs_auth:
+          type: boolean
+          example: false
+          description: Enforce every filesystem created under this tenant requires authentication.
+        enforce_mount_netspace_access:
+          type: boolean
+          example: true
+          description: Enforce every mount requested coming from network space belonging to this tenant.
+        network_spaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/networkSpaceInfo'
+    networkSpaceInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: netspace-1
+        id:
+          type: string
+          example: NetspaceId<0>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

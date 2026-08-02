@@ -1,0 +1,1297 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Filesystem API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Filesystem
+paths:
+  /fileSystems:
+    get:
+      tags:
+      - Filesystem
+      summary: List all filesystems
+      description: Returns a list of all filesystems in the cluster.
+      parameters:
+      - in: query
+        name: force_fresh
+        schema:
+          type: boolean
+        description: Refresh the capacities to ensure they are current.
+      operationId: getFileSystems
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/fileSystem'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Filesystem
+      summary: Create filesystem
+      description: Creates a new filesystem in the cluster.
+      operationId: createFileSystem
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/fileSystem'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - group_name
+              - total_capacity
+              properties:
+                name:
+                  type: string
+                  description: Filesystem name.
+                  example: fs1
+                group_name:
+                  type: string
+                  example: default
+                  description: Group name.
+                total_capacity:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: Total capacity (format - capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                obs_name:
+                  type: string
+                  example: OBS_1
+                  description: Object store name. Mandatory for tiered filesystems.
+                ssd_capacity:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: SSD capacity. (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                thin_provision_min_ssd:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: Thin-provisioned minimum SSD capacity. (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                thin_provision_max_ssd:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: Thin-provisioned maximum SSD capacity. (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                encrypted:
+                  type: boolean
+                  example: true
+                  description: Creates an encrypted filesystem.
+                auth_required:
+                  type: boolean
+                  example: true
+                  description: Require the mounting user to be authenticated for mounting this filesystem. This flag is only effective in the root organization; users in non-root organizations must be authenticated to perform a mount operation.
+                allow_no_kms:
+                  type: boolean
+                  example: true
+                  description: Allow (insecurely) creating an encrypted filesystem without a KMS configured.
+                kms_vault_key_identifier:
+                  type: string
+                  example: weka_fs_key1
+                  description: Key identifier for encrypting the filesystem key.
+                kms_vault_namespace:
+                  type: string
+                  example: namespace1
+                  description: Namespace in which the key is created.
+                kms_vault_role_id:
+                  type: string
+                  example: d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8
+                  description: Role Identifier with access to the specified key.
+                kms_vault_secret_id:
+                  type: string
+                  example: b99052e6-8bf1-4f0a-a3d0-969f90698d28
+                  description: Secret identifier to access the key for the specified role.
+                data_reduction:
+                  type: boolean
+                  example: true
+                  description: Enable data reduction.
+                audit:
+                  type: boolean
+                  example: true
+                  description: Enable audit logging.
+                audit_open_close:
+                  type: boolean
+                  example: true
+                  description: Enable audit logging for Open/Close operation.
+                index_enabled:
+                  type: boolean
+                  example: true
+                  description: Enable catalog indexing for this filesystem.
+                has_permissions:
+                  type: boolean
+                  example: false
+                  description: Enable filesystem mount permissions.
+                org:
+                  type: string
+                  example: org1
+                  description: Tenant name or ID. Defaults to the current user's tenant.
+  /fileSystems/{uid}:
+    get:
+      tags:
+      - Filesystem
+      summary: Get filesystem details
+      description: Returns detailed information about a specific filesystem, such as its size, quota, and usage.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem.
+      - in: query
+        name: force_fresh
+        schema:
+          type: boolean
+        description: Refresh the capacities to ensure they are current.
+      operationId: getFileSystem
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/fileSystem'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+      - Filesystem
+      summary: Update a filesystem
+      description: Updates the settings of an existing filesystem.
+      operationId: updateFileSystem
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/fileSystem'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: New name.
+                  example: newFs
+                total_capacity:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: Total capacity. (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                ssd_capacity:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: SSD capacity. (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                thin_provision_min_ssd:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: Thin-provisioned minimum SSD capacity. (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                thin_provision_max_ssd:
+                  type: integer
+                  format: int64
+                  example: 1073741824
+                  description: Thin-provisioned maximum SSD capacity. (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                auth_required:
+                  type: boolean
+                  example: true
+                  description: Require the mounting user to be authenticated for mounting this filesystem. This flag is only effective in the root organization; users in non-root organizations must be authenticated to perform a mount operation.
+                audit:
+                  type: boolean
+                  example: true
+                  description: Update audit status.
+                audit_open_close:
+                  type: boolean
+                  example: true
+                  description: Update audit status for Open/Close operations.
+                kms_vault_key_identifier:
+                  type: string
+                  example: weka_fs_key1
+                  description: Key identifier for encrypting the filesystem key.
+                kms_vault_namespace:
+                  type: string
+                  example: namespace1
+                  description: Namespace in which the key is created.
+                kms_vault_role_id:
+                  type: string
+                  example: d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8
+                  description: Role Identifier with access to the specified key.
+                kms_vault_secret_id:
+                  type: string
+                  example: b99052e6-8bf1-4f0a-a3d0-969f90698d28
+                  description: Secret identifier to access the key for the specified role.
+                use_cluster_kms_conf:
+                  type: boolean
+                  example: true
+                  description: Update the filesystem to use cluster KMS configuration.
+                index_enabled:
+                  type: boolean
+                  example: true
+                  description: Enable catalog indexing for this filesystem.
+                has_permissions:
+                  type: boolean
+                  example: false
+                  description: Update the filesystem to use access permissions.
+                owner:
+                  type: string
+                  example: 9df5a0ff-3828-470e-9537-a12d54172526
+                  description: Update the filesystem owner to the given user UID.
+    delete:
+      tags:
+      - Filesystem
+      summary: Remove a filesystem
+      description: Removes a specified filesystem and its data from the cluster.
+      operationId: deleteFileSystem
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem.
+      - in: query
+        name: purge_from_obs
+        schema:
+          type: boolean
+        description: Delete the filesystem's objects from Object Storage, making all uploaded snapshots unusable.
+  /fileSystems/{uid}/mountToken:
+    post:
+      tags:
+      - Filesystem
+      summary: Obtain mount token for filesystem
+      description: Generates a long-lived authentication token to mount a specific filesystem. This token enables persistent access and supports controlled permissions, such as read-only access or defined expiration periods.
+      operationId: getMountToken
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Filesystem uid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                read_only:
+                  type: boolean
+                  description: Mount token can only be used for read-only mounts
+                  example: true
+                expires:
+                  type: number
+                  description: Expiration time in seconds for the token
+  /fileSystems/{uid}/objectStores:
+    post:
+      deprecated: true
+      tags:
+      - Filesystem
+      summary: Attach an object store bucket (Deprecated)
+      description: This endpoint is deprecated. Use POST /fileSystems/{uid}/objectStoreBuckets instead.
+      operationId: attachObsToFs
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - obs_name
+              type: object
+              properties:
+                obs_name:
+                  type: string
+                  description: Name of the Object Store Bucket to attach.
+                  example: obs1
+                obs_mode:
+                  type: string
+                  description: The operation mode for the OBS.
+                  enum:
+                  - READ_ONLY
+                  - WRITABLE
+  /fileSystems/{uid}/objectStoreBuckets:
+    post:
+      tags:
+      - Filesystem
+      summary: Attach an object store bucket
+      description: Links an object store bucket to a filesystem, allowing tiered data access.
+      operationId: attachObsBucketToFs
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - obs_name
+              type: object
+              properties:
+                obs_name:
+                  type: string
+                  description: Name of the Object Store Bucket to attach.
+                  example: obs1
+                obs_mode:
+                  type: string
+                  description: The operation mode for the OBS.
+                  enum:
+                  - READ_ONLY
+                  - WRITABLE
+  /fileSystems/{uid}/objectStores/{obs_uid}:
+    delete:
+      deprecated: true
+      tags:
+      - Filesystem
+      summary: Detach an object store bucket (Deprecated)
+      description: This endpoint is deprecated. Use DELETE /fileSystems/{uid}/objectStoreBuckets/{obs_uid} instead.
+      operationId: detachObsFromFS
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: CWTaskId<278>
+                    description: Detach task ID.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UID.
+      - in: path
+        name: obs_uid
+        required: true
+        schema:
+          type: string
+        description: Object store system UID.
+  /fileSystems/{inode_id}/getPath:
+    get:
+      tags:
+      - Filesystem
+      summary: Get path by inode ID
+      description: Returns the full path of a file or directory using its inode ID.
+      parameters:
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the inode.
+      operationId: filesystemResolveInode
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/filesystemInodeGetPath'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /fileSystems/{inode_id}/resolve:
+    get:
+      deprecated: true
+      tags:
+      - Filesystem
+      summary: Get filesystem by inode ID (Deprecated)
+      description: This endpoint is deprecated. Use GET /fileSystems/{inode_id}/getPath instead.
+      parameters:
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the inode.
+      operationId: filesystemResolveInode
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/filesystemResolve'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /fileSystems/{uid}/objectStoreBuckets/{obs_uid}:
+    delete:
+      tags:
+      - Filesystem
+      summary: Detach object store bucket from filesystem
+      description: Disconnects an object store bucket from a filesystem, separating their data access.
+      operationId: detachObsBucketFromFS
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: CWTaskId<278>
+                    description: Detach task ID.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UID.
+      - in: path
+        name: obs_uid
+        required: true
+        schema:
+          type: string
+        description: Object store system UID.
+  /fileSystems/download:
+    post:
+      tags:
+      - Filesystem
+      summary: Download filesystem from object store
+      description: Creates a new filesystem based on a saved snapshot stored in an object store bucket.
+      operationId: downloadFS
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/fileSystem'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - group_name
+              - total_capacity
+              - object_storage
+              - locator
+              - ssd_capacity
+              properties:
+                name:
+                  type: string
+                  description: New filesystem name.
+                  example: new_fs
+                group_name:
+                  type: string
+                  description: Group name.
+                  example: default
+                total_capacity:
+                  type: integer
+                  format: int64
+                  example: 10000000000
+                  description: Total capacity (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                object_storage:
+                  type: string
+                  description: Object Store name.
+                  example: obs1
+                locator:
+                  type: string
+                  description: Locator.
+                  example: bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc
+                ssd_capacity:
+                  type: integer
+                  format: int64
+                  example: 10000000000
+                  description: SSD capacity (format - Capacity in decimal or binary units - 11B, 1KB, 1MB, 1GB, 1TB, 1PB, 1EB, 1KiB, 1MiB, 1GiB, 1TiB, 1PiB, 1EiB).
+                auth_required:
+                  type: boolean
+                  example: true
+                  description: Require the mounting user to be authenticated for mounting this filesystem. This flag is only effective in the root organization; users in non-root organizations must be authenticated to perform a mount operation.
+                additional_object_storage:
+                  type: string
+                  example: obs2
+                  description: Additional object Store name.
+                snapshot_name:
+                  type: string
+                  example: snapName
+                access_point:
+                  type: string
+                  example: 111d3
+                kms_vault_key_identifier:
+                  type: string
+                  example: weka_fs_key1
+                  description: Key identifier to encrypt the filesystem key.
+                kms_vault_namespace:
+                  type: string
+                  example: namespace1
+                  description: Namespace in which the key is created.
+                kms_vault_role_id:
+                  type: string
+                  example: d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8
+                  description: Role Identifier that has access to the specified key.
+                kms_vault_secret_id:
+                  type: string
+                  example: b99052e6-8bf1-4f0a-a3d0-969f90698d28
+                  description: Secret identifier to access the key for the specified role.
+                audit:
+                  type: boolean
+                  example: true
+                  description: Enable audit logging.
+                audit_open_close:
+                  type: boolean
+                  example: true
+                  description: Enable audit logging for Open/Close operation.
+  /fileSystems/thinProvisionReserve:
+    get:
+      tags:
+      - Filesystem
+      summary: Get thin-provisioning reserve status
+      description: Returns the existing allocated thin-provisioning space reserved for your organization within the cluster.
+      operationId: getFileSystemsThinProvisionReserveStatus
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ThinProvisionReserve'
+        '401':
+          $ref: '#/components/responses/401'
+  /fileSystems/thinProvisionReserve/{org_uid}:
+    put:
+      tags:
+      - Filesystem
+      summary: Set thin-provisioning reserve
+      description: Sets the thin-provisioning space for your organization's filesystems.
+      operationId: setFileSystemsThinProvisionReserve
+      parameters:
+      - in: path
+        name: org_uid
+        required: true
+        schema:
+          type: string
+        description: Organization UID to set the thin-provisioning space.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ssd_capacity
+              properties:
+                ssd_capacity:
+                  type: integer
+                  format: int64
+                  description: SSD Capacity to reserve.
+                  example: 1073741824
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+                description: Previously set value (zero means no value is set).
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+      - Filesystem
+      summary: Remove thin-provisioning reserve
+      description: Removes the existing reserved thin-provisioning space allocated for your organization's filesystems.
+      operationId: deleteFileSystemsThinProvisionReserve
+      parameters:
+      - in: path
+        name: org_uid
+        required: true
+        schema:
+          type: string
+        description: Organization UID.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: integer
+                format: int64
+                description: Previously set value (zero means no value is set).
+        '400':
+          $ref: '#/components/responses/400'
+        '404':
+          $ref: '#/components/responses/404'
+  /fileSystems/{uid}/securityPolicy:
+    delete:
+      tags:
+      - Filesystem
+      summary: Remove all security policies from a filesystem
+      description: Detaches all security policies from a specific filesystem.
+      operationId: resetFsSecurityPolicies
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        description: Filesystem UID.
+    get:
+      tags:
+      - Filesystem
+      summary: Get security policies for a filesystem
+      description: Returns a list of all security policies attached to a specific filesystem.
+      operationId: getFsSecurityPolicies
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        description: Filesystem UID.
+    put:
+      tags:
+      - Filesystem
+      summary: Set filesystem security policies
+      description: Replaces all security policies on a filesystem with a new, specified set of policies.
+      operationId: setFsSecurityPolicies
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: Security policies to set for the filesystem.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        description: Filesystem UID.
+  /fileSystems/{uid}/securityPolicy/attach:
+    post:
+      tags:
+      - Filesystem
+      summary: Attach security policies to a filesystem
+      description: Adds one or more security policies to a filesystem's existing policy list.
+      operationId: attachFsSecurityPolicies
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: Security policies to set for filesystem.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Filesystem UID.
+        example: 00000000-0000-0000-0000-000000000000
+  /fileSystems/{uid}/securityPolicy/detach:
+    post:
+      tags:
+      - Filesystem
+      summary: Detach security policies from a filesystem
+      description: Removes one or more specified security policies from a filesystem.
+      operationId: detachFsSecurityPolicies
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: Security policies to set for filesystem.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Filesystem UID.
+        example: 00000000-0000-0000-0000-000000000000
+  /fileSystems/freeSpaceInOrg:
+    get:
+      tags:
+      - Filesystem
+      summary: Get available space in an organization
+      description: Returns the total unprovisioned and reclaimable SSD space available for new or existing filesystems within the user's organization.
+      operationId: getFreeSpaceInOrg
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unprovisionedSpace:
+                    type: integer
+                    format: int64
+                    description: Unprovisioned space in bytes.
+                    example: 1073741824
+                  reclaimableSpace:
+                    type: integer
+                    format: int64
+                    description: Reclaimable space in bytes. 0 is if thin provisioning is disabled.
+                    example: 536870912
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Forbidden
+  schemas:
+    filesystemInodeGetPath:
+      type: object
+      properties:
+        access_point:
+          type: string
+          example: string
+        fs_id:
+          type: string
+          example: FSId<1>
+        fs_name:
+          type: string
+          example: default
+        inode_id:
+          type: string
+          example: '10092623495168'
+        path:
+          type: string
+          example: /
+        snap_name:
+          type: string
+          example: string
+        snap_view_id:
+          type: string
+          example: SnapViewId<1>
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+    filesystemResolve:
+      type: object
+      properties:
+        access_point:
+          type: string
+          example: string
+        fs_id:
+          type: string
+          example: FSId<1>
+        fs_name:
+          type: string
+          example: default
+        inode_context:
+          type: string
+          example: InodeContext<1>
+        inode_id:
+          type: string
+          example: InodeId<1>
+        path:
+          type: string
+          example: /
+        snap_name:
+          type: string
+          example: string
+        snap_view_id:
+          type: string
+          example: SnapViewId<1>
+    ThinProvisionReserve:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 0
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        name:
+          type: string
+          example: Root
+        ssd_reserve:
+          type: integer
+          format: int64
+          example: 0
+    fileSystem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: FSId<2>
+        auto_max_files:
+          type: boolean
+          example: false
+        used_ssd_data:
+          type: integer
+          format: int64
+          example: 0
+        name:
+          type: string
+          example: fs1
+        uid:
+          type: string
+          example: '245'
+        is_removing:
+          type: boolean
+          example: false
+        group_id:
+          type: string
+          example: FSGroupId<0>
+        is_creating:
+          type: boolean
+          example: true
+        free_total:
+          type: integer
+          format: int64
+          example: 1073737728
+        is_encrypted:
+          type: boolean
+          example: true
+        metadata_budget:
+          type: integer
+          format: int64
+          example: 4202496
+        used_total_data:
+          type: integer
+          format: int64
+          example: 0
+        used_total:
+          type: integer
+          format: int64
+          example: 4096
+        ssd_budget:
+          type: integer
+          format: int64
+          example: 1073741824
+        is_ready:
+          type: boolean
+          example: false
+        group_name:
+          type: string
+          example: default
+        available_total:
+          type: integer
+          format: int64
+          example: 1073741824
+        status:
+          type: string
+          example: CREATING
+        used_ssd_metadata:
+          type: integer
+          format: int64
+          example: 4096
+        auth_required:
+          type: boolean
+          example: true
+        available_ssd_metadata:
+          type: integer
+          format: int64
+          example: 4202496
+        total_budget:
+          type: integer
+          format: int64
+          example: 1073741824
+        used_ssd:
+          type: integer
+          format: int64
+          example: 4096
+        object_storages:
+          type: array
+          deprecated: true
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: '237'
+              state:
+                type: string
+                example: ACTIVE
+              status:
+                type: string
+                example: UP
+              detachProgress:
+                type: number
+                example: 0
+              obsId:
+                type: string
+                example: ObjectStorageId<0>
+              mode:
+                type: string
+                example: WRITABLE
+              name:
+                type: string
+                example: OBS_1
+        obs_buckets:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: '237'
+              state:
+                type: string
+                example: ACTIVE
+              status:
+                type: string
+                example: UP
+              detachProgress:
+                type: number
+                example: 0
+              obsId:
+                type: string
+                example: ObjectStorageId<0>
+              mode:
+                type: string
+                example: WRITABLE
+              name:
+                type: string
+                example: OBS_1
+        available_ssd:
+          type: integer
+          format: int64
+          example: 1073741824
+        free_ssd:
+          type: integer
+          format: int64
+          example: 1073737728
+        data_reduction:
+          type: boolean
+          example: true
+        data_reduction_ratio:
+          type: number
+          example: 5.2
+        used_ssd_pending:
+          type: integer
+          format: int64
+          example: 1073737728
+        compressed_estimation:
+          type: integer
+          format: int64
+          example: 1073737728
+        kms_key_identifier:
+          type: string
+          example: weka_fs_key1
+        kms_namespace:
+          type: string
+          example: namespace1
+        kms_role:
+          type: string
+          example: 11bc2535-671a-63ad-c4f4-93b21afe8cd6
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

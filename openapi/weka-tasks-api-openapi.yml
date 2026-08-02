@@ -1,0 +1,223 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Tasks API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Tasks
+paths:
+  /tasks:
+    get:
+      tags:
+      - Tasks
+      summary: Get background tasks
+      description: Returns all background tasks currently running in the cluster, with optional filtering for waiting tasks.
+      operationId: getTasks
+      parameters:
+      - in: query
+        name: show_waiting
+        description: Include tasks in waiting state.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of background tasks.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: CWTaskId<0>
+                          description: Unique task identifier.
+                        state:
+                          type: string
+                          example: RUNNING
+                          description: Current task state.
+                        params:
+                          type: object
+                          description: Task-specific parameters.
+                          properties:
+                            obsId:
+                              type: string
+                              example: ObjectStorageId<0>
+                            fsId:
+                              type: string
+                              example: FSId<0>
+                            purpose:
+                              type: string
+                              example: UNTIER
+                        uid:
+                          type: string
+                          example: uid_string
+                          description: Task UUID.
+                        progress:
+                          type: number
+                          example: 99.04327392578125
+                          description: Completion percentage (0-100).
+                        type:
+                          type: string
+                          example: OBS_DETACH
+                          description: Task type identifier.
+                        description:
+                          type: string
+                          example: Detaching Object Storage `obs1` from filesystem `default`
+                          description: Human-readable task description.
+                        is_explicitly_paused:
+                          type: boolean
+                          example: false
+                          description: Whether task was manually paused.
+        '401':
+          $ref: '#/components/responses/401'
+  /tasks/{uid}/resume:
+    post:
+      tags:
+      - Tasks
+      summary: Resume paused task
+      description: Resumes execution of a previously paused background task.
+      operationId: resumeTask
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: Task UUID.
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          description: Task not found.
+  /tasks/{uid}/pause:
+    post:
+      tags:
+      - Tasks
+      summary: Pause running task
+      description: Temporarily pauses a running background task. The task can be resumed later without losing progress.
+      operationId: pauseTask
+      parameters:
+      - in: path
+        name: uid
+        description: Task UUID.
+        required: true
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          description: Task not found.
+  /tasks/{uid}/abort:
+    post:
+      tags:
+      - Tasks
+      summary: Abort running task
+      description: Permanently terminates a background task and discards any incomplete work. This action cannot be undone.
+      operationId: abortTask
+      parameters:
+      - in: path
+        name: uid
+        description: Task UUID.
+        required: true
+        schema:
+          type: string
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          description: Task not found.
+  /tasks/limits:
+    get:
+      tags:
+      - Tasks
+      summary: Get task resource limits
+      description: Returns the current CPU resource limits configured for background task execution.
+      operationId: getTasksLimit
+      responses:
+        '200':
+          description: Current task resource limits.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      cpuPercentLimit:
+                        type: number
+                        example: 5
+                        description: Maximum CPU percentage allocated to background tasks.
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - Tasks
+      summary: Update task resource limits
+      description: Configures the maximum CPU resources that can be allocated to background tasks cluster-wide.
+      operationId: setTasksLimit
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          description: Invalid limit value.
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - cpu_limit
+              properties:
+                cpu_limit:
+                  type: number
+                  minimum: 0
+                  maximum: 100
+                  example: 50
+                  description: CPU percentage to allocate for background tasks (0-100).
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

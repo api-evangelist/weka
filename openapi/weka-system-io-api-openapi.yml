@@ -1,0 +1,107 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory System IO API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: System IO
+paths:
+  /io/start:
+    post:
+      tags:
+      - System IO
+      summary: Start cluster IO services
+      description: Initiates IO services across the entire cluster.
+      operationId: startIO
+      responses:
+        '200':
+          description: Successful initiation of cluster IO services.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      resend_secs:
+                        type: number
+                        example: 3
+                        description: Interval in seconds before resending the request, if required.
+                      result:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                            example: STARTING_NODES
+                            description: Current status of the IO service startup process.
+                      completed:
+                        type: boolean
+                        example: false
+                        description: Indicates whether the IO services have been fully started.
+        '401':
+          $ref: '#/components/responses/401'
+  /io/stop:
+    post:
+      tags:
+      - System IO
+      summary: Stop cluster IO services
+      description: Shuts down IO services across the entire cluster.
+      operationId: stopIO
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                brutal_no_flush:
+                  type: boolean
+                  description: Immediately stops IO services without performing a graceful flush of ongoing operations.<br> This option may lead to data loss and must only be used under explicit guidance from the Customer Success Team.
+      responses:
+        '200':
+          description: Successful initiation of cluster IO shutdown.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      resend_secs:
+                        type: number
+                        example: 3
+                        description: Interval in seconds before resending the request, if required.
+                      result:
+                        type: object
+                        properties:
+                          status:
+                            type: string
+                            example: STOPPING_SERVICES
+                            description: Current status of the IO service shutdown process.
+                      completed:
+                        type: boolean
+                        example: false
+                        description: Indicates whether the IO services have been fully stopped.
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

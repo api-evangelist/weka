@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/weka-openapi-original.json
+format: json
+api: '@weka-api'
+notes: >-
+  Derived from the 4xx/5xx responses declared across the WEKA REST API OpenAPI
+  3.0.3 definition (412 operations). WEKA returns errors as application/json
+  (not RFC 9457 problem+json). Counts reflect how many operations declare each
+  status. Titles/remediation enriched from the WEKA security and REST API docs.
+envelope:
+  content_type: application/json
+  format: non-rfc9457
+problems:
+- status: 400
+  title: Bad request
+  meaning: Request parameters or body are invalid.
+  occurrences: 199
+  action: Validate the request against the OpenAPI schema and CLI parameter docs.
+- status: 401
+  title: Unauthorized
+  meaning: Missing, expired, or invalid access token.
+  occurrences: 389
+  action: Obtain a fresh access token via POST /login or POST /login/refresh; access tokens expire after 5 minutes by default.
+  docs: https://docs.weka.io/security/obtain-authentication-tokens.md
+- status: 403
+  title: Forbidden
+  meaning: Authenticated principal lacks the required role/permission for the operation.
+  occurrences: 1
+  action: Verify the user role (cluster admin, org admin, S3 role) and organization scope.
+- status: 404
+  title: Not found
+  meaning: The referenced resource (filesystem, bucket, quota, org, user) does not exist.
+  occurrences: 163
+  action: Confirm the resource uid/uuid; list the collection to verify existence.
+- status: 409
+  title: Conflict
+  meaning: The operation conflicts with the current state of the resource.
+  occurrences: 2
+  action: Re-read current state via GET and retry after resolving the conflict.
+- status: 500
+  title: Internal server error
+  meaning: Unexpected server-side error in the cluster management process.
+  occurrences: 4
+  action: Retry with backoff; if persistent, collect logs (weka-log-collector) and contact WEKA support.
+- status: 503
+  title: Service unavailable
+  meaning: The cluster or a required service is temporarily unavailable (e.g. not ready, degraded).
+  occurrences: 5
+  action: Check cluster status (GET /cluster) and retry after the service recovers.
+- status: 504
+  title: Gateway timeout
+  meaning: An upstream cluster operation did not complete in time.
+  occurrences: 1
+  action: Retry with backoff; verify cluster health.

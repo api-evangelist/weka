@@ -1,0 +1,256 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory KMS API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: KMS
+paths:
+  /kms:
+    get:
+      tags:
+      - KMS
+      summary: Get KMS configuration
+      description: Returns the Key Management Service (KMS) configuration for the specified organization.
+      operationId: getKms
+      parameters:
+      - in: query
+        name: org
+        schema:
+          type: string
+        description: Organization name or ID. Defaults to the callers organization.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      params:
+                        type: object
+                        properties:
+                          master_key_name:
+                            type: string
+                            example: cluster_key
+                          base_url:
+                            type: string
+                            example: https://company.com:4000
+                          auth_method:
+                            type: string
+                            example: RoleId/SecretId
+                      kms_type:
+                        type: string
+                        example: HashiCorpVault
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - KMS
+      summary: Set KMS configuration
+      description: Sets a new Key Management Service (KMS) configuration (Hashicorp Vault or KMIP) for the specified organization.
+      operationId: setKms
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                org:
+                  type: string
+                  description: Organization name or ID. Defaults to the callers organization.
+                  example: my_organization
+                base_url:
+                  type: string
+                  description: KMS URL address (Vault-only).
+                  example: https://compney.com:4000
+                master_key_name:
+                  type: string
+                  description: Key name to secure the filesystem keys (Vault-only).
+                  example: cluster_key
+                token:
+                  type: string
+                  description: API token for authenticating with a HashiCorp Vault KMS used for cluster-wide encryption.<br> Do not use with the role_id or secret_id parameters, which are used for AppRole authentication.
+                  example: s.token_string
+                server_endpoint:
+                  type: string
+                  description: Server address, usually a hostname:port (KMIP-only).
+                key_uid:
+                  type: string
+                  description: Key UID to secure the filesystem keys (KMIP-only).
+                client_cert_pem:
+                  type: string
+                  description: Path to the client certificate PEM file (KMIP-only).
+                client_key_pem:
+                  type: string
+                  description: Path to the client key PEM file (KMIP-only).
+                ca_cert_pem:
+                  type: string
+                  description: Path to the CA certificate PEM file (KMIP-only).
+                namespace:
+                  type: string
+                  description: The namespace name in HashiCorp Vault.
+                  example: namespace1
+                role_id:
+                  type: string
+                  description: Role ID to access the KMS (Vault-only).
+                  example: d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8
+                secret_id:
+                  type: string
+                  description: Secret ID to access the KMS (Vault-only).
+                  example: b99052e6-8bf1-4f0a-a3d0-969f90698d28
+                convert_to_cluster_key:
+                  description: Convert all encrypted filesystems to use the cluster KMS key.
+                  type: boolean
+                  example: true
+    delete:
+      tags:
+      - KMS
+      summary: Delete KMS configuration
+      description: Removes the KMS configuration for the specified organization. For tenant KMS deletion with encrypted filesystems, use force_delete to switch to cluster-wide KMS, or allow_downgrade to fall back to local encryption if no cluster KMS exists.
+      operationId: deleteKms
+      parameters:
+      - in: query
+        name: org
+        schema:
+          type: string
+        description: Organization name or ID. Defaults to the callers organization.
+      - in: query
+        name: force_delete
+        schema:
+          type: boolean
+        description: For tenant KMS deletion, allows switching encrypted filesystems to use the cluster-wide KMS configuration. Requires a cluster-wide KMS to be configured.
+      - in: query
+        name: allow_downgrade
+        schema:
+          type: boolean
+        description: Allows downgrading encrypted filesystems to local encryption. Required when deleting cluster-wide KMS with encrypted filesystems, or when deleting tenant KMS without a cluster-wide KMS configured.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /kms/type:
+    get:
+      tags:
+      - KMS
+      summary: Get KMS type
+      description: Returns the configured KMS type (HashiCorp Vault or KMIP) for the specified organization.
+      operationId: getKmsType
+      parameters:
+      - in: query
+        name: org
+        schema:
+          type: string
+        description: Organization name or ID. Defaults to the callers organization.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: HashiCorpVault
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /kms/rewrap:
+    post:
+      tags:
+      - KMS
+      summary: Rewrap KMS key
+      description: Updates the encryption keys for existing filesystems with a new KMS master key for the specified organization.
+      operationId: rewrapKmsKey
+      responses:
+        '200':
+          description: ''
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                org:
+                  type: string
+                  description: Organization name or ID. Defaults to the callers organization.
+                  example: my_organization
+                new_key_uid:
+                  type: string
+                  description: (KMIP-only) Unique identifier for the new key to be used to wrap filesystem keys.
+                rewrapAll:
+                  type: boolean
+                  example: true
+                  description: (Vault-only) Rewrap all filesystems, including one with custom KMS settings.
+                convert_to_cluster_key:
+                  type: boolean
+                  example: true
+                  description: (Vault-only) Convert all filesystem custom settings to use cluster key.
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

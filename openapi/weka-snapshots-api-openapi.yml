@@ -1,0 +1,1105 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Snapshots API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Snapshots
+paths:
+  /snapshots:
+    get:
+      tags:
+      - Snapshots
+      summary: List all snapshots
+      description: Returns a list of all filesystem snapshots in the system. Snapshots are point-in-time copies used for backup, archiving, and testing. Filter results by filesystem using the query parameter.
+      operationId: getSnapshots
+      parameters:
+      - in: query
+        name: filesystem
+        description: Filter by specific filesystem.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successfully retrieved snapshot list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/snapshot'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Snapshots
+      summary: Create a new snapshot
+      description: Creates a point-in-time snapshot of an existing filesystem. Snapshots are read-only by default and do not impact system performance. Writable snapshots enable data modification for testing environments.<br> Snapshots consume minimal space based on 4KB granularity differences. Once created as writable, a snapshot cannot be converted to read-only.
+      operationId: createSnapshot
+      responses:
+        '200':
+          description: Snapshot created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshot'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - fs_uid
+              - name
+              properties:
+                fs_uid:
+                  type: string
+                  description: Unique identifier of the filesystem to snapshot.
+                  example: 12345678-1234-1234-1234-123456789abc
+                name:
+                  type: string
+                  description: Name for the snapshot.
+                  example: daily_backup_2024_10_13
+                access_point:
+                  type: string
+                  description: Access point directory name for mounting the snapshot.
+                  example: snap_mount_point
+                source_snap_uid:
+                  type: string
+                  description: Source snapshot identifier when creating a snapshot of an existing snapshot.
+                  example: 87654321-4321-4321-4321-cba987654321
+                is_writable:
+                  type: boolean
+                  description: Create a writable snapshot. Writable snapshots consume approximately twice the internal resources of read-only snapshots and cannot be converted to read-only.
+  /snapshots/{uid}:
+    get:
+      tags:
+      - Snapshots
+      summary: Get snapshot details
+      description: Returns detailed information about a specific snapshot, including creation timestamp, parent filesystem, size, and writability status.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the snapshot (UUID format).
+      operationId: getSnapshot
+      responses:
+        '200':
+          description: Successfully retrieved snapshot details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshot'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+      - Snapshots
+      summary: Update snapshot configuration
+      description: Modifies snapshot name or access point. The snapshot's data and point-in-time state remain unchanged.
+      operationId: updateSnapshot
+      responses:
+        '200':
+          description: Snapshot updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshotEdit'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the snapshot to update.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: New name for the snapshot.
+                  example: weekly_backup_renamed
+                access_point:
+                  type: string
+                  description: New access point directory name.
+                  example: new_mount_point
+    delete:
+      tags:
+      - Snapshots
+      summary: Delete a snapshot
+      description: Permanently removes a snapshot from the system and frees storage space consumed by its unique data. If the snapshot has been downloaded to another filesystem, deletion may cause that filesystem to malfunction. Ensure downloaded snapshots are un-tiered or migrated before deletion.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the snapshot to delete.
+  /snapshots/{uid}/copy:
+    post:
+      tags:
+      - Snapshots
+      summary: Create a copy of a snapshot
+      description: Creates a duplicate of an existing snapshot within the same filesystem. Useful for creating multiple versions or preserving snapshot state.
+      operationId: copySnapshot
+      responses:
+        '200':
+          description: Snapshot copied successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshot'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        description: Unique identifier of the source snapshot to copy.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                destination_name:
+                  type: string
+                  description: Name for the newly created snapshot copy.
+                  example: backup_copy_2024_10_13
+  /snapshots/{uid}/upload:
+    post:
+      tags:
+      - Snapshots
+      summary: Upload snapshot to object store
+      description: Transfers a snapshot to object storage using the Snap-To-Object feature. Consolidates all snapshot data, including filesystem metadata and files, for backup, archiving, or disaster recovery. Only read-only snapshots can be uploaded. Upload snapshots in chronological order for optimal efficiency.
+      operationId: uploadSnapshot
+      responses:
+        '200':
+          description: Snapshot upload initiated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      extra:
+                        type: object
+                        description: Additional metadata related to the upload operation.
+                      locator:
+                        type: string
+                        description: Unique locator string identifying the snapshot's location in object store. Required for downloading or restoring the snapshot.
+                        example: 59c2ddf9/d/s/16/spec/b365-4e7a-b924-b2f0956b7f9c
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the snapshot to upload.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                obs_site:
+                  type: string
+                  enum:
+                  - REMOTE
+                  - LOCAL
+                  description: Destination object store site. LOCAL for co-located high-performance backup, REMOTE for geographic redundancy.
+  /snapshots/download:
+    post:
+      tags:
+      - Snapshots
+      summary: Download snapshot from object store
+      description: Downloads a previously uploaded snapshot from object storage to a filesystem. Enables data restoration, disaster recovery, and filesystem migration. Snapshots are incrementally reconstructed on the target filesystem. Apply snapshots in chronological order for optimal consistency. Use the locator obtained during snapshot upload. Downloading snapshots from object stores within the same cluster is not supported.
+      operationId: downloadSnapshot
+      responses:
+        '200':
+          description: Snapshot download initiated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshot'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - fs_uid
+              - locator
+              properties:
+                fs_uid:
+                  type: string
+                  description: Unique identifier of the target filesystem.
+                  example: 12345678-1234-1234-1234-123456789abc
+                locator:
+                  type: string
+                  description: Unique locator string identifying the snapshot in object store (returned during upload).
+                  example: bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc
+                name:
+                  type: string
+                  description: Name to assign to the downloaded snapshot.
+                  example: restored_backup_2024
+                access_point:
+                  type: string
+                  description: Access point directory name for mounting.
+                  example: restored_mount
+                allow_non_chronological:
+                  type: boolean
+                  description: Permit downloading snapshots in non-chronological order. Use with caution as this may affect data consistency.
+                allow_divergence:
+                  type: boolean
+                  description: Allow downloading snapshots that are not descendants of the last downloaded snapshot. Use carefully to avoid data inconsistencies.
+  /snapshots/{fs_uid}/{uid}/restore:
+    post:
+      tags:
+      - Snapshots
+      summary: Restore filesystem from snapshot
+      description: Restores a filesystem to a previous state using a specified snapshot. This operation overwrites the current filesystem content. This operation is destructive. Ensure appropriate backups exist before proceeding. Consider creating a snapshot of the current filesystem state first.
+      operationId: restoreFileSystemFromSnapshot
+      responses:
+        '200':
+          description: Filesystem restoration initiated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshot'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: fs_uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the target filesystem to restore.
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the source snapshot.
+  /snapshots/locatorInfo:
+    post:
+      tags:
+      - Snapshots
+      summary: Get snapshot metadata from object store
+      description: Returns detailed metadata about a snapshot stored in object storage using its locator string. Queries the object store directly without requiring the snapshot to be downloaded.
+      operationId: locatorInfo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - object_storage
+              - locator
+              properties:
+                object_storage:
+                  type: string
+                  description: Name or identifier of the object storage system.
+                  example: primary_obs
+                locator:
+                  type: string
+                  description: Unique locator string identifying the snapshot's location (returned during upload).
+                  example: bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc
+      responses:
+        '200':
+          description: Snapshot metadata retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshotLocatorInfoDetails'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /snapshots/diff/prepare:
+    post:
+      summary: Initialize snapshot differential analysis
+      description: Prepares the system for computing differences between two snapshots by generating processing tokens (cookies). This is the first step in a two-phase operation for identifying changed, added, or deleted files. The operation divides the comparison workload into parallel chunks based on the requested parallelism. Use the returned cookies in subsequent getResults calls.
+      operationId: diffPrepare
+      tags:
+      - Snapshots
+      responses:
+        '200':
+          description: Differential analysis prepared successfully with cookie tokens.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/cookielist'
+              example:
+                data:
+                - 0-0-0-3-4-0-0
+                - 2-0-40000000-3-4-40000000-0
+                - 4-0-80000000-3-4-80000000-0
+                - 6-0-C0000000-3-4-C0000000-0
+                - 9-0-0-3-4-0-0
+                - B-0-40000000-3-4-40000000-0
+                - D-0-80000000-3-4-80000000-0
+                - F-0-C0000000-3-4-C0000000-0
+                - 12-0-0-3-4-0-0
+                - 14-0-40000000-3-4-40000000-0
+                - 16-0-80000000-3-4-80000000-0
+                - 18-0-C0000000-3-4-C0000000-0
+                - 1B-0-0-3-4-0-0
+                - 1D-0-40000000-3-4-40000000-0
+                - 1F-0-80000000-3-4-80000000-0
+                - 21-0-C0000000-3-4-C0000000-0
+                - FFFF-FFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-0
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - fs_name
+              - recent_snap
+              - parallelism
+              properties:
+                fs_name:
+                  type: string
+                  description: Name of the filesystem containing the snapshots.
+                  example: production_fs
+                recent_snap:
+                  type: string
+                  description: Name of the newer snapshot (target state).
+                  example: backup_oct_13
+                older_snap:
+                  type: string
+                  description: Name of the older snapshot (baseline state). If omitted, compares against the immediately preceding snapshot.
+                  example: backup_oct_12
+                parallelism:
+                  type: number
+                  description: Number of parallel processing tokens to generate. Higher values enable greater parallelism. Recommended range 4-32.
+                  example: 16
+  /snapshots/diff/getResults:
+    post:
+      summary: Get snapshot differential results
+      description: Retrieves the actual differences between two snapshots, including changed, added, and deleted files. Must be called after preparing the differential analysis using the prepare endpoint. Supports efficient pagination through resume and stop tokens. Use resume_token from previous responses to continue where you left off.
+      operationId: diffList
+      tags:
+      - Snapshots
+      responses:
+        '200':
+          description: Snapshot differences retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/diff_list'
+              examples:
+                thread1-iteration1:
+                  summary: Thread 1 - Iteration 1 (100 results)
+                  description: First iteration with max_results=100, showing initial batch of changes
+                  value:
+                    data:
+                      results_count: 100
+                      next_resume_token: 0-1-10F326D8-3-4-0-0
+                      results:
+                      - parent_inode: InodeContext<15166635913519693827>
+                        op_type: FILE_CREATE
+                        prev_path: ''
+                        inode: InodeContext<3483843281618403331>
+                        path: /dataset/dirdata/dir_5039/dir_x/dir_y/dir_z/file.txt
+                        renamed: false
+                      - parent_inode: InodeContext<3871279636400046083>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<12194863564207620099>
+                        path: /dataset/dirdata/dir_8159
+                        renamed: false
+                      - parent_inode: InodeContext<15458283659613437955>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<17697929275669610499>
+                        path: /dataset/dirdata/dir_3037/dir_x/dir_y/dir_z
+                        renamed: false
+                      - parent_inode: InodeContext<3871279636400046083>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<11175523706379436035>
+                        path: /dataset/dirdata/dir_1695
+                        renamed: false
+                      - parent_inode: InodeContext<6118543810050523139>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<11077777077828321283>
+                        path: /dataset/dirdata/dir_9291/dir_x
+                        renamed: false
+                thread1-iteration2:
+                  summary: Thread 1 - Iteration 2 (8000 results, completion)
+                  description: Second iteration with max_results=8000, showing continuation and completion when next_resume_token equals stop_token
+                  value:
+                    data:
+                      results_count: 3150
+                      next_resume_token: 2-0-40000000-3-4-40000000-0
+                      results:
+                      - parent_inode: InodeContext<13327881675819253763>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<16045605862122258435>
+                        path: /dataset/dirdata/dir_198/dir_x/dir_y
+                        renamed: false
+                      - parent_inode: InodeContext<17148797304561926147>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<993206141507600387>
+                        path: /dataset/dirdata/dir_16/dir_x
+                        renamed: false
+                      - parent_inode: InodeContext<10624307984884236291>
+                        op_type: FILE_CREATE
+                        prev_path: ''
+                        inode: InodeContext<10635858177387134979>
+                        path: /dataset/dirdata/dir_6360/dir_x/dir_y/dir_z/file.txt
+                        renamed: false
+                      - parent_inode: InodeContext<1440645320542453763>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<6674956673887502339>
+                        path: /dataset/dirdata/dir_8021/dir_x
+                        renamed: false
+                thread2-iteration1:
+                  summary: Thread 2 - Iteration 1 (8000 results, completion)
+                  description: Parallel thread processing different token range, reaching end token in first iteration
+                  value:
+                    data:
+                      results_count: 3196
+                      next_resume_token: 4-0-80000000-3-4-80000000-0
+                      results:
+                      - parent_inode: InodeContext<12963720677309743107>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<10027347151937339395>
+                        path: /dataset/dirdata/dir_1095/dir_x/dir_y
+                        renamed: false
+                      - parent_inode: InodeContext<10213298851411132419>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<6366961576956723203>
+                        path: /dataset/dirdata/dir_8784/dir_x/dir_y/dir_z
+                        renamed: false
+                      - parent_inode: InodeContext<7744324355758620675>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<5416459622070091779>
+                        path: /dataset/dirdata/dir_1778/dir_x/dir_y/dir_z
+                        renamed: false
+                      - parent_inode: InodeContext<1501480576118554627>
+                        op_type: DIR_CREATE
+                        prev_path: ''
+                        inode: InodeContext<18180286275263922179>
+                        path: /dataset/dirdata/dir_9993/dir_x
+                        renamed: false
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - fs_name
+              - recent_snap
+              - max_results
+              properties:
+                fs_name:
+                  type: string
+                  description: Name of the filesystem containing the snapshots.
+                  example: production_fs
+                recent_snap:
+                  type: string
+                  description: Name of the newer snapshot.
+                  example: backup_oct_13
+                older_snap:
+                  type: string
+                  description: Name of the older snapshot. If omitted, defaults to the immediately preceding snapshot.
+                  example: backup_oct_12
+                max_results:
+                  type: number
+                  description: Maximum number of changed inodes to return. Balance between response size and round-trip.
+                  example: 100
+                resume_token:
+                  type: string
+                  description: Token from previous response to continue pagination. Omit to start from the beginning.
+                  example: 0-0-0-3-2-0-0
+                stop_token:
+                  type: string
+                  description: Token indicating where to stop. Used with resume_token for specific ranges, particularly when distributing work across parallel tasks.
+                  example: FFFF-FFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-0
+                output_type:
+                  type: string
+                  enum:
+                  - DEFAULT
+                  - PARTIAL_STAT
+                  - FULL_STAT
+                  description: Level of detail - DEFAULT (basic), PARTIAL_STAT (common statistics), or FULL_STAT (comprehensive metadata).
+                resolve_path:
+                  type: boolean
+                  description: Include full filesystem path for each entry. Useful for reports, but adds processing overhead.
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    snapshotLocatorInfoDetails:
+      type: object
+      properties:
+        fs_name:
+          type: string
+          example: fs1
+        guid:
+          type: string
+          example: d758af08-f03d-4acf-b289-35433cf433f6
+        snap_view_id:
+          type: string
+          example: SnapViewId<1>
+        min_weka_version:
+          type: string
+          example: 4.4.0
+        access_point:
+          type: string
+          example: '@GMT-2024.10.14-09.23.51'
+        fs_ssd_capacity:
+          type: number
+          example: 10000003072
+        root_inode_id:
+          type: string
+          example: InodeId<304574939398144>
+        has_legacy_v34_data:
+          type: boolean
+          example: false
+        orig_fq_fs_id:
+          type: object
+          properties:
+            guid:
+              type: string
+              example: d758af08-f03d-4acf-b289-35433cf433f6
+            fsId:
+              type: string
+              example: FSId<8>
+        snapshot_name:
+          type: string
+          example: s1
+        snap_layers_num:
+          type: number
+          example: 1
+        deprecation_weka_version:
+          type: string
+          example: INVALID
+        is_encrypted:
+          type: boolean
+          example: true
+        customizationKmsType:
+          type: string
+          example: unset
+        kmsNamespace:
+          type: string
+          example: ''
+        kmsKeyName:
+          type: string
+          example: ''
+        stow_version:
+          type: string
+          example: StowVersion<11>
+        fs_max_files:
+          type: number
+          example: 0
+        num_unique_guids:
+          type: number
+          example: 1
+        snap_layers_info:
+          type: array
+          items:
+            type: object
+            properties:
+              indexInParent_deprecated:
+                type: number
+                example: 0
+              guid:
+                type: string
+                example: d758af08-f03d-4acf-b289-35433cf433f6
+              freezeTimestamp:
+                type: object
+                properties:
+                  nanosecs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 246200232
+                  secs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 1728897831
+              squashDepth:
+                type: string
+                example: SnapDepth<INVALID>
+              origFqSnapLayerId:
+                type: object
+                properties:
+                  guid:
+                    type: string
+                    example: d758af08-f03d-4acf-b289-35433cf433f6
+                  snapLayerId:
+                    type: string
+                    example: SnapLayerId<9>
+              capacity:
+                type: object
+                properties:
+                  metadata:
+                    type: number
+                    example: 0
+                  data:
+                    type: number
+                    example: 1
+              bucketsNum:
+                type: number
+                example: 72
+              timestamp:
+                type: object
+                properties:
+                  nanosecs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 10
+                  secs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 0
+              snapLayerId:
+                type: string
+                example: SnapLayerId<9>
+              isForked:
+                type: string
+                example: 'no'
+              generation:
+                type: string
+                example: SnapLayerStowGeneration<0>
+              depth:
+                type: string
+                example: SnapDepth<0>
+              origLastMergedParent:
+                type: object
+                properties:
+                  guid:
+                    type: string
+                    example: d758af08-f03d-4acf-b289-35433cf433f6
+                  snapLayerId:
+                    type: string
+                    example: SnapLayerId<9>
+              stowVersion:
+                type: string
+                example: StowVersion<11>
+        total_ssd_metadata_size:
+          type: number
+          example: 4096
+        fs_total_capacity:
+          type: number
+          example: 10000003072
+        total_size:
+          type: number
+          example: 4096
+        fs_id:
+          type: string
+          example: FSId<8>
+    cookielist:
+      type: array
+      items:
+        type: string
+        example: 8-0-0-6-5-0-0
+    snapshot:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SnapViewId<10>
+        isWritable:
+          type: boolean
+          example: false
+        uploadSize:
+          type: object
+          properties:
+            LOCAL:
+              type: number
+              example: 0
+            REMOTE:
+              type: number
+              example: 0
+        task_ids:
+          type: array
+          items:
+            type: string
+            example: task_id
+        remoteStowInfo:
+          type: object
+          properties:
+            stowProgress:
+              type: string
+              example: 100%
+            locator:
+              type: string
+              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+            stowStatus:
+              type: string
+              example: SYNCHRONIZED
+        filesystemId:
+          type: string
+          example: FSId<0>
+        locator:
+          type: string
+          example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+        isRemoving:
+          type: boolean
+          example: false
+        filesystemUid:
+          type: string
+          example: 7a6bfe5e-9944-4bf4-b799-527e9b5c2a13
+        name:
+          type: string
+          example: base
+        filesystem:
+          type: string
+          example: default
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        localStowInfo:
+          type: object
+          properties:
+            stowProgress:
+              type: string
+              example: 100%
+            locator:
+              type: string
+              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+            stowStatus:
+              type: string
+              example: SYNCHRONIZED
+        accessPoint:
+          type: string
+          example: '@GMT-2022.07.27-10.41.09'
+        stowStatus:
+          type: string
+          example: SYNCHRONIZED
+        creationTime:
+          type: string
+          example: '2022-07-27T10:41:10Z'
+        objectProgress:
+          type: string
+          example: 100%
+        estReclaimableSize:
+          type: number
+          example: 0
+    snapshotEdit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SnapViewId<10>
+        stowInfo:
+          type: object
+          properties:
+            LOCAL:
+              type: object
+              properties:
+                stowProgress:
+                  type: string
+                  example: 100%
+                locator:
+                  type: string
+                  example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+                multiObs:
+                  type: boolean
+                  example: false
+                locatorInfo:
+                  type: object
+                  properties:
+                    guid:
+                      type: string
+                      example: 00000000-0000-0000-0000-000000000000
+                    snapLayerId:
+                      type: string
+                      example: SnapLayerId<0>
+                stowStatus:
+                  type: string
+                  example: SYNCHRONIZED
+                stowVersion:
+                  type: string
+                  example: StowVersion<INVALID>
+                generation:
+                  type: string
+                  example: SnapLayerStowGeneration<INVALID>
+                isDownloaded:
+                  type: string
+                  example: 'no'
+            REMOTE:
+              type: object
+              properties:
+                stowProgress:
+                  type: string
+                  example: 100%
+                locator:
+                  type: string
+                  example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+                multiObs:
+                  type: boolean
+                  example: false
+                locatorInfo:
+                  type: object
+                  properties:
+                    guid:
+                      type: string
+                      example: 00000000-0000-0000-0000-000000000000
+                    snapLayerId:
+                      type: string
+                      example: SnapLayerId<0>
+                stowStatus:
+                  type: string
+                  example: SYNCHRONIZED
+                stowVersion:
+                  type: string
+                  example: StowVersion<INVALID>
+                generation:
+                  type: string
+                  example: SnapLayerStowGeneration<INVALID>
+                isDownloaded:
+                  type: string
+                  example: 'no'
+        isWritable:
+          type: boolean
+          example: false
+        filesystemId:
+          type: string
+          example: FSId<0>
+        isRemoving:
+          type: boolean
+          example: false
+        name:
+          type: string
+          example: base
+        filesystem:
+          type: string
+          example: default
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        accessPoint:
+          type: string
+          example: '@GMT-2022.07.27-10.41.09'
+        snapLayerId:
+          type: string
+          example: SnapLayerId<1>
+        creationTime:
+          type: string
+          format: date-time
+          example: '2022-07-27T10:41:10Z'
+    diff_list:
+      type: object
+      properties:
+        results_count:
+          type: number
+          example: 1
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              inode:
+                type: string
+                example: InodeContext<4270850748147367937>
+              parent_inode:
+                type: string
+                example: InodeContext<55996090941441>
+              op_type:
+                type: string
+                example: FILE_CREATE
+              path:
+                type: string
+                example: /dir1/dir2/file1
+              prev_path:
+                type: string
+                example: null
+              renamed:
+                type: boolean
+                example: false
+              size:
+                type: number
+                example: 0
+              mode:
+                type: number
+                example: 33188
+              modify_time_secs:
+                type: number
+                example: 1740744251
+              access_time_secs:
+                type: number
+                example: 1740744251
+              change_time_secs:
+                type: number
+                example: 1740744251
+              blocks:
+                type: number
+                example: 0
+              rdev:
+                type: number
+                example: 0
+              uid:
+                type: number
+                example: 0
+              gid:
+                type: number
+                example: 0
+              nlinks:
+                type: number
+                example: 0
+        next_resume_token:
+          type: string
+          example: 8-1-A72EAA20-3-2-0-0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

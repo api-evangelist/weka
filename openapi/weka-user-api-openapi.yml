@@ -1,0 +1,437 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory User API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: User
+paths:
+  /users:
+    get:
+      summary: Get all local users
+      description: Returns all local user accounts for the specified organization. ClusterAdmin users can use include_tenants to get users from all tenants.
+      operationId: getUsers
+      parameters:
+      - in: query
+        name: org
+        schema:
+          type: string
+        description: Organization name or ID. Defaults to the callers organization.
+      - in: query
+        name: include_tenants
+        schema:
+          type: boolean
+        description: Include users from all tenants (ClusterAdmin only, ignored for other users).
+      responses:
+        '200':
+          description: Successfully returned user list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/user'
+        '401':
+          $ref: '#/components/responses/401'
+      tags:
+      - User
+    post:
+      summary: Create a new local user
+      description: Creates a new local user account with the specified credentials and permissions. Cluster admins can create users in any tenant by specifying the org parameter.
+      operationId: createUser
+      tags:
+      - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: Unique username for the new account.
+                  example: user1
+                password:
+                  type: string
+                  description: Password meeting complexity requirements (minimum 8 characters with at least one uppercase letter, one lowercase letter, and one number or special character).
+                  example: StrongPass111
+                role:
+                  $ref: '#/components/schemas/userRole'
+                  description: Role assigned to the user.
+                posix_uid:
+                  type: number
+                  description: POSIX UID for S3 file operations (S3 environments only).
+                  example: 10
+                posix_gid:
+                  type: number
+                  description: POSIX GID for S3 file operations (S3 environments only).
+                  example: 10
+                org:
+                  type: string
+                  description: Tenant name or ID to create the user in (cluster admin only). Defaults to the caller's tenant.
+                  example: tenant1
+      responses:
+        '200':
+          description: User created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/user'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /users/{uid}:
+    put:
+      summary: Update user details
+      description: Modifies role and POSIX settings for an existing local user.
+      operationId: updateUser
+      tags:
+      - User
+      parameters:
+      - in: path
+        name: uid
+        description: Unique user identifier (UUID format).
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                role:
+                  $ref: '#/components/schemas/userRole'
+                  description: Updated role for the user.
+                posix_uid:
+                  type: number
+                  description: Updated POSIX UID for S3 file operations (S3 environments only).
+                  example: 10
+                posix_gid:
+                  type: number
+                  description: Updated POSIX GID for S3 file operations (S3 environments only).
+                  example: 10
+      responses:
+        '200':
+          description: User updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/user'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      summary: Delete a local user
+      description: Permanently removes a local user account and associated data from the system.
+      operationId: deleteUser
+      tags:
+      - User
+      parameters:
+      - in: path
+        name: uid
+        description: Unique user identifier (UUID format).
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /users/password:
+    put:
+      summary: Change user password
+      description: Updates a user's password. Users can change their own password with their current credentials.<br> Administrators can change any user's password within their organization.
+      operationId: updateUserPassword
+      tags:
+      - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - username
+              - old_password
+              - new_password
+              properties:
+                username:
+                  type: string
+                  description: Target username for password change.
+                  example: some_username
+                old_password:
+                  type: string
+                  description: Current password for verification.
+                  example: NewUser123
+                new_password:
+                  type: string
+                  description: New password meeting complexity requirements.
+                  example: NewPass123
+                tenant:
+                  type: string
+                  description: Tenant name (defaults to 'Root').
+                  example: root
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /users/{uid}/password:
+    put:
+      summary: Set user password (admin)
+      description: Assigns a new password to a local user without requiring the current password. Requires administrative privileges.
+      operationId: setUserPassword
+      tags:
+      - User
+      parameters:
+      - in: path
+        name: uid
+        description: Unique user identifier (UUID format).
+        schema:
+          type: string
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - password
+              properties:
+                password:
+                  type: string
+                  description: New password meeting complexity requirements.
+                  example: NewPass123
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /users/whoami:
+    get:
+      summary: Get current user information
+      description: Returns profile information for the authenticated user making the request.
+      operationId: whoAmI
+      tags:
+      - User
+      responses:
+        '200':
+          description: Successfully returned current user information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      org_id:
+                        type: number
+                        example: 0
+                      username:
+                        type: string
+                        example: admin
+                      uid:
+                        type: string
+                        example: uid_string
+                      source:
+                        type: string
+                        example: Internal
+                      role:
+                        type: string
+                        example: ClusterAdmin
+                      org_name:
+                        type: string
+                        example: Root
+        '401':
+          $ref: '#/components/responses/401'
+  /users/{uid}/revoke:
+    delete:
+      summary: Revoke all user sessions
+      description: Immediately invalidates all active authentication tokens for the specified user, terminating all GUI, CLI, and API sessions.
+      operationId: revokeUser
+      tags:
+      - User
+      parameters:
+      - in: path
+        name: uid
+        description: Unique user identifier (UUID format).
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /users/{uid}/s3/resetCredentials:
+    post:
+      summary: Reset S3 API credentials
+      description: Generates a new S3 access key and secret key for the specified S3 user, invalidating any existing credentials. The new credentials are returned in the response and cannot be retrieved again.
+      operationId: resetUserS3Credentials
+      tags:
+      - User
+      parameters:
+      - in: path
+        name: uid
+        description: Unique user identifier (UUID format).
+        schema:
+          type: string
+        required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                org:
+                  type: string
+                  description: Tenant name or ID (cluster admin only). Defaults to the caller's tenant.
+                  example: tenant1
+      responses:
+        '200':
+          description: S3 credentials reset successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      accessKey:
+                        type: string
+                        description: The new S3 access key.
+                      secretKey:
+                        type: string
+                        description: The new S3 secret key.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    user:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: uid_string
+        org_id:
+          type: number
+          example: 0
+        source:
+          type: string
+          example: Internal
+        posix_uid:
+          type: number
+          example: 0
+        posix_gid:
+          type: number
+          example: 0
+        username:
+          type: string
+          example: admin
+        role:
+          type: string
+          example: ClusterAdmin
+        policy:
+          type: string
+          example: readonly
+    userRole:
+      type: string
+      enum:
+      - ClusterAdmin
+      - TenantAdmin
+      - ReadOnly
+      - Regular
+      - S3
+      - CSI
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

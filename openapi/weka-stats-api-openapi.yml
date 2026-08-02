@@ -1,0 +1,342 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Stats API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Stats
+paths:
+  /stats:
+    get:
+      tags:
+      - Stats
+      summary: Get statistics
+      description: Returns statistics related to the cluster's performance and resource usage.
+      operationId: getStats
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      all:
+                        type: object
+                        properties:
+                          rpc:
+                            type: array
+                            items:
+                              type: object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: start_time
+        schema:
+          type: string
+      - in: query
+        name: end_time
+        schema:
+          type: string
+      - in: query
+        name: interval
+        schema:
+          type: string
+      - in: query
+        name: category
+        schema:
+          type: array
+          items:
+            type: string
+        description: Array of categories.
+      - in: query
+        name: stat
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: resolution_secs
+        schema:
+          type: number
+      - in: query
+        name: accumulated
+        schema:
+          type: boolean
+      - in: query
+        name: per_process
+        schema:
+          type: boolean
+      - in: query
+        name: process_uids
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: param
+        schema:
+          type: object
+          properties:
+            <param_key>:
+              type: array
+              items:
+                type: string
+        style: deepObject
+        explode: true
+      - in: query
+        name: no_zeroes
+        schema:
+          type: boolean
+      - in: query
+        name: show_internal
+        schema:
+          type: boolean
+  /stats/description:
+    get:
+      tags:
+      - Stats
+      summary: Get statistic descriptions
+      description: Returns detailed information about the statistics.
+      operationId: getStatsDescription
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      RESPONSE_COUNT_LENGTH_REQUIRED:
+                        type: object
+                        properties:
+                          is_histogram:
+                            type: boolean
+                            example: false
+                          parameters:
+                            type: array
+                            items:
+                              type: string
+                              example: hTTPCode
+                          permission:
+                            type: string
+                            example: USER
+                          for_process_type:
+                            type: string
+                            example: IO
+                          label:
+                            type: string
+                            example: Response Count LENGTH_REQUIRED(total)
+                          description:
+                            type: string
+                            example: Number of HTTP LENGTH_REQUIRED responses per second
+                          type:
+                            type: string
+                            example: Rate
+                          unit:
+                            type: string
+                            example: Responses/Sec
+                          can_accumulate:
+                            type: boolean
+                            example: true
+  /stats/realtime:
+    get:
+      tags:
+      - Stats
+      summary: Get real-time statistics
+      description: Returns live statistics for the cluster.
+      operationId: getRealTimeStats
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: ProcessId<121>
+                        hostname:
+                          type: string
+                          example: backend-0
+                        cpu_utilization_percentage:
+                          type: number
+                          example: 10.597062895894386
+                        reads_per_second:
+                          type: number
+                          example: 0
+                        read_latency_usecs:
+                          type: number
+                          example: 0
+                        writes_per_second:
+                          type: number
+                          example: 0
+                        rdmaTX_bytes_per_second:
+                          type: number
+                          example: 0
+                        L6RX_bytes_per_second:
+                          type: number
+                          example: 230401.41501184125
+                        obs_upload_bytes_per_second:
+                          type: number
+                          example: 0
+                        read_bytes_per_second:
+                          type: number
+                          example: 0
+                        ops_per_second:
+                          type: number
+                          example: 0
+                        write_latency_usecs:
+                          type: number
+                          example: 0
+                        L6TX_bytes_per_second:
+                          type: number
+                          example: 281357.40098772035
+                        obs_download_bytes_per_second:
+                          type: number
+                          example: 0
+                        rdmaRX_bytes_per_second:
+                          type: number
+                          example: 0
+                        write_bytes_per_second:
+                          type: number
+                          example: 0
+        '401':
+          $ref: '#/components/responses/401'
+  /stats/retention:
+    get:
+      tags:
+      - Stats
+      summary: Get statistics retention and disk usage
+      description: Returns the retention period of statistics and the estimated disk space required for their storage.
+      operationId: getStatsDiskUsage
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      server_estimated_bytes:
+                        type: number
+                        example: 136205240
+                      retention_secs:
+                        type: number
+                        example: 86400
+                      client_estimated_bytes:
+                        type: number
+                        example: 0
+                      client_estimation_result_type:
+                        type: string
+                        example: NO_CLIENTS
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: retention_duration
+        description: Duration (format - 1 minute 2 seconds, options - weeks, days, hours, minutes, seconds).
+        schema:
+          type: string
+          example: 1 day
+    post:
+      tags:
+      - Stats
+      summary: Set statistics retention
+      description: Sets the duration for which statistics are retained in storage.
+      operationId: getStatsRetention
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      server_estimated_bytes:
+                        type: number
+                        example: 136205240
+                      retention_secs:
+                        type: number
+                        example: 86400
+                      client_estimated_bytes:
+                        type: number
+                        example: 0
+                      client_estimation_result_type:
+                        type: string
+                        example: NO_CLIENTS
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                retention_duration:
+                  type: string
+                  description: Duration (format - 1 minute 2 seconds, options - weeks, days, hours, minutes, seconds).
+components:
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

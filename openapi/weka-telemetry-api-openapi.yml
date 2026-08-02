@@ -1,0 +1,524 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Telemetry API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Telemetry
+paths:
+  /telemetry:
+    get:
+      tags:
+      - Telemetry
+      summary: Get telemetry configuration
+      description: Returns the cluster-wide telemetry configuration, including audit and forwarding settings.
+      operationId: getTelemetryStatus
+      responses:
+        '200':
+          description: Successfully retrieved telemetry configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/telemetryInfo'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Telemetry
+      summary: Update telemetry configuration
+      description: Modifies cluster-wide telemetry settings, including enabling/disabling audit logging and configuring tracked operations.
+      operationId: updateTelemetryStatus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: Enable or disable the telemetry gateway.
+                  example: true
+                audit_traces_enabled:
+                  type: boolean
+                  description: Enable or disable audit trace collection.
+                  example: true
+                resolve_full_file_paths:
+                  type: boolean
+                  description: Include full file paths in telemetry data.
+                  example: true
+                operations:
+                  type: array
+                  items:
+                    type: string
+                  description: Operations to track (use 'All' or specify individual operations like 'Open', 'Create', 'Delete').
+                  example:
+                  - Create
+                  - Delete
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /telemetry/exports:
+    get:
+      tags:
+      - Telemetry
+      summary: Get all telemetry exports
+      description: Returns all configured export destinations for telemetry data (for example, Splunk, S3, Kafka).
+      operationId: getTelemetryExports
+      responses:
+        '200':
+          description: Successfully retrieved telemetry exports.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/telemetryExport'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - Telemetry
+      summary: Create a telemetry export
+      description: Configures a new export destination to forward telemetry events to an external system.
+      operationId: createTelemetryExport
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/telemetryExportReq'
+      responses:
+        '200':
+          description: Export created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/telemetryExport'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /telemetry/exports/{uid}:
+    get:
+      tags:
+      - Telemetry
+      summary: Get a telemetry export
+      description: Returns the configuration and status of a specific export destination.
+      operationId: getTelemetryExport
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique export identifier (UUID format).
+      responses:
+        '200':
+          description: Successfully retrieved telemetry export.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/telemetryExport'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    post:
+      tags:
+      - Telemetry
+      summary: Update a telemetry export
+      description: Modifies the configuration of an existing export destination (for example, endpoint URL, authentication credentials).
+      operationId: updateTelemetryExport
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique export identifier (UUID format).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/telemetryExportReq'
+      responses:
+        '200':
+          description: Export updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/telemetryExport'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+      - Telemetry
+      summary: Delete a telemetry export
+      description: Removes an export destination, stopping all telemetry forwarding to that endpoint.
+      operationId: removeTelemetryExport
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique export identifier (UUID format).
+      responses:
+        '200':
+          description: Export deleted successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/telemetryExport'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /telemetry/exports/{uid}/sources:
+    put:
+      tags:
+      - Telemetry
+      summary: Attach data sources to export
+      description: Associates one or more data sources (for example, 'Audit') with an export destination to begin forwarding that data type.
+      operationId: attachTelemetrySourceToExport
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique export identifier (UUID format).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Data source type to attach.
+                example: Audit
+      responses:
+        '200':
+          description: Sources attached successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                      description: Attached data source.
+                      example: Audit
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+      - Telemetry
+      summary: Detach data sources from export
+      description: Removes one or more data sources from an export destination, stopping the forwarding of that data type.
+      operationId: detachTelemetrySourceFromExport
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique export identifier (UUID format).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+                description: Data source type to detach.
+                example: Audit
+      responses:
+        '200':
+          description: Sources detached successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                      description: Remaining attached data source.
+                      example: Audit
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    telemetryExportReq:
+      type: object
+      properties:
+        name:
+          type: string
+          example: somesink
+        target:
+          type: string
+          example: /some/target
+        enabled:
+          type: boolean
+          example: true
+        token:
+          type: string
+          example: 123-abc-123abc
+        ca_cert_pem:
+          type: string
+          example: '-----BEGIN CERTIFICATE-----'
+        allow_unverified_certificate:
+          type: boolean
+          example: false
+        clear_tls_settings:
+          type: boolean
+          example: false
+        use_cluster_ca_cert:
+          type: boolean
+          example: true
+        s3_bucket_name:
+          type: string
+          example: somebucket
+        s3_region:
+          type: string
+          example: eu-central-1
+        s3_key:
+          type: string
+          example: somekey
+        s3_secret:
+          type: string
+          example: secretkey
+        syslog_mode:
+          type: string
+          example: tcp
+          enum:
+          - tcp
+          - udp
+          description: 'Syslog transport mode. Default: tcp.'
+        syslog_rfc:
+          type: string
+          example: rfc5424
+          enum:
+          - rfc5424
+          - rfc3164
+          description: 'Syslog message format. Default: rfc5424.'
+        syslog_facility:
+          type: string
+          example: local0
+          enum:
+          - local0
+          - local1
+          - local2
+          - local3
+          - local4
+          - local5
+          - local6
+          - local7
+          description: 'Syslog facility level for log routing. Default: local0.'
+        type:
+          type: string
+          example: File
+          enum:
+          - File
+          - Splunk
+          - S3
+          - Vector
+          - Kafka
+          - Syslog
+        sources:
+          type: array
+          items:
+            type: string
+            example: Audit
+    telemetryInfo:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        uiEnabled:
+          type: boolean
+          example: true
+        auditTracesEnabled:
+          type: boolean
+          example: true
+    telemetryExport:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: 1234-abcd-4321-dcba
+        id:
+          type: string
+          example: TelemetrySinkId<0>
+        name:
+          type: string
+          example: somesink
+        target:
+          type: string
+          example: /some/target
+        type:
+          type: string
+          example: File
+          enum:
+          - File
+          - Splunk
+          - S3
+          - Vector
+          - Kafka
+          - Syslog
+        s3_bucket_name:
+          type: string
+          example: somebucket
+        s3_region:
+          type: string
+          example: eu-central-1
+        s3_key:
+          type: string
+          example: somekey
+        s3_secret:
+          type: string
+          example: secretkey
+        ca_type:
+          type: string
+          example: Unverified
+        syslog_mode:
+          type: string
+          example: tcp
+          enum:
+          - tcp
+          - udp
+          description: 'Syslog transport mode. Default: tcp.'
+        syslog_rfc:
+          type: string
+          example: rfc5424
+          enum:
+          - rfc5424
+          - rfc3164
+          description: 'Syslog message format. Default: rfc5424.'
+        syslog_facility:
+          type: string
+          example: local0
+          enum:
+          - local0
+          - local1
+          - local2
+          - local3
+          - local4
+          - local5
+          - local6
+          - local7
+          description: 'Syslog facility level for log routing. Default: local0.'
+        sources:
+          type: array
+          items:
+            type: string
+            example: Audit
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

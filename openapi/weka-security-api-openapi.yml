@@ -1,0 +1,1066 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Security API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Security
+paths:
+  /security/defaultTokensExpiry:
+    get:
+      tags:
+      - Security
+      summary: Get token expiration configuration
+      description: Returns the configured default and maximum expiration times for access and refresh tokens. Token expiration ensures authentication credentials remain valid for a limited time, reducing risks such as unauthorized access and token misuse.
+      operationId: getTokensExpiry
+      responses:
+        '200':
+          description: Token expiration configuration retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      access_token_expiry:
+                        type: number
+                        example: 60
+                        description: Default lifetime of access tokens in seconds.
+                      refresh_token_expiry:
+                        type: number
+                        example: 86400
+                        description: Default lifetime of refresh tokens in seconds.
+                      max_access_token_expiry:
+                        type: number
+                        example: 3600
+                        description: Maximum allowable lifetime of access tokens in seconds.
+                      max_refresh_token_expiry:
+                        type: number
+                        example: 8640000
+                        description: Maximum allowable lifetime of refresh tokens in seconds.
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Security
+      summary: Configure token expiration settings
+      description: Configures the default and maximum expiration times for access and refresh tokens to maintain a secure, policy-aligned authentication environment. Best practices recommend setting access tokens to 5 minutes and refresh tokens to 2 weeks to balance security and usability.
+      operationId: setTokensExpiry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_token_expiry:
+                  type: number
+                  example: 60
+                  description: Default lifetime of access tokens in seconds (shorter lifetimes reduce exposure to stale token risks).
+                refresh_token_expiry:
+                  type: number
+                  example: 864000
+                  description: Default lifetime of refresh tokens in seconds (balances security with minimal reauthentication burden).
+                max_access_token_expiry:
+                  type: number
+                  example: 3600
+                  description: Maximum allowable lifetime of access tokens in seconds.
+                max_refresh_token_expiry:
+                  type: number
+                  example: 8640000
+                  description: Maximum allowable lifetime of refresh tokens in seconds.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /security/banner:
+    get:
+      tags:
+      - Security
+      summary: Get login banner configuration
+      description: Returns the current login banner text and enabled status. The login banner displays a customizable legal or security message on the GUI sign-in page to warn against unauthorized access and inform authorized users of their responsibilities and acceptable use policies.
+      operationId: getLoginBanner
+      responses:
+        '200':
+          description: Login banner configuration retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      text:
+                        type: string
+                        example: 'WARNING: Unauthorized access to this system is prohibited and may be prosecuted to the fullest extent of the law.'
+                        description: The login banner message text.
+                      enabled:
+                        type: boolean
+                        example: true
+                        description: Indicates whether the login banner is currently displayed on the sign-in page.
+    put:
+      tags:
+      - Security
+      summary: Set or update the login banner
+      description: Creates or modifies the login banner containing a security statement or legal message displayed on the sign-in page. The statement can warn potential intruders about illegal activities while advising authorized users of their obligations regarding acceptable system use.
+      operationId: setLoginBanner
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - login_banner
+              properties:
+                login_banner:
+                  type: string
+                  description: The text to display in the login banner.
+  /security/banner/enable:
+    post:
+      tags:
+      - Security
+      summary: Enable the login banner
+      description: Activates the login banner so it displays on the GUI sign-in page, presenting the configured security or legal message to all users attempting to access the system.
+      operationId: enableLoginBanner
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /security/banner/disable:
+    post:
+      tags:
+      - Security
+      summary: Disable the login banner
+      description: Deactivates the login banner so it no longer displays on the GUI sign-in page. The banner text is preserved and can be re-enabled at any time.
+      operationId: disableLoginBanner
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /security/tokensExpiry:
+    get:
+      deprecated: true
+      tags:
+      - Security
+      summary: Get token expiration times (deprecated)
+      description: This endpoint is deprecated. Use /security/defaultTokensExpiry instead.
+      operationId: getTokensExpiryDeprecated
+      responses:
+        '200':
+          description: Token expiration configuration retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      access_token_expiry:
+                        type: number
+                        example: 100000
+                        description: Default lifetime of access tokens in seconds.
+                      refresh_token_expiry:
+                        type: number
+                        example: 31536000
+                        description: Default lifetime of refresh tokens in seconds.
+        '401':
+          $ref: '#/components/responses/401'
+  /security/joinToken:
+    post:
+      tags:
+      - Security
+      summary: Get cluster join token
+      description: Get a cluster join token, used by clients to join the cluster.
+      operationId: getJoinToken
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_token_expiry:
+                  type: number
+                  description: Expiration time in seconds for the token
+                ips:
+                  description: IP addresses where the token can be used from
+                  type: array
+                  items:
+                    type: string
+                    oneOf:
+                    - format: ipv4
+                    - format: ipv6
+  /security/caCert:
+    put:
+      tags:
+      - Security
+      summary: Upload custom CA certificate for cluster authentication
+      description: Uploads a custom Certificate Authority (CA) certificate to be used for secure cluster authentication with external services such as Vault. This certificate enables the cluster to verify the identity of external systems using TLS/SSL. If a certificate is already configured, this operation replaces it.
+      operationId: setCaCert
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - certificate
+              properties:
+                certificate:
+                  type: string
+                  example: '-----BEGIN CERTIFICATE-----\n<all_the_content_of_cert.pem_with_\n>\n-----END CERTIFICATE-----\n'
+                  description: The PEM-encoded CA certificate content, including header and footer markers with newline characters.
+    delete:
+      tags:
+      - Security
+      summary: Remove custom CA certificate from cluster
+      description: Removes the configured custom CA certificate from the cluster. After removal, the cluster will revert to using the default certificate validation mechanism.
+      operationId: unsetCaCert
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+    get:
+      tags:
+      - Security
+      summary: Get CA certificate details and status
+      description: Returns comprehensive information about the cluster's currently configured CA certificate, including its status, certificate metadata, and content. Use this endpoint to verify certificate configuration and expiration dates.
+      operationId: showCaCert
+      responses:
+        '200':
+          description: CA certificate information retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        example: true
+                        description: Indicates whether a custom CA certificate is currently configured.
+                      country:
+                        type: string
+                        example: IL
+                        description: Country code from the certificate's subject.
+                      state:
+                        type: string
+                        example: TA
+                        description: State or province from the certificate's subject.
+                      locality:
+                        type: string
+                        example: Tel-Aviv
+                        description: City or locality from the certificate's subject.
+                      organization:
+                        type: string
+                        example: company
+                        description: Organization name from the certificate's subject.
+                      organization_unit:
+                        type: string
+                        example: qa
+                        description: Organizational unit from the certificate's subject.
+                      common_name:
+                        type: string
+                        example: t1831-*.company.io
+                        description: Common name (CN) from the certificate's subject.
+                      email:
+                        type: string
+                        example: mail@company.io
+                        description: Email address from the certificate's subject.
+                      expired_date:
+                        type: string
+                        example: '2021-03-20T08:17:34Z'
+                        description: Certificate expiration date in ISO 8601 format.
+                      content:
+                        type: string
+                        example: '-----BEGIN CERTIFICATE-----\n<all_the_content_of_cert.pem_with_\n>\n-----END CERTIFICATE-----"'
+                        description: The complete PEM-encoded certificate content.
+        '401':
+          $ref: '#/components/responses/401'
+  /security/policies:
+    post:
+      tags:
+      - Security
+      summary: Create a CIDR-based security policy
+      description: Creates a new security policy to regulate access to cluster management and POSIX data services. These policies strengthen security by permitting or blocking connections from specific client IP address ranges without requiring user authentication. Policies are evaluated in order of attachment, and updates do not affect active connections.
+      responses:
+        '200':
+          description: Security policy created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/securityPolicy'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Unique identifier name for the security policy.
+                  example: admin_hosts
+                description:
+                  type: string
+                  description: Human-readable explanation of the policy's purpose and scope.
+                  example: Allows admin access from admin workstations
+                action:
+                  type: string
+                  description: Action to apply when the policy matches (Allow or Deny). Default is Allow for whitelist implementation.
+                  enum:
+                  - Allow
+                  - Deny
+                role:
+                  type: array
+                  description: User roles that this policy applies to for API access. Leave empty to apply to all roles.
+                  items:
+                    $ref: '#/components/schemas/userRole'
+                ip:
+                  type: array
+                  description: IP address ranges for access control. Accepts individual IPs, CIDR notation (IP/mask), or IP ranges (IP1-IP2).
+                  items:
+                    type: string
+                    example: 192.168.2.0/21
+                read_only:
+                  type: boolean
+                  example: false
+                  description: When true, restricts policy-matched connections to read-only operations.
+    get:
+      summary: List all security policies
+      description: Returns a comprehensive list of all CIDR-based security policies defined in the cluster. These policies control access to cluster management and POSIX data services based on client IP ranges.
+      operationId: listSecPolicies
+      tags:
+      - Security
+      responses:
+        '200':
+          description: List of security policies retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicy'
+        '401':
+          $ref: '#/components/responses/401'
+  /security/policies/{policy}:
+    get:
+      summary: Get a specific security policy
+      description: Returns detailed configuration information for a specific security policy identified by its UUID. This includes the policy's name, description, action, roles, IP ranges, and read-only status.
+      operationId: getSecPolicy
+      responses:
+        '200':
+          description: Security policy details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/securityPolicy'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      tags:
+      - Security
+      parameters:
+      - in: path
+        name: policy
+        description: Unique identifier (UUID) of the security policy to retrieve.
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        required: true
+    delete:
+      summary: Delete a security policy
+      description: Permanently removes a security policy from the system. This operation does not affect currently active connections. The policy will no longer be evaluated for new connection attempts.
+      operationId: deleteSecPolicy
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      tags:
+      - Security
+      parameters:
+      - in: path
+        name: policy
+        description: Unique identifier (UUID) of the security policy to delete.
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        required: true
+    patch:
+      tags:
+      - Security
+      summary: Update an existing security policy
+      description: Modifies the configuration of an existing security policy. You can replace entire role or IP lists, or incrementally add/remove specific entries. Changes take effect immediately for new connections but do not impact existing active sessions.
+      responses:
+        '200':
+          description: Security policy updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/securityPolicy'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: policy
+        description: Unique identifier (UUID) of the security policy to update.
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Updated name for the security policy.
+                  example: admin_hosts
+                description:
+                  type: string
+                  description: Updated human-readable description.
+                  example: Allows admin access from admin workstations
+                action:
+                  type: string
+                  description: Updated action when the policy matches (Allow or Deny).
+                  enum:
+                  - Allow
+                  - Deny
+                role:
+                  type: array
+                  description: Replaces all existing roles with the specified list. Use empty array to apply policy to all roles.
+                  items:
+                    $ref: '#/components/schemas/userRole'
+                add_role:
+                  type: array
+                  description: Adds specified roles to the existing role list without removing current entries.
+                  items:
+                    $ref: '#/components/schemas/userRole'
+                remove_role:
+                  type: array
+                  description: Removes specified roles from the existing role list.
+                  items:
+                    $ref: '#/components/schemas/userRole'
+                ip:
+                  type: array
+                  description: Replaces all existing IP ranges with the specified list. Accepts IPs, CIDR notation, or IP ranges.
+                  items:
+                    type: string
+                    example: 10.1.4.0/24
+                add_ip:
+                  type: array
+                  description: Adds specified IP ranges to the existing list without removing current entries.
+                  items:
+                    type: string
+                    example: 10.1.5.10-10.1.5.22
+                remove_ip:
+                  type: array
+                  description: Removes specified IP ranges from the existing list.
+                  items:
+                    type: string
+                    example: 10.1.4.0/24
+                read_only:
+                  type: boolean
+                  example: false
+                  description: When true, restricts policy-matched connections to read-only operations.
+                squash_mode:
+                  type: string
+                  description: Whether to squash user and group IDs on mounted filesystems.
+                  enum:
+                  - none
+                  - root
+                  example: root
+                anon_uid:
+                  type: number
+                  description: The anonymous user identifier (UID) for squashed users. Applies only when `squash_mode` is not `none`.
+                  example: 65534
+                anon_gid:
+                  type: number
+                  example: 65534
+                  description: The anonymous group identifier (GID) for squashed users. Applies only when `squash_mode` is not `none`.
+  /security/policies/{policy}/duplicate:
+    post:
+      tags:
+      - Security
+      summary: Duplicate an existing security policy
+      description: Creates a new security policy by copying all configuration settings from an existing policy. The new policy requires a unique name but inherits all other properties including description, action, roles, IP ranges, and read-only status.
+      parameters:
+      - in: path
+        name: policy
+        description: Unique identifier (UUID) of the security policy to duplicate.
+        schema:
+          type: string
+          format: uuid
+          example: 00000000-0000-0000-0000-000000000000
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Unique name for the duplicated security policy.
+                  example: admin_hosts_backup
+      responses:
+        '200':
+          description: Security policy duplicated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/securityPolicy'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /security/policies/test:
+    get:
+      tags:
+      - Security
+      summary: Test security policy evaluation
+      description: Simulates how one or more security policies would evaluate a connection attempt for API access or cluster joining. Returns the resulting action (Allow/Deny), whether it was explicitly matched, and details of the matched policy. Use this endpoint to validate policy configurations before deployment.
+      operationId: testJoinSecurityPolicies
+      responses:
+        '200':
+          description: Policy test completed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      action:
+                        description: Resulting action from policy evaluation (Allow or Deny).
+                        type: string
+                        enum:
+                        - Allow
+                        - Deny
+                      read_only:
+                        description: Indicates if the matched policy enforces read-only access.
+                        type: boolean
+                        example: false
+                      explicit:
+                        description: True if the result matched an explicit policy rule; false if the default policy was applied.
+                        type: boolean
+                      policy:
+                        $ref: '#/components/schemas/securityPolicyInfo'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: policies
+        description: List of security policy UUIDs to evaluate in the test.
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            format: uuid
+        style: form
+        explode: true
+      - in: query
+        name: ip
+        required: true
+        description: IP address to simulate the connection from (IPv4 or IPv6).
+        schema:
+          type: string
+          oneOf:
+          - format: ipv4
+          - format: ipv6
+      - in: query
+        name: role
+        description: User role to simulate for API access evaluation.
+        required: false
+        schema:
+          $ref: '#/components/schemas/userRole'
+      - in: query
+        name: join
+        description: When true, simulates a cluster join scenario instead of API access.
+        required: false
+        schema:
+          type: boolean
+  /security/join/{mode}/securityPolicy:
+    delete:
+      tags:
+      - Security
+      summary: Remove all security policies from cluster join configuration
+      description: Removes all security policies currently applied to the cluster join process for the specified mode (backend or client). This allows any container to join the cluster without IP-based security policy restrictions. The join secret authentication, if configured, remains active.
+      operationId: resetJoinSecurityPolicies
+      responses:
+        '200':
+          description: All join security policies removed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: mode
+        required: true
+        schema:
+          type: string
+          enum:
+          - backend
+          - client
+        description: Cluster join mode - backend for server containers, client for POSIX clients.
+    get:
+      tags:
+      - Security
+      summary: Get security policies for cluster joining
+      description: Returns the list of security policies currently applied when containers or clients attempt to join the cluster for the specified mode. These policies work in conjunction with join secret authentication to secure cluster membership.
+      operationId: getJoinSecurityPolicies
+      responses:
+        '200':
+          description: Join security policies retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: mode
+        required: true
+        schema:
+          type: string
+          enum:
+          - backend
+          - client
+        description: Cluster join mode - backend for server containers, client for POSIX clients.
+    put:
+      tags:
+      - Security
+      summary: Set cluster join security policies
+      description: Configures the complete set of security policies for containers or clients joining the cluster, replacing any existing policy configuration. These policies are evaluated to determine whether a join attempt from a specific IP address should be allowed or denied. Works in conjunction with join secret authentication.
+      operationId: setJoinSecurityPolicies
+      responses:
+        '200':
+          description: Join security policies configured successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: List of security policy UUIDs to apply for cluster joining. Policies are evaluated in the order provided.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: mode
+        required: true
+        schema:
+          type: string
+          enum:
+          - backend
+          - client
+        description: Cluster join mode - backend for server containers, client for POSIX clients.
+  /security/join/{mode}/securityPolicy/attach:
+    post:
+      tags:
+      - Security
+      summary: Attach security policies to cluster join configuration
+      description: Adds one or more security policies to the existing list of policies applied during cluster joining for the specified mode. The new policies are appended to the end of the evaluation order. Use this endpoint to incrementally build up join security without replacing the entire policy set.
+      operationId: attachJoinSecurityPolicies
+      responses:
+        '200':
+          description: Security policies attached successfully to join configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: List of security policy UUIDs to add to the cluster join configuration.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: mode
+        required: true
+        schema:
+          type: string
+          enum:
+          - backend
+          - client
+        description: Cluster join mode - backend for server containers, client for POSIX clients.
+  /security/join/{mode}/securityPolicy/detach:
+    post:
+      tags:
+      - Security
+      summary: Detach security policies from cluster join configuration
+      description: Removes specific security policies from the list of policies applied during cluster joining for the specified mode. Other policies in the join configuration remain active and continue to be evaluated in their original order.
+      operationId: detachJoinSecurityPolicies
+      responses:
+        '200':
+          description: Security policies detached successfully from join configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: List of security policy UUIDs to remove from the cluster join configuration.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: mode
+        required: true
+        schema:
+          type: string
+          enum:
+          - backend
+          - client
+        description: Cluster join mode - backend for server containers, client for POSIX clients.
+  /security/guiIdleTimeout:
+    get:
+      tags:
+      - Security
+      summary: Get GUI idle timeout configuration
+      description: Returns the currently configured idle timeout duration for the graphical user interface. The GUI idle timeout automatically logs out users after a specified period of inactivity, reducing the risk of unauthorized access from unattended sessions.
+      operationId: getGuiIdleTimeout
+      responses:
+        '200':
+          description: GUI idle timeout configuration retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      timeout:
+                        type: number
+                        example: 1800
+                        description: GUI idle timeout duration in seconds (valid range 60-86400).
+    put:
+      tags:
+      - Security
+      summary: Configure GUI idle timeout
+      description: Sets the duration after which inactive GUI sessions are automatically terminated. This security feature helps protect against unauthorized access by logging out users who leave their sessions unattended. The timeout value must be between 60 seconds (1 minute) and 86400 seconds (24 hours).
+      operationId: setGuiIdleTimeout
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - timeout
+              properties:
+                timeout:
+                  type: number
+                  example: 7200
+                  description: GUI idle timeout duration in seconds (minimum 60, maximum 86400).
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - Security
+      summary: Reset GUI idle timeout to default
+      description: Restores the GUI idle timeout setting to its default system value, removing any custom configuration. This returns the timeout duration to the standard recommended setting for automatic session termination.
+      operationId: restoreGuiIdleTimeout
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    securityPolicy:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        action:
+          type: string
+          example: Allow
+          enum:
+          - Allow
+          - Deny
+          description: Action to perform on a match
+        description:
+          type: string
+          example: Admin access for remote admin network
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        roles:
+          type: array
+          items:
+            type: string
+            example: ClusterAdmin
+            description: User roles to which the policy applies
+        ips:
+          type: array
+          items:
+            type: string
+            example: 10.1.4.0/24
+            description: IP address range, as IP, IP/CIDR, or IP1-IP2
+        ref_count:
+          type: number
+          example: 1
+          description: Number of objects to which policy is attached
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+        created_at:
+          type: string
+          format: date-time
+          example: '2024-08-26T07:14:14.123Z'
+          description: Creation time of the policy
+        created_by:
+          type: string
+          example: alex-admin
+          description: Username who created the policy
+        modified_at:
+          type: string
+          format: date-time
+          example: '2024-09-26T07:56:41.818Z'
+          description: Time when policy was last modified
+        modified_by:
+          type: string
+          example: alex-admin
+          description: Username who last modified the policy
+        read_only:
+          type: boolean
+          example: false
+          description: The policy only allows read-only mounts
+        squash_mode:
+          type: string
+          example: root
+          description: Whether to squash user and group IDs on mounted filesystems
+        anon_uid:
+          type: string
+          example: PosixUID<65534>
+          description: The anonymous user identifier (UID) for squashed users. Applies only when `squash_mode` is not `none`
+        anon_gid:
+          type: string
+          example: PosixGID<65534>
+          description: The anonymous group identifier (GID) for squashed users. Applies only when `squash_mode` is not `none`
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+    userRole:
+      type: string
+      enum:
+      - ClusterAdmin
+      - TenantAdmin
+      - ReadOnly
+      - Regular
+      - S3
+      - CSI
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

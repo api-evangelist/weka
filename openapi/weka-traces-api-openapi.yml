@@ -1,0 +1,318 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Traces API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Traces
+paths:
+  /traces:
+    get:
+      tags:
+      - Traces
+      summary: Get trace configuration
+      description: Returns the current trace collection settings, including status and storage limits for both server and client traces.
+      operationId: getTracesStatus
+      responses:
+        '200':
+          description: Trace configuration retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/traces'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - Traces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  example: true
+                  description: Enable or disable trace collection.
+                server_ensure_free:
+                  type: number
+                  example: 300000
+                  description: Minimum free space (in KB) to maintain on server storage.
+                client_ensure_free:
+                  type: number
+                  example: 300000
+                  description: Minimum free space (in KB) to maintain on client storage.
+                server_max:
+                  type: number
+                  example: 600000
+                  description: Maximum storage space (in KB) allocated for server traces.
+                client_max:
+                  type: number
+                  example: 600000
+                  description: Maximum storage space (in KB) allocated for client traces.
+      summary: Configure trace collection settings
+      description: Updates trace collection parameters, including storage allocation limits and free space thresholds for server and client trace data.
+      operationId: updateTracesConfigure
+      responses:
+        '200':
+          description: Trace configuration updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/traces'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - Traces
+      summary: Reset trace configuration to defaults
+      description: Restores all trace collection settings to their factory default values, including storage limits and collection status.
+      operationId: restoreTracesDefaults
+      responses:
+        '200':
+          description: Trace configuration restored to defaults successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/traces'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /traces/freeze:
+    get:
+      tags:
+      - Traces
+      summary: Get trace freeze period
+      description: Returns the configured freeze period during which trace data is preserved and protected from automatic deletion to support troubleshooting and investigation activities.
+      operationId: getTracesFreeze
+      responses:
+        '200':
+          description: Trace freeze period retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/tracesFreeze'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - Traces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - start_time
+              properties:
+                start_time:
+                  type: string
+                  example: '2022-01-01T00:00:00.000Z'
+                  description: Start timestamp of the freeze period (ISO 8601 format).
+                end_time:
+                  type: string
+                  example: '2022-01-01T00:00:00.000Z'
+                  description: End timestamp of the freeze period (ISO 8601 format).
+                freeze_retention:
+                  type: number
+                  example: 0
+                  description: Duration (in days) to retain frozen trace data.
+                override_existing_period:
+                  type: boolean
+                  example: true
+                  description: Replace existing freeze period if one is already configured.
+                comment:
+                  type: string
+                  example: WEKAPP-XXXXX
+                  description: Reference identifier or notes for the freeze period.
+      summary: Set trace freeze period
+      description: Configures a time range during which trace data is preserved and protected from deletion. This ensures diagnostic data remains available for analysis and troubleshooting of specific incidents or issues.
+      operationId: updateTracesFreeze
+      responses:
+        '200':
+          description: Trace freeze period configured successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/tracesFreeze'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - Traces
+      summary: Clear trace freeze period
+      description: Removes the active trace freeze configuration and allows frozen trace data to be subject to normal retention policies. This action clears all freeze period settings and releases preserved traces.
+      operationId: resetTracesFreeze
+      responses:
+        '200':
+          description: Trace freeze period cleared successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/tracesFreeze'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /traces/level:
+    put:
+      tags:
+      - Traces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - level
+              properties:
+                level:
+                  type: string
+                  example: HIGH
+                  enum:
+                  - HIGH
+                  - LOW
+                  description: Trace verbosity level (LOW for essential data, HIGH for comprehensive diagnostic information).
+      summary: Set trace verbosity level
+      description: Adjusts the granularity of trace data collection. LOW level captures essential information suitable for routine troubleshooting with minimal storage impact. HIGH level captures comprehensive diagnostic details required for complex issue analysis and root cause investigation.
+      operationId: updateTracesLevel
+      responses:
+        '200':
+          description: Trace level updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: HIGH
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  schemas:
+    traces:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        level:
+          type: string
+          example: high
+        clients:
+          type: object
+          properties:
+            type:
+              type: string
+              example: default
+        clients_ensure_free:
+          type: object
+          properties:
+            type:
+              type: string
+              example: bytes
+            value:
+              type: number
+              example: 3000000000
+        servers:
+          type: object
+          properties:
+            type:
+              type: string
+              example: default
+        servers_ensure_free:
+          type: object
+          properties:
+            type:
+              type: string
+              example: bytes
+            value:
+              type: number
+              example: 3000000000
+    tracesFreeze:
+      type: object
+      properties:
+        start_time:
+          type: string
+          example: '2022-01-01T00:00:00.000Z'
+        end_time:
+          type: string
+          example: '2022-01-01T00:00:00.000Z'
+        retention:
+          type: number
+          example: 0
+        comment:
+          type: string
+          example: WEKAPP-XXXXX
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,125 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Mounts Defaults API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Mounts Defaults
+paths:
+  /mountDefaults:
+    get:
+      tags:
+      - Mounts Defaults
+      summary: Get default mount options
+      description: Returns the configured default mount options applied to all filesystems across the cluster.
+      operationId: getMountDefaults
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/mountDefaults'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - Mounts Defaults
+      summary: Set default mount options
+      description: Configures default mount options applied to all filesystems across the cluster.
+      operationId: setMountDefaults
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                qos_max_throughput_mbps:
+                  type: number
+                  example: 300000
+                  description: Default QoS max throughput in Mbps.
+                qos_preferred_throughput_mbps:
+                  type: number
+                  example: 200000
+                  description: Default QoS preferred throughput in Mbps.
+    delete:
+      tags:
+      - Mounts Defaults
+      summary: Reset default mount options
+      description: Reverts the default mount options to initial settings for all filesystems in the cluster.
+      operationId: resetMountDefaults
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: qos_max_throughput_mbps
+        schema:
+          type: boolean
+          example: false
+          description: Reset QoS max throughput to default.
+      - in: query
+        name: qos_preferred_throughput_mbps
+        schema:
+          type: boolean
+          example: false
+          description: Reset QoS preferred throughput to default.
+components:
+  responses:
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    mountDefaults:
+      type: object
+      properties:
+        qos_max_throughput:
+          type: number
+          example: '100240444'
+        qos_preferred_throughput:
+          type: number
+          example: '100240444'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

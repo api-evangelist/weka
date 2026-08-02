@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Active Directory
+paths:
+  /activeDirectory:
+    put:
+      tags:
+      - Active Directory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  example: true
+                server_uri:
+                  type: string
+                  example: ad.comapny.com
+                  description: Specifies the LDAP server URI, formatted as `ldap://hostname[:port]` or `ldaps://hostname[:port]`.
+                start_tls:
+                  type: boolean
+                  example: false
+                  description: When set to true, issues a StartTLS command after connecting. Do not use with the `ldaps://` protocol.
+                ignore_start_tls_failure:
+                  type: boolean
+                  example: false
+                  description: When set to true, ignores a StartTLS failure.
+                server_timeout_secs:
+                  type: number
+                  example: 30
+                  description: Specifies the LDAP connection timeout in seconds.
+                domain:
+                  type: string
+                  example: ad.comapny.com
+                  description: Specifies the Active Directory domain name.
+                reader_username:
+                  type: string
+                  example: read_admin
+                  description: Specifies the username for a read-only account.
+                reader_password:
+                  type: string
+                  example: read_pass
+                  description: Specifies the password for the read-only account.
+                role_groups:
+                  type: object
+                  properties:
+                    ClusterAdmin:
+                      type: string
+                      example: Enterprise admins
+                      description: Specifies the Active Directory group name that maps to the `ClusterAdmin` role.
+                    OrgAdmin:
+                      type: string
+                      example: ''
+                      description: Specifies the Active Directory group name that maps to the `OrgAdmin` role.
+                    Regular:
+                      type: string
+                      example: WekaGroup
+                      description: Specifies the Active Directory group name that maps to the `Regular` role.
+                    ReadOnly:
+                      type: string
+                      example: TestGroup
+                      description: Specifies the Active Directory group name that maps to the `ReadOnly` role.
+      summary: Update the Active Directory configuration
+      description: Configures the integration with an Active Directory server for user management. This allows for authenticating users and mapping their group memberships to the cluster user roles.
+      operationId: updateLdapActiveDirectory
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

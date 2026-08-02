@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/weka-openapi-original.json
+api: '@weka-api'
+notes: >-
+  Cross-cutting standards conformance derived from the WEKA REST API OpenAPI
+  3.0.3 definition and the WEKA security docs. WEKA is a data-platform / storage
+  vendor; no published corporate compliance certification program (SOC 2 / ISO
+  27001) was found on the public site, so no Compliance pointer is emitted.
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Published OpenAPI 3.0.3 definition at https://api.docs.weka.io/docs/5.1.json
+- id: http-bearer-auth
+  conforms: true
+  evidence: securitySchemes bearerAuth (http/bearer JWT); global security applied
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in the cluster management API (JWT bearer via /login)
+- id: oidc
+  conforms: true
+  evidence: S3 service supports OIDC authentication for temporary credentials (docs/additional-protocols/s3/s3-users-and-authentication/configure-s3-oidc-authentication)
+- id: s3-api
+  conforms: true
+  evidence: WEKA exposes an S3-compatible object protocol with IAM-style policies
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses are application/json, not application/problem+json
+- id: pagination-cursor
+  conforms: true
+  evidence: List endpoints use limit + next_token cursor pagination
+- id: kerberos
+  conforms: true
+  evidence: NFS with Kerberos (krb5/krb5i/krb5p) supported per security docs
+- id: kmip-kms
+  conforms: true
+  evidence: External KMS integration for encryption key management (KMS API + docs)
+- id: fhir-r4
+  conforms: false
+- id: scim
+  conforms: false
+- id: fapi
+  conforms: false

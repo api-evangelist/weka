@@ -1,0 +1,671 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Object store bucket API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Object store bucket
+paths:
+  /objectStoreBuckets:
+    get:
+      tags:
+      - Object store bucket
+      summary: Get object store bucket configurations
+      description: Retrieves a list of all object store bucket configurations and status.
+      operationId: getAllObsBuckets
+      responses:
+        '200':
+          description: A list of object store bucket configurations was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/objectStoreBucket'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Object store bucket
+      summary: Create an object store bucket configuration
+      description: Establishes a new object store bucket configuration.
+      operationId: createObsBucket
+      responses:
+        '200':
+          description: The object store bucket was created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/objectStoreBucket'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: A new, unique name for the object store bucket connection.
+                  example: OBS_1
+                new_obs_name:
+                  type: string
+                  description: The new name of the pre-configured object store to use for this bucket.
+                  example: ON_PREM1
+                protocol:
+                  type: string
+                  description: The connection protocol to use for the object store endpoint. Default is HTTP.
+                  enum:
+                  - HTTP
+                  - HTTPS
+                  - HTTPS_UNVERIFIED
+                hostname:
+                  type: string
+                  description: The hostname or IP address of the object store endpoint.
+                  example: s3.eu-west-1.amazonaws.com
+                port:
+                  type: number
+                  description: The network port of the object store entrypoint (single accessor or load balancer).
+                  example: 80
+                bucket:
+                  type: string
+                  description: The name of the bucket in the object store.
+                  example: eu-west-1-aws.company.def-oo-test/obs_1
+                auth_method:
+                  type: string
+                  description: The authentication method to use. `AWSSignature4` is recommended for modern services like AWS S3.
+                  enum:
+                  - None
+                  - AWSSignature2
+                  - AWSSignature4
+                region:
+                  type: string
+                  description: The provider-specific region of the object store (for example, `eu-west-1` for AWS). Required for some cloud providers.
+                  example: eu-west-1
+                access_key_id:
+                  type: string
+                  description: The access key ID for authentication. Required for `AWSSignature2` and `AWSSignature4` methods.
+                  example: some_key
+                secret_key:
+                  type: string
+                  description: The secret access key for authentication. Required for `AWSSignature2` and `AWSSignature4` methods.
+                  example: some_secret_key
+                dry_run:
+                  type: boolean
+                  description: If `true`, tests the connection without saving the configuration.
+                  example: false
+                skip_verification:
+                  type: boolean
+                  description: If `true`, skips the verification of the connection to the object store.
+                  example: false
+                bandwidth:
+                  type: number
+                  description: The maximum bandwidth per I/O process to be used for this object store, in megabits per second (Mbps).
+                  example: 1000
+                verbose_errors:
+                  type: boolean
+                  description: If `true`, provides detailed HTTP information on connection errors.
+                errors_timeout:
+                  type: string
+                  description: The duration to wait before I/O operations fail if the object store is unreachable. Must be between 1 and 15 minutes.
+                  example: 1 minute
+                prefetch_mib:
+                  type: number
+                  description: The amount of data in MiB to prefetch during sequential reads. Must be between 0 and 600.
+                  example: 10
+                max_concurrent_downloads:
+                  type: number
+                  description: The maximum number of concurrent download operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_concurrent_uploads:
+                  type: number
+                  description: The maximum number of concurrent upload operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_concurrent_removals:
+                  type: number
+                  description: The maximum number of concurrent removal operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_extents_in_data_blob:
+                  type: number
+                  description: The maximum number of data extents to include in a single uploaded data blob.
+                  example: 10
+                max_blocks_in_data_blob:
+                  type: number
+                  description: The maximum size of a single uploaded data blob. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 10
+                data_storage_class:
+                  type: string
+                  description: The storage class (e.g., AWS S3 Storage Class or Azure Access Tier) to use for data blobs.
+                  example: INTELLIGENT_TIERING
+                metadata_storage_class:
+                  type: string
+                  description: The storage class (e.g., AWS S3 Storage Class or Azure Access Tier) to use for metadata blobs.
+                  example: INTELLIGENT_TIERING
+                sts_operation_type:
+                  type: string
+                  description: The AWS Security Token Service (STS) operation type for authentication. Currently, only `ASSUME_ROLE` is supported.
+                  enum:
+                  - ASSUME_ROLE
+                sts_role_arn:
+                  type: string
+                  description: The Amazon Resource Name (ARN) of the IAM role to assume when using STS authentication.
+                  example: arn:aws:iam::123456789012:role/MyRole
+                sts_role_session_name:
+                  type: string
+                  description: A unique identifier for the assumed role session. Must be 2-64 characters long and can only contain alphanumeric characters and the following symbols - `_` `=` `,` `.` `@` `-`.
+                  example: weka-session
+                sts_session_duration:
+                  type: number
+                  description: The duration, in seconds, for the temporary security credentials. The value must be between 900 and 43200. Defaults to 3600.
+                  example: 3600
+  /objectStoreBuckets/{uid}:
+    get:
+      tags:
+      - Object store bucket
+      summary: Get a specific object store bucket configuration
+      description: Retrieves a specific object store bucket configuration and status.
+      operationId: getObsBuckets
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the object store bucket.
+      responses:
+        '200':
+          description: The object store bucket configuration details were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/objectStoreBucket'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+      - Object store bucket
+      summary: Delete an object store bucket configuration
+      description: Removes an existing object store bucket configuration if the bucket is not attached to a filesystem.
+      operationId: deleteObsBucket
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the object store bucket to delete.
+    put:
+      tags:
+      - Object store bucket
+      summary: Update an object store bucket configuration
+      description: Modifies an existing object store bucket configuration.
+      operationId: updateObsBucket
+      responses:
+        '200':
+          description: The object store bucket configuration was updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/objectStoreBucket'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the object store bucket to update.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: A new unique name for the object store bucket connection.
+                  example: OBS_1
+                new_obs_name:
+                  type: string
+                  description: The new name of the pre-configured object store to use for this bucket.
+                  example: ON_PREM1
+                protocol:
+                  type: string
+                  description: The connection protocol to use for the object store endpoint.
+                  enum:
+                  - HTTP
+                  - HTTPS
+                  - HTTPS_UNVERIFIED
+                hostname:
+                  type: string
+                  description: The hostname or IP address of the object store endpoint.
+                  example: s3.eu-west-1.amazonaws.com
+                port:
+                  type: number
+                  description: The network port of the object store endpoint.
+                  example: 80
+                bucket:
+                  type: string
+                  description: The name of the bucket in the object store.
+                  example: eu-west-1-aws.company.def-oo-test/obs_1
+                auth_method:
+                  type: string
+                  description: The authentication method to use. `AWSSignature4` is recommended for modern services like AWS S3.
+                  enum:
+                  - None
+                  - AWSSignature2
+                  - AWSSignature4
+                region:
+                  type: string
+                  description: The provider-specific region of the object store (e.g., `eu-west-1` for AWS). Required for some cloud providers.
+                  example: eu-west-1
+                access_key_id:
+                  type: string
+                  description: The access key ID for authentication. Required for `AWSSignature2` and `AWSSignature4` methods.
+                  example: some_key
+                secret_key:
+                  type: string
+                  description: The secret access key for authentication. Required for `AWSSignature2` and `AWSSignature4` methods.
+                  example: some_secret_key
+                dry_run:
+                  type: boolean
+                  description: If `true`, tests the connection without saving the configuration.
+                  example: false
+                skip_verification:
+                  type: boolean
+                  description: If `true`, skips the verification of the connection to the object store.
+                  example: false
+                bandwidth:
+                  type: number
+                  description: The maximum bandwidth per I/O process to be used for this object store, in megabits per second (Mbps).
+                  example: 1000
+                verbose_errors:
+                  type: boolean
+                  description: If `true`, provides detailed HTTP information on connection errors.
+                  example: false
+                errors_timeout:
+                  type: string
+                  description: The duration to wait before I/O operations fail if the object store is unreachable. Must be between 1 and 15 minutes.
+                  example: 1 minute
+                prefetch_mib:
+                  type: number
+                  description: The amount of data in MiB to prefetch during sequential reads. Must be between 0 and 600.
+                  example: 10
+                max_concurrent_downloads:
+                  type: number
+                  description: The maximum number of concurrent download operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_concurrent_uploads:
+                  type: number
+                  description: The maximum number of concurrent upload operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_concurrent_removals:
+                  type: number
+                  description: The maximum number of concurrent removal operations per I/O process. Must be between 1 and 64.
+                  example: 10
+                max_extents_in_data_blob:
+                  type: number
+                  description: The maximum number of data extents to include in a single uploaded data blob.
+                  example: 10
+                max_blocks_in_data_blob:
+                  type: number
+                  description: The maximum size of a single uploaded data blob. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 10
+                data_storage_class:
+                  type: string
+                  description: The storage class (e.g., AWS S3 Storage Class or Azure Access Tier) to use for data blobs.
+                  example: INTELLIGENT_TIERING
+                metadata_storage_class:
+                  type: string
+                  description: The storage class (e.g., AWS S3 Storage Class or Azure Access Tier) to use for metadata blobs.
+                  example: INTELLIGENT_TIERING
+                sts_operation_type:
+                  type: string
+                  description: The AWS Security Token Service (STS) operation type for authentication. Currently, only `ASSUME_ROLE` is supported.
+                  enum:
+                  - ASSUME_ROLE
+                sts_role_arn:
+                  type: string
+                  description: The Amazon Resource Name (ARN) of the IAM role to assume when using STS authentication.
+                  example: arn:aws:iam::123456789012:role/MyRole
+                sts_role_session_name:
+                  type: string
+                  description: A unique identifier for the assumed role session. Must be 2-64 characters long and can only contain alphanumeric characters and the following symbols - `_` `=` `,` `.` `@` `-`.
+                  example: weka-session
+                sts_session_duration:
+                  type: number
+                  description: The duration, in seconds, for the temporary security credentials. The value must be between 900 and 43200. Defaults to 3600.
+                  example: 3600
+  /objectStoreBuckets/{uid}/operations:
+    get:
+      tags:
+      - Object store bucket
+      summary: Get object store bucket operations
+      description: Retrieves a list of live, low-level I/O operations (such as uploads and downloads) for a specific object store bucket.
+      operationId: getObsOperations
+      responses:
+        '200':
+          description: The list of live operations was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: A map of node IDs to their respective operations (e.g., "NodeId<121>").
+                    properties:
+                      NodeId<121>:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            chanType:
+                              type: string
+                              example: Upload
+                            info:
+                              type: object
+                              properties:
+                                concurrencyAtEnd:
+                                  type: number
+                                  example: 0
+                                executionTimeUSecs:
+                                  type: number
+                                  example: 265839
+                                key:
+                                  type: string
+                                  example: B_84/23caf2eb-246e-4743-b6f1-ebcc70672b07/s/I_0/17/0
+                                concurrencyAtStart:
+                                  type: number
+                                  example: 3
+                                size:
+                                  type: number
+                                  example: 56
+                                lastCurlError:
+                                  type: string
+                                  example: ok
+                                lastLatencyUSecs:
+                                  type: number
+                                  example: 265821
+                                fsId:
+                                  type: string
+                                  example: FSId<0>
+                                lastHTTPRespCode:
+                                  type: string
+                                  example: INVALID
+                                curlErrorStr:
+                                  type: string
+                                  example: ''
+                                startTime:
+                                  type: object
+                                  properties:
+                                    usecs:
+                                      type: number
+                                      example: 1615473402366933
+                                extentSpec:
+                                  type: object
+                                  properties:
+                                    snapLayerId:
+                                      type: string
+                                      example: SnapLayerId<INVALID>
+                                    extentKey:
+                                      type: object
+                                      properties:
+                                        extentIndex:
+                                          type: string
+                                          example: ExtentIndex<INVALID>
+                                        inodeId:
+                                          type: string
+                                          example: InodeId<INVALID>
+                                counts:
+                                  type: object
+                                  properties:
+                                    SUCCESS:
+                                      type: number
+                                      example: 1
+                            opPhase:
+                              type: string
+                              example: Recent
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the object store bucket.
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    objectStoreBucket:
+      type: object
+      properties:
+        status_remove:
+          type: string
+          example: UP
+        id:
+          type: string
+          example: ObsBucketId<1>
+        secret_key:
+          type: string
+          example: '**********'
+        errors_timeout:
+          type: number
+          example: 60
+        bandwidth:
+          type: object
+          properties:
+            _mbps:
+              type: number
+              example: 1000
+        name:
+          type: string
+          example: OBS_1
+        obs_name:
+          type: string
+          example: default
+        obs_site:
+          type: string
+          example: local
+        prefetch_mib:
+          type: number
+          example: 10
+        uid:
+          type: string
+          example: '302'
+        hostname:
+          type: string
+          example: s3.eu-west-1.amazonaws.com
+        enable_upload_tags:
+          type: boolean
+          example: true
+        data_storage_class:
+          type: string
+          example: INTELLIGENT_TIERING
+        metadata_storage_class:
+          type: string
+          example: INTELLIGENT_TIERING
+        unknown_nodes:
+          type: array
+          items:
+            type: string
+            example: NodeId<61>
+        unknown_count:
+          type: number
+          example: 0
+        up_nodes:
+          type: array
+          items:
+            type: string
+            example: NodeId<100>
+        up_count:
+          type: number
+          example: 14
+        down_count:
+          type: number
+          example: 0
+        max_concurrent_uploads:
+          type: number
+          example: 10
+        auth_method:
+          type: string
+          example: AWSSignature4
+        status_upload:
+          type: string
+          example: UP
+        download_bandwidth:
+          type: object
+          properties:
+            _mbps:
+              type: number
+              example: 4294967295
+        max_concurrent_removals:
+          type: number
+          example: 10
+        max_extents_in_data_blob:
+          type: number
+          example: 10
+        max_blocks_in_data_blob:
+          type: number
+          example: 10
+        upload_bandwidth:
+          type: object
+          properties:
+            _mbps:
+              type: number
+              example: 4294967295
+        up_since:
+          type: string
+          nullable: true
+          example: '2021-03-09T08:56:27.923664Z'
+        access_key_id:
+          type: string
+          example: REDACTED_AWS_ACCESS_KEY_ID
+        last_errors:
+          type: string
+          nullable: true
+          example: last error
+        port:
+          type: number
+          example: 80
+        status_download:
+          type: string
+          example: UP
+        bucket:
+          type: string
+          example: eu-west-1-aws.weka.io.def-oo-test/obs_1
+        status:
+          type: string
+          example: UP
+        obs_type:
+          type: string
+          example: AWS
+        max_concurrent_downloads:
+          type: number
+          example: 10
+        obs_id:
+          type: string
+          example: ObsId<0>
+        region:
+          type: string
+          example: eu-west-1
+        protocol:
+          type: string
+          example: HTTP
+        down_nodes:
+          type: array
+          items:
+            type: string
+            example: NodeId<60>
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

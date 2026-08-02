@@ -1,0 +1,642 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Cluster API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Cluster
+paths:
+  /cluster:
+    post:
+      tags:
+      - Cluster
+      summary: Create a cluster
+      description: Forms a new WEKA cluster from a list of specified servers.
+      operationId: createCluster
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      guid:
+                        type: string
+                      success:
+                        type: object
+                      failures:
+                        type: object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hosts_hostnames:
+                  type: array
+                  description: A list of server hostnames to include in the new cluster.
+                  items:
+                    type: string
+                  example:
+                  - host-1
+                  - host-2
+                hosts_ips:
+                  type: array
+                  description: Management IP addresses. If empty, the hostnames are resolved. For HA or mixed-networking, use the format 'ip+ip+...+ip'.
+                  items:
+                    type: string
+                  example:
+                  - <host-ip>
+                  - <host-ip2>
+                join_secret:
+                  type: string
+                  description: An initial secret key to prevent unauthorized servers from joining the cluster.
+                  example: some-secret
+                admin_password:
+                  type: string
+                  description: The password for the cluster admin user. If not provided, a default password is set.
+                  example: Admin123
+    put:
+      tags:
+      - Cluster
+      summary: Update cluster configuration
+      description: Modifies the configuration settings of an existing cluster.
+      operationId: updateCluster
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cluster_name:
+                  type: string
+                  description: A new name for the cluster.
+                  example: new_name
+                data_drives:
+                  type: number
+                  description: The number of data blocks for the RAID stripe width.
+                  example: 5
+                parity_drives:
+                  type: number
+                  description: The number of parity blocks for the RAID stripe width.
+                  example: 2
+                scrubber_bytes_per_sec:
+                  type: number
+                  description: The rate of RAID scrubbing. Units can be specified in decimal (KB, MB) or binary (KiB, MiB) format.
+                  example: 100000000
+                hotspare_failure_domains:
+                  type: number
+                  description: The number of hot spare failure domains to reserve for data rebuilds.
+                  example: 2
+    get:
+      tags:
+      - Cluster
+      summary: Get cluster status
+      description: Returns a comprehensive status report for the cluster, including health, performance metrics, and capacity.
+      operationId: getClusterStatus
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      overlay:
+                        type: object
+                        properties:
+                          client_nodes_safety_histogram:
+                            type: array
+                            items:
+                              type: number
+                            example:
+                            - 0
+                            - 0
+                            - 10
+                            - 1
+                          branching_factor:
+                            type: number
+                            example: 40
+                          clients_branching_factor:
+                            type: number
+                            example: 100
+                          backend_nodes_safety_histogram:
+                            type: array
+                            items:
+                              type: number
+                            example:
+                            - 0
+                            - 0
+                            - 10
+                            - 1
+                          client_nodes_at_risk:
+                            type: number
+                            example: 0
+                          client_nodes_not_supported:
+                            type: number
+                            example: 0
+                      activity:
+                        type: object
+                        properties:
+                          obs_upload_bytes_per_second:
+                            type: number
+                            example: 0
+                          sum_bytes_read:
+                            type: number
+                            example: 0
+                          num_writes:
+                            type: number
+                            example: 0
+                          obs_download_bytes_per_second:
+                            type: number
+                            example: 0
+                          sum_bytes_written:
+                            type: number
+                            example: 0
+                          num_reads:
+                            type: number
+                            example: 0
+                          num_ops:
+                            type: number
+                            example: 0
+                      hot_spare:
+                        type: number
+                        example: 1
+                      io_status:
+                        type: string
+                        example: STARTED
+                      status:
+                        type: string
+                        example: OK
+                      last_init_failure:
+                        type: string
+                        example: ''
+                      drives:
+                        type: object
+                        properties:
+                          active:
+                            type: number
+                            example: 7
+                          total:
+                            type: number
+                            example: 7
+                      name:
+                        type: string
+                        example: stewie
+                      deployment_mode:
+                        type: string
+                        enum:
+                        - BACKEND
+                        - CLIENT
+                        - CONVERGED
+                        - UNKNOWN
+                        example: CONVERGED
+                      upgrade:
+                        type: string
+                        example: ''
+                      io_status_changed_time:
+                        type: string
+                        example: '2021-03-10T09:46:02.245149Z'
+                      short_drive_grace_on_failure_secs:
+                        type: number
+                        example: 10
+                      io_nodes:
+                        type: object
+                        properties:
+                          active:
+                            type: number
+                            example: 7
+                          total:
+                            type: number
+                            example: 7
+                      cloud:
+                        type: object
+                        properties:
+                          enabled:
+                            type: boolean
+                            example: true
+                          healthy:
+                            type: boolean
+                            example: true
+                          proxy:
+                            type: string
+                            example: ''
+                      release_hash:
+                        type: string
+                        example: d79aaa56d95d9beb02b15783dede1ec79d4c273b
+                      rebuild:
+                        type: object
+                        properties:
+                          requiredFDsForRebuild:
+                            type: number
+                            example: 4
+                          unavailablePercent:
+                            type: number
+                            example: 0
+                          enoughActiveFDs:
+                            type: boolean
+                            example: true
+                          totalCopiesMiB:
+                            type: number
+                            example: 0
+                          unavailableMiB:
+                            type: number
+                            example: 0
+                          progressPercent:
+                            type: number
+                            example: 0
+                          stripeDisks:
+                            type: number
+                            example: 7
+                          numActiveFDs:
+                            type: number
+                            example: 7
+                          totalCopiesDoneMiB:
+                            type: number
+                            example: 0
+                          protectionState:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                percent:
+                                  type: number
+                                  example: 100
+                                numFailures:
+                                  type: number
+                                  example: 0
+                                MiB:
+                                  type: number
+                                  example: 403200
+                      init_stage:
+                        type: string
+                        example: INITIALIZED
+                      failure_domains_enabled:
+                        type: boolean
+                        example: true
+                      long_drive_grace_on_failure_secs:
+                        type: number
+                        example: 360
+                      hosts:
+                        type: object
+                        properties:
+                          total_count:
+                            type: number
+                            example: 7
+                          backends:
+                            type: object
+                            properties:
+                              active:
+                                type: number
+                                example: 7
+                              total:
+                                type: number
+                                example: 7
+                          active_count:
+                            type: number
+                            example: 7
+                          clients:
+                            type: object
+                            properties:
+                              active:
+                                type: number
+                                example: 0
+                              total:
+                                type: number
+                                example: 0
+                      last_init_failure_code:
+                        type: string
+                        example: ''
+                      stripe_data_drives:
+                        type: number
+                        example: 5
+                      release:
+                        type: string
+                        example: 3.11.1.6926-f6e1fbb96d03ef76b64bfd4d8c2c366a
+                      buckets_info:
+                        type: object
+                        properties:
+                          averageFillLevelPPMMinSinceLastEvent:
+                            type: number
+                            example: 0
+                          thinProvisionState:
+                            type: object
+                            properties:
+                              usableWritable:
+                                type: number
+                                example: 521109504
+                              totalSSDBudgets:
+                                type: number
+                                example: 446644224
+                              shrinkageFactor:
+                                type: object
+                                properties:
+                                  val:
+                                    type: number
+                                    example: 4096
+                          averageFillLevelPPM:
+                            type: number
+                            example: 5269
+                          shrunkAtGeneration:
+                            type: string
+                            example: ConfigGeneration<INVALID>
+                          placementAllocationThresholdPPM:
+                            type: number
+                            example: 450000
+                          maxPrefetchRPCs:
+                            type: number
+                            example: 256
+                      active_alerts_count:
+                        type: number
+                        example: 0
+                      time:
+                        type: object
+                        properties:
+                          cluster_time:
+                            type: string
+                            example: '2021-03-10T09:52:14.5068161Z'
+                          allowed_clock_skew_secs:
+                            type: number
+                            example: 60
+                          cluster_local_utc_offset_seconds:
+                            type: number
+                            example: 1800
+                          cluster_local_utc_offset:
+                            type: string
+                            example: +03:00
+                      net:
+                        type: object
+                        properties:
+                          link_layer:
+                            type: string
+                            example: ETH
+                      buckets:
+                        type: object
+                        properties:
+                          active:
+                            type: number
+                            example: 105
+                          global_flush_generation:
+                            type: number
+                            example: 1
+                          global_flush_status:
+                            type: string
+                            example: NONE
+                          total:
+                            type: number
+                            example: 105
+                          flush_finished:
+                            type: number
+                            example: 105
+                          shutdown_finished:
+                            type: number
+                            example: 105
+                      scrubber_bytes_per_sec:
+                        type: number
+                        example: 134217728
+                      init_stage_changed_time:
+                        type: string
+                        example: '2021-03-10T09:45:42.599016Z'
+                      capacity:
+                        type: object
+                        properties:
+                          total_bytes:
+                            type: number
+                            example: 1829454741504
+                          hot_spare_bytes:
+                            type: number
+                            example: 305009786880
+                          unprovisioned_bytes:
+                            type: number
+                            example: 0
+                      is_cluster:
+                        type: boolean
+                        example: true
+                      block_upgrade_task:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            example: INVALID
+                          progress:
+                            type: number
+                            example: 0
+                          taskId:
+                            type: string
+                            example: BlockTaskId<0>
+                          state:
+                            type: string
+                            example: IDLE
+                      grim_reaper:
+                        type: object
+                        properties:
+                          enabled:
+                            type: boolean
+                            example: true
+                          is_cluster_fully_connected:
+                            type: boolean
+                            example: true
+                          node_with_least_links:
+                            type: string
+                            example: ''
+                      stripe_protection_drives:
+                        type: number
+                        example: 2
+                      guid:
+                        type: string
+                        example: 9724f5ec-a68c-437d-8411-03c8425c06b8
+                      start_io_starting_drives_grace_secs:
+                        type: number
+                        example: 60
+                      start_io_starting_io_nodes_grace_secs:
+                        type: number
+                        example: 30
+                      hanging_ios:
+                        type: object
+                        properties:
+                          event_driver_frontend_threshold_secs:
+                            type: number
+                            example: 1800
+                          last_emitted_backend_no_longer_detected_event:
+                            type: string
+                            example: ''
+                          alerts_threshold_secs:
+                            type: number
+                            example: 900
+                          last_emitted_backend_event:
+                            type: string
+                            example: ''
+                          event_backend_threshold_secs:
+                            type: number
+                            example: 1800
+                          last_emitted_driver_frontend_no_longer_detected_event:
+                            type: string
+                            example: ''
+                          last_emitted_driver_frontend_event:
+                            type: string
+                            example: ''
+                          event_nfs_frontend_threshold_secs:
+                            type: number
+                            example: 1800
+                          last_emitted_nfs_frontend_event:
+                            type: string
+                            example: ''
+                          last_emitted_nfs_frontend_no_longer_detected_event:
+                            type: string
+                            example: ''
+                      last_init_failure_time:
+                        type: string
+                        example: ''
+                      nodes:
+                        type: object
+                        properties:
+                          blacklisted:
+                            type: number
+                            example: 0
+                          total:
+                            type: number
+                            example: 14
+                      licensing:
+                        type: object
+                        properties:
+                          mode:
+                            type: string
+                            example: Classic
+                          usage:
+                            type: object
+                            properties:
+                              drive_capacity_gb:
+                                type: number
+                                example: 3324
+                              usable_capacity_gb:
+                                type: number
+                                example: 1829
+                              obs_capacity_gb:
+                                type: number
+                                example: 0
+                          license:
+                            type: string
+                            example: license_key
+                          limits:
+                            type: object
+                            properties:
+                              drive_capacity_gb:
+                                type: number
+                                example: 3324
+                              usable_capacity_gb:
+                                type: number
+                                example: 18446744073709552000
+                              obs_capacity_gb:
+                                type: number
+                                example: 1000000000000000
+                              valid_from:
+                                type: string
+                                example: '2021-03-10T09:46:18Z'
+                              expires_at:
+                                type: string
+                                example: '2021-04-09T09:46:18Z'
+                          next_check:
+                            type: string
+                            example: '2021-03-10T10:46:20Z'
+                          error:
+                            type: string
+                            example: ''
+                          check_interval_secs:
+                            type: number
+                            example: 3600
+        '401':
+          $ref: '#/components/responses/401'
+  /cluster/capacity_reduction:
+    get:
+      tags:
+      - Cluster
+      summary: Get capacity reduction details
+      description: Returns data reduction statistics for the cluster, including the total saved bytes and the reduction ratio.
+      operationId: getCapacityReduction
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      data_reduction_saved_bytes:
+                        type: number
+                        example: 1829454741504
+                      data_reduction_ratio:
+                        type: number
+                        example: 2.53
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

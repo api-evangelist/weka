@@ -1,0 +1,702 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Snapshot Policy API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Snapshot Policy
+paths:
+  /snapshotPolicy:
+    post:
+      tags:
+      - Snapshot Policy
+      summary: Create snapshot policy
+      description: Creates a new snapshot policy with specified scheduling parameters, retention rules, and configuration settings for automated point-in-time data copies.
+      operationId: createSnapshotPolicy
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshotPolicy'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of snapshot policy to create.
+                  example: Backup
+                policy_params:
+                  $ref: '#/components/schemas/snapshotPolicyTemplate'
+                enable:
+                  type: boolean
+                  example: true
+                description:
+                  type: string
+                  example: Backup filesystem
+    get:
+      summary: Get all snapshot policies
+      description: Returns a complete list of all snapshot policies configured in the cluster with their current settings and status.
+      operationId: listSnapPolicies
+      tags:
+      - Snapshot Policy
+      responses:
+        '200':
+          description: List of snapshot policies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/snapshotPolicy'
+        '401':
+          $ref: '#/components/responses/401'
+  /snapshotPolicy/{uid}:
+    get:
+      tags:
+      - Snapshot Policy
+      summary: Get a snapshot policy
+      description: Returns detailed configuration for a specific snapshot policy, including schedule definitions, retention parameters, and attached filesystem associations.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: snapshot policy uid.
+      operationId: showSnapshotPolicy
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshotPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+      - Snapshot Policy
+      summary: Update snapshot policy
+      description: Updates configuration settings for an existing snapshot policy, including name, description, schedule parameters, retention rules, and activation status.
+      operationId: updateSnapshotPolicy
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Snapshot policy uid.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshotPolicy'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policy_params:
+                  $ref: '#/components/schemas/snapshotPolicyTemplate'
+                new_name:
+                  type: string
+                  description: New name of snapshot policy.
+                  example: NewBackup
+                enable:
+                  type: boolean
+                description:
+                  type: string
+                  example: Backup Filesystem New
+    delete:
+      tags:
+      - Snapshot Policy
+      summary: Delete snapshot policy
+      description: Permanently removes a snapshot policy from the system. All filesystems must be detached from the policy before deletion can proceed.
+      operationId: deleteSnapshotPolicy
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Snapshot policy uid.
+  /snapshotPolicy/{uid}/filesystems:
+    get:
+      tags:
+      - Snapshot Policy
+      summary: List filesystems attached to a snapshot policy
+      description: Returns a list of all filesystem identifiers currently associated with a specific snapshot policy.
+      operationId: listFsAttachedToSnapshotPolicy
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Snapshot policy uid.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                      example: default
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /snapshotPolicy/{uid}/filesystems/attach:
+    post:
+      tags:
+      - Snapshot Policy
+      summary: Attach filesystems to snapshot policy
+      description: Associates one or more filesystems with a snapshot policy, applying the policy's scheduling and retention rules to the specified filesystems.
+      operationId: attachFsToSnapshotPolicy
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Snapshot policy uid.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                      example: default
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filesystems:
+                  description: A list of filesystem UIDs to attach.
+                  type: array
+                  items:
+                    type: string
+                    example: 7bd47da6-6769-44ca-5f7c-6bebc27beeab
+  /snapshotPolicy/{uid}/filesystems/detach:
+    post:
+      tags:
+      - Snapshot Policy
+      summary: Detach filesystems from snapshot policy
+      description: Removes the association between a snapshot policy and one or more filesystems, discontinuing automated snapshot operations for those filesystems.
+      operationId: detachFsFromSnapshotPolicy
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Snapshot policy UID.
+      - in: query
+        name: remove_waiting_tasks
+        description: Allow to delete all waiting tasks corresponding to the filesystems.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                      example: default
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                filesystems:
+                  description: A list of filesystem uids to detach.
+                  type: array
+                  items:
+                    type: string
+                    example: 7bd47da6-6769-44ca-5f7c-6bebc27beeab
+  /snapshotPolicy/{uid}/duplicate:
+    post:
+      tags:
+      - Snapshot Policy
+      summary: Duplicate a snapshot policy
+      description: Creates a copy of an existing snapshot policy with its configuration settings, optionally including filesystem associations. Useful for establishing similar policies with minor variations.
+      operationId: duplicateSnapshotPolicy
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Snapshot policy uid.
+      - in: query
+        name: include_attached_filesystems
+        description: Define whether or not to include the attached filesystems.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/snapshotPolicyInfo'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Name of the new snapshot policy.
+                  type: string
+                  example: policy_dup
+                description:
+                  description: Description of the new snapshot policy.
+                  type: string
+                  example: duplicate policy
+  /snapshotPolicy/{uid}/runOnce:
+    post:
+      tags:
+      - Snapshot Policy
+      summary: Run the snapshot policy schedule once
+      description: Runs a specified schedule type immediately, creating snapshots for all attached filesystems without waiting for the scheduled time.
+      operationId: runSnapshotPolicyScheduleOnce
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Snapshot policy uid
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: string
+                    example: Background jobs are initiated to generate snapshots for all attached filesystems.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                schedule_type:
+                  description: Schedule type to be run once.
+                  type: string
+                  enum:
+                  - PERIODIC
+                  - HOURLY
+                  - DAILY
+                  - WEEKLY
+                  - MONTHLY
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    snapshotPolicy:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: fe08008e-397d-237b-a095-577783714006
+        id:
+          type: string
+          example: SnapPolicyId<1>
+        name:
+          type: string
+          example: Backup
+        description:
+          type: string
+          example: Periodic filesystem backup
+        enable:
+          type: boolean
+          example: true
+        filesystems:
+          type: array
+          items:
+            type: string
+            example: default
+    snapshotPolicyTemplate:
+      type: object
+      properties:
+        daily:
+          type: object
+          properties:
+            days:
+              type: string
+              example: all
+            enable:
+              type: boolean
+              example: true
+            retention:
+              type: number
+              example: 7
+            time:
+              type: string
+              example: '22:05'
+            upload:
+              type: string
+              example: local
+        hourly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: monday, tuesday, wednesday, thursday, friday
+            enable:
+              type: boolean
+              example: true
+            hours:
+              type: string
+              example: 09, 10, 11, 12, 13, 14, 15, 16, 17, 18
+            minuteOffset:
+              type: number
+              example: 5
+            retention:
+              type: number
+              example: 10
+            upload:
+              type: string
+              example: none
+        monthly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: '07'
+            enable:
+              type: boolean
+              example: true
+            months:
+              type: string
+              example: all
+            retention:
+              type: number
+              example: 12
+            time:
+              type: string
+              example: 00:05
+            upload:
+              type: string
+              example: local
+        periodic:
+          type: object
+          properties:
+            days:
+              type: string
+              example: monday, tuesday, wednesday, thursday, friday
+            enable:
+              type: boolean
+              example: false
+            end_time:
+              type: string
+              example: '18:00'
+            interval:
+              type: number
+              example: 30
+            retention:
+              type: number
+              example: 4
+            start_time:
+              type: string
+              example: 09:00
+            upload:
+              type: string
+              example: none
+        weekly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: saturday
+            enable:
+              type: boolean
+              example: true
+            retention:
+              type: number
+              example: 4
+            time:
+              type: string
+              example: '23:05'
+            upload:
+              type: string
+              example: local
+    snapshotPolicyInfo:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SnapPolicyId<1>
+        name:
+          type: string
+          example: Backup
+        description:
+          type: string
+          example: Periodic filesystem backup
+        enable:
+          type: boolean
+          example: true
+        filesystems:
+          type: array
+          items:
+            type: string
+            example: default
+        daily:
+          type: object
+          properties:
+            days:
+              type: string
+              example: all
+            enable:
+              type: boolean
+              example: true
+            retention:
+              type: number
+              example: 7
+            time:
+              type: string
+              example: '22:05'
+            upload:
+              type: string
+              example: local
+        hourly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: monday, tuesday, wednesday, thursday, friday
+            enable:
+              type: boolean
+              example: true
+            hours:
+              type: string
+              example: 09, 10, 11, 12, 13, 14, 15, 16, 17, 18
+            minuteOffset:
+              type: number
+              example: 5
+            retention:
+              type: number
+              example: 10
+            upload:
+              type: string
+              example: none
+        monthly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: '07'
+            enable:
+              type: boolean
+              example: true
+            months:
+              type: string
+              example: all
+            retention:
+              type: number
+              example: 12
+            time:
+              type: string
+              example: 00:05
+            upload:
+              type: string
+              example: local
+        periodic:
+          type: object
+          properties:
+            days:
+              type: string
+              example: monday, tuesday, wednesday, thursday, friday
+            enable:
+              type: boolean
+              example: false
+            end_time:
+              type: string
+              example: '18:00'
+            interval:
+              type: number
+              example: 30
+            retention:
+              type: number
+              example: 4
+            start_time:
+              type: string
+              example: 09:00
+            upload:
+              type: string
+              example: none
+        weekly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: saturday
+            enable:
+              type: boolean
+              example: true
+            retention:
+              type: number
+              example: 4
+            time:
+              type: string
+              example: '23:05'
+            upload:
+              type: string
+              example: local
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

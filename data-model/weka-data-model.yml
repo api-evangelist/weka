@@ -1,0 +1,73 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/weka-openapi-original.json
+api: '@weka-api'
+notes: >-
+  Entity-relationship model derived from the WEKA REST API OpenAPI paths, tags,
+  and id-reference parameters (uid, fs_uuid, bucket, inode_id, org/tenant).
+  Resources are addressed by uid/uuid.
+entities:
+- name: Cluster
+  id: singleton
+  paths: ['/cluster']
+  relationships:
+  - 'has_many: FileSystem'
+  - 'has_many: Container'
+  - 'has_many: Drive'
+- name: FileSystem
+  id: uid
+  paths: ['/fileSystems', '/fileSystems/{uid}']
+  relationships:
+  - 'belongs_to: FilesystemGroup'
+  - 'has_many: Quota (via fileSystems/{uid}/quota)'
+  - 'has_many: ObjectStoreBucket (via objectStoreBuckets attach)'
+  - 'has_many: Snapshot'
+- name: FilesystemGroup
+  id: uid
+  paths: ['/fileSystemGroups']
+- name: Quota
+  id: inode_id
+  paths: ['/fileSystems/{uid}/quota/{inode_id}']
+  relationships:
+  - 'belongs_to: FileSystem (via uid)'
+- name: Snapshot
+  id: uid
+  paths: ['/snapshots']
+  relationships:
+  - 'belongs_to: FileSystem'
+  - 'belongs_to: SnapshotPolicy'
+- name: ObjectStoreBucket
+  id: uid
+  paths: ['/objectStoreBuckets', '/objectStoreBuckets/{uid}']
+- name: S3Bucket
+  id: bucket
+  paths: ['/s3/buckets', '/s3/buckets/{bucket}']
+  relationships:
+  - 'belongs_to: FileSystem'
+- name: Tenant
+  id: tenantId
+  paths: ['/tenants']
+  note: Supersedes the deprecated Organization entity.
+- name: Organization
+  id: uid
+  paths: ['/organizations/{uid}']
+  deprecated: true
+  note: Replaced by Tenant.
+- name: User
+  id: uid
+  paths: ['/users', '/users/{uid}']
+  relationships:
+  - 'belongs_to: Tenant'
+- name: Container
+  id: uid
+  paths: ['/containers']
+  note: Supersedes the deprecated Host entity.
+- name: Alert
+  id: alert_type
+  paths: ['/alerts', '/alerts/{alert_type}/mute']
+- name: Event
+  id: n/a
+  paths: ['/events']
+- name: KMS
+  id: singleton
+  paths: ['/kms']

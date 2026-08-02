@@ -1,0 +1,969 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory SMB API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: SMB
+paths:
+  /smb:
+    get:
+      tags:
+      - SMB
+      summary: Get SMB cluster configuration
+      description: Returns comprehensive details about the existing SMB cluster, including<br> domain membership status, container assignments, ID mapping configuration,<br> encryption settings, and feature enablement flags.<br> Use this endpoint to audit the current cluster state or verify configuration changes.
+      operationId: getSamba
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      joinedDomainMappingToId:
+                        type: number
+                        example: 4290000000
+                      sambaHosts:
+                        type: array
+                        items:
+                          type: string
+                          example: HostId<0>
+                      idmapBackend:
+                        type: string
+                        example: rfc2307
+                      sambaIps:
+                        type: array
+                        items:
+                          type: string
+                          example: some_ip
+                      defaultDomainMappingToId:
+                        type: number
+                        example: 4291000000
+                      domainName:
+                        type: string
+                        example: ad.company.com
+                      name:
+                        type: string
+                        example: CompanySMB
+                      encryption:
+                        type: string
+                        example: enabled
+                      domainJoined:
+                        type: boolean
+                        example: true
+                      joinedDomainMappingFromId:
+                        type: number
+                        example: 0
+                      domainAdminUsername:
+                        type: string
+                        example: wekadmin
+                      defaultDomainMappingFromId:
+                        type: number
+                        example: 4290000001
+                      domainNetbiosName:
+                        type: string
+                        example: ad
+                      symlink:
+                        type: boolean
+                        description: Enable or disable symbolic link (symlink) support for the SMB cluster.
+                      smbw:
+                        type: boolean
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - SMB
+      summary: Create a new SMB cluster
+      description: Creates a new SMB cluster and establishes its foundational configuration. This includes setting the domain association, assigning containers to serve the SMB protocol, and defining security policies.<br> This operation creates the cluster structure but does not join it to an Active Directory domain. After the cluster is created, use the POST /smb/activeDirectory endpoint to complete the domain integration.
+      operationId: setSamba
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - domain
+              properties:
+                name:
+                  type: string
+                  description: Unique identifier for the SMB cluster.
+                  example: companySMB
+                samba_hosts:
+                  type: array
+                  description: Array of container UIDs that will provide SMB protocol services (minimum of three containers). These containers must be available and properly configured within the system.
+                  items:
+                    type: string
+                    example: 15
+                domain:
+                  type: string
+                  description: Fully qualified domain name (FQDN) for Active Directory integration.
+                  example: ad.company.com
+                samba_ips:
+                  type: array
+                  description: Floating IP addresses for high-availability SMB access.<br> These IPs must not be assigned to any container on the network.<br> Supported formats include A.B.C.D-E.F.G.H, A.B.C.D-F.G.H, A.B.C.D-G.H, or A.B.C.D-H.
+                  items:
+                    type: string
+                    example: 172.68.34.23
+                domain_netbios_name:
+                  type: string
+                  description: The domain NetBIOS name; If not given, the default will be the first part of the given domain name.
+                  example: ad
+                idmap_backend:
+                  type: string
+                  example: rfc2307
+                  description: Defines the identity mapping backend strategy.<br> The rfc2307 strategy uses UID/GID attributes from Active Directory for persistent, deterministic mappings.<br> The rid strategy automatically generates mappings from Windows RIDs. This method requires no Active Directory configuration, but the mappings can change if ID ranges are modified.
+                default_domain_mapping_from_id:
+                  type: number
+                  example: 4290000001
+                  description: The SMB default domain first ID.
+                default_domain_mapping_to_id:
+                  type: number
+                  example: 4291000000
+                  description: The SMB default domain last ID.
+                joined_domain_mapping_from_id:
+                  type: number
+                  example: 0
+                  description: The joined domain first ID.
+                joined_domain_mapping_to_id:
+                  type: number
+                  example: 4290000000
+                  description: The joined domain's last ID.
+                encryption:
+                  type: string
+                  description: SMB cluster encryption.
+                  enum:
+                  - enabled
+                  - disabled
+                  - desired
+                  - required
+                symlink:
+                  type: boolean
+                  description: Enable or disable symbolic link (symlink) support for the SMB cluster.
+                smbw:
+                  type: boolean
+                  description: smbw.
+                config_fs_name:
+                  type: string
+                  description: Filesystem name for SMB configuration.
+                  example: default
+    put:
+      tags:
+      - SMB
+      summary: Modify SMB cluster settings
+      description: Updates cluster-wide configuration parameters for an existing SMB deployment.<br> Supports modification of encryption policy and floating IP address assignments.<br> Changing the encryption policy affects new connections. Existing connections maintain their original encryption state until reconnection.
+      operationId: updateSamba
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                encryption:
+                  type: string
+                  description: SMB cluster encryption.
+                  enum:
+                  - enabled
+                  - disabled
+                  - desired
+                  - required
+                samba_ips:
+                  type: array
+                  description: An array of floating IP addresses or ranges that provide High Availability for the SMB service.<br> These IPs must be reserved and not assigned to any other server on the network. Ranges can be specified in formats like 192.168.1.10-20.
+                  items:
+                    type: string
+                    example: 172.68.34.23
+    delete:
+      tags:
+      - SMB
+      summary: Disable SMB cluster
+      description: Disables the SMB cluster and removes its configuration. This action terminates all active client sessions, removes associated floating IPs, and automatically disconnects the cluster from its Active Directory domain, if joined.<br> The underlying filesystem data is preserved. This operation only removes network access through the SMB protocol.
+      operationId: clearSamba
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /smb/domains:
+    get:
+      tags:
+      - SMB
+      summary: Get trusted domain list
+      description: Returns all trusted domains configured within the SMB cluster.<br> Trusted domains enable cross-domain authentication and resource access in multi-domain<br> Active Directory environments. Each domain includes ID mapping range specifications.
+      operationId: setSambaDomains
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/smbDomain'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - SMB
+      summary: Add trusted domain to cluster
+      description: Registers a new trusted domain with the SMB cluster and configures its ID mapping range.<br> Trusted domains allow users and groups from additional Active Directory domains to access SMB resources.<br> This operation automatically restarts SMB services to apply the new trust configuration, which may cause a brief service interruption.<br> Ensure the specified ID mapping range (mapping_from_id–mapping_to_id) does not overlap with existing domain ranges.
+      operationId: addSambaDomain
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/smbDomain'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - domain_name
+              - mapping_from_id
+              - mapping_to_id
+              properties:
+                domain_name:
+                  type: string
+                  description: Fully qualified domain name (FQDN) of the trusted domain to add.
+                  example: partner.company.com
+                mapping_from_id:
+                  type: number
+                  description: Starting ID for this domain's UID/GID mapping range (must not overlap with existing ranges).
+                  example: 4291000001
+                mapping_to_id:
+                  type: number
+                  description: Ending ID for this domain's UID/GID mapping range (inclusive).
+                  example: 4294967294
+  /smb/mount:
+    get:
+      tags:
+      - SMB
+      summary: Get smb mount options
+      operationId: SmbShareOptions
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    example:
+                    - coherent
+                    - readcache
+                    - writecache
+                    items:
+                      type: string
+        '401':
+          $ref: '#/components/responses/401'
+  /smb/shares:
+    get:
+      tags:
+      - SMB
+      summary: Get all SMB shares
+      description: Returns a comprehensive list of all shares configured within the SMB cluster.<br> Each share includes access permissions, encryption settings, filesystem mappings,<br> user access lists, and configuration parameters.
+      operationId: setSambaShares
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/smbShare'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - SMB
+      summary: Add SMB share
+      description: Provisions a new share within the SMB cluster, mapping a filesystem path to a network-accessible share.<br> The share becomes immediately available to authorized users upon creation.<br> For access control, use the user_list_type and users parameters to define initial access permissions. After creating a user, additional users can be added using the POST /smb/users endpoint. For ACL options, use the map_acls parameter to determine how Windows ACLs are translated to filesystem permissions (posix, windows, or hybrid mode).
+      operationId: addShareToSamba
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/smbShare'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - share_name
+              - fs_name
+              properties:
+                share_name:
+                  type: string
+                  description: Network name for the share as it appears to SMB clients (example - \\server\share_name).
+                  example: share-1
+                fs_name:
+                  type: string
+                  description: Name of the source filesystem to share.
+                  example: default
+                description:
+                  type: string
+                  description: A description for SMB to show regarding the share.
+                  example: Some description
+                sub_path:
+                  type: string
+                  description: Directory path within the filesystem to share. Use "/" to share the entire filesystem root.
+                  example: /projects/data
+                mount_options:
+                  type: string
+                  example: writecache
+                  description: WARNING - ADVANCED OPTION - Custom mount parameters passed to the filesystem mount command.<br> Incorrect usage may result in data corruption or loss. Consult documentation before modifying.
+                file_create_mask:
+                  type: string
+                  example: 484
+                  description: POSIX permission mask (octal notation) applied to newly created files. For example, 0744 grants owner (rwx), group (r), others (r) permissions.
+                directory_create_mask:
+                  type: string
+                  example: 493
+                  description: POSIX permission mask (octal notation) applied to newly created directories. For example, 0755 grants owner (rwx), group (rx), others (rx) permissions.
+                acl:
+                  type: boolean
+                  description: Enable Windows ACL support with automatic translation to POSIX ACLs where possible. Required for fine-grained Windows permission management.
+                hidden:
+                  type: boolean
+                  description: Hide this share from network browse lists. Users can still access the share by specifying its full path.
+                allow_guest_access:
+                  type: boolean
+                  description: Permit unauthenticated (guest) access to this share. Security consideration - guest access bypasses domain authentication.
+                obs_direct:
+                  type: boolean
+                  description: A special mount option to bypass the time-based policies.
+                encryption:
+                  type: string
+                  description: Share-specific encryption policy. Options include cluster_default (inherit cluster-level encryption setting), desired (encrypt if client supports it, otherwise allow unencrypted), or required (reject connections from clients that don't support encryption).
+                  enum:
+                  - cluster_default
+                  - desired
+                  - required
+                case_sensitivity:
+                  type: boolean
+                  description: Enable case-sensitive filename handling. When true, "File.txt" and "file.txt" are treated as distinct files. Windows clients typically expect case-insensitive behavior.
+                read_only:
+                  type: boolean
+                  description: Mount share as read-only, preventing all write operations regardless of user permissions.
+                user_list_type:
+                  type: string
+                  example: read_write
+                users:
+                  type: array
+                  description: An array of user names to be granted access to the share. The permission level for these users is determined by the user_list_type.
+                  items:
+                    type: string
+                additional_share_options:
+                  type: array
+                  items:
+                    type: string
+                    example: string
+                named_streams:
+                  description: Enable Alternate Data Streams (ADS) support. Required for Windows applications that<br> store metadata in named streams (for example, zone identifiers, custom properties).
+                  type: boolean
+                map_acls:
+                  type: string
+                  description: ACL mapping strategy between Windows and POSIX permission models. Options include posix (store permissions as POSIX ACLs only), windows (store permissions as Windows ACLs with extended attributes), or hybrid (maintain both POSIX and Windows ACLs).
+                  enum:
+                  - posix
+                  - windows
+                  - hybrid
+                  example: posix
+  /smb/activeDirectory:
+    post:
+      tags:
+      - SMB
+      summary: Join Active Directory domain
+      description: Joins the SMB cluster to the Active Directory domain specified during the initial cluster creation.<br> This operation creates the necessary computer account in Active Directory, establishes trust, and enables authentication for domain users and groups.<br> Before using this endpoint, you must first create the SMB cluster using POST /smb.
+      operationId: setSambaActiveDirectory
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - username
+              - password
+              properties:
+                username:
+                  type: string
+                  description: Domain administrator account with privileges to join computers to the domain.
+                password:
+                  type: string
+                  description: Password for the domain administrator account.
+                debug_mode:
+                  type: boolean
+                  description: Enables debug mode for the operation. When set to true, the command runs with increased logging verbosity, providing additional diagnostic and troubleshooting details.<br> This option is typically used to gather more granular information during issue investigation or testing.
+                server:
+                  type: string
+                  description: Specific domain controller hostname or IP address. If omitted, the system will discover an available domain controller automatically.
+                create_computerOU:
+                  type: string
+                  description: Organizational Unit (OU) distinguished name where the computer account will be created.
+                  example: OU=Servers,DC=ad,DC=company,DC=com
+                extra_options:
+                  type: string
+                task_id:
+                  type: string
+                asynchronous:
+                  type: boolean
+                poll:
+                  type: boolean
+                timeout:
+                  type: string
+                  description: Maximum time to wait for domain join completion to accommodate varying network and domain controller response times.<br> Supported formats include 3s (seconds), 2h (hours), 4m (minutes), 1d (days), 1w (weeks), or infinite/unlimited.
+    put:
+      tags:
+      - SMB
+      summary: Disconnect from Active Directory domain
+      description: Disconnects the SMB cluster from the Active Directory domain.<br> This action deletes the cluster account from Active Directory and terminates domain-based authentication, making shares immediately inaccessible to all domain users. Before leaving the domain, configure an alternative authentication method if you require continued access to the shares.<br> Administrator credentials may be necessary to complete the operation.
+      operationId: deleteSambaActiveDirectory
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    example: Deleted account for 'WEKASMB' in realm 'AD.COMPANY>COM'\n
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: Administrator
+                  description: Domain administrator account with privileges to remove computer accounts (optional, depending on DC configuration).
+                password:
+                  type: string
+                  description: Administrator password (required if username is provided).
+                  example: smbPassword
+                debug_mode:
+                  type: boolean
+                  description: Enables debug mode for the operation. When set to true, the command runs with increased logging verbosity, providing additional diagnostic and troubleshooting details.<br> This option is typically used to gather more granular information during issue investigation or testing.
+  /smb/debug:
+    post:
+      tags:
+      - SMB
+      summary: Configure SMB container logging verbosity
+      description: Adjusts the debug logging level for SMB container processes on specified containers.<br> Higher debug levels increase logging verbosity, which is useful for troubleshooting but may impact performance.
+      operationId: setSambaDebug
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - debug_level
+              properties:
+                debug_level:
+                  type: number
+                  description: The debug level ranging from 0 to 10. Debug level guidelines include:<br> - Level 0 for minimal logging (production default)<br> - Levels 1-3 for basic diagnostic information<br> - Levels 4-6 for detailed operation logging<br> - Levels 7-10 for verbose debugging (use temporarily for issue investigation)<br>
+                  example: 1
+                samba_hosts:
+                  type: array
+                  description: List of container UIDs to apply the debug level. If not specified, the debug level applies to all SMB cluster containers.
+                  items:
+                    type: string
+                    example:
+                    - uid-1
+                    - uid-2
+  /smb/shares/{uid}:
+    put:
+      tags:
+      - SMB
+      summary: Modify share configuration
+      description: Updates operational parameters for an existing SMB share.<br> Changes take effect immediately and apply to new client connections. Active sessions may need to reconnect to observe changes.<br> Only a subset of share properties can be modified after creation. To change immutable properties (for example, filesystem, sub_path), delete and recreate the share.
+      operationId: updateSambaShare
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/smbShare'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the share to modify.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - encryption
+              properties:
+                encryption:
+                  type: string
+                  description: SMB share encryption.
+                  enum:
+                  - cluster_default
+                  - desired
+                  - required
+                hidden:
+                  type: boolean
+                  description: Hide the share when viewing the list of system shares.
+                allow_guest_access:
+                  type: boolean
+                  description: When guest access is allowed, authentication is not required for accessing the share.
+                read_only:
+                  type: boolean
+                  description: Mount SMB as read-only.
+    delete:
+      tags:
+      - SMB
+      summary: Remove SMB share
+      description: Removes an SMB share from the cluster, terminating network access to the associated filesystem path.<br> Active client connections to this share are forcibly disconnected.<br> Underlying filesystem data remains intact. Only the SMB network share configuration is removed.
+      operationId: deleteSambaShare
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Share UID.
+  /smb/domains/{uid}:
+    delete:
+      tags:
+      - SMB
+      summary: Remove trusted domain
+      description: Removes a trusted domain from the SMB cluster, revoking authentication and access rights for all users and groups within that domain.<br> This operation triggers a background restart of the SMB services, which may cause a brief service interruption. Before removing a domain, ensure no active share permissions reference its users or groups.
+      operationId: deleteSambaDomain
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: Domain uid.
+        schema:
+          type: string
+  /smb/users/{share_uid}/{user_type}:
+    post:
+      tags:
+      - SMB
+      summary: Grant share access to users
+      description: Adds specified users or groups to a share's access control list with designated permission level.<br> Users can be Active Directory users, groups, or domain aliases.
+      operationId: addUserToSamba
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: share_uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier of the target share.
+      - in: path
+        name: user_type
+        required: true
+        schema:
+          type: string
+        description: Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                users:
+                  type: array
+                  description: Users to add. Format - DOMAIN\username or DOMAIN\groupname.
+                  items:
+                    type: string
+                    example: AD\EnterpriseAdmins
+  /smb/users/reset/{share_uid}/{user_type}:
+    delete:
+      tags:
+      - SMB
+      summary: Remove all users from the access list
+      description: Removes all users and groups from the specified access permission category for a given share.<br> This is a bulk operation that clears the entire user list for the specified category.<br> Useful when reconfiguring share permissions from scratch or removing all entries before applying a new access control policy.<br> To remove individual users, use DELETE /smb/users/{share_uid}/{user_type}/{user} instead.
+      operationId: resetSambaUsers
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: share_uid
+        required: true
+        schema:
+          type: string
+        description: Share UID.
+      - in: path
+        name: user_type
+        required: true
+        schema:
+          type: string
+        description: Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)
+  /smb/users/{share_uid}/{user_type}/{user}:
+    delete:
+      tags:
+      - SMB
+      summary: Remove specific user from share access
+      description: Removes an individual user or group from the specified access permission category.<br> The user immediately loses the associated permissions, but may retain access through other permission categories or group memberships.
+      operationId: deleteSambaUser
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: share_uid
+        required: true
+        schema:
+          type: string
+        description: Share UID.
+      - in: path
+        name: user_type
+        required: true
+        schema:
+          type: string
+        description: read_only, read_write, valid, invalid.
+      - in: path
+        name: user
+        required: true
+        schema:
+          type: string
+        description: Username or group name to remove (format - DOMAIN\name, for example, "AD\jdoe").
+  /smb/containersAreReady:
+    get:
+      tags:
+      - SMB
+      summary: Verify SMB container readiness
+      description: Checks the operational readiness of all containers participating in the SMB cluster.<br> The response indicates whether each container SMB process is fully operational and ready to serve client requests.<br> Use this endpoint to monitor cluster health or to verify that configuration changes have been applied successfully.
+      operationId: getSambaContainersAreReady
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    description: Map of container UIDs to their readiness status.
+                    additionalProperties:
+                      type: boolean
+                      description: true if container is ready, false if still initializing or encountering errors.
+                    example:
+                      ContainerId<0>: true
+                      ContainerId<1>: true
+                      ContainerId<2>: false
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /smb/servers:
+    put:
+      tags:
+      - SMB
+      summary: Add containers to SMB cluster
+      description: Expands the SMB cluster by adding containers to distribute the SMB service load.<br> Newly added containers immediately handle SMB requests and participate in HA failover.<br> Requires properly configured hosts and sufficient floating IPs.<br> Used to scale SMB capacity for increased load or improved fault tolerance.
+      operationId: addSambaServers
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                addedHosts:
+                  type: array
+                  description: Array of container unique identifiers (UIDs) to add to the SMB cluster.
+                  items:
+                    type: string
+                  example:
+                  - uid-1
+                  - uid-2
+    delete:
+      tags:
+      - SMB
+      summary: Remove containers from SMB cluster
+      description: Removes specified containers from the SMB cluster. Client connections on the removed containers migrate to the remaining active containers in the cluster.<br> Use this operation to decommission containers for maintenance or to reduce the cluster size during periods of low demand.<br> Before proceeding, ensure that at least one container remains in the cluster and that the removal does not violate the cluster's minimum redundancy requirements.
+      operationId: deleteSambaServers
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: removedHosts
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+        description: Array of container unique identifiers (UIDs) to remove from the cluster.
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    smbShare:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SambaShareId<0>
+        innerPath:
+          type: string
+          example: /
+        fileCreateMask:
+          type: string
+          example: '0744'
+        mountOptions:
+          type: string
+          example: writecache
+        readWriteUsers:
+          type: array
+          items:
+            type: string
+            example: wekadmin
+        readOnly:
+          type: boolean
+          example: true
+        validUsers:
+          type: array
+          items:
+            type: string
+            example: username
+        invalidUsers:
+          type: array
+          items:
+            type: string
+            example: username2
+        hidden:
+          type: boolean
+          example: false
+        shareName:
+          type: string
+          example: share-1
+        readOnlyUsers:
+          type: array
+          items:
+            type: string
+            example: username3
+        encryption:
+          type: string
+          example: cluster_default
+        uid:
+          type: string
+          example: '435'
+        acl:
+          type: boolean
+          example: true
+        additionalShareOptions:
+          type: array
+          items:
+            type: string
+            example: string
+        directoryCreateMask:
+          type: string
+          example: '0755'
+        description:
+          type: string
+          example: some description
+        obsDirect:
+          type: boolean
+          example: true
+        allowGuestAccess:
+          type: boolean
+          example: false
+        fsName:
+          type: string
+          example: default
+        caseSensitivity:
+          type: boolean
+          example: true
+        namedStreams:
+          type: boolean
+          example: true
+        mapAcls:
+          type: string
+          example: posix
+    smbDomain:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SMBTrustedDomainId<0>
+        uid:
+          type: string
+          example: uid_string
+        idmapBackend:
+          type: string
+          example: rfc2307
+        mappingFromId:
+          type: number
+          example: 4291000001
+        mappingToId:
+          type: number
+          example: 4294967294
+        domainName:
+          type: string
+          example: ad.company.com
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

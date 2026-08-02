@@ -1,0 +1,63 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+derived_from: openapi/weka-openapi-original.json
+api: '@weka-api'
+base_path: /api/v2
+notes: >-
+  Cross-cutting request/response semantics for the WEKA (NeuralMesh) cluster
+  REST API. The API is served on port 14000 at /api/v2 on each cluster, plus a
+  static reference at https://api.docs.weka.io. Derived from the published
+  OpenAPI 3.0.3 definition and the WEKA REST API docs.
+authentication:
+  style: bearer-jwt
+  scheme: http bearer
+  header: 'Authorization: Bearer <access_token>'
+  token_endpoint: POST /api/v2/login
+  refresh_endpoint: POST /api/v2/login/refresh
+  access_token_ttl: 5 minutes (default; configurable via weka security token-expiry)
+  refresh_token_ttl: 1 month (default; configurable)
+  long_lived_tokens: supported for local users via GUI/CLI (API Token)
+  docs: https://docs.weka.io/security/obtain-authentication-tokens.md
+pagination:
+  style: cursor
+  detected: true
+  params:
+  - limit
+  - next_token
+  notes: >-
+    List endpoints that page use a `limit` query parameter and return a
+    `next_token` cursor to fetch the following page. Not every list endpoint
+    is paginated; many return the full collection.
+idempotency:
+  documented: false
+  notes: >-
+    The OpenAPI defines no Idempotency-Key parameter and the docs describe no
+    idempotency-key contract. Mutations are not idempotent by key; treat
+    create/update/delete as at-most-once and reconcile via GET.
+versioning:
+  scheme: uri-path
+  current: v2
+  base_path: /api/v2
+  product_versions:
+  - '5.1'
+  - '5.0'
+  - '4.4'
+  - '4.3'
+  docs: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+error_envelope:
+  format: non-rfc9457
+  content_type: application/json
+  notes: >-
+    Error responses are returned as application/json with a message/data body;
+    the OpenAPI does not declare application/problem+json. See errors/weka-problem-types.yml.
+  cross_ref: errors/weka-problem-types.yml
+rate_limiting:
+  documented: false
+  notes: No published rate-limit headers or quotas for the cluster management API.
+request_tracing:
+  documented: false
+cross_links:
+  authentication: authentication/weka-authentication.yml
+  errors: errors/weka-problem-types.yml
+  lifecycle: lifecycle/weka-lifecycle.yml

@@ -1,0 +1,245 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Filesystem group API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Filesystem group
+paths:
+  /fileSystemGroups:
+    get:
+      tags:
+      - Filesystem group
+      summary: Get filesystem groups
+      description: Returns a list of all filesystem groups in the cluster.
+      operationId: getFileSystemGroups
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/fileSystemGroup'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Filesystem group
+      summary: Create a filesystem group
+      description: Creates a new group to manage policies and settings for a collection of filesystems.
+      operationId: createFileSystemGroup
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/fileSystemGroup'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                  description: Filesystem group name.
+                  example: fs-group1
+                target_ssd_retention:
+                  type: number
+                  description: The target time in seconds for data to be retained on the SSD tier before tiering.
+                  example: 86400
+                start_demote:
+                  type: number
+                  description: The time in seconds after which cold data begins to be tiered to object storage.
+                  example: 1800
+  /fileSystemGroups/{uid}:
+    get:
+      tags:
+      - Filesystem group
+      summary: Get a specific filesystem group
+      description: Returns the properties of a specific filesystem group by providing its UID.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem group.
+      operationId: getFileSystemGroup
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/fileSystemGroup'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+      - Filesystem group
+      summary: Update filesystem group
+      description: Modifies the properties of an existing filesystem group.
+      operationId: updateFileSystemGroup
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem group.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/fileSystemGroup'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: A new, unique name for the filesystem group.
+                  example: fs-group1
+                target_ssd_retention:
+                  type: number
+                  description: The target time in seconds for data to be retained on the SSD tier before tiering.
+                  example: 86400
+                start_demote:
+                  type: number
+                  description: The time in seconds after which cold data begins to be tiered to object storage.
+                  example: 1800
+    delete:
+      tags:
+      - Filesystem group
+      summary: Delete filesystem group
+      description: Removes a filesystem group from the cluster.
+      operationId: deleteFileSystemGroup
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem group.
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    fileSystemGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          example: fs-group1
+        start_demote:
+          type: number
+          example: 1800
+          description: The retention period according to the amount of data that will be created
+        target_ssd_retention:
+          type: number
+          example: 86400
+          description: SSD retention period
+        uid:
+          type: string
+          example: uid_string
+        id:
+          type: string
+          example: FSGroupId<0>
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

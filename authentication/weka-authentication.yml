@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/weka-openapi-original.json
+docs: https://docs.weka.io/security/obtain-authentication-tokens.md
+summary:
+  types:
+  - http
+  model: JWT bearer token obtained from the cluster login endpoint
+  token_endpoint: POST /api/v2/login
+  refresh_endpoint: POST /api/v2/login/refresh
+  access_token_ttl: 5 minutes (default; configurable)
+  refresh_token_ttl: 1 month (default; configurable)
+  long_lived_tokens: supported for local users (GUI/CLI API Token)
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  docs: https://docs.weka.io/security/obtain-authentication-tokens.md
+  sources:
+  - openapi/weka-openapi-original.json

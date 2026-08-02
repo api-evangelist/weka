@@ -1,0 +1,359 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Processes API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Processes
+paths:
+  /processes:
+    get:
+      tags:
+      - Processes
+      summary: Get a list of all processes
+      description: Returns information about all running processes within the cluster. The list can be filtered by type, container, process ID, or role.
+      operationId: getProcesses
+      parameters:
+      - in: query
+        name: filter_type
+        schema:
+          type: string
+          enum:
+          - All
+          - ByContainerOrProcess
+          - Backends
+          - Clients
+          - Roles
+          - Leadership
+          - Leader
+        description: The type of filter to apply to the process list.
+      - in: query
+        name: container_ids
+        schema:
+          type: array
+          items:
+            type: number
+        description: A comma-separated list of container IDs to filter by. This parameter is only used when `filter_type` is set to `ByContainerOrProcess`.
+      - in: query
+        name: process_ids
+        schema:
+          type: array
+          items:
+            type: number
+        description: A comma-separated list of process IDs to filter by. This parameter is only used when `filter_type` is set to `ByContainerOrProcess`.
+      - in: query
+        name: roles
+        schema:
+          type: array
+          items:
+            type: string
+        description: A comma-separated list of process roles to filter by. This parameter is only used when `filter_type` is set to `Roles`. Valid roles include `Management`, `Drives`, `Compute`, and `Frontend`.
+      - in: query
+        name: council
+        schema:
+          type: boolean
+        description: If true, query the cluster leadership members.
+      responses:
+        '200':
+          description: A list of processes was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/process'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /processes/{uid}:
+    get:
+      tags:
+      - Processes
+      summary: Get a specific process
+      description: Returns information about a specific running process, identified by its UID.
+      operationId: getProcess
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the process.
+      responses:
+        '200':
+          description: The process information was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/process'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  responses:
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    process:
+      type: object
+      properties:
+        id:
+          type: string
+          example: NodeId<61>
+        dpdk_port_info:
+          type: array
+          items:
+            type: string
+            example: info
+        network_mode:
+          type: string
+          example: DPDK
+        mode:
+          type: string
+          example: backend
+        container_name:
+          type: string
+          example: default
+        lowest_node_path_issue:
+          type: string
+          example: NodeId<INVALID>
+        last_fencing_reason:
+          type: string
+          example: INVALID
+        uid:
+          type: string
+          example: 2689d12c-5b47-d867-6af4-928dfa152a45
+        hostname:
+          type: string
+          example: ip-172-31-38-126.support.local
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.41.173
+        slot:
+          type: number
+          example: 1
+        is_blacklisted:
+          type: boolean
+          example: false
+        roles:
+          type: array
+          items:
+            type: string
+            example: FRONTEND
+        missing_links:
+          type: object
+          properties:
+            missing:
+              type: number
+              example: 0
+            self_report:
+              type: object
+              properties:
+                up:
+                  type: object
+                  properties:
+                    missing:
+                      type: number
+                      example: 0
+                    synced:
+                      type: number
+                      example: 23
+                    required:
+                      type: number
+                      example: 23
+                joining:
+                  type: object
+                  properties:
+                    missing:
+                      type: number
+                      example: 0
+                    synced:
+                      type: number
+                      example: 0
+                    required:
+                      type: number
+                      example: 0
+                syncing:
+                  type: object
+                  properties:
+                    missing:
+                      type: number
+                      example: 0
+                    synced:
+                      type: number
+                      example: 0
+                    required:
+                      type: number
+                      example: 0
+                total:
+                  type: number
+                  example: 23
+            others_report:
+              type: object
+              properties:
+                syncing_reporters:
+                  type: array
+                  items:
+                    type: string
+                    example: report
+                up_reporters:
+                  type: array
+                  items:
+                    type: string
+                    example: report
+                joining_missing:
+                  type: number
+                  example: 0
+                up_missing:
+                  type: number
+                  example: 0
+                syncing_missing:
+                  type: number
+                  example: 0
+                missing:
+                  type: number
+                  example: 0
+                joining_reporters:
+                  type: array
+                  items:
+                    type: string
+                    example: report
+                reporters:
+                  type: array
+                  items:
+                    type: string
+                    example: report
+        is_ucx:
+          type: boolean
+          example: false
+        cpu_is_dedicated:
+          type: boolean
+          example: true
+        sw_version:
+          type: string
+          example: 4.0.1.5908
+        cpu_core_id:
+          type: number
+          example: 1
+        container_id:
+          type: string
+          example: HostId<3>
+        cpu_numa_node:
+          type: number
+          example: 0
+        gds_mode:
+          type: string
+          example: mode
+        cpu_socket_id:
+          type: number
+          example: 0
+        rdma_mode:
+          type: string
+          example: mode
+        memory:
+          type: number
+          example: 1476395008
+        up_since:
+          type: string
+          example: '2022-07-27T07:51:54.782895Z'
+        trace_history_in_seconds:
+          type: number
+          example: 6367
+        leadership_role:
+          type: string
+          example: role
+        mgmt_ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.38.126
+        last_fencing_time:
+          type: string
+          example: '2021-11-22T08:44:15.725096Z'
+        status:
+          type: string
+          example: UP
+        cpu_model:
+          type: string
+          example: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+        dpdk_ip:
+          type: string
+          example: 172.31.41.173
+        ucx_mode:
+          type: string
+          example: mode
+        dpdk_socket_info:
+          type: array
+          items:
+            type: string
+            example: info
+        mgmt_port:
+          type: number
+          example: 14000
+        last_join_reject_reason:
+          type: string
+          example: NONE
+        is_dpdk:
+          type: boolean
+          example: true
+        cpu_id:
+          type: number
+          example: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

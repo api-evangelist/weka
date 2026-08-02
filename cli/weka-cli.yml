@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.weka.io/getting-started-with-weka/weka-rest-api-and-equivalent-cli-commands.md
+api: '@weka-api'
+notes: >-
+  The WEKA cluster ships a first-party command-line client, `weka`, that mirrors
+  the REST API surface (every REST operation has an equivalent CLI command). A
+  separate `wekactl` cloud CLI manages cloud-hosted clusters and is distributed
+  via Homebrew/Scoop/RPM/DEB (see packages/weka-packages.yml).
+clis:
+- name: weka
+  binary: weka
+  distribution: bundled with WEKA software on cluster servers and clients
+  docs: https://docs.weka.io/usage/using-the-cli
+  auth: 'weka user login (writes ~/.weka/auth-token.json)'
+  command_groups:
+  - group: cluster
+    summary: Cluster status, create, update, capacity.
+  - group: fs
+    summary: Manage filesystems, filesystem groups, and mounts.
+  - group: fs group
+    summary: Manage filesystem (SSD/tier) groups.
+  - group: quota
+    summary: Directory quotas and default quotas.
+  - group: snapshot
+    summary: Filesystem snapshots and snapshot policies.
+  - group: s3
+    summary: S3 cluster, buckets, users, and policies.
+  - group: nfs
+    summary: NFS exports and interface groups.
+  - group: smb
+    summary: SMB cluster and shares.
+  - group: user
+    summary: Local users, roles, passwords, sessions.
+  - group: org / tenant
+    summary: Multi-tenancy (tenants supersede organizations).
+  - group: security
+    summary: Token expiration, TLS certificates, KMS, CIDR policies, lockout.
+  - group: alerts
+    summary: List, describe, mute/unmute cluster alerts.
+  - group: events
+    summary: List and aggregate cluster events.
+  - group: stats
+    summary: Performance statistics and telemetry.
+- name: wekactl
+  binary: wekactl
+  distribution: Homebrew (weka/wekactl), Scoop, RPM, DEB
+  repo: https://github.com/weka/homebrew-wekactl
+  summary: Manage cloud-hosted (AWS/Azure/GCP) WEKA clusters and autoscaling.

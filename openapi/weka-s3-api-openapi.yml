@@ -1,0 +1,1804 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory S3 API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: S3
+paths:
+  /s3:
+    get:
+      tags:
+      - S3
+      summary: Get S3 cluster information
+      description: Returns details about the S3 cluster managed by the system.
+      operationId: getS3Cluster
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - S3
+      summary: Create an S3 cluster
+      description: Establishes a new S3 cluster.
+      operationId: createS3Cluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - default_fs_name
+              - config_fs_name
+              - key
+              - secret
+              properties:
+                default_fs_name:
+                  type: string
+                  description: Default filesystem name.
+                  example: default
+                config_fs_name:
+                  type: string
+                  description: Config file system name.
+                  example: default
+                host_uids:
+                  type: array
+                  description: UIDs of hosts running S3.
+                  items:
+                    type: string
+                  example:
+                  - uid_string
+                all_hosts:
+                  type: boolean
+                  example: false
+                port:
+                  type: number
+                  description: port.
+                  example: 9000
+                mount_options:
+                  type: string
+                  description: mount options.
+                  example: rw
+                key:
+                  type: string
+                  description: S3 cluster access key.
+                  example: NH4iX9HXjM
+                secret:
+                  type: string
+                  description: S3 cluster secret key
+                  example: izMx3kd7lXGHbifiNHARKB6j9Udx5KO6
+                anonymous_posix_uid:
+                  type: number
+                  description: POSIX UID for anonymous users.
+                  example: 65534
+                anonymous_posix_gid:
+                  type: number
+                  description: POSIX GID for anonymous users.
+                  example: 65534
+                domain:
+                  type: string
+                  description: Virtual host-style comma-separated domains.
+                  example: sub1.mydomain.com,sub2.mydomain.com
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - S3
+      summary: Update an S3 cluster
+      description: Modifies the configuration of an existing S3 cluster.
+      operationId: updateS3Cluster
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                host_uids:
+                  type: array
+                  description: UIDs of hosts running S3.
+                  items:
+                    type: string
+                  example:
+                  - uid_string
+                port:
+                  type: number
+                  description: port.
+                  example: 9000
+                mount_options:
+                  type: string
+                  description: mount options.
+                  example: rw
+                anonymous_posix_uid:
+                  type: number
+                  description: POSIX UID for anonymous users.
+                  example: 65534
+                anonymous_posix_gid:
+                  type: number
+                  description: POSIX GID for anonymous users.
+                  example: 65534
+                domain:
+                  type: string
+                  description: Virtual host-style comma-seperated domains. Empty to disable.
+                  example: sub1.mydomain.com,sub2.mydomain.com
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - S3
+      summary: Delete an S3 cluster
+      description: Removes an S3 cluster.
+      operationId: deleteS3Cluster
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: purge_config
+        schema:
+          type: boolean
+        required: false
+        description: Purge the existing configuration by default.
+  /s3/tenantSetup:
+    get:
+      tags:
+      - S3
+      summary: Get S3 settings for the calling tenant
+      description: 'Returns the calling tenant''s effective S3 default filesystem and anonymous POSIX UID/GID.
+
+        Default filesystem falls back to the cluster-wide default when no tenant override is set.
+
+        '
+      operationId: getS3TenantSetup
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  filesystem_name:
+                    type: string
+                  active:
+                    type: boolean
+                  anonymous_posix_uid:
+                    type: number
+                  anonymous_posix_gid:
+                    type: number
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - S3
+      summary: Update S3 settings for the calling tenant
+      description: 'Sets the calling tenant''s S3 default filesystem and/or anonymous POSIX UID/GID.
+
+        UID and GID must be set together. At least one parameter must be provided.
+
+        '
+      operationId: setS3TenantSetup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                default_fs_name:
+                  type: string
+                  description: Default filesystem name for new buckets created via the S3 API.
+                  example: default
+                anonymous_posix_uid:
+                  type: number
+                  description: POSIX UID for anonymous users.
+                  example: 65534
+                anonymous_posix_gid:
+                  type: number
+                  description: POSIX GID for anonymous users.
+                  example: 65534
+      responses:
+        '200':
+          description: ''
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/buckets:
+    get:
+      tags:
+      - S3
+      summary: Get S3 buckets
+      description: Returns a list of all buckets within an S3 cluster.
+      operationId: getS3Buckets
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                  buckets:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/s3Bucket'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - S3
+      summary: Add an S3 bucket
+      description: Adds a new bucket within an S3 cluster.
+      operationId: createS3Bucket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bucket_name
+              properties:
+                bucket_name:
+                  type: string
+                  description: bucket name.
+                policy:
+                  type: string
+                  description: bucket policy.
+                policy_file_content:
+                  type: string
+                  description: S3 policy file contents.
+                  example:
+                    Statement:
+                    - Principal:
+                        AWS: '*'
+                      Resource:
+                      - arn:aws:s3:::*
+                      Sid: ''
+                      Action:
+                      - s3:GetObject
+                      - s3:ListBucket
+                      Effect: Allow
+                    Version: '2012-10-17'
+                hard_quota:
+                  type: string
+                  description: Hard limit for the bucket.
+                  example: 1MB
+                existing_path:
+                  type: string
+                  description: bucket's existing path.
+                fs_uid:
+                  type: string
+                  description: bucket's filesystem's uid.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/userPolicies:
+    get:
+      tags:
+      - S3
+      summary: Get S3 user policies
+      description: Returns a list of S3 user policies.
+      operationId: getuserPolicies
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: object
+                    properties:
+                      user1:
+                        type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/buckets/{bucket}:
+    delete:
+      tags:
+      - S3
+      summary: Delete an S3 bucket
+      description: Removes a specified S3 bucket.
+      operationId: destroyS3Bucket
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      - in: query
+        name: unlink
+        description: Unlinks the bucket, but leaves the data directory in place.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/policies:
+    get:
+      tags:
+      - S3
+      summary: Get S3 IAM policies
+      description: Returns a list of S3 IAM policies.
+      operationId: getS3Policies
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - S3
+      summary: Add an S3 IAM policy
+      description: Adds a new S3 IAM policy.
+      operationId: createS3Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - policy_name
+              - policy_file_content
+              properties:
+                policy_name:
+                  type: string
+                  description: S3 IAM policy name.
+                policy_file_content:
+                  type: object
+                  description: S3 IAM policy file contents.
+                  example:
+                    Statement:
+                    - Resource:
+                      - arn:aws:s3:::*
+                      Sid: ''
+                      Action:
+                      - s3:GetObject
+                      - s3:ListBucket
+                      Effect: Allow
+                    Version: '2012-10-17'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/policies/{policy}:
+    get:
+      tags:
+      - S3
+      summary: Get S3 IAM policy details
+      description: Returns details about a specific S3 IAM policy.
+      operationId: getS3Policy
+      parameters:
+      - in: path
+        name: policy
+        required: true
+        description: policy name.
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - S3
+      summary: Delete an S3 IAM policy
+      description: Removes an S3 IAM policy.
+      operationId: deleteS3Policy
+      parameters:
+      - in: path
+        name: policy
+        required: true
+        description: policy name.
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/policies/attach:
+    post:
+      tags:
+      - S3
+      summary: Attach an S3 IAM policy to a user
+      description: Assigns an S3 IAM policy to a user.
+      operationId: attachS3Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - policy
+              - user
+              properties:
+                policy_name:
+                  type: string
+                  description: policy name.
+                user_name:
+                  type: string
+                  description: user name.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/policies/detach:
+    post:
+      tags:
+      - S3
+      summary: Detach an S3 IAM policy from a user
+      description: Unassigns an S3 IAM policy from a user.
+      operationId: detachS3Policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user_name
+              properties:
+                user_name:
+                  type: string
+                  description: user name.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/serviceAccounts:
+    get:
+      tags:
+      - S3
+      summary: Get S3 service accounts
+      description: Returns the S3 service accounts added by the S3 user, including their access keys.
+      operationId: getS3ServiceAccounts
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service_accounts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        access_key:
+                          type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - S3
+      summary: Add an S3 service account
+      description: Adds a new S3 service account.
+      operationId: createS3ServiceAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policy_file_content:
+                  type: string
+                  description: S3 IAM policy file content to restrict the new service account.
+                  example:
+                    Statement:
+                    - Resource:
+                      - arn:aws:s3:::*
+                      Sid: ''
+                      Action:
+                      - s3:GetObject
+                      - s3:ListBucket
+                      Effect: Allow
+                    Version: '2012-10-17'
+      responses:
+        '200':
+          description: Credentials of the new service account.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_key:
+                    type: string
+                  secret_key:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/serviceAccounts/{access_key}:
+    get:
+      tags:
+      - S3
+      summary: Get S3 service account details
+      description: Returns a specific S3 service account.
+      operationId: getServiceAccount
+      parameters:
+      - in: path
+        name: access_key
+        required: true
+        description: Access key of the service account.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  parent_user:
+                    type: string
+                  implied_policy:
+                    type: boolean
+                    description: Implied meaning the policy is inherited from the parent user.
+                  policy:
+                    type: string
+                    description: In case of an implied policy, shows the policy of the parent user. Otherwise, shows the custom inline policy of the service account.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - S3
+      summary: Remove an S3 service account
+      description: Removes an S3 service account.
+      operationId: deleteS3ServiceAccount
+      parameters:
+      - in: path
+        name: access_key
+        required: true
+        description: Access key of the service account.
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/sts:
+    post:
+      tags:
+      - S3
+      summary: Create an S3 STS token
+      description: Creates an S3 STS token with an assumed role.
+      operationId: s3StsCreate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_key:
+                  type: string
+                  description: Access key.
+                  example: user
+                secret_key:
+                  type: string
+                  description: Secret key (must be at least 8 characters long).
+                  example: Password123
+                duration:
+                  type: number
+                  description: Token expiration duration in seconds (must be at least 900).
+                  example: 1500
+                policy_file_content:
+                  type: string
+                  description: S3 policy file contents for the new token.
+                  example:
+                    Statement:
+                    - Resource:
+                      - arn:aws:s3:::*
+                      Sid: ''
+                      Action:
+                      - s3:GetObject
+                      - s3:ListBucket
+                      Effect: Allow
+                    Version: '2012-10-17'
+              required:
+              - access_key
+              - secret_key
+              - duration
+      responses:
+        '200':
+          description: Credentials of the new sts token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_key:
+                    type: string
+                  secret_key:
+                    type: string
+                  session_token:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/buckets/{bucket}/lifecycle/rules:
+    post:
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - expiry_days
+              properties:
+                expiry_days:
+                  type: string
+                  description: expiry days.
+                  example: '90'
+                prefix:
+                  type: string
+                  description: bucket prefix.
+                  example: videos
+                tags:
+                  type: string
+                  description: object tags dictionary.
+                  example: name=video1&compression=mpeg
+      tags:
+      - S3
+      summary: Add a lifecycle rule
+      description: Creates a new lifecycle rule for an S3 bucket.
+      operationId: s3CreateLifecycleRule
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: rule id.
+                  target:
+                    type: string
+                    description: target bucket.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      tags:
+      - S3
+      summary: Delete lifecycle rules
+      description: Removes all lifecycle rules for an S3 bucket.
+      operationId: s3DeleteAllLifecycleRules
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  target:
+                    type: string
+                    description: target bucket.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    get:
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      tags:
+      - S3
+      summary: Get lifecycle rules
+      description: Returns a list of all lifecycle rules for an S3 bucket.
+      operationId: s3ListAllLifecycleRules
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                  buckets:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/buckets/{bucket}/lifecycle/rules/{rule}:
+    delete:
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      - in: path
+        name: rule
+        required: true
+        description: rule ID.
+        schema:
+          type: string
+      tags:
+      - S3
+      summary: Delete a lifecycle rule
+      description: Removes a specific lifecycle rule from an S3 bucket.
+      operationId: s3DeleteLifecycleRule
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  target:
+                    type: string
+                    description: target bucket.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/buckets/{bucket}/policy:
+    get:
+      tags:
+      - S3
+      summary: Get S3 bucket policy
+      description: Returns the policy attached to an S3 bucket.
+      operationId: getS3BucketPolicy
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bucket policy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      policy:
+                        type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - S3
+      summary: Set S3 bucket policy
+      description: Assigns a policy to an S3 bucket.
+      operationId: setS3BucketPolicy
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - bucket_policy
+              properties:
+                bucket_policy:
+                  type: string
+                  description: 'policy type, one of: [None, Download, Upload, Public].'
+                  example: Download
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/buckets/{bucket}/policyJson:
+    get:
+      tags:
+      - S3
+      summary: Get S3 bucket policy (JSON)
+      description: Returns the bucket policy in JSON format.
+      operationId: getS3BucketPolicyJson
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Json of the bucket policy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      policy:
+                        type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - S3
+      summary: Set S3 bucket policy (JSON)
+      description: Sets the bucket policy using a JSON file.
+      operationId: setS3BucketPolicyJson
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - policy_file_content
+              properties:
+                policy_file_content:
+                  type: string
+                  description: S3 policy file contents
+                  example:
+                    Statement:
+                    - Resource:
+                      - arn:aws:s3:::*
+                      Sid: ''
+                      Action:
+                      - s3:GetObject
+                      - s3:ListBucket
+                      Effect: Allow
+                    Version: '2012-10-17'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/buckets/{bucket}/quota:
+    put:
+      tags:
+      - S3
+      summary: Set S3 bucket quota
+      description: Defines a storage quota for an S3 bucket.
+      operationId: setS3BucketQuota
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - hard_quota
+              properties:
+                hard_quota:
+                  type: string
+                  description: Hard limit for the bucket
+                  example: 1MB
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - S3
+      summary: Unset S3 bucket quota
+      description: Removes a storage quota from an S3 bucket.
+      operationId: unsetS3BucketQuota
+      parameters:
+      - in: path
+        name: bucket
+        required: true
+        description: bucket name
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/containersAreReady:
+    get:
+      tags:
+      - S3
+      summary: Get container readiness
+      description: Returns the readiness status of containers within the S3 cluster.
+      operationId: gets3ContainersAreReady
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      <uid>:
+                        type: boolean
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/hosts:
+    post:
+      deprecated: true
+      tags:
+      - S3
+      summary: Add servers to S3 cluster - deprecated, use POST /s3/containers
+      description: Adds a server to the S3 cluster.
+      operationId: addS3Hosts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - host_uids
+              properties:
+                host_uids:
+                  type: array
+                  description: UIDs of servers to add to S3 cluster
+                  items:
+                    type: string
+                  example:
+                  - uid_string
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      deprecated: true
+      tags:
+      - S3
+      summary: Remove servers from S3 cluster - deprecated use /s3/containers
+      description: Removes a server from the S3 cluster.
+      operationId: deleteS3Hosts
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: host_uids
+        schema:
+          type: array
+          items:
+            type: string
+        required: true
+        description: UIDs of servers to remove from S3 cluster
+  /s3/containers:
+    post:
+      tags:
+      - S3
+      summary: Add container to S3 cluster
+      description: Adds a container to the S3 cluster.
+      operationId: addS3Containers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - container_uids
+              properties:
+                container_uids:
+                  type: array
+                  description: UIDs of container to add to S3 cluster
+                  items:
+                    type: string
+                  example:
+                  - uid_string
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - S3
+      summary: Remove containers
+      description: Removes containers from the S3 cluster.
+      operationId: deleteS3Containers
+      responses:
+        '200':
+          description: ''
+          $ref: '#/components/responses/400'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: container_uids
+        schema:
+          type: array
+          items:
+            type: string
+        required: true
+        description: UIDs of containers to remove from S3 cluster
+  /s3/debug:
+    get:
+      tags:
+      - S3
+      summary: Get logging verbosity
+      description: Returns the logging level for container processes within the S3 cluster.
+      operationId: gets3DebugLevel
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        hostId:
+                          type: string
+                          example: HostId<1>
+                        uid:
+                          type: string
+                          example: <host_uid>
+                        stdout:
+                          type: string
+                          example: 2 (WARNING)
+                        stderr:
+                          type: string
+                          example: some error
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - S3
+      summary: Set logging verbosity
+      description: Adjusts the logging level for container processes within the S3 cluster.
+      operationId: sets3DebugLevel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - level
+              - host_uids
+              properties:
+                level:
+                  type: number
+                  example: 1
+                host_uids:
+                  type: array
+                  description: Host uids to change log level
+                  items:
+                    type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/auditWebhook/enable:
+    post:
+      tags:
+      - S3
+      summary: Enable S3 audit webhook
+      description: Activates the S3 audit webhook.
+      operationId: enableS3AuditWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - endpoint
+              - auth_token
+              properties:
+                endpoint:
+                  type: string
+                  example: https://hec.example.com:8088/services/collector/raw
+                auth_token:
+                  type: string
+                  example: Splunk AAAAAAAA-D822-CCCC-BBBB-819F80AAAAAA
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/auditWebhook/disable:
+    post:
+      tags:
+      - S3
+      summary: Disable S3 audit webhook
+      description: Deactivates the S3 audit webhook.
+      operationId: disableS3AuditWebhook
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/auditWebhook:
+    get:
+      tags:
+      - S3
+      summary: Get S3 audit webhook configuration
+      description: Returns details about the S3 audit webhook configuration.
+      operationId: getS3AuditWebhook
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      endpoint:
+                        type: string
+                        example: https://hec.example.com:8088/services/collector/raw
+                      authToken:
+                        type: string
+                        example: Splunk AAAAAAAA-D822-CCCC-BBBB-819F80AAAAAA
+                      enabled:
+                        type: boolean
+                        example: true
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/oidc:
+    post:
+      tags:
+      - S3
+      summary: Add S3 OIDC configuration
+      description: Adds OIDC (OpenID Connect) configuration for S3 authentication.
+      operationId: addS3OIDC
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - config_url
+              properties:
+                config_url:
+                  type: string
+                  description: OIDC provider configuration URL
+                  example: https://login.microsoftonline.com/tenant/.well-known/openid-configuration
+                claim_name:
+                  type: string
+                  description: JWT claim name for policy mapping
+                  example: roles
+      responses:
+        '200':
+          description: OIDC configuration added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      config_url:
+                        type: string
+                        example: https://login.microsoftonline.com/tenant/.well-known/openid-configuration
+                      claim_name:
+                        type: string
+                        example: roles
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - S3
+      summary: Update S3 OIDC configuration
+      description: Updates existing OIDC configuration.
+      operationId: updateS3OIDC
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                config_url:
+                  type: string
+                  description: OIDC provider configuration URL
+                  example: https://login.microsoftonline.com/tenant/.well-known/openid-configuration
+                claim_name:
+                  type: string
+                  description: JWT claim name for policy mapping
+                  example: roles
+      responses:
+        '200':
+          description: OIDC configuration updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      config_url:
+                        type: string
+                        example: https://login.microsoftonline.com/tenant/.well-known/openid-configuration
+                      claim_name:
+                        type: string
+                        example: roles
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - S3
+      summary: Remove S3 OIDC configuration
+      description: Removes the OIDC configuration.
+      operationId: removeS3OIDC
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    get:
+      tags:
+      - S3
+      summary: Get S3 OIDC configuration
+      description: Returns the current OIDC configuration.
+      operationId: getS3OIDC
+      responses:
+        '200':
+          description: OIDC configuration
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      config_url:
+                        type: string
+                        description: OIDC provider configuration URL
+                        example: https://login.microsoftonline.com/tenant/.well-known/openid-configuration
+                      claim_name:
+                        type: string
+                        description: JWT claim name for policy mapping
+                        example: roles
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/ldapImportUser:
+    post:
+      tags:
+      - S3
+      summary: Import LDAP user for S3 access
+      description: Provisions S3 access for an existing LDAP user in tenant 0. Use /s3/{tenantId}/ldapImportUser for other tenants.
+      operationId: ldapCreateS3User
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: User import successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  operation:
+                    type: string
+                    example: user_created
+                  access_key:
+                    type: string
+                  secret_key:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '409':
+          description: User already exists
+    put:
+      tags:
+      - S3
+      summary: Update an S3 user through LDAP authentication
+      description: Updates an S3 user's credentials and policy through LDAP authentication in tenant 0. Use /s3/{tenantId}/ldapImportUser for other tenants.
+      operationId: ldapUpdateS3User
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  operation:
+                    type: string
+                    example: user_updated
+                  access_key:
+                    type: string
+                  secret_key:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          description: User does not exist
+    delete:
+      tags:
+      - S3
+      summary: Remove an S3 user through LDAP username
+      description: Deletes an S3 user authenticated through LDAP in tenant 0. Use /s3/{tenantId}/ldapImportUser for other tenants.
+      operationId: ldapDeleteS3User
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  operation:
+                    type: string
+                    example: user_deleted
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/{tenantId}/ldapImportUser:
+    post:
+      tags:
+      - S3
+      summary: Import LDAP user for S3 access in specific tenant
+      description: Provisions S3 access for an existing LDAP user. It authenticates the user against the configured LDAP directory for the specified tenant and generates unique S3 access and secret keys.
+      operationId: ldapCreateS3UserForTenant
+      security:
+      - basicAuth: []
+      parameters:
+      - name: tenantId
+        in: path
+        required: true
+        description: The tenant ID (organization ID) to import the user into
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: User import successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  operation:
+                    type: string
+                    example: user_created
+                  access_key:
+                    type: string
+                  secret_key:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '409':
+          description: User already exists
+    put:
+      tags:
+      - S3
+      summary: Update an S3 user through LDAP authentication in specific tenant
+      description: Updates an S3 user's credentials and policy through LDAP authentication for the specified tenant.
+      operationId: ldapUpdateS3UserForTenant
+      security:
+      - basicAuth: []
+      parameters:
+      - name: tenantId
+        in: path
+        required: true
+        description: The tenant ID (organization ID)
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  operation:
+                    type: string
+                    example: user_updated
+                  access_key:
+                    type: string
+                  secret_key:
+                    type: string
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          description: User does not exist
+    delete:
+      tags:
+      - S3
+      summary: Remove an S3 user through LDAP username in specific tenant
+      description: Deletes an S3 user authenticated through LDAP for the specified tenant.
+      operationId: ldapDeleteS3UserForTenant
+      security:
+      - basicAuth: []
+      parameters:
+      - name: tenantId
+        in: path
+        required: true
+        description: The tenant ID (organization ID)
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: User deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  operation:
+                    type: string
+                    example: user_deleted
+                  message:
+                    type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/refresh-imported:
+    put:
+      tags:
+      - S3
+      summary: Refresh all LDAP S3 users
+      description: Synchronizes UID, GID, and S3 policies for all LDAP-imported users to ensure cluster permissions match the current directory state. This operation updates existing identities and reports success or failure counts.
+      operationId: refreshS3ImportedUsers
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: Refresh completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                    example: 'Refresh completed: 45 success, 2 failures'
+                  success_count:
+                    type: number
+                    example: 45
+                  failure_count:
+                    type: number
+                    example: 2
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - 'User user1: S3 policy not found'
+                    - 'User user2: LDAP authentication failed'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /s3/{tenantId}/refresh-imported:
+    put:
+      tags:
+      - S3
+      summary: Refresh all LDAP S3 users for a specific tenant
+      description: Synchronizes UID, GID, and S3 policies for all LDAP-imported users in the specified tenant.
+      operationId: refreshS3ImportedUsersForTenant
+      security:
+      - basicAuth: []
+      parameters:
+      - name: tenantId
+        in: path
+        required: true
+        description: The tenant ID (organization ID)
+        schema:
+          type: integer
+          example: 1
+      responses:
+        '200':
+          description: Refresh completed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                  success_count:
+                    type: number
+                  failure_count:
+                    type: number
+                  errors:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    s3Bucket:
+      type: object
+      properties:
+        name:
+          type: string
+          example: bucket1
+        hard_limit_bytes:
+          type: number
+          example: 10000003072
+        path:
+          type: string
+          example: /path
+        used_bytes:
+          type: number
+          example: 4096
+        fs:
+          type: string
+          example: default
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

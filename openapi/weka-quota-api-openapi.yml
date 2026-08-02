@@ -1,0 +1,762 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Quota API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Quota
+paths:
+  /fileSystems/{uid}/quota:
+    get:
+      tags:
+      - Quota
+      summary: List directory quotas
+      description: Returns all quotas for directories within a specific filesystem.
+      operationId: listQuotas
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        quota_id:
+                          type: string
+                          example: 0x3558c7ffd0770000:0
+                        inode_id:
+                          type: number
+                          example: 10092623495168
+                        full_path:
+                          type: string
+                          example: default:/testdir/dir8
+                        total_bytes:
+                          type: integer
+                          format: int64
+                          example: 8192
+                        time_over_soft_limit:
+                          type: number
+                          example: 100
+                        owner:
+                          type: string
+                          example: user
+                        data_blocks:
+                          type: number
+                          example: 0
+                        grace_seconds:
+                          type: number
+                          example: null
+                        hard_limit_bytes:
+                          type: integer
+                          format: int64
+                          example: 1000001536
+                        path:
+                          type: string
+                          example: /testdir/dir8
+                        fsName:
+                          type: string
+                          example: default
+                  next_token:
+                    type: number
+                    example: 3214121
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem.
+      - in: query
+        name: next_token
+        schema:
+          type: string
+        description: Token to get the next page.
+  /fileSystems/{uid}/quota/default:
+    get:
+      tags:
+      - Quota
+      summary: List default directory quotas
+      description: Returns all default quotas for directories within a specific filesystem.
+      operationId: listDefaultQuotas
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: '48117142192129'
+                        fsName:
+                          type: string
+                          example: default
+                        graceSeconds:
+                          type: number
+                          example: 8192
+                        hard_limit_bytes:
+                          type: integer
+                          format: int64
+                          example: 18446744073
+                        owner:
+                          type: string
+                          example: admin
+                        path:
+                          type: string
+                          example: /dir1
+                        snapName:
+                          type: string
+                          example: string
+                        soft_limit_bytes:
+                          type: integer
+                          format: int64
+                          example: 18446744073
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem.
+  /fileSystems/{uid}/quota/{inode_id}:
+    get:
+      tags:
+      - Quota
+      summary: Get directory quota details
+      description: Returns the quota parameters for a specific directory.
+      operationId: getQuota
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      inode_id:
+                        type: number
+                        example: 10092623495168
+                      total_bytes:
+                        type: integer
+                        format: int64
+                        example: 8192
+                      owner:
+                        type: string
+                        example: user
+                      data_blocks:
+                        type: number
+                        example: 0
+                      time_over_soft_limit:
+                        type: number
+                        example: 100
+                      grace_seconds:
+                        type: number
+                        example: null
+                      hard_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 1000001536
+                      snap_view_id:
+                        type: number
+                        example: 0
+                      metadata_blocks:
+                        type: number
+                        example: 2
+                      soft_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: null
+                      status:
+                        type: string
+                        example: ACTIVE
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the filesystem.
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the directory's inode.
+    put:
+      tags:
+      - Quota
+      summary: Set a quota for a directory
+      description: Sets a quota for a directory. If Data Service is not enabled, use the CLI to set a quota for a non-empty directory.
+      operationId: putQuota
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      inode_id:
+                        type: number
+                        example: 10092623495168
+                      total_bytes:
+                        type: integer
+                        format: int64
+                        example: 8192
+                      owner:
+                        type: string
+                        example: user
+                      data_blocks:
+                        type: number
+                        example: 0
+                      grace_seconds:
+                        type: number
+                        example: null
+                      hard_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 1000001536
+                      time_over_soft_limit:
+                        type: number
+                        example: 100
+                      snap_view_id:
+                        type: number
+                        example: 0
+                      metadata_blocks:
+                        type: number
+                        example: 2
+                      soft_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 0
+                      status:
+                        type: string
+                        example: ACTIVE
+                      cw_task_id:
+                        type: number
+                        example: 1
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UID.
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: Directory's inode ID.
+      - in: query
+        name: path
+        schema:
+          type: string
+      - in: query
+        name: hard_limit_bytes
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: 0 for unlimited.
+      - in: query
+        name: soft_limit_bytes
+        required: true
+        schema:
+          type: integer
+          format: int64
+        description: 0 for unlimited.
+      - in: query
+        name: grace_seconds
+        required: true
+        schema:
+          type: number
+      - in: query
+        name: owner
+        schema:
+          type: string
+    patch:
+      tags:
+      - Quota
+      summary: Update directory quota
+      description: Modifies specific settings, such as the grace period or limits, for an existing directory quota.
+      operationId: patchQuota
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      inode_id:
+                        type: number
+                        example: 10092623495168
+                      total_bytes:
+                        type: integer
+                        format: int64
+                        example: 8192
+                      owner:
+                        type: string
+                        example: user
+                      data_blocks:
+                        type: number
+                        example: 0
+                      grace_seconds:
+                        type: number
+                        example: null
+                      hard_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 1000001536
+                      snap_view_id:
+                        type: number
+                        example: 0
+                      metadata_blocks:
+                        type: number
+                        example: 2
+                      soft_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: null
+                      status:
+                        type: string
+                        example: ACTIVE
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UID.
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: Directory's inode ID.
+      - in: query
+        name: path
+        schema:
+          type: string
+      - in: query
+        name: hard_limit_bytes
+        schema:
+          type: integer
+          format: int64
+        description: 0 for unlimited.
+      - in: query
+        name: soft_limit_bytes
+        schema:
+          type: integer
+          format: int64
+        description: 0 for unlimited.
+      - in: query
+        name: grace_seconds
+        schema:
+          type: number
+      - in: query
+        name: owner
+        schema:
+          type: string
+    delete:
+      tags:
+      - Quota
+      summary: Remove directory quota
+      description: Removes a quota from a specific directory. If the Data Service is not enabled, use the CLI to remove a quota from a non-empty directory.
+      operationId: deleteQuota
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      inode_id:
+                        type: number
+                        example: 10092623495168
+                      total_bytes:
+                        type: integer
+                        format: int64
+                        example: 8192
+                      owner:
+                        type: string
+                        example: user
+                      data_blocks:
+                        type: number
+                        example: 0
+                      grace_seconds:
+                        type: number
+                        example: null
+                      hard_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 1000001536
+                      snap_view_id:
+                        type: number
+                        example: 0
+                      metadata_blocks:
+                        type: number
+                        example: 2
+                      soft_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: null
+                      status:
+                        type: string
+                        example: ACTIVE
+                      cw_task_id:
+                        type: number
+                        example: 1
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UID.
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: Directory's inode ID.
+      - in: query
+        name: path
+        schema:
+          type: string
+  /fileSystems/quota/{inode_id}:
+    put:
+      tags:
+      - Quota
+      summary: Set or update a default directory quota
+      description: Establishes or changes the default quota that applies to all newly created subdirectories within a specified parent directory.
+      operationId: putDefaultQuota
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      inode_id:
+                        type: number
+                        example: 10092623495168
+                      total_bytes:
+                        type: integer
+                        format: int64
+                        example: 8192
+                      owner:
+                        type: string
+                        example: user
+                      data_blocks:
+                        type: number
+                        example: 0
+                      grace_seconds:
+                        type: number
+                        example: null
+                      hard_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 1000001536
+                      snap_view_id:
+                        type: number
+                        example: 0
+                      metadata_blocks:
+                        type: number
+                        example: 2
+                      soft_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 0
+                      status:
+                        type: string
+                        example: ACTIVE
+      parameters:
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: Directory's inode ID.
+      - in: query
+        name: path
+        schema:
+          type: string
+      - in: query
+        name: hard_limit_bytes
+        schema:
+          type: integer
+          format: int64
+        description: 0 for unlimited.
+      - in: query
+        name: soft_limit_bytes
+        schema:
+          type: integer
+          format: int64
+        description: 0 for unlimited.
+      - in: query
+        name: grace_seconds
+        schema:
+          type: number
+      - in: query
+        name: owner
+        schema:
+          type: string
+  /fileSystems/quota/{inode_id}/default:
+    delete:
+      tags:
+      - Quota
+      summary: Remove default quota from a directory
+      description: Removes the default quota from a directory, preventing new subdirectories from inheriting its settings.
+      operationId: deleteDefaultQuota
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      fsName:
+                        type: string
+                        example: user
+                      path:
+                        type: string
+                        example: default
+                      graceSeconds:
+                        type: number
+                        example: null
+                      hard_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 1000001536
+                      owner:
+                        type: number
+                        example: 0
+                      snapName:
+                        type: number
+                        example: 0
+                      soft_limit_bytes:
+                        type: integer
+                        format: int64
+                        example: 1000001536
+      parameters:
+      - in: path
+        name: inode_id
+        required: true
+        schema:
+          type: string
+        description: Directory's inode ID.
+      - in: query
+        name: path
+        schema:
+          type: string
+  /fileSystems/{uid}/resolvePath:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      schema:
+        type: string
+      description: Filesystem UID.
+    - in: query
+      name: path
+      required: true
+      schema:
+        type: string
+      description: Path within the filesystem.
+    get:
+      tags:
+      - Quota
+      summary: Resolve path to inode ID
+      description: Returns the unique inode ID for a specified file or directory path.
+      operationId: resolvePath
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      inode_id:
+                        type: string
+                        example: 1468752432114565000
+  /quota:
+    get:
+      deprecated: true
+      tags:
+      - Quota
+      summary: Get filesystem quota
+      operationId: getQuotaDeprecated
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      0x0000092ddf3d0000:0:
+                        type: object
+                        properties:
+                          inodeId:
+                            type: number
+                            example: 10092623495168
+                          total_bytes:
+                            type: number
+                            example: 8192
+                          owner:
+                            type: string
+                            example: user
+                          data_blocks:
+                            type: number
+                            example: 0
+                          grace_seconds:
+                            type: number
+                            example: 4294967295
+                          hard_limit_bytes:
+                            type: number
+                            example: 1000001536
+                          snap_view_id:
+                            type: number
+                            example: 0
+                          metadata_blocks:
+                            type: number
+                            example: 2
+                          soft_limit_bytes:
+                            type: number
+                            example: 18446744073709548000
+                          status:
+                            type: string
+                            example: ACTIVE
+                  next_token:
+                    type: number
+                    example: 3214121
+      parameters:
+      - in: query
+        name: type
+        schema:
+          type: string
+        required: true
+        description: Quota type
+        example: directory
+      - in: query
+        name: uid
+        schema:
+          type: string
+        required: true
+        description: Filesystem uid
+        example: uid_string
+      - in: query
+        name: next_token
+        schema:
+          type: string
+        description: Token to get the next page
+  /quota/batch:
+    get:
+      tags:
+      - Quota
+      summary: Get a batch of quotas
+      operationId: getQuota
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      0x0000092ddf3d0000:0:
+                        type: object
+                        properties:
+                          inodeId:
+                            type: number
+                            example: 10092623495168
+                          total_bytes:
+                            type: number
+                            example: 8192
+                          owner:
+                            type: string
+                            example: user
+                          data_blocks:
+                            type: number
+                            example: 0
+                          grace_seconds:
+                            type: number
+                            example: 4294967295
+                          hard_limit_bytes:
+                            type: number
+                            example: 1000001536
+                          snap_view_id:
+                            type: number
+                            example: 0
+                          metadata_blocks:
+                            type: number
+                            example: 2
+                          soft_limit_bytes:
+                            type: number
+                            example: 18446744073709548000
+                          status:
+                            type: string
+                            example: ACTIVE
+      parameters:
+      - in: query
+        name: inode_ids
+        schema:
+          type: array
+          items:
+            type: number
+        required: true
+        description: List of quotas to query
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

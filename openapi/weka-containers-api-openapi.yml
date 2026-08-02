@@ -1,0 +1,1300 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Containers API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Containers
+paths:
+  /containers:
+    get:
+      tags:
+      - Containers
+      summary: Get containers
+      description: Returns a list of all containers in the cluster.
+      operationId: getContainers
+      parameters:
+      - in: query
+        name: filter_type
+        schema:
+          type: string
+          enum:
+          - All
+          - ByContainer
+          - Backends
+          - Clients
+          - Leadership
+          - Leader
+        description: Filters the list of containers. Use 'ByContainer' to specify a list of container IDs.
+      - in: query
+        name: container_ids
+        schema:
+          type: array
+          items:
+            type: number
+        description: A list of container IDs to retrieve. Required when 'filter_type' is 'ByContainer'.
+      - in: query
+        name: council
+        schema:
+          type: boolean
+        description: If true, query the cluster leadership members.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/container'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Containers
+      summary: Add a container
+      description: Adds a new container to the cluster. The container configuration must be applied to activate it.
+      operationId: addContainer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/container'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - container_name
+              type: object
+              properties:
+                container_name:
+                  type: string
+                  description: The hostname for the new container.
+                  example: new-container-01
+                ip:
+                  type: string
+                  example: 173.21.11.41
+                  description: The management IP address. If empty, the hostname is resolved. For high-availability configurations, use a '+' separated list of IPs.
+                no_wait:
+                  type: boolean
+                  description: If true, the command returns immediately without waiting for the container to be added.
+                  example: true
+  /containers/{uid}:
+    get:
+      tags:
+      - Containers
+      summary: Get container details
+      description: Returns the details, including resources and state, for a specific container.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the container.
+      operationId: getSingleContainer
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/container'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      tags:
+      - Containers
+      summary: Update container configuration
+      description: Updates the staged configuration for a specific container. Any resource configuration change, such as memory or cores, requires an apply action to take effect.
+      operationId: updateContainer
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: The unique identifier of the container.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                failure_domain_type:
+                  type: string
+                  description: A failure domain type.
+                  enum:
+                  - AUTO
+                  - USER
+                  - HA
+                failure_domain:
+                  type: string
+                  description: Assigns the container to a named failure domain.
+                cores:
+                  type: number
+                  description: The total number of CPU cores to dedicate to the WEKA processes.
+                  example: 4
+                frontend_dedicated_cores:
+                  type: number
+                  description: The number of dedicated cores for frontend processes.
+                  example: 1
+                drives_dedicated_cores:
+                  type: number
+                  description: The number of dedicated cores for drive processes.
+                  example: 2
+                memory:
+                  type: number
+                  description: The amount of memory in bytes to dedicate to the WEKA processes.
+                  example: 16000000000
+                dedicated:
+                  type: boolean
+                  description: If true, the container is fully dedicated to WEKA and can be rebooted or configured for optimal performance.
+                  example: true
+                bandwidth:
+                  type: number
+                  description: Sets a bandwidth limit for the container.
+                  example: 1000
+                auto_remove_timeout:
+                  type: number
+                  description: For clients only, the timeout in seconds before removing the container if it disconnects. Use 0 to disable.
+                management_ips:
+                  type: array
+                  description: Sets the management IPs for the container. Providing two IPs enables high-availability mode.
+                  items:
+                    type: string
+                    example: 173.21.11.41
+                join_secret:
+                  type: string
+                  description: Secret used when joining the cluster, or when other backends try to join the cluster.
+                  example: some-secret
+                purge_old_secrets:
+                  type: boolean
+                  description: Purge old join secrets so that only the most recently set join-secret may be used.
+                  example: false
+                apply_container:
+                  type: boolean
+                  description: Apply the container after this change.
+                  example: false
+    delete:
+      tags:
+      - Containers
+      summary: Remove a container
+      description: Deactivates and removes a container from the cluster.
+      operationId: removeContainer
+      parameters:
+      - in: path
+        name: uid
+        schema:
+          type: string
+        required: true
+        description: The unique identifier of the container.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /containers/manageProtoContainers:
+    post:
+      tags:
+      - Containers
+      summary: Perform action on protocol containers
+      description: Performs an action, such as a restart, on specified protocol containers.
+      operationId: manageProtoContainers
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - container_names
+              - container_operation
+              properties:
+                container_names:
+                  type: array
+                  description: A list of protocol container names.
+                  items:
+                    type: string
+                    enum:
+                    - ganesha
+                    - s3
+                    - smbw
+                  example:
+                  - ganesha
+                container_operation:
+                  type: string
+                  description: The operation to perform on the containers.
+                  enum:
+                  - RESTART_CONTAINER
+                  example: RESTART_CONTAINER
+  /containers/apply:
+    post:
+      tags:
+      - Containers
+      summary: Apply configuration updates to multiple containers
+      description: Applies staged configuration changes to a specified list of containers.
+      operationId: applyContainers
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - container_uids
+              properties:
+                container_uids:
+                  type: array
+                  description: A list of container UIDs to apply changes to.
+                  items:
+                    type: string
+                    example:
+                    - uid_string1
+                    - uid_string2
+  /containers/{uid}/apply:
+    post:
+      tags:
+      - Containers
+      summary: Apply configuration updates to a container
+      description: Applies staged configuration changes to a specific container.
+      operationId: applyContainer
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: The unique identifier of the container.
+        schema:
+          type: string
+  /containers/lastFailureReason/{uid}:
+    delete:
+      tags:
+      - Containers
+      summary: Clear last failure for a container
+      description: Resets the last failure reason for a specific container.
+      operationId: clearContainerFailure
+      parameters:
+      - in: path
+        name: uid
+        description: The unique identifier of the container.
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /containers/{uid}/resources:
+    get:
+      tags:
+      - Containers
+      summary: Get container resources
+      description: Returns the resource allocation (CPU, memory) for a specific container.
+      operationId: getContainersResources
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/containerResource'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        description: The unique identifier of the container.
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: type
+        schema:
+          type: string
+        description: The resource type to retrieve, either 'Staging' or 'Stable'. Defaults to 'Staging'.
+  /containers/activate:
+    post:
+      tags:
+      - Containers
+      summary: Activate containers
+      description: Activates a list of specified containers, bringing them online.
+      operationId: activateContainers
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - container_uids
+              properties:
+                container_uids:
+                  type: array
+                  description: A list of container UIDs to activate.
+                  items:
+                    type: string
+  /containers/{uid}/activate:
+    post:
+      tags:
+      - Containers
+      summary: Activate a container
+      description: Activates a specific container, bringing it online.
+      operationId: activateContainer
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: The unique identifier of the container.
+        schema:
+          type: string
+  /containers/deactivate:
+    post:
+      tags:
+      - Containers
+      summary: Deactivate containers
+      description: Deactivates a list of specified containers.
+      operationId: deactivateContainers
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - container_uids
+              type: object
+              properties:
+                container_uids:
+                  type: array
+                  description: A list of container UIDs to deactivate.
+                  items:
+                    type: string
+  /containers/deactivation-check:
+    post:
+      tags:
+      - Containers
+      summary: Perform container deactivation check
+      description: Simulates container deactivation to assess whether the operation can be performed safely without impacting the cluster.
+      operationId: deactivateContainers check
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - container_uids
+              type: object
+              properties:
+                container_uids:
+                  type: array
+                  description: A list of container UIDs to check for deactivation.
+                  items:
+                    type: string
+  /containers/{uid}/deactivate:
+    post:
+      tags:
+      - Containers
+      summary: Deactivate a container
+      description: Deactivates a specific container.
+      operationId: deactivateContainer
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: The unique identifier of the container.
+        schema:
+          type: string
+  /containers/netdevs:
+    get:
+      tags:
+      - Containers
+      summary: Get network devices for all containers
+      description: Returns the network device configurations for all containers in the cluster.
+      operationId: getAllContainersNetwork
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/netdevContainer'
+        '401':
+          $ref: '#/components/responses/401'
+  /containers/{uid}/netdevs:
+    get:
+      tags:
+      - Containers
+      summary: Get network devices for a container
+      description: Returns the network device configurations for a specific container.
+      operationId: getContainerNetwork
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/netdevContainer'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: The unique identifier of the container.
+        schema:
+          type: string
+    post:
+      tags:
+      - Containers
+      summary: Add a dedicated network device to a container
+      description: Allocates a dedicated network device to a specific container. The change must be applied to take effect.
+      operationId: createContainerNetwork
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        description: The unique identifier of the container.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                device:
+                  type: string
+                  description: The network device identifier (PCI slot, MAC address, or interface name).
+                  example: eth1
+                ips_type:
+                  type: string
+                  description: 'Specifies the IP address source: ''POOL'' for automatic allocation from the default data network, or ''USER'' for manual assignment.'
+                  enum:
+                  - POOL
+                  - USER
+                ips:
+                  type: array
+                  description: A list of IPs or IP ranges to allocate to cores using the device.
+                  items:
+                    type: string
+                    example: 172.31.4.107
+                gateway:
+                  type: string
+                  example: 172.31.0.1
+                  description: The default gateway IP. Auto-detected in AWS environments.
+                netmask:
+                  type: number
+                  example: 20
+                  description: The subnet mask in CIDR format. Auto-detected in AWS environments.
+                name:
+                  type: string
+                  description: A custom name for the network device. If empty, a name is auto-generated.
+                  example: netdev01
+                apply_container:
+                  type: boolean
+                  description: If true, applies the configuration change to the container immediately.
+                  example: false
+  /containers/{uid}/netdevs/{netdev_uid}:
+    delete:
+      tags:
+      - Containers
+      summary: Remove a dedicated network device
+      description: Removes a dedicated network device from a container. The change must be applied to take effect.
+      operationId: removeContainerNetwork
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        description: The unique identifier of the container.
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: netdev_uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the network device.
+      - in: query
+        name: apply_container
+        schema:
+          type: boolean
+        description: If true, applies the configuration change to the container immediately.
+        example: false
+  /containers/infos:
+    post:
+      tags:
+      - Containers
+      summary: Get container hardware information
+      description: Returns hardware information for one or more containers, specified by IP or hostname.
+      operationId: getContainersInfo
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      net:
+                        type: object
+                        properties:
+                          interfaces:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                mtu:
+                                  type: number
+                                  example: 65536
+                                pciSlot:
+                                  type: string
+                                  example: 0000:ff:ff.ff
+                                mac:
+                                  type: string
+                                  example: 00:00:00:00:00:00
+                                pciSlot_slaves:
+                                  type: array
+                                  items:
+                                    type: string
+                                ip4:
+                                  type: string
+                                  example: 127.0.0.1
+                                linkLayer:
+                                  type: string
+                                  example: ETH
+                                name:
+                                  type: string
+                                  example: lo
+                                ip4Netmask:
+                                  type: number
+                                  example: 8
+                                name_slaves:
+                                  type: array
+                                  items:
+                                    type: string
+                                bondType:
+                                  type: string
+                                  example: NONE
+                                ip6:
+                                  type: string
+                                  example: null
+                      disks:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            devName:
+                              type: string
+                              example: xvdw
+                            diskSizeBytes:
+                              type: number
+                              example: 20401094656
+                            isMounted:
+                              type: boolean
+                            uuid:
+                              type: string
+                              example: 00000000-0000-0000-0000-000000000000
+                            devNumber:
+                              type: string
+                              example: 202:5632
+                            isWekaPartition:
+                              type: boolean
+                            label:
+                              type: string
+                              example: null
+                            pciAddr:
+                              type: string
+                              example: null
+                            parentName:
+                              type: string
+                              example: null
+                            devPath:
+                              type: string
+                              example: /dev/xvdw
+                            sizeBytes:
+                              type: number
+                              example: 20401094656
+                            isRotational:
+                              type: boolean
+                            type:
+                              type: string
+                              example: DISK
+                            model:
+                              type: string
+                              example: null
+                      resolvedIp:
+                        type: string
+                        example: 172.31.23.127
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                containers_ips:
+                  type: array
+                  items:
+                    type: string
+                info_types:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - VERSION
+                    - OSINFO
+                    - MEMORY
+                    - CORES
+                    - DISKS
+                    - ETHS
+                    - NET
+                    - IPS
+                    - AWS
+                    - OFED
+  /containers/requestedAction:
+    put:
+      tags:
+      - Containers
+      summary: Set a requested action on containers
+      description: Sets a requested action, such as STOP or RESTART, to be performed on one or more containers.
+      operationId: setContainerRequestedAction
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - container_ids
+              - requested_action
+              properties:
+                container_ids:
+                  type: array
+                  description: A list of container IDs for which to set the requested action.
+                  items:
+                    type: integer
+                  example:
+                  - 0
+                  - 1
+                  - 2
+                requested_action:
+                  type: string
+                  description: The requested action to set for the containers.
+                  enum:
+                  - STOP
+                  - RESTART
+                  - APPLY_RESOURCES
+                  example: RESTART
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    container:
+      type: object
+      properties:
+        id:
+          type: string
+          example: HostId<0>
+        sw_release_string:
+          type: string
+          example: 4.2.1.8293-f1b6ea71df13d4395ff974e5164424a8
+        mode:
+          type: string
+          example: backend
+        failure_domain_id:
+          type: string
+          example: FailureDomainId<1>
+        bandwidth:
+          type: number
+          nullable: true
+          example: 6497
+        container_name:
+          type: string
+          nullable: true
+          example: default
+        failure_domain:
+          type: string
+          example: DOM-000
+        added_time:
+          type: string
+          example: '2021-03-10T09:47:14.835443Z'
+        uid:
+          type: string
+          example: uid_string
+        server_identifier:
+          type: string
+          example: uid_string
+        drives_dedicated_cores:
+          type: number
+          example: 0
+        hostname:
+          type: string
+          example: exam-0
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.17.71
+        member_of_leadership:
+          type: boolean
+          example: true
+        cloud:
+          type: object
+          properties:
+            instance_type:
+              type: string
+              example: VM.Standard.E4.Flex
+            provider:
+              type: string
+              example: OCI
+            availability_zone:
+              type: string
+              example: eu-frankfurt-1
+            instance_id:
+              type: string
+              example: i-0286561555bf9dcc5
+        io_processes:
+          type: number
+          example: 1
+        last_failure_time:
+          type: string
+          example: '2021-03-10T09:47:04.927107Z'
+        state:
+          type: string
+          example: ACTIVE
+        start_time:
+          type: string
+          example: '2021-03-10T09:47:05.563549Z'
+        aws:
+          type: object
+          properties:
+            instance_type:
+              type: string
+              example: i3.large
+            availability_zone:
+              type: string
+              example: eu-west-1a
+            instance_id:
+              type: string
+              example: i-0286561555bf9dcc5
+        sw_version:
+          type: string
+          example: 3.11.1.6928
+        os_info:
+          type: object
+          properties:
+            kernel_name:
+              type: string
+              example: Linux
+            platform:
+              type: string
+              example: x86_64
+            kernel_version:
+              type: string
+              example: '#1 SMP Mon Jul 29 17:46:05 UTC 2019'
+            os_name:
+              type: string
+              example: GNU/Linux
+            kernel_release:
+              type: string
+              example: 3.10.0-957.27.2.el7.x86_64
+            drivers:
+              type: object
+              properties:
+                ixgbe:
+                  type: string
+                  example: ''
+                ixgbevf:
+                  type: string
+                  example: ''
+                mlx5_core:
+                  type: string
+                  example: ''
+                ib_uverbs:
+                  type: string
+                  example: ''
+                uio_pci_generic:
+                  type: string
+                  example: 5f49bb7dc1b5d192fb01b442b17ddc0451313ea2
+        last_failure_code:
+          type: string
+          example: ApplyingResources
+        cores_ids:
+          type: array
+          items:
+            type: number
+            example: 1
+        memory:
+          type: number
+          example: 1493172224
+        frontend_dedicated_cores:
+          type: number
+          example: 0
+        failure_domain_type:
+          type: string
+          example: USER
+        leadership_role:
+          type: string
+          nullable: true
+          example: member
+        state_changed_time:
+          type: string
+          example: '2021-03-10T09:47:04.927107Z'
+        status:
+          type: string
+          example: UP
+        cores:
+          type: number
+          example: 1
+        container_ip:
+          type: string
+          example: 172.31.17.71
+        is_dedicated:
+          type: boolean
+          example: false
+        last_failure:
+          type: string
+          example: Applying resources on container
+        mgmt_port:
+          type: number
+          example: 14000
+        auto_remove_timeout:
+          type: number
+          nullable: true
+          example: 100
+        requested_action:
+          type: string
+          example: STOP
+        requested_action_failure:
+          type: string
+          example: Cannot start draining because there are not enough failure domains with active drives to support 1 protection.
+        requested_action_status:
+          type: string
+          example: NotEnoughDrivesForProtectionToDrain
+        requested_action_failure_time:
+          type: string
+          example: '2021-03-10T09:47:04.927107Z'
+    containerResource:
+      type: object
+      properties:
+        mode:
+          type: string
+          example: BACKEND
+        memory:
+          type: number
+          example: 0
+        format:
+          type: number
+          example: 3
+        bandwidth:
+          type: number
+          example: 2000
+        drives:
+          type: array
+          items:
+            type: string
+            example: some_drive
+        failure_domain:
+          type: string
+          example: ''
+        hardware_watchdog:
+          type: boolean
+          example: false
+        wait_io_nodes_timeout:
+          type: number
+          example: 300
+        backend_endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              ip:
+                type: string
+                example: 172.31.13.97
+              port:
+                type: number
+                example: 14000
+        hostname:
+          type: string
+          example: ''
+        reserve_1g_hugepages:
+          type: boolean
+          example: true
+        net_devices:
+          type: array
+          items:
+            type: string
+            example: eth0
+        dedicate_memory:
+          type: boolean
+          example: true
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.11.41
+        ui_enabled:
+          type: boolean
+          example: true
+        join_secret:
+          type: array
+          items:
+            type: string
+            example: secret
+        nodes:
+          type: object
+          properties:
+            '0':
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+                    example: MANAGEMENT
+                core_id:
+                  type: number
+                  example: 4294967295
+                http_port:
+                  type: number
+                  example: 14000
+                dedicate_core:
+                  type: boolean
+                  example: false
+                rpc_port:
+                  type: number
+                  example: 14010
+                dedicated_mode:
+                  type: string
+                  example: FULL
+            '1':
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+                    example: FRONTEND
+                core_id:
+                  type: number
+                  example: 4294967295
+                http_port:
+                  type: number
+                  example: 14000
+                dedicate_core:
+                  type: boolean
+                  example: true
+                rpc_port:
+                  type: number
+                  example: 14011
+                dedicated_mode:
+                  type: string
+                  example: FULL
+        container_id:
+          type: number
+          example: 65535
+        auto_remove_timeout:
+          type: number
+          example: 0
+        disable_numa_balancing:
+          type: boolean
+          example: true
+        mask_interrupts:
+          type: boolean
+          example: true
+    netdevContainer:
+      type: object
+      properties:
+        id:
+          type: string
+          example: NetDevId<3>
+        id_type:
+          type: string
+          example: INVALID
+        netmask_bits:
+          type: number
+          example: 20
+        owner_processes:
+          type: array
+          items:
+            type: string
+            example: NodeId<1>
+        name:
+          type: string
+          example: '0000:00:04.0'
+        uid:
+          type: string
+          example: uid_str
+        hostname:
+          type: string
+          example: stewie-0
+        net_devices:
+          type: array
+          items:
+            type: object
+            properties:
+              mac_address:
+                type: string
+                example: 02:5a:d7:de:50:5c
+              mtu:
+                type: number
+                example: 0
+              is_virtual:
+                type: boolean
+                example: true
+              interface_alias:
+                type: string
+                example: 'some alias '
+              numa:
+                type: number
+                example: -1
+              aws:
+                type: object
+                properties:
+                  netmask_bits:
+                    type: number
+                    example: 20
+                  ip:
+                    type: string
+                    example: 172.31.12.149
+                  gateway:
+                    type: string
+                    example: 172.31.0.1
+              interface_name:
+                type: string
+                example: some name
+              max_vfs_num:
+                type: number
+                example: 0
+              vendor:
+                type: string
+                example: Amazon.com, Inc.
+              slave_devices:
+                type: array
+                items:
+                  type: string
+                  example: some_devices
+              pci_slot:
+                type: string
+                example: '0000:00:04.0'
+              device:
+                type: string
+                example: Elastic Network Adapter (ENA)
+              driver:
+                type: string
+                example: igb_uio
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.12.149
+        max_cores:
+          type: number
+          example: 1
+        vlan_id:
+          type: string
+          example: some_id
+        gateway:
+          type: string
+          example: 172.31.0.1
+        container_id:
+          type: string
+          example: HostId<0>
+        identifier:
+          type: string
+          example: '0000:00:04.0'
+        network_label:
+          type: string
+          example: label
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/weka-openapi-original.json
+skills:
+- file: weka-authenticate-and-inspect-cluster.md
+  name: Authenticate and inspect a WEKA cluster
+  api: openapi/weka-openapi-original.json
+  operations: [login, refreshToken, whoAmI, getClusterStatus, getFileSystems, getAlerts]
+- file: weka-provision-filesystem-with-quota.md
+  name: Provision a WEKA filesystem with a directory quota
+  api: openapi/weka-openapi-original.json
+  operations: [login, createFileSystem, getFileSystem, resolvePath, putQuota, listQuotas]
+- file: weka-manage-s3-buckets.md
+  name: Manage WEKA S3 buckets and users
+  api: openapi/weka-openapi-original.json
+  operations: [login, getS3Cluster, getS3Buckets, createS3Bucket, getUsers, createUser, resetUserS3Credentials]

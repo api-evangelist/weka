@@ -1,0 +1,1095 @@
+aid: weka
+name: Weka
+description: >-
+  WEKA (WekaIO, Inc.) builds NeuralMesh, a software-defined, high-performance
+  data platform for AI, machine learning, and HPC workloads. Its container-native
+  storage system delivers a unified namespace across NVMe SSD and object storage,
+  running on bare metal and across AWS, Azure, GCP, and OCI. WEKA clusters expose
+  a RESTful management API (served at /api/v2 on port 14000) that automates
+  filesystems, quotas, snapshots, S3 buckets, multi-tenancy, users, KMS, alerts,
+  and events, with a first-party CLI, Kubernetes CSI driver and operator, and
+  Terraform modules. The company is backed by Norwest Venture Partners and others.
+url: https://raw.githubusercontent.com/api-evangelist/weka/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.sanity.io/images/ult5g8gw/production/3f976b57b4400a41163bc68d67ffb770d0a3b923-1200x675.jpg
+x-type: company
+x-source: vc-portfolio
+x-backed-by:
+- norwest-venture-partners
+x-tier: profiled
+x-tier-reason: enriched-from-public-api
+specificationVersion: '0.20'
+created: '2026-07-17'
+modified: '2026-07-21'
+tags:
+- Company
+- AI Storage
+- Data Platform
+- High Performance Computing
+- File System
+- Object Storage
+- Kubernetes
+- Cloud Infrastructure
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+apis:
+- aid: weka:weka-active-directory-api
+  name: Weka Active Directory API
+  description: The Active Directory API from Weka — 1 operation(s) for active directory.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Active Directory
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-active-directory-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-alerts-api
+  name: Weka Alerts API
+  description: The Alerts API from Weka — 8 operation(s) for alerts.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-catalog-api
+  name: Weka Catalog API
+  description: The Catalog API from Weka — 12 operation(s) for catalog.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-catalog-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-cluster-api
+  name: Weka Cluster API
+  description: The Cluster API from Weka — 2 operation(s) for cluster.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Cluster
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-cluster-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-containers-api
+  name: Weka Containers API
+  description: The Containers API from Weka — 17 operation(s) for containers.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Containers
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-containers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-dataservice-api
+  name: Weka DataService API
+  description: The DataService API from Weka — 1 operation(s) for dataservice.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - DataService
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-dataservice-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-default-network-api
+  name: Weka Default network API
+  description: The Default network API from Weka — 1 operation(s) for default network.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Default network
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-default-network-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-drive-api
+  name: Weka Drive API
+  description: The Drive API from Weka — 5 operation(s) for drive.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Drive
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-drive-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-events-api
+  name: Weka Events API
+  description: The Events API from Weka — 5 operation(s) for events.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-failure-domains-api
+  name: Weka Failure domains API
+  description: The Failure domains API from Weka — 2 operation(s) for failure domains.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Failure domains
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-failure-domains-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-filesystem-api
+  name: Weka Filesystem API
+  description: The Filesystem API from Weka — 16 operation(s) for filesystem.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Filesystem
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-filesystem-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-filesystem-group-api
+  name: Weka Filesystem group API
+  description: The Filesystem group API from Weka — 2 operation(s) for filesystem group.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Filesystem group
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-filesystem-group-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-health-api
+  name: Weka Health API
+  description: The Health API from Weka — 2 operation(s) for health.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-hosts-api
+  name: Weka Hosts API
+  description: The Hosts API from Weka — 14 operation(s) for hosts.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Hosts
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-hosts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-interface-group-api
+  name: Weka Interface group API
+  description: The Interface group API from Weka — 10 operation(s) for interface group.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Interface group
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-interface-group-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-kms-api
+  name: Weka KMS API
+  description: The KMS API from Weka — 3 operation(s) for kms.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - KMS
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-kms-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-ldap-api
+  name: Weka LDAP API
+  description: The LDAP API from Weka — 1 operation(s) for ldap.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - LDAP
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-ldap-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-license-api
+  name: Weka License API
+  description: The License API from Weka — 1 operation(s) for license.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - License
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-license-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-lockout-policy-api
+  name: Weka Lockout policy API
+  description: The Lockout policy API from Weka — 1 operation(s) for lockout policy.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Lockout policy
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-lockout-policy-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-login-api
+  name: Weka Login API
+  description: The Login API from Weka — 2 operation(s) for login.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Login
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-login-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-machines-api
+  name: Weka Machines API
+  description: The Machines API from Weka — 2 operation(s) for machines.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Machines
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-machines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-mounts-defaults-api
+  name: Weka Mounts Defaults API
+  description: The Mounts Defaults API from Weka — 1 operation(s) for mounts defaults.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Mounts Defaults
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-mounts-defaults-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-networkspace-api
+  name: Weka NetworkSpace API
+  description: The NetworkSpace API from Weka — 3 operation(s) for networkspace.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - NetworkSpace
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-networkspace-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-nfs-api
+  name: Weka NFS API
+  description: The NFS API from Weka — 21 operation(s) for nfs.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - NFS
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-nfs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-nodes-api
+  name: Weka Nodes API
+  description: The Nodes API from Weka — 2 operation(s) for nodes.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-object-store-api
+  name: Weka Object store API
+  description: The Object store API from Weka — 2 operation(s) for object store.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Object store
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-object-store-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-object-store-bucket-api
+  name: Weka Object store bucket API
+  description: The Object store bucket API from Weka — 3 operation(s) for object store bucket.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Object store bucket
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-object-store-bucket-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-organization-api
+  name: Weka Organization API
+  description: The Organization API from Weka — 12 operation(s) for organization.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Organization
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-organization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-processes-api
+  name: Weka Processes API
+  description: The Processes API from Weka — 2 operation(s) for processes.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Processes
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-processes-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-quota-api
+  name: Weka Quota API
+  description: The Quota API from Weka — 8 operation(s) for quota.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Quota
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-quota-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-s3-api
+  name: Weka S3 API
+  description: The S3 API from Weka — 29 operation(s) for s3.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - S3
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-s3-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-security-api
+  name: Weka Security API
+  description: The Security API from Weka — 15 operation(s) for security.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Security
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-security-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-servers-api
+  name: Weka Servers API
+  description: The Servers API from Weka — 3 operation(s) for servers.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-servers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-smb-api
+  name: Weka SMB API
+  description: The SMB API from Weka — 13 operation(s) for smb.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - SMB
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-smb-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-snapshot-policy-api
+  name: Weka Snapshot Policy API
+  description: The Snapshot Policy API from Weka — 7 operation(s) for snapshot policy.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Snapshot Policy
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-snapshot-policy-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-snapshots-api
+  name: Weka Snapshots API
+  description: The Snapshots API from Weka — 9 operation(s) for snapshots.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Snapshots
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-snapshots-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-stats-api
+  name: Weka Stats API
+  description: The Stats API from Weka — 4 operation(s) for stats.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Stats
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-stats-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-system-io-api
+  name: Weka System IO API
+  description: The System IO API from Weka — 2 operation(s) for system io.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - System IO
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-system-io-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-tasks-api
+  name: Weka Tasks API
+  description: The Tasks API from Weka — 5 operation(s) for tasks.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-telemetry-api
+  name: Weka Telemetry API
+  description: The Telemetry API from Weka — 4 operation(s) for telemetry.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Telemetry
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-telemetry-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-tenant-api
+  name: Weka Tenant API
+  description: The Tenant API from Weka — 12 operation(s) for tenant.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Tenant
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-tenant-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-tls-api
+  name: Weka TLS API
+  description: The TLS API from Weka — 2 operation(s) for tls.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - TLS
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-tls-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-traces-api
+  name: Weka Traces API
+  description: The Traces API from Weka — 3 operation(s) for traces.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Traces
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-traces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-user-api
+  name: Weka User API
+  description: The User API from Weka — 7 operation(s) for user.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-weka-home-api
+  name: Weka Weka home API
+  description: The Weka home API from Weka — 6 operation(s) for weka home.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Weka home
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-weka-home-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+common:
+- type: AgenticAccess
+  url: agentic-access/weka-agentic-access.yml
+- type: Authentication
+  url: authentication/weka-authentication.yml
+- type: DomainSecurity
+  url: security/weka-domain-security.yml
+- type: VulnerabilityDisclosure
+  url: security/weka-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.weka.io/company/vulnerability-discovery-procedure/
+- type: Packages
+  url: packages/weka-packages.yml
+- type: SDKs
+  url: packages/weka-packages.yml
+- type: CLI
+  url: cli/weka-cli.yml
+- type: MCPServer
+  url: mcp/weka-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/weka-llms.txt
+- type: Lifecycle
+  url: lifecycle/weka-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/weka-lifecycle.yml
+- type: ChangeLog
+  url: changelog/weka-changelog.yml
+- type: Website
+  url: https://weka.io
+- type: DeveloperPortal
+  url: https://docs.weka.io/
+- type: Documentation
+  url: https://docs.weka.io/
+- type: APIReference
+  url: https://api.docs.weka.io/
+- type: GettingStarted
+  url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+- type: Blog
+  url: https://www.weka.io/blog/
+- type: Support
+  url: https://support.weka.io/s
+- type: GitHubOrganization
+  url: https://github.com/weka
+- type: SignUp
+  url: https://get.weka.io/
+- type: TermsOfService
+  url: https://www.weka.io/company/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.weka.io/company/privacy-policy/
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1

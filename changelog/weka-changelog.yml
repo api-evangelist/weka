@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.weka.io/readme/documentation-revision-history.md
+api: '@weka-api'
+scheme: semantic-build (major.minor.build, e.g. 5.1.22)
+current_version: '5.1'
+product: NeuralMesh by WEKA
+notes: >-
+  WEKA publishes a dated documentation revision history keyed by product build.
+  Recent window captured below; the live page is the source of truth.
+entries:
+- version: 5.1.22
+  breaking: false
+  highlights:
+  - 'CoreWeave SUNK: new topic to configure Kubernetes and WEKA for CoreWeave SUNK.'
+  - 'Networking: added NVIDIA Mellanox CX-8 as a supported network adapter for backends and clients.'
+- version: 5.1.21
+  breaking: false
+  highlights:
+  - 'Multi-tenancy: documented the default internal NAT subnet (198.18.0.0/16) for network spaces.'
+  - 'Per-tenant S3 settings: dedicated per-tenant S3 section (default filesystem fallback, anonymous UID/GID), previously cluster-level only.'
+  - 'S3 user management: GUI support to generate/display S3 access keys on user creation and reset S3 credentials.'
+  - 'Container state and status fields: new topic clarifying state/status in CLI and REST API output.'
+- version: 5.1.20
+  breaking: false
+  highlights:
+  - 'WEKA native multi-tenancy: new topic replacing the Organizations topics (independent LDAP, KMS, QoS per tenant).'
+  - 'Data catalog: new topic to manage, index, and query filesystem metadata at scale.'
+  - 'NeuralMesh Observe: new SaaS observability interface for cluster health and performance.'

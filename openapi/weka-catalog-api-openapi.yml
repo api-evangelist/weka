@@ -1,0 +1,942 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Catalog API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Catalog
+paths:
+  /catalog/query:
+    post:
+      tags:
+      - Catalog
+      summary: Run catalog query with nested filters
+      operationId: postCatalogQuery
+      description: Execute a catalog query over the catalog view with nested AND/OR criteria.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fs_uuid:
+                  type: string
+                point_in_time:
+                  type: string
+                  description: Snapshot access point (point-in-time)
+                select_fields:
+                  type: array
+                  items:
+                    type: string
+                page_size:
+                  type: integer
+                  description: Number of rows per page (max 8000)
+                resume_cookie:
+                  type: string
+                  description: Opaque cookie returned by previous /catalog/query call to fetch the next page
+                return_count_only:
+                  type: boolean
+                sort:
+                  type: object
+                  properties:
+                    field:
+                      type: string
+                    order:
+                      type: string
+                      enum:
+                      - ASC
+                      - DESC
+                criteria:
+                  type: object
+                  properties:
+                    operator:
+                      type: string
+                      enum:
+                      - AND
+                      - OR
+                    conditions:
+                      type: array
+                      items:
+                        type: object
+              required:
+              - fs_uuid
+              - select_fields
+            example:
+              fs_uuid: 326933be-23fe-b497-a50f-58774d6cbe4b
+              point_in_time: '@GMT-2025.09.20-12.00.00'
+              select_fields:
+              - inode
+              - filepath
+              - filename
+              - size
+              - uid
+              - gid
+              page_size: 1000
+              resume_cookie: eyJzb3J0RmllbGQiOiJmaWxlbmFtZSIsInNvcnRPcmRlciI6IkRFU0MiLCJsYXN0U29ydCI6Im15ZmlsZS50eHQiLCJsYXN0SW5vZGUiOjEyMzQ1Nn0
+              sort:
+                field: filename
+                order: DESC
+              criteria:
+                operator: OR
+                conditions:
+                - operator: AND
+                  conditions:
+                  - field: filepath
+                    operation: LIKE
+                    value: /data/prod/docs/%
+                  - field: modify_time
+                    operation: BEFORE
+                    value: '2025-01-01T00:00:00Z'
+                - operator: AND
+                  conditions:
+                  - field: filepath
+                    operation: LIKE
+                    value: /data/logs/%
+                  - field: file_extension
+                    operation: EQUALS
+                    value: .log
+      responses:
+        '200':
+          description: Query result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      type: object
+                  page_size:
+                    type: integer
+                  next_cookie:
+                    type: string
+                    nullable: true
+                  total_records:
+                    type: integer
+                    description: Total number of records matching the query criteria (for pagination UI)
+        '400':
+          description: Validation error
+        '401':
+          $ref: '#/components/responses/401'
+        '503':
+          description: Catalog service unavailable or not configured
+  /catalog/query/diff:
+    post:
+      tags:
+      - Catalog
+      summary: Compare two point-in-time snapshots and return differences
+      operationId: postCatalogQueryDiff
+      description: 'Compare two point-in-time snapshots and return the differences.
+
+        This API shows what changed between two snapshots using FsOperationType values:
+
+        - FILE_CREATE, DIR_CREATE, SYMLINK_CREATE: New entries in the newer snapshot
+
+        - FILE_DELETE, DIR_DELETE, SYMLINK_DELETE: Entries removed in the newer snapshot
+
+        - FILE_MODIFY, DIR_MODIFY, SYMLINK_MODIFY: Entries with changed attributes
+
+
+        When `show_changed_fields=true`, MODIFY records include a `changed_fields` object
+
+        showing old/new values for ALL modified fields (not just select_fields).
+
+        '
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fs_uuid:
+                  type: string
+                  description: Filesystem UUID
+                old_point_in_time:
+                  type: string
+                  description: Older/baseline snapshot access point (required)
+                new_point_in_time:
+                  type: string
+                  description: Newer snapshot access point (optional, null = latest)
+                select_fields:
+                  type: array
+                  items:
+                    type: string
+                  description: 'Additional fields to return beyond defaults (inode, parent_inode, change_type, filename, filepath).
+
+                    Use ["all"] to return all available fields.
+
+                    '
+                change_types:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - FILE_CREATE
+                    - FILE_DELETE
+                    - FILE_MODIFY
+                    - DIR_CREATE
+                    - DIR_DELETE
+                    - DIR_MODIFY
+                    - SYMLINK_CREATE
+                    - SYMLINK_DELETE
+                    - SYMLINK_MODIFY
+                  description: Filter by change type (default all types)
+                filepath:
+                  type: string
+                  description: Path prefix filter (e.g., "/data/" to only show changes under /data/)
+                include_directories:
+                  type: boolean
+                  default: false
+                  description: Include directories in results (default false, files only)
+                show_changed_fields:
+                  type: boolean
+                  default: false
+                  description: 'For MODIFY records, include a changed_fields object showing old/new values.
+
+                    When true, ALL modifiable fields are compared (not just select_fields).
+
+                    '
+                page_size:
+                  type: integer
+                  minimum: 1
+                  maximum: 8000
+                  default: 1000
+                  description: Number of results per page
+                resume_cookie:
+                  type: string
+                  description: Pagination token from previous response
+              required:
+              - fs_uuid
+              - old_point_in_time
+            example:
+              fs_uuid: 326933be-23fe-b497-a50f-58774d6cbe4b
+              old_point_in_time: '@GMT-2025.01.01-00.00.00'
+              new_point_in_time: '@GMT-2025.02.01-00.00.00'
+              select_fields:
+              - size
+              - modify_time
+              change_types:
+              - FILE_CREATE
+              - FILE_MODIFY
+              filepath: /data/
+              show_changed_fields: false
+              page_size: 1000
+      responses:
+        '200':
+          description: Diff results between snapshots
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  old_snapshot:
+                    type: string
+                    description: The old_point_in_time used
+                  new_snapshot:
+                    type: string
+                    description: The new_point_in_time used
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        inode:
+                          type: string
+                          description: File inode (string to preserve precision)
+                        change_type:
+                          type: string
+                          enum:
+                          - FILE_CREATE
+                          - FILE_DELETE
+                          - FILE_MODIFY
+                          - DIR_CREATE
+                          - DIR_DELETE
+                          - DIR_MODIFY
+                          - SYMLINK_CREATE
+                          - SYMLINK_DELETE
+                          - SYMLINK_MODIFY
+                        parent_inode:
+                          type: string
+                        filepath:
+                          type: string
+                        filename:
+                          type: string
+                        changed_fields:
+                          type: object
+                          description: Only present for MODIFY when show_changed_fields=true
+                          additionalProperties:
+                            type: object
+                            properties:
+                              old:
+                                description: Previous value
+                              new:
+                                description: New value
+                  summary:
+                    type: object
+                    properties:
+                      file_create:
+                        type: integer
+                      file_delete:
+                        type: integer
+                      file_modify:
+                        type: integer
+                      dir_create:
+                        type: integer
+                      dir_delete:
+                        type: integer
+                      dir_modify:
+                        type: integer
+                      symlink_create:
+                        type: integer
+                      symlink_delete:
+                        type: integer
+                      symlink_modify:
+                        type: integer
+                  next_cookie:
+                    type: string
+                    nullable: true
+                    description: Pagination token for next page (null if no more pages)
+              example:
+                success: true
+                old_snapshot: '@GMT-2025.01.01-00.00.00'
+                new_snapshot: '@GMT-2025.02.01-00.00.00'
+                data:
+                - inode: '12345'
+                  change_type: FILE_CREATE
+                  parent_inode: '100'
+                  filepath: /data/new
+                  filename: file.txt
+                  size: 1024
+                  modify_time: '2025-02-01T10:00:00Z'
+                - inode: '67890'
+                  change_type: FILE_MODIFY
+                  parent_inode: '100'
+                  filepath: /data/existing
+                  filename: doc.txt
+                  size: 2048
+                  modify_time: '2025-02-01T12:00:00Z'
+                  changed_fields:
+                    size:
+                      old: 1024
+                      new: 2048
+                    modify_time:
+                      old: '2025-01-15T10:00:00Z'
+                      new: '2025-02-01T12:00:00Z'
+                summary:
+                  file_create: 150
+                  file_delete: 10
+                  file_modify: 25
+                  dir_create: 5
+                  dir_delete: 2
+                  dir_modify: 3
+                  symlink_create: 0
+                  symlink_delete: 0
+                  symlink_modify: 0
+                next_cookie: eyJsYXN0SW5vZGUiOiIxMjM0NTY3ODkwIn0
+        '400':
+          description: Validation error (missing required fields, invalid values)
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          description: Snapshot not found for the specified point-in-time
+        '503':
+          description: Catalog service unavailable or not configured
+        '504':
+          description: Query timed out
+  /catalog/stats/usageByUser:
+    get:
+      tags:
+      - Catalog
+      summary: Get filesystem usage statistics by user
+      operationId: getCatalogUsageByUser
+      description: Query filesystem usage statistics grouped by user
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      - in: query
+        name: point_in_time
+        schema:
+          type: string
+        description: Snapshot access point for point-in-time query
+      - in: query
+        name: uid
+        schema:
+          type: integer
+        description: Filter by user ID
+      - in: query
+        name: gid
+        schema:
+          type: integer
+        description: Filter by group ID
+      - in: query
+        name: filepath
+        schema:
+          type: string
+          default: /
+        description: Filter by directory path
+      responses:
+        '200':
+          description: Usage statistics by user
+        '401':
+          $ref: '#/components/responses/401'
+        '503':
+          description: Catalog service unavailable or not configured
+  /catalog/stats/usageByGroup:
+    get:
+      tags:
+      - Catalog
+      summary: Get filesystem usage statistics by group
+      operationId: getCatalogUsageByGroup
+      description: Query filesystem usage statistics grouped by group name
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      - in: query
+        name: point_in_time
+        schema:
+          type: string
+        description: Snapshot access point for point-in-time query
+      - in: query
+        name: filepath
+        schema:
+          type: string
+          default: /
+        description: Filter by directory path
+      responses:
+        '200':
+          description: Usage statistics by group
+        '401':
+          $ref: '#/components/responses/401'
+  /catalog/snapshots/{fs_uuid}:
+    get:
+      tags:
+      - Catalog
+      summary: Get list of snapshot metadata available for a filesystem in the catalog
+      operationId: getFilesystemSnapshots
+      description: Retrieve a list of snapshot metadata available for a filesystem in the catalog
+      parameters:
+      - in: path
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      responses:
+        '200':
+          description: List of snapshots for the filesystem
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    description: Whether the request was successful
+                  filesystem_uuid:
+                    type: string
+                    description: UUID of the filesystem
+                  filesystem_name:
+                    type: string
+                    description: Name of the filesystem
+                  latest_snapshot:
+                    type: object
+                    description: Most recent snapshot information
+                    properties:
+                      access_point:
+                        type: string
+                      snapshot_id:
+                        type: string
+                      snapshot_name:
+                        type: string
+                      sequence_number:
+                        type: integer
+                  snapshots:
+                    type: array
+                    description: List of all snapshots
+                    items:
+                      type: object
+                      properties:
+                        access_point:
+                          type: string
+                        snapshot_name:
+                          type: string
+                        snapshot_id:
+                          type: string
+                        sequence_number:
+                          type: integer
+                        completion_timestamp:
+                          type: string
+                  total_count:
+                    type: integer
+                    description: Total number of snapshots
+        '401':
+          $ref: '#/components/responses/401'
+  /catalog/stats/distributionByExtension:
+    get:
+      tags:
+      - Catalog
+      summary: Get file distribution by extension
+      operationId: getCatalogDistributionByExtension
+      description: Query file count distribution grouped by file extension
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      - in: query
+        name: point_in_time
+        schema:
+          type: string
+        description: Snapshot access point for point-in-time query
+      - in: query
+        name: filepath
+        schema:
+          type: string
+          default: /
+        description: Filter by directory path
+      responses:
+        '200':
+          description: File distribution by extension
+        '401':
+          $ref: '#/components/responses/401'
+  /catalog/stats/filesBySize:
+    get:
+      tags:
+      - Catalog
+      summary: Get files by size buckets
+      operationId: getCatalogFilesBySize
+      description: Query file distribution grouped by size ranges (0-1KB, 1KB-10KB, 10KB-100KB, 100KB-1MB, 1MB-10MB, 10MB-100MB, 100MB-1GB, 1GB-10GB, 10GB-100GB, 100GB-1TB, 1TB-10TB, 10TB+)
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      - in: query
+        name: point_in_time
+        schema:
+          type: string
+        description: Snapshot access point for point-in-time query
+      - in: query
+        name: filepath
+        schema:
+          type: string
+          default: /
+        description: Filter by directory path
+      responses:
+        '200':
+          description: File distribution by size buckets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        size_bucket:
+                          type: string
+                          example: 1KB-10KB
+                        file_count:
+                          type: integer
+                          example: 8234
+                        total_size_bytes:
+                          type: integer
+                          example: 41234567
+                        total_size_formatted:
+                          type: string
+                          example: 39.32 MB
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          description: Internal server error
+  /catalog/stats/capacityByFileAge:
+    get:
+      tags:
+      - Catalog
+      summary: Get capacity by file age
+      operationId: getCatalogCapacityByFileAge
+      description: Query total file capacity grouped by file age based on modification time (< 1 week, 1 week - 1 month, 1-3 months, 3-6 months, 6-12 months, 1-2 years, 2-5 years, 5+ years)
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      - in: query
+        name: point_in_time
+        schema:
+          type: string
+        description: Snapshot access point for point-in-time query
+      - in: query
+        name: filepath
+        schema:
+          type: string
+          default: /
+        description: Filter by directory path
+      responses:
+        '200':
+          description: File capacity by age buckets
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        age_bucket:
+                          type: string
+                          example: 1-3 months
+                        file_count:
+                          type: integer
+                          example: 15234
+                        total_size_bytes:
+                          type: integer
+                          example: 512345678
+                        total_size_formatted:
+                          type: string
+                          example: 488.56 MB
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          description: Internal server error
+  /catalog/stats/dashboard:
+    get:
+      tags:
+      - Catalog
+      summary: Get dashboard statistics
+      operationId: getCatalogDashboard
+      description: Get combined statistics including quick stats, top users, and file types
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      - in: query
+        name: point_in_time
+        schema:
+          type: string
+        description: Snapshot access point for point-in-time query
+      - in: query
+        name: filepath
+        schema:
+          type: string
+          default: /
+        description: Filter by directory path
+      responses:
+        '200':
+          description: Dashboard statistics
+        '401':
+          $ref: '#/components/responses/401'
+  /catalog/stats/directoryTree:
+    get:
+      tags:
+      - Catalog
+      summary: Get hierarchical directory tree with size statistics
+      operationId: getCatalogDirectoryTree
+      description: Retrieve directory tree showing multiple levels with direct and recursive size aggregations. All sizes returned in bytes.
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+      - in: query
+        name: path
+        schema:
+          type: string
+          default: /
+        description: Starting directory path
+      - in: query
+        name: levels
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 5
+          default: 2
+        description: Number of directory levels to return (1-5)
+      - in: query
+        name: point_in_time
+        schema:
+          type: string
+        description: Snapshot access point for point-in-time query
+      - in: query
+        name: min_size
+        schema:
+          type: integer
+        description: Minimum recursive size in bytes to include directories (filter small directories)
+      - in: query
+        name: top_n_levels
+        schema:
+          type: string
+        description: Comma-separated top N values for each relative level (e.g., "10,5,3"). Each value 1-10. Aggregates rest as 'OTHERS' (optional)
+        example: 10,5,3
+      responses:
+        '200':
+          description: Hierarchical directory tree with size statistics (all sizes in bytes)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  path:
+                    type: string
+                  levels:
+                    type: integer
+                  tree:
+                    type: object
+                    properties:
+                      path:
+                        type: string
+                        description: Directory path
+                      depth:
+                        type: integer
+                        description: Directory depth from root
+                      direct_size:
+                        type: integer
+                        description: Total size of files directly in this directory (bytes)
+                      direct_file_count:
+                        type: integer
+                        description: Number of files directly in this directory
+                      recursive_size:
+                        type: integer
+                        description: Total size including all subdirectories (bytes)
+                      recursive_file_count:
+                        type: integer
+                        description: Total file count including subdirectories
+                      subdirectory_count:
+                        type: integer
+                        description: Number of immediate subdirectories
+                      recursive_directory_count:
+                        type: integer
+                        description: Total directory count including all nested subdirectories (only present in OTHERS nodes)
+                      subdirs:
+                        type: object
+                        description: Nested subdirectory objects (recursive structure)
+        '401':
+          $ref: '#/components/responses/401'
+        '503':
+          description: Catalog service unavailable or not configured
+  /catalog/filesystem/metadata:
+    get:
+      tags:
+      - Catalog
+      summary: Get filesystem capacity metadata history
+      operationId: getFilesystemMetadata
+      description: 'Query filesystem capacity metadata showing SSD and total capacity trends over time.
+
+        **Time Range Options (mutually exclusive):**
+
+        - Use `timeframe` for predefined ranges (7d, 30d, 90d, 180d, 365d, 1y)
+
+        - OR use `start_time`/`end_time` for custom date ranges
+
+        '
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+        example: 326933be-23fe-b497-a50f-58774d6cbe4b
+      - in: query
+        name: timeframe
+        schema:
+          type: string
+          enum:
+          - 7d
+          - 30d
+          - 90d
+          - 180d
+          - 365d
+          - 1y
+        description: Predefined timeframe (7d=last 7 days, 30d=last 30 days, etc.). Mutually exclusive with start_time/end_time.
+        example: 30d
+      - in: query
+        name: start_time
+        schema:
+          type: string
+          format: date-time
+        description: Start time for custom range (ISO format YYYY-MM-DDTHH:MM:SS). Mutually exclusive with timeframe.
+        example: '2024-10-01T00:00:00'
+      - in: query
+        name: end_time
+        schema:
+          type: string
+          format: date-time
+        description: End time for custom range (ISO format YYYY-MM-DDTHH:MM:SS). Mutually exclusive with timeframe.
+        example: '2024-11-10T23:59:59'
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 100
+        description: Maximum number of records to return
+      responses:
+        '200':
+          description: Filesystem capacity metadata history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        used_ssd_capacity:
+                          type: integer
+                          example: 500000000000
+                          description: Used SSD capacity in bytes
+                        used_total_capacity:
+                          type: integer
+                          example: 1000000000000
+                          description: Used total capacity in bytes (SSD + Object)
+                        ssd_capacity:
+                          type: integer
+                          example: 1000000000000
+                          description: Total SSD capacity in bytes
+                        total_capacity:
+                          type: integer
+                          example: 10000000000000
+                          description: Total capacity in bytes (SSD + Object)
+                        access_point:
+                          type: string
+                          example: '@GMT-2025.10.16-06.48.29'
+                          description: Snapshot access point
+                        timestamp:
+                          type: string
+                          format: date-time
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          description: Internal server error
+  /catalog/filesystem/metadata/point-in-time:
+    get:
+      tags:
+      - Catalog
+      summary: Get point-in-time filesystem capacity metadata
+      operationId: getPointInTimeFilesystemMetadata
+      description: 'Query filesystem capacity metadata for a specific snapshot access point or the latest metadata.
+
+
+        - If `access_point` is provided: returns metadata for that specific snapshot
+
+        - If `access_point` is not provided: returns the latest (most recent) metadata
+
+        '
+      parameters:
+      - in: query
+        name: fs_uuid
+        required: true
+        schema:
+          type: string
+        description: Filesystem UUID
+        example: 326933be-23fe-b497-a50f-58774d6cbe4b
+      - in: query
+        name: access_point
+        required: false
+        schema:
+          type: string
+        description: Snapshot access point (optional - if not provided, returns latest metadata)
+        example: '@GMT-2025.10.16-06.48.29'
+      responses:
+        '200':
+          description: Point-in-time filesystem capacity metadata
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        used_ssd_capacity:
+                          type: integer
+                          example: 500000000000
+                          description: Used SSD capacity in bytes
+                        used_total_capacity:
+                          type: integer
+                          example: 1000000000000
+                          description: Used total capacity in bytes (SSD + Object)
+                        ssd_capacity:
+                          type: integer
+                          example: 1000000000000
+                          description: Total SSD capacity in bytes
+                        total_capacity:
+                          type: integer
+                          example: 10000000000000
+                          description: Total capacity in bytes (SSD + Object)
+                        access_point:
+                          type: string
+                          example: '@GMT-2025.10.16-06.48.29'
+                          description: Snapshot access point
+        '401':
+          $ref: '#/components/responses/401'
+        '500':
+          description: Internal server error
+components:
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

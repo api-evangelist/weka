@@ -1,0 +1,360 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Drive API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Drive
+paths:
+  /drives:
+    get:
+      tags:
+      - Drive
+      summary: List all drives
+      description: Lists all SSD drives in the cluster and provides details such as size, UUID, and status.
+      operationId: getDrives
+      parameters:
+      - in: query
+        name: show_removed
+        schema:
+          type: boolean
+        description: Show drives that were removed from the cluster.
+      - in: query
+        name: container_ids
+        schema:
+          type: array
+          items:
+            type: number
+        description: Filters the list to show drives from the specified container IDs only.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/drive'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Drive
+      summary: Add a drive
+      description: Attaches an SSD drive to a specific container to expand its resources.
+      operationId: provisionDrives
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/drive'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                host_uid:
+                  type: string
+                  description: The unique identifier of the server the drive is attached to.
+                  example: uid_string
+                device_path:
+                  type: string
+                  example: /dev/nvme0n1
+                  description: The device path of the drive to add.
+                force:
+                  type: boolean
+                  description: Force formatting the drive, bypassing all safety checks.
+                  example: true
+                allow_format_non_wekafs_drives:
+                  type: boolean
+                  description: Allows the reuse of drives formatted by other WEKA versions.
+                  example: true
+              required:
+              - host_id
+              - device_path
+  /drives/{uid}:
+    get:
+      tags:
+      - Drive
+      summary: Get drive details
+      description: Returns detailed information for a specific SSD drive.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the drive.
+      operationId: getSingleDrive
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/drive'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+      - Drive
+      summary: Remove a drive
+      description: Detaches a specified SSD drive from the cluster, making it unavailable.
+      operationId: deleteDrive
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the drive.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /drives/{uid}/identify:
+    post:
+      tags:
+      - Drive
+      summary: Identify a drive
+      description: Locate a physical drive by controlling its indicator LED. This operation enables or disables the LED for a specific drive, assisting with maintenance or hardware identification.
+      operationId: identifyDrive
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Drive uid
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                'on':
+                  type: boolean
+                  description: State of indicator LED
+                  example: true
+  /drives/activate:
+    post:
+      tags:
+      - Drive
+      summary: Activate drives
+      description: Activates one or more inactive SSD drives, making them available for use.
+      operationId: activateDrives
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                drive_uids:
+                  type: array
+                  description: A list of drive UUIDs to activate. If no UUID is supplied, all inactive drives will be activated.
+                  items:
+                    type: string
+                    example: uid_string
+  /drives/deactivate:
+    post:
+      tags:
+      - Drive
+      summary: Deactivate drives
+      description: Deactivates one or more SSD drives, preventing their use while preserving the data on them.
+      operationId: deactivatesDrives
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                drive_uids:
+                  type: array
+                  description: A list of drive UUIDs to deactivate.
+                  items:
+                    type: string
+                    example: uid_string
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    drive:
+      type: object
+      properties:
+        added_time:
+          type: string
+          example: '2021-03-07T07:28:48.46952Z'
+        attachment:
+          type: string
+          example: OK
+        block_size:
+          type: number
+          example: 512
+        device_path:
+          type: string
+          example: 0000:00:1e.0
+        failure_domain:
+          type: string
+          example: FailureDomainId<1>
+        failure_domain_name:
+          type: string
+          example: DOM-005
+        firmware:
+          type: string
+          example: '0'
+        host_id:
+          type: string
+          example: HostId<5>
+        hostname:
+          type: string
+          example: s731-5
+        id:
+          type: string
+          example: DiskId<0>
+        location:
+          type: string
+          example: Slot 1
+        model:
+          type: string
+          example: Amazon EC2 NVMe Instance Storage
+        node_id:
+          type: string
+          example: NodeId<101>
+        percentage_used:
+          type: string
+          example: 0
+        removed_time:
+          type: string
+          nullable: true
+          example: '2021-03-07T09:28:48.46952Z'
+        serial_number:
+          type: string
+          nullable: true
+          example: AWS66292A9B076E48A38
+        should_be_active:
+          type: boolean
+          example: true
+        size_bytes:
+          type: number
+          example: 474998934528
+        spares_remaining:
+          type: number
+          example: 100
+        spares_threshold:
+          type: number
+          example: 0
+        status:
+          type: string
+          example: ACTIVE
+        state_change_time:
+          type: string
+          example: '2021-03-07T09:28:48.46952Z'
+        uid:
+          type: string
+          example: '137'
+        uuid:
+          type: string
+          example: 11d0c5f9-7b68-4d81-be41-2025c8368913
+        vendor:
+          type: string
+          example: AMAZON
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,262 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory LDAP API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: LDAP
+paths:
+  /ldap:
+    get:
+      tags:
+      - LDAP
+      summary: Get LDAP configuration
+      description: Returns the LDAP configuration.
+      operationId: getLdap
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      enabled:
+                        type: boolean
+                        description: Indicates if the LDAP integration is enabled.
+                        example: true
+                      group_object_class:
+                        type: string
+                        description: The object class in the LDAP schema that defines the structure of group entries.
+                        example: group
+                      ignore_start_tls_failure:
+                        type: boolean
+                        description: When enabled, the LDAP client ignores certificate validation failures during the TLS/SSL handshake.
+                        example: false
+                      group_membership_attribute:
+                        type: string
+                        description: Specifies which users are members of a particular group.
+                        example: member
+                      server_timeout_secs:
+                        type: number
+                        description: The maximum time in seconds the client waits for a response from the LDAP server before timing out.
+                        example: 10
+                      user_id_attribute:
+                        type: string
+                        description: Unique ID of user entries.
+                        example: sAMAccountName
+                      start_tls:
+                        type: boolean
+                        description: When enabled, initiates a Transport Layer Security (TLS) connection with the LDAP server for encrypted communication.
+                        example: false
+                      protocol_version:
+                        type: number
+                        description: The version of the LDAP protocol.
+                        example: 3
+                      reader_username:
+                        type: string
+                        description: The username or DN of a dedicated user account for reading data from the LDAP server.
+                        example: username@ad.com
+                      group_id_attribute:
+                        type: string
+                        description: Unique ID of group entries.
+                        example: cn
+                      base_dn:
+                        type: string
+                        description: The base distinguished name (DN) that serves as the starting point for directory tree searches.
+                        example: DC=ad,DC=company,DC=io
+                      user_object_class:
+                        type: string
+                        description: The object class in the LDAP schema that defines the structure of user entries.
+                        example: user
+                      role_groups:
+                        type: object
+                        properties:
+                          OrgAdmin:
+                            type: string
+                            example: Enterprise Admins
+                          ClusterAdmin:
+                            type: string
+                            example: Enterprise Admins
+                          ReadOnly:
+                            type: string
+                            example: ''
+                          Regular:
+                            type: string
+                            example: ''
+                          S3:
+                            type: string
+                            example: ''
+                      server_type:
+                        type: string
+                        example: LDAP
+                      user_revocation_attribute:
+                        type: string
+                        example: ''
+                      domain:
+                        type: string
+                        example: ''
+                      server_uri:
+                        type: string
+                        example: company.io
+        '401':
+          $ref: '#/components/responses/401'
+    put:
+      tags:
+      - LDAP
+      summary: Update LDAP configuration
+      description: Modifies the configuration for connecting to your LDAP server.
+      operationId: updateLdap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                  description: Enables or disables the LDAP integration.
+                  example: true
+                server_uri:
+                  type: string
+                  example: ad.company.io
+                  description: LDAP server URI ([ldap://]hostname[:port] or ldaps://hostname[:port]).
+                start_tls:
+                  type: boolean
+                  example: true
+                  description: When enabled, initiates a Transport Layer Security (TLS) connection with the LDAP server for encrypted communication. (do not use with ldaps://)
+                ignore_start_tls_failure:
+                  type: boolean
+                  example: true
+                  description: When enabled, the LDAP client ignores certificate validation failures during the TLS/SSL handshake. Use this option cautiously, as it may pose a security risk.
+                server_timeout_secs:
+                  type: number
+                  example: 30
+                  description: The maximum time in seconds the client waits for a response from the LDAP server before timing out.
+                protocol_version:
+                  type: number
+                  example: 3
+                  description: The version of the LDAP protocol.
+                base_dn:
+                  type: string
+                  example: DC=ad,DC=company,DC=io
+                  description: The base distinguished name (DN) that serves as the starting point for directory tree searches.
+                user_object_class:
+                  type: string
+                  example: person
+                  description: The object class in the LDAP schema that defines the structure of user entries.
+                user_id_attribute:
+                  type: string
+                  example: sAMAccountName
+                  description: Unique ID of user entries.
+                user_revocation_attribute:
+                  type: string
+                  example: isRevoked
+                  description: Indicates a user account's revocation status.
+                group_object_class:
+                  type: string
+                  example: groupOfNames
+                  description: Defines the structure of group entries.
+                group_membership_attribute:
+                  type: string
+                  example: member
+                  description: Specifies which users are members of a particular group.
+                group_id_attribute:
+                  type: string
+                  example: cn
+                  description: The unique ID of group entries.
+                reader_username:
+                  type: string
+                  example: user@ad.io
+                  description: Reader username.
+                reader_password:
+                  type: string
+                  example: pass.io
+                  description: Reader password.
+                role_groups:
+                  type: object
+                  properties:
+                    ClusterAdmin:
+                      type: string
+                      example: Enterprise admins
+                    OrgAdmin:
+                      type: string
+                      example: ''
+                    Regular:
+                      type: string
+                      example: WekaGroup
+                    ReadOnly:
+                      type: string
+                      example: TestGroup
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - LDAP
+      summary: Disable LDAP configuration
+      description: Deactivates the integration with your LDAP server for user authentication.
+      operationId: deleteLdap
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for WEKA REST API
+  version: 1.0.0
+extends: openapi/weka-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: weka
+    x-apievangelist-product: NeuralMesh by WEKA
+    x-apievangelist-category: data-platform-storage
+    x-apievangelist-auth: bearer-jwt
+    x-apievangelist-pagination: cursor (limit + next_token)
+    x-apievangelist-static-reference: https://api.docs.weka.io/
+- target: $.info
+  update:
+    x-apievangelist-docs:
+      getting_started: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+      authentication: https://docs.weka.io/security/obtain-authentication-tokens.md
+      cli_equivalents: https://docs.weka.io/getting-started-with-weka/weka-rest-api-and-equivalent-cli-commands.md

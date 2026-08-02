@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Default network API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Default network
+paths:
+  /defaultNet:
+    get:
+      tags:
+      - Default network
+      summary: Get default network
+      operationId: getDefaultNetwork
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      range_available:
+                        type: number
+                        example: 255
+                      range:
+                        type: string
+                        description: IP range (format - A.B.C.D-E.F.G.H or A.B.C.D-F.G.H or A.B.C.D-G.H or A.B.C.D-H).
+                        example: 1.1.1.1-1.1.1.254
+                      gateway:
+                        type: string
+                        description: Default gateway IP.
+                        example: 255.255.255.255
+                      netmask_bits:
+                        type: number
+                        description: Subnet mask bits (0..32).
+                        example: 0
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Default network
+      summary: Set default network settings
+      description: Defines the IP address range, gateway, and subnet mask for future container network assignments.
+      operationId: setDefaultNetwork
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/defaultNet'
+    put:
+      tags:
+      - Default network
+      summary: Update default network settings
+      description: Modifies existing default network settings, such as the IP range, gateway, or subnet mask.
+      operationId: updateDefaultNetwork
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/defaultNet'
+    delete:
+      tags:
+      - Default network
+      summary: Reset default network settings
+      description: Removes custom default network settings and reverts to the initial system baseline.
+      operationId: resetDefaultNetwork
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  schemas:
+    defaultNet:
+      type: object
+      properties:
+        range:
+          type: string
+          description: IP range (format - A.B.C.D-E.F.G.H or A.B.C.D-F.G.H or A.B.C.D-G.H or A.B.C.D-H)
+          example: 1.1.1.1-1.1.1.254
+        gateway:
+          type: string
+          description: Default gateway IP
+          example: 255.255.255.255
+        netmask:
+          type: number
+          description: Subnet mask bits (0..32)
+          example: 0
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

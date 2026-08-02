@@ -1,0 +1,426 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Events API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Events
+paths:
+  /events:
+    get:
+      tags:
+      - Events
+      summary: List events
+      description: Lists cluster events, with options to filter by severity, category, and time range.
+      operationId: getEvents
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/event'
+                  next_token:
+                    type: string
+                    example: 91b5d073-2e3f-febe-b731-ad43d021ae45
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: num_results
+        schema:
+          type: number
+      - in: query
+        name: start_time
+        schema:
+          type: string
+      - in: query
+        name: end_time
+        schema:
+          type: string
+      - in: query
+        name: severity
+        schema:
+          type: string
+      - in: query
+        name: type_list
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: category_list
+        schema:
+          type: array
+          items:
+            type: string
+      - in: query
+        name: sort_order
+        schema:
+          type: string
+          enum:
+          - asc
+          - dsc
+      - in: query
+        name: show_internal
+        schema:
+          type: boolean
+      - in: query
+        name: by_digested_time
+        schema:
+          type: boolean
+      - in: query
+        name: next_token
+        schema:
+          type: string
+  /events/describe:
+    get:
+      tags:
+      - Events
+      summary: List event types and descriptions
+      description: Lists all event types and provides a detailed description for each, including its meaning and potential causes.
+      operationId: getEventsDescription
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/eventDescription'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: type
+        schema:
+          type: array
+          items:
+            type: string
+        description: A list of event types to describe.
+      - in: query
+        name: category
+        schema:
+          type: array
+          items:
+            type: string
+        description: A list of event categories to describe.
+      - in: query
+        name: show_internal
+        schema:
+          type: boolean
+  /events/aggregate:
+    get:
+      tags:
+      - Events
+      summary: Aggregate events by time
+      description: Aggregates events over a specified time interval to show event frequency and trends.
+      operationId: getAggregateEvents
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                    example:
+                    - event-type: 3
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: start_time
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: end_time
+        schema:
+          type: string
+      - in: query
+        name: int
+        schema:
+          type: number
+        description: The time interval for the aggregation in seconds.
+      - in: query
+        name: show_internal
+        schema:
+          type: boolean
+  /events/local:
+    get:
+      tags:
+      - Events
+      summary: List local server events
+      description: Lists events generated only by the server that receives the API request, which is useful for targeted troubleshooting.
+      operationId: getLocalEvents
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        time:
+                          type: string
+                          example: '2021-03-21T08:23:11.4965413Z'
+                        hash:
+                          type: number
+                          example: 0
+                        entity:
+                          type: string
+                          example: Cluster
+                        severity:
+                          type: string
+                          example: INFO
+                        permission:
+                          type: string
+                          example: User
+                        category:
+                          type: string
+                          example: Node
+                        description:
+                          type: string
+                          example: User login failed
+                        eventFields:
+                          type: object
+                          properties:
+                            swRelease:
+                              type: string
+                              example: 3.11.1.8425-0d19171073bfbb7a5cca4cc3a8a4bfdf
+                            nodeId:
+                              type: number
+                              example: 0
+                            pid:
+                              type: number
+                              example: 170
+                            swVersion:
+                              type: string
+                              example: 3.11.1.8425
+                        type:
+                          type: string
+                          example: NodeStarted
+                        nid:
+                          type: string
+                          example: NodeId<0>
+                  next_token:
+                    type: string
+                    example: '2021-03-21T08:24:01.561Z'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: start_time
+        schema:
+          type: string
+      - in: query
+        name: end_time
+        schema:
+          type: string
+      - in: query
+        name: stem_mode
+        schema:
+          type: boolean
+      - in: query
+        name: show_internal
+        schema:
+          type: boolean
+      - in: query
+        name: next_token
+        schema:
+          type: string
+  /events/custom:
+    post:
+      tags:
+      - Events
+      summary: Create a custom event
+      description: Creates and records a custom event with a user-defined message for enhanced monitoring and logging.
+      operationId: triggerCustomEvent
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: A custom event message.
+              required:
+              - message
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    eventDescription:
+      type: object
+      properties:
+        dedup_parameters:
+          type: array
+          items:
+            type: string
+        parameters:
+          type: array
+          items:
+            type: string
+            example: username
+        severity:
+          type: string
+          example: INFO
+        is_dedup_event:
+          type: boolean
+          example: false
+        permission:
+          type: string
+          example: User
+        category:
+          type: string
+          example: User
+        type:
+          type: string
+          example: UserLoginFailed
+        description:
+          type: string
+          example: User login failed
+        formatString:
+          type: string
+          example: '`{username}` failed logging-in: {reason}'
+    event:
+      type: object
+      properties:
+        category:
+          type: string
+          example: Filesystem
+        cloud_digested_ts:
+          type: string
+          example: '2021-03-11T08:48:52.020804Z'
+        cloud_id:
+          type: string
+          example: 91b5d073-2e3f-febe-b731-ad43d021ae45
+        entity:
+          type: string
+          example: ClusterAdmin internal user (admin from 172.31.41.19)
+        guid:
+          type: string
+          example: 23caf2eb-246e-4743-b6f1-ebcc70672b07
+        hash:
+          type: number
+          example: 0
+        is_backend:
+          type: boolean
+          example: true
+        nid:
+          type: string
+          example: NodeId<40>
+        org_id:
+          type: string
+          example: OrgId<1>
+        params:
+          type: object
+          properties:
+            name:
+              type: string
+              example: default
+            parameters:
+              type: string
+              example: 'GroupName: default, TotalCapacity: 1829454741504, SSDCapacity: 1829454741504'
+        permission:
+          type: string
+          example: USER
+        related_node_ids:
+          type: array
+          items:
+            type: number
+            example: 40
+        s3_time:
+          type: string
+          example: '2021-03-11T08:48:52.020804Z'
+        severity:
+          type: string
+          example: INFO
+        snid:
+          type: array
+          items:
+            type: number
+            example: 0
+        sqs_message_time:
+          type: string
+          example: '2021-03-11T08:48:52.020804Z'
+        timestamp:
+          type: string
+          example: '2021-03-11T08:48:47.570754Z'
+        description:
+          type: string
+          example: User login failed
+        type:
+          type: string
+          example: FilesystemAdded
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

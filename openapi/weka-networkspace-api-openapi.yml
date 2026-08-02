@@ -1,0 +1,308 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory NetworkSpace API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: NetworkSpace
+paths:
+  /networkSpaces:
+    get:
+      tags:
+      - NetworkSpace
+      summary: List network spaces
+      description: List the cluster's network spaces. Optionally filter by tenant.
+      operationId: getNetworkSpaces
+      parameters:
+      - in: query
+        name: org
+        schema:
+          type: string
+        description: Filter by tenant name or ID.
+      responses:
+        '200':
+          description: A list of network spaces was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/networkSpace'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - NetworkSpace
+      summary: Add a network space
+      description: Add a new network space with its corresponding VLAN and IP pool for backend cluster use.
+      operationId: addNetworkSpace
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - netspace_name
+              properties:
+                netspace_name:
+                  type: string
+                  description: The name for the new network space.
+                  example: netspace-1
+                vlan:
+                  type: integer
+                  description: VLAN ID (1-4094).
+                  example: 100
+                range:
+                  type: string
+                  description: IP range for the network space.
+                  example: 10.0.0.1-10.0.0.100
+                gateway:
+                  type: string
+                  description: Default gateway IP for the network space.
+                  example: 10.0.0.254
+                netmask_bits:
+                  type: integer
+                  description: Subnet mask bits (0-32). Defaults to 0 if unspecified.
+                  example: 24
+  /networkSpaces/{name}/usage:
+    get:
+      tags:
+      - NetworkSpace
+      summary: Show network space usage
+      description: Show which containers are using IPs from a specific network space.
+      operationId: getNetworkSpaceUsage
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: The network space name or numeric ID (nid).
+      - in: query
+        name: only_clients
+        schema:
+          type: boolean
+        description: Show only client containers.
+      - in: query
+        name: only_backends
+        schema:
+          type: boolean
+        description: Show only backend containers.
+      responses:
+        '200':
+          description: Network space usage was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/networkSpaceUsage'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /networkSpaces/{name}:
+    put:
+      tags:
+      - NetworkSpace
+      summary: Update a network space
+      description: Update an existing network space's VLAN and IP pool configuration.
+      operationId: updateNetworkSpace
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: The network space name or numeric ID (nid).
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                netspace_name:
+                  type: string
+                  description: New name for the network space (rename).
+                  example: netspace-2
+                vlan:
+                  type: integer
+                  description: VLAN ID (1-4094).
+                  example: 100
+                range:
+                  type: string
+                  description: IP range for the network space.
+                  example: 10.0.0.1-10.0.0.100
+                gateway:
+                  type: string
+                  description: Default gateway IP for the network space.
+                  example: 10.0.0.254
+                netmask_bits:
+                  type: integer
+                  description: Subnet mask bits (0-32).
+                  example: 24
+                force:
+                  type: boolean
+                  description: Force update even when clients are present.
+                  example: false
+    delete:
+      tags:
+      - NetworkSpace
+      summary: Remove a network space
+      description: Remove a network space from the cluster.
+      operationId: removeNetworkSpace
+      parameters:
+      - in: path
+        name: name
+        required: true
+        schema:
+          type: string
+        description: The network space name or numeric ID (nid).
+      - in: query
+        name: force
+        schema:
+          type: boolean
+        description: Force remove even when clients are present.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    networkSpaceUsage:
+      type: object
+      properties:
+        hostId:
+          type: integer
+          example: 0
+          description: Container ID.
+        ip:
+          type: string
+          example: 10.0.0.1
+          description: Network space IP assigned to this container.
+        netspaceIpIdx:
+          type: integer
+          example: 0
+          description: Index in the IP range.
+        hostMode:
+          type: string
+          example: Backend
+          description: 'Container mode: Backend or Client.'
+    networkSpace:
+      type: object
+      properties:
+        nid:
+          type: integer
+          example: 0
+          description: Network space ID.
+        netspaceName:
+          type: string
+          example: netspace-1
+          description: Network space name.
+        rangeFront:
+          type: string
+          example: 10.0.0.1
+          description: Start of IP address range.
+        rangeEnd:
+          type: string
+          example: 10.0.0.100
+          description: End of IP address range.
+        vlan:
+          type: integer
+          example: 100
+          description: VLAN ID.
+        gateway:
+          type: string
+          example: 10.0.0.254
+          description: Default gateway IP.
+        netmaskBits:
+          type: integer
+          example: 24
+          description: Subnet mask bits.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

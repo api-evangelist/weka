@@ -1,0 +1,409 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Alerts API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Alerts
+paths:
+  /alerts:
+    get:
+      tags:
+      - Alerts
+      summary: Get all cluster alerts
+      description: Returns a list of active cluster alerts to monitor the system's health. The list includes silenced alerts and can be filtered by severity level.
+      operationId: getAlerts
+      parameters:
+      - in: query
+        name: severity
+        schema:
+          type: string
+        description: Filters alerts by a minimum severity level, including alerts of equal or higher severity.<br>The default is warning. Accepted values are debug, warning, minor, major, or critical.
+      responses:
+        '200':
+          description: A successful response returns a list of alert objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/alert'
+        '401':
+          $ref: '#/components/responses/401'
+  /alerts/types:
+    get:
+      tags:
+      - Alerts
+      summary: List all possible alert types
+      description: Returns a comprehensive list of all possible alert types that the system can generate.
+      operationId: getAlertsTypes
+      responses:
+        '200':
+          description: A successful response returns a list of all possible alert types.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - ClusterIsUpgrading
+                    - DataProtection
+                    - NodeDisconnected
+                    - NodeTieringConnectivity
+                    - DriveDown
+                    - DriveEndurancePercentageUsed
+                    - DriveEnduranceSparesRemaining
+                    - DriveNeedsPhaseout
+                    - JumboConnectivity
+                    - BucketHasNoQuorum
+                    - BucketUnresponsive
+                    - HangingIos
+                    - NotEnoughActiveDrives
+                    - PartiallyConnectedNode
+                    - NodeNetworkUnstable
+                    - NetworkInterfaceLinkDown
+                    - BondInterfaceCompromised
+                    - IPConflictDetected
+                    - ChokingDetected
+                    - PerformanceDegradedLowRAM
+                    - ApproachingClientsUnavailability
+                    - ClockSkew
+                    - AgentNotRunning
+                    - OfedVersions
+                    - DedicatedWatchdog
+                    - BackendNumaBalancingEnabled
+                    - ClientNumaBalancingEnabled
+                    - CloudHealth
+                    - AdminDefaultPassword
+                    - NoClusterLicense
+                    - LicenseError
+                    - HighDrivesCapacity
+                    - NegativeUnprovisionedCapacity
+                    - FilesystemHasTooManyFiles
+                    - MismatchedDriveFailureDomain
+                    - KMSError
+                    - AutoRemoveTimeoutTooLow
+                    - NodeBlacklisted
+                    - UdpModePerformanceWarning
+                    - ResourcesNotApplied
+                    - PartialConnectivityTrackingDisabled
+                    - TLSCertificateExpiresSoon
+                    - TLSCertificateExpired
+                    - ClusterInitializationError
+                    - TracesDisabled
+                    - ManualOverridesActive
+                    - NodeRDMANotActive
+        '401':
+          $ref: '#/components/responses/401'
+  /alerts/description:
+    get:
+      tags:
+      - Alerts
+      summary: List alert descriptions and recommended actions
+      description: Returns detailed descriptions and recommended troubleshooting actions for all possible alert types.
+      operationId: getAlertDescription
+      responses:
+        '200':
+          description: A successful response returns a list of alert types with their descriptions and recommended actions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: ExampleAlert
+                        action:
+                          type: string
+                          example: Disable this alert by running the set_example_alert_off manhole
+                        title:
+                          type: string
+                          example: Example Alert
+        '401':
+          $ref: '#/components/responses/401'
+  /alerts/muteList:
+    get:
+      tags:
+      - Alerts
+      summary: List all active alert mute rules
+      description: Returns all currently active alert mute rules. Muted alerts do not generate notifications.
+      operationId: getAlertMutes
+      responses:
+        '200':
+          description: A list of muted alert rules was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          example: ExampleAlert
+                        alert_filter_type:
+                          type: string
+                          example: FILTER_TYPE_HOSTNAME
+                        mute_time_remaining:
+                          type: number
+                          example: 604800
+                        description:
+                          type: string
+                          example: Alert is muted for the whole system
+                        mute_reason:
+                          type: string
+                          example: Maintenance window
+        '401':
+          $ref: '#/components/responses/401'
+  /alerts/{alert_type}/mute:
+    put:
+      tags:
+      - Alerts
+      summary: Mute alerts by type
+      operationId: muteAlertByType
+      description: Creates a rule to temporarily mute a specific type of alert.<br> This is useful for preventing notifications during maintenance or for known, non-critical issues.<br> The mute can be applied globally to an alert type or filtered to specific servers, containers, or processes.
+      parameters:
+      - in: path
+        name: alert_type
+        description: The type of alert to silence. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                duration:
+                  type: number
+                  default: 604800
+                  description: Specifies the mute duration in seconds.
+                process:
+                  type: array
+                  description: 'Mutes alerts for specific process IDs. This parameter applies only to process-specific alerts. If omitted or used on a non-process alert, all alerts of this type are muted. Provide a comma-separated list or repeat the parameter for multiple IDs.
+
+                    '
+                  items:
+                    type: number
+                container:
+                  type: array
+                  description: 'Mutes alerts for specific container IDs. This parameter applies only to container-specific alerts. If omitted or used on a non-container alert, all alerts of this type are muted. Provide a comma-separated list or repeat the parameter for multiple IDs.
+
+                    '
+                  items:
+                    type: number
+                hostname:
+                  type: array
+                  description: 'Mutes alerts for specific server IDs. This parameter applies only to server-specific alerts. If omitted or used on a non-server alert, all alerts of this type are muted. Provide a comma-separated list or repeat the parameter for multiple IDs.
+
+                    '
+                  items:
+                    type: string
+                comment:
+                  type: string
+                  description: Specifies a comment to provide context for the mute action.
+              required:
+              - duration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /alerts/{alert_type}/muteAdd:
+    put:
+      tags:
+      - Alerts
+      summary: Add parameters to alert mute
+      description: Expands the scope of an existing alert mute by adding specific processes, containers, or servers. This action allows for granular suppression of notifications for a particular alert type without modifying the entire entry.
+      operationId: muteAlertAdd
+      parameters:
+      - in: path
+        name: alert_type
+        description: Specifies the alert type to mute. Run `weka alerts types` to list all possible types.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                process:
+                  type: array
+                  description: Mutes alerts for specific process IDs. This parameter applies only to process-specific alerts.
+                  items:
+                    type: number
+                container:
+                  type: array
+                  description: Mutes alerts for specific container IDs. This parameter applies only to container-specific alerts.
+                  items:
+                    type: number
+                hostname:
+                  type: array
+                  description: Mutes alerts for specific hostnames. This parameter applies only to server-specific alerts.
+                  items:
+                    type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /alerts/{alert_type}/muteRemove:
+    put:
+      tags:
+      - Alerts
+      summary: Remove parameters from alert mute
+      description: Selectively restore alerts for processes, containers, or servers by removing them from an active alert mute. This action reactivates notifications for the specified identifiers while keeping other components under the same alert type silenced.
+      operationId: muteAlertRemove
+      parameters:
+      - in: path
+        name: alert_type
+        description: Specifies the alert type to mute. Run `weka alerts types` to list all possible types.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                process:
+                  type: array
+                  description: Unmutes alerts for specific process IDs. This parameter applies only to process-specific alerts.
+                  items:
+                    type: number
+                container:
+                  type: array
+                  description: Unmutes alerts for specific container IDs. This parameter applies only to container-specific alerts.
+                  items:
+                    type: number
+                hostname:
+                  type: array
+                  description: Unmutes alerts for specific hostnames. This parameter applies only to server-specific alerts.
+                  items:
+                    type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /alerts/{alert_type}/unmute:
+    put:
+      tags:
+      - Alerts
+      summary: Unmute alerts by type
+      description: Removes all active mute rules for a specific alert type, causing it to generate notifications again.
+      operationId: unmuteAlertByType
+      parameters:
+      - in: path
+        name: alert_type
+        description: The type of alert to reactivate. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    alert:
+      type: object
+      properties:
+        type:
+          type: string
+          example: AdminDefaultPassword
+        muted:
+          type: boolean
+          example: true
+        fmt:
+          type: string
+          example: The admin password is still set to factory default, it should to be changed to ensure only authorized users can access the cluster
+        action:
+          type: string
+          example: Change the admin user password to using 'weka user passwd' to ensure only authorized users can access the cluster
+        title:
+          type: string
+          example: Default Password In Use
+        params:
+          type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

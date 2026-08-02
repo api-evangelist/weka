@@ -1,0 +1,87 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+derived_from: openapi/weka-openapi-original.json
+api: '@weka-api'
+versioning:
+  scheme: uri-path
+  current: v2
+  base_path: /api/v2
+  product_line: NeuralMesh by WEKA
+  supported_product_versions:
+  - '5.1'
+  - '5.0'
+  - '4.4'
+  - '4.3'
+  end_of_support_versions:
+  - '4.1'
+  - '4.0'
+  - '3.14'
+  docs: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  spec_selector: https://api.docs.weka.io/
+deprecation:
+  policy_documented: true
+  mechanism: 'Operations flagged deprecated:true in the OpenAPI with a replacement noted in the summary.'
+  sunset_header: false
+  notes: >-
+    48 operations are marked deprecated in the 5.1 definition, largely the
+    Hosts (superseded by Containers/Processes), Organization (superseded by
+    Tenant), and legacy Nodes/Machines surfaces. Each deprecated operation's
+    summary names its replacement.
+  deprecated_operations:
+  - activateHost
+  - activateHosts
+  - addHost
+  - addOrganizationNetworkSpaces
+  - addPortToInterfaceGroupDeprecated
+  - addS3Hosts
+  - applyHost
+  - applyHosts
+  - attachObsToFs
+  - attachOrganizationSecurityPolicies
+  - clearHostFailure
+  - createHostNetwork
+  - createOrganization
+  - deactivateHost
+  - deactivateHosts
+  - deleteOrganization
+  - deletePortFromInterfaceGroupDeprecated
+  - deleteS3Hosts
+  - detachObsFromFS
+  - detachOrganizationSecurityPolicies
+  - filesystemResolveInode
+  - getAllHostsNetwork
+  - getHostNetwork
+  - getHostResources
+  - getHosts
+  - getHostsInfo
+  - getMachines
+  - getMultipleOrgExist
+  - getNode
+  - getNodes
+  - getOrganization
+  - getOrganizationNetworkSpaces
+  - getOrganizationSecurityPolicies
+  - getOrganizations
+  - getQuotaDeprecated
+  - getSingleHost
+  - getSingleMachine
+  - getTokensExpiryDeprecated
+  - removeHost
+  - removeHostNetwork
+  - removeOrganizationNetworkSpaces
+  - resetOrganizationSecurityPolicies
+  - revokeOrganizationTokens
+  - setOrganizationLimit
+  - setOrganizationSecurityPolicies
+  - updateHost
+  - updateOrganization
+  - updateOrganizationOptions
+status_page:
+  present: false
+  notes: No public status page found (status.weka.io does not resolve). Operational support via support.weka.io.
+support: https://support.weka.io/s
+changelog:
+  present: true
+  url: https://docs.weka.io/readme/documentation-revision-history.md
+  cross_ref: changelog/weka-changelog.yml

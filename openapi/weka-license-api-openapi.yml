@@ -1,0 +1,172 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory License API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: License
+paths:
+  /license:
+    get:
+      tags:
+      - License
+      summary: Get license details
+      description: Returns details about the configured cluster license, including resource usage and validity.
+      operationId: getLicense
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      mode:
+                        type: string
+                        example: Classic
+                      usage:
+                        type: object
+                        properties:
+                          drive_capacity_gb:
+                            type: number
+                            example: 2374
+                          usable_capacity_gb:
+                            type: number
+                            example: 1024
+                          obs_capacity_gb:
+                            type: number
+                            example: 0
+                      license:
+                        type: string
+                        example: license_string
+                      limits:
+                        type: object
+                        properties:
+                          drive_capacity_gb:
+                            type: number
+                            example: 2374
+                          usable_capacity_gb:
+                            type: number
+                            example: 18446744073709552000
+                          obs_capacity_gb:
+                            type: number
+                            example: 1000000000000000
+                          valid_from:
+                            type: string
+                            example: '2021-03-16T07:52:39Z'
+                          expires_at:
+                            type: string
+                            example: '2021-04-15T07:52:39Z'
+                      next_check:
+                        type: string
+                        example: '2021-03-16T11:52:40Z'
+                      error:
+                        type: string
+                        example: ''
+                      check_interval_secs:
+                        type: number
+                        example: 3600
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - License
+      summary: Set license
+      description: Installs a new cluster license for continued operation. The license is a text-based file generated via get.weka.io for a specific cluster.
+      operationId: setLicense
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                license:
+                  type: string
+                  description: The new license to set for the cluster.
+                  example: license_string
+                plan_id:
+                  type: string
+                  description: (deprecated) Applies to PAYG.
+                  example: plan_string
+                secret_key:
+                  type: string
+                  description: (deprecated) Applies to PAYG.
+                  example: key_string
+                url:
+                  type: string
+                  description: (deprecated) Applies to PAYG.
+                  example: https://get.weka.io
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    delete:
+      tags:
+      - License
+      summary: Remove license
+      description: Deactivates the existing license and returns the cluster to unlicensed mode.
+      operationId: resetLicense
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

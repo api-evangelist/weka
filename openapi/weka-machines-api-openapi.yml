@@ -1,0 +1,440 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Machines API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Machines
+paths:
+  /machines:
+    get:
+      deprecated: true
+      tags:
+      - Machines
+      summary: Get all machines - deprecated, use GET /servers
+      operationId: getMachines
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/machines'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: role
+        schema:
+          type: array
+          items:
+            type: string
+  /machines/{uid}:
+    get:
+      deprecated: true
+      tags:
+      - Machines
+      summary: Get single machine - deprecated, use GET /servers/{uid}
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Machine uid.
+      operationId: getSingleMachine
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/machine'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+components:
+  schemas:
+    machines:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: c4c4de54-3593-11ec-8768-3f4687e5d883
+        roles:
+          type: array
+          items:
+            type: string
+            example: BACKEND
+        name:
+          type: string
+          example: machine_hostname
+        primary_ip_address:
+          type: string
+          example: 1.2.3.4
+        primary_port:
+          type: number
+          example: '14000'
+        deployment_mode:
+          type: string
+          enum:
+          - BACKEND
+          - CLIENT
+          - CONVERGED
+          - UNKNOWN
+          example: CONVERGED
+        status:
+          type: string
+          example: DEGRADED
+        up_since:
+          type: string
+          example: '2021-10-26T07:56:41.818Z'
+        load:
+          type: number
+          example: '55'
+        nodes:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+              roles:
+                type: array
+                items:
+                  type: string
+                  example: MGMT
+              dedicated_core:
+                type: boolean
+                example: false
+        versions:
+          type: array
+          items:
+            type: string
+            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
+        ram_allocated:
+          type: number
+          example: '343597383680'
+        drives:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+    machine:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: c4c4de54-3593-11ec-8768-3f4687e5d883
+        roles:
+          type: array
+          items:
+            type: string
+            example: BACKEND
+        name:
+          type: string
+          example: machine_hostname
+        primary_ip_address:
+          type: string
+          example: 1.2.3.4
+        primary_port:
+          type: number
+          example: 14000
+        status:
+          type: string
+          example: DEGRADED
+        up_since:
+          type: string
+          example: '2021-10-26T07:56:41.818Z'
+        load:
+          type: number
+          example: 55
+        nodes:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+              id:
+                type: number
+                example: 41
+              roles:
+                type: array
+                items:
+                  type: string
+                  example: MGMT
+              container_uid:
+                type: string
+                example: f396c7b8-37b8-bcad-da62-b7346f00fa93
+              container_name:
+                type: string
+                example: default
+              executable:
+                type: string
+                example: wekanode
+              ip_addresses:
+                type: array
+                items:
+                  type: string
+                  example: 172.31.17.71
+              socket_id:
+                type: number
+                example: 0
+              core_id:
+                type: number
+                example: 0
+              dedicated_core:
+                type: boolean
+                example: false
+        versions:
+          type: array
+          items:
+            type: string
+            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
+        ram_allocated:
+          type: number
+          example: 343597383680
+        drives:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              uuid:
+                type: string
+                example: 11d0c5f9-7b68-4d81-be41-2025c8368913
+              status:
+                type: string
+                example: OK
+              should_be_active:
+                type: boolean
+                example: true
+              id:
+                type: number
+                example: 1
+              model:
+                type: string
+                example: OK
+              vendor:
+                type: string
+                example: OK
+              raw_capacity:
+                type: string
+                example: OK
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: HostId<0>
+              uid:
+                type: string
+                example: f396c7b8-37b8-bcad-da62-b7346f00fa93
+              name:
+                type: string
+                example: default
+              type:
+                type: string
+                example: weka
+              ram_allocated:
+                type: number
+                example: 1493172224
+              failure_domain_uid:
+                type: string
+                example: <some_uid>
+              failure_domain:
+                type: string
+                example: DOM-004
+              dedicated_memory:
+                type: boolean
+                example: false
+              bandwidth:
+                type: number
+                example: 6412
+              ips:
+                type: array
+                items:
+                  type: string
+                  example: 123.33.42.12
+              version:
+                type: string
+                example: 3.15.1.326
+              version_string:
+                type: string
+                example: 3.15.1.326-58a3655fb45d16d2f8802afa112cce96
+        network_devices:
+          type: array
+          items:
+            type: object
+            properties:
+              model:
+                type: string
+                example: Elastic Network Adapter (ENA)
+              vendor:
+                type: string
+                example: Amazon.com, Inc.
+              link_layer_type:
+                type: string
+                example: ETH
+              speed:
+                type: number
+                example: 1493172224
+              driver:
+                type: string
+                example: igb_uio
+              pci_address:
+                type: string
+                example: '00:08.0'
+              device_name:
+                type: string
+                example: enx00e04c68049c
+        processors:
+          type: object
+          properties:
+            socket_count:
+              type: number
+              example: '2'
+            architecture:
+              type: string
+              example: x86_64
+            model:
+              type: string
+              example: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+            vendor:
+              type: string
+              example: GenuineIntel
+        platform:
+          type: object
+          properties:
+            vendor_code:
+              type: string
+              example: hp
+            vendor:
+              type: string
+              example: Hewlett Packard
+            is_physical:
+              type: boolean
+              example: true
+            vendor_specific_info:
+              type: object
+              properties:
+                family:
+                  type: string
+                  example: server family
+                model:
+                  type: string
+                  example: server_model
+                instance_id:
+                  type: string
+                  example: aws_instance_id
+                instance_type:
+                  type: string
+                  example: aws_instance_type
+                availability_zone:
+                  type: string
+                  example: aws_availability_zone
+        services:
+          type: object
+          properties:
+            smb:
+              type: object
+              properties:
+                administrative_state:
+                  type: string
+                  example: ENABLED
+                status:
+                  type: string
+                  example: OK
+            nfs:
+              type: object
+              properties:
+                administrative_state:
+                  type: string
+                  example: ENABLED
+                status:
+                  type: string
+                  example: OK
+            s3:
+              type: object
+              properties:
+                administrative_state:
+                  type: string
+                  example: ENABLED
+                status:
+                  type: string
+                  example: OK
+        operating_system:
+          type: string
+          example: Ubuntu 20.04
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,539 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Servers API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Servers
+paths:
+  /servers:
+    get:
+      tags:
+      - Servers
+      summary: Get cluster server inventory
+      description: Returns a comprehensive list of all servers within the cluster.<br> Supports optional filtering by server role to narrow results to specific server types or functions within the cluster topology.
+      operationId: getServers
+      responses:
+        '200':
+          description: Server inventory retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/servers'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: role
+        schema:
+          type: array
+          items:
+            type: string
+        description: Filter servers by assigned role (for example, BACKEND, CLIENT, NFS, SMB, S3).<br> Multiple roles can be specified to retrieve servers matching any of the provided values.
+        example:
+        - BACKEND
+        - NFS
+  /servers/{uid}:
+    get:
+      tags:
+      - Servers
+      summary: Get individual server information
+      description: Returns detailed configuration, status, and operational information for a specific server identified by its unique identifier.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Unique identifier for the server in UUID format.
+        example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      operationId: getSingleServer
+      responses:
+        '200':
+          description: Server information retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/server'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /servers/requestedAction:
+    put:
+      tags:
+      - Servers
+      summary: Run action on multiple servers
+      description: Initiates a specified action across one or more servers in the cluster.<br> This endpoint allows administrators to perform coordinated operations such as stopping, restarting, or applying<br> resource configuration changes to containers running on the targeted servers. <br> Actions are queued and executed based on cluster policies and operational constraints.
+      responses:
+        '200':
+          description: Action request submitted successfully and queued for execution.
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - server_identifiers
+              - requested_action
+              properties:
+                server_identifiers:
+                  type: array
+                  description: Collection of server identifiers targeting the servers for action execution. Accepts hostnames, fully qualified domain names, or IP addresses. All identifiers must correspond to active servers within the cluster.
+                  items:
+                    type: string
+                  example:
+                  - server1.example.com
+                  - 192.168.1.100
+                  - compute-node-02
+                  minItems: 1
+                requested_action:
+                  type: string
+                  description: Action to execute on all containers running on the specified servers. STOP terminates container processes gracefully. RESTART performs a stop followed by start sequence. APPLY_RESOURCES updates container resource allocations without interrupting service.
+                  enum:
+                  - STOP
+                  - RESTART
+                  - APPLY_RESOURCES
+                  example: RESTART
+                timeout:
+                  type: number
+                  description: Maximum duration in seconds to wait for action completion before timing out. If not specified, the system default timeout applies. Recommended values vary by action type - longer timeouts for RESTART operations, shorter for STOP.
+                  example: 300
+                  minimum: 1
+                  maximum: 3600
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    servers:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: c4c4de54-3593-11ec-8768-3f4687e5d883
+        roles:
+          type: array
+          items:
+            type: string
+            example: BACKEND
+        name:
+          type: string
+          example: server_hostname
+        primary_ip_address:
+          type: string
+          example: 1.2.3.4
+        primary_port:
+          type: number
+          example: '14000'
+        deployment_mode:
+          type: string
+          enum:
+          - BACKEND
+          - CLIENT
+          - CONVERGED
+          - UNKNOWN
+          example: CONVERGED
+        status:
+          type: string
+          example: DEGRADED
+        up_since:
+          type: string
+          example: '2021-10-26T07:56:41.818Z'
+        up_since_time:
+          type: object
+          properties:
+            usecs:
+              type: number
+              example: 1699258299451
+        nodesCounter:
+          type: object
+          properties:
+            count:
+              type: number
+              example: 2
+            monitored:
+              type: number
+              example: 2
+        load:
+          type: number
+          example: '55'
+        processes:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+              roles:
+                type: array
+                items:
+                  type: string
+                  example: MGMT
+              dedicated_core:
+                type: boolean
+                example: false
+        versions:
+          type: array
+          items:
+            type: string
+            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
+        ram_allocated:
+          type: number
+          example: '343597383680'
+        drives:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+    server:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: c4c4de54-3593-11ec-8768-3f4687e5d883
+        roles:
+          type: array
+          items:
+            type: string
+            example: BACKEND
+        name:
+          type: string
+          example: server_hostname
+        primary_ip_address:
+          type: string
+          example: 1.2.3.4
+        primary_port:
+          type: number
+          example: 14000
+        deployment_mode:
+          type: string
+          enum:
+          - BACKEND
+          - CLIENT
+          - CONVERGED
+          - UNKNOWN
+          example: CONVERGED
+        status:
+          type: string
+          example: DEGRADED
+        up_since_time:
+          type: object
+          properties:
+            usecs:
+              type: number
+              example: -1
+        nodesCounter:
+          type: object
+          properties:
+            count:
+              type: number
+              example: 2
+            monitored:
+              type: number
+              example: 2
+        up_since:
+          type: string
+          example: '2021-10-26T07:56:41.818Z'
+        load:
+          type: number
+          example: 55
+        processes:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+              id:
+                type: number
+                example: 41
+              roles:
+                type: array
+                items:
+                  type: string
+                  example: MGMT
+              container_uid:
+                type: string
+                example: f396c7b8-37b8-bcad-da62-b7346f00fa93
+              container_name:
+                type: string
+                example: default
+              executable:
+                type: string
+                example: wekanode
+              ip_addresses:
+                type: array
+                items:
+                  type: string
+                  example: 172.31.17.71
+              socket_id:
+                type: number
+                example: 0
+              core_id:
+                type: number
+                example: 0
+              dedicated_core:
+                type: boolean
+                example: false
+        versions:
+          type: array
+          items:
+            type: string
+            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
+        ram_allocated:
+          type: number
+          example: 343597383680
+        drives:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              uuid:
+                type: string
+                example: 11d0c5f9-7b68-4d81-be41-2025c8368913
+              status:
+                type: string
+                example: OK
+              should_be_active:
+                type: boolean
+                example: true
+              id:
+                type: number
+                example: 1
+              model:
+                type: string
+                example: OK
+              vendor:
+                type: string
+                example: OK
+              raw_capacity:
+                type: string
+                example: OK
+        containers:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: HostId<0>
+              uid:
+                type: string
+                example: f396c7b8-37b8-bcad-da62-b7346f00fa93
+              name:
+                type: string
+                example: default
+              type:
+                type: string
+                example: weka
+              ram_allocated:
+                type: number
+                example: 1493172224
+              failure_domain_uid:
+                type: string
+                example: <some_uid>
+              failure_domain:
+                type: string
+                example: DOM-004
+              dedicated_memory:
+                type: boolean
+                example: false
+              bandwidth:
+                type: number
+                example: 6412
+              ips:
+                type: array
+                items:
+                  type: string
+                  example: 123.33.42.12
+              version:
+                type: string
+                example: 3.15.1.326
+              version_string:
+                type: string
+                example: 3.15.1.326-58a3655fb45d16d2f8802afa112cce96
+        network_devices:
+          type: array
+          items:
+            type: object
+            properties:
+              model:
+                type: string
+                example: Elastic Network Adapter (ENA)
+              vendor:
+                type: string
+                example: Amazon.com, Inc.
+              link_layer_type:
+                type: string
+                example: ETH
+              speed:
+                type: number
+                example: 1493172224
+              driver:
+                type: string
+                example: igb_uio
+              pci_address:
+                type: string
+                example: '00:08.0'
+              device_name:
+                type: string
+                example: enx00e04c68049c
+        processors:
+          type: object
+          properties:
+            socket_count:
+              type: number
+              example: '2'
+            architecture:
+              type: string
+              example: x86_64
+            model:
+              type: string
+              example: Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz
+            vendor:
+              type: string
+              example: GenuineIntel
+        platform:
+          type: object
+          properties:
+            vendor_code:
+              type: string
+              example: hp
+            vendor:
+              type: string
+              example: Hewlett Packard
+            is_physical:
+              type: boolean
+              example: true
+            vendor_specific_info:
+              type: object
+              properties:
+                family:
+                  type: string
+                  example: server family
+                model:
+                  type: string
+                  example: server_model
+                instance_id:
+                  type: string
+                  example: aws_instance_id
+                instance_type:
+                  type: string
+                  example: aws_instance_type
+                availability_zone:
+                  type: string
+                  example: aws_availability_zone
+        services:
+          type: object
+          properties:
+            smb:
+              type: object
+              properties:
+                administrative_state:
+                  type: string
+                  example: ENABLED
+                status:
+                  type: string
+                  example: OK
+            nfs:
+              type: object
+              properties:
+                administrative_state:
+                  type: string
+                  example: ENABLED
+                status:
+                  type: string
+                  example: OK
+            s3:
+              type: object
+              properties:
+                administrative_state:
+                  type: string
+                  example: ENABLED
+                status:
+                  type: string
+                  example: OK
+        operating_system:
+          type: string
+          example: Ubuntu 20.04
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

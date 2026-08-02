@@ -1,0 +1,789 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Organization API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Organization
+paths:
+  /organizations/multipleOrgsExist:
+    get:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Check if multiple organizations exist - deprecated, use GET /tenants/multipleTenantsExist
+      description: Checks if more than one organization is configured in the cluster. This is useful for determining if multi-tenancy is active.
+      operationId: getMultipleOrgExist
+      responses:
+        '200':
+          description: A boolean value indicating if multiple organizations exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: boolean
+                    example: true
+  /organizations:
+    get:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Get a list of all organizations - deprecated, use GET /tenants
+      description: Returns a list of all organizations configured in the cluster.
+      operationId: getOrganizations
+      responses:
+        '200':
+          description: A list of organizations was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/organization'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Create a new organization - deprecated, use POST /tenants
+      description: Creates a new organization within the cluster. An organization is a logical partition that isolates users and data for multi-tenancy.
+      operationId: createOrganization
+      responses:
+        '200':
+          description: The organization was created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - username
+              - password
+              properties:
+                name:
+                  type: string
+                  description: A unique name for the new organization.
+                  example: ORG-1
+                username:
+                  type: string
+                  description: The username for the initial administrator of the new organization.
+                  example: org1-user
+                password:
+                  type: string
+                  description: The password for the initial organization administrator.
+                  example: Org1User
+                ssd_quota:
+                  type: number
+                  description: The storage quota for the organization on the SSD tier. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 10000000000
+                total_quota:
+                  type: number
+                  description: The total storage quota for the organization, including SSD and object store capacity. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 20000000000
+                enforce_fs_authentication:
+                  type: boolean
+                  description: Enforce every filesystem created under this organization requires authentication.
+                enforce_mount_netspace_access:
+                  type: boolean
+                  description: Enforce every mount requested coming from network space belonging to this organization.
+                network_space_names:
+                  type: array
+                  items:
+                    type: string
+                  description: Network space names to assign to the new organization.
+                  example:
+                  - netspace-1
+  /organizations/{uid}:
+    get:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Get a specific organization - deprecated, use GET /tenants/{uid}
+      description: Returns the details of a specific organization, identified by its UID.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization.
+      operationId: getOrganization
+      responses:
+        '200':
+          description: The organization details were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Delete a specific organization - deprecated, use DELETE /tenants/{uid}
+      description: Removes a specific organization from the cluster. This operation is only possible if the organization does not contain any resources.
+      operationId: deleteOrganization
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization to delete.
+    put:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Rename an organization - deprecated, use PUT /tenants/{uid}
+      description: Updates the name of a specific organization.
+      operationId: updateOrganization
+      responses:
+        '200':
+          description: The organization was renamed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization to rename.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_name:
+                  type: string
+                  description: The new unique name for the organization.
+                  example: ORG-2
+  /organizations/{uid}/limits:
+    put:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Set or update organization quotas - deprecated, use PUT /tenants/{uid}/limits
+      description: Sets or updates the storage capacity quotas for a specific organization.
+      operationId: setOrganizationLimit
+      responses:
+        '200':
+          description: The organization quotas were updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ssd_quota:
+                  type: number
+                  description: The storage quota for the organization on the SSD tier. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 10000000000
+                total_quota:
+                  type: number
+                  description: The total storage quota for the organization, including SSD and object store capacity. Supports binary (KiB, MiB, GiB) and decimal (KB, MB, GB) units.
+                  example: 20000000000
+  /organizations/{uid}/options:
+    put:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Update organization options - deprecated, use PUT /tenants/{uid}/options
+      description: Updates enforcement options for a specific organization, such as filesystem authentication and mount network space access enforcement.
+      operationId: updateOrganizationOptions
+      responses:
+        '200':
+          description: The organization options were updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/organization'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enforce_fs_authentication:
+                  type: boolean
+                  description: Enforce every filesystem created under this organization requires authentication.
+                enforce_mount_netspace_access:
+                  type: boolean
+                  description: Enforce every mount requested coming from network space belonging to this organization.
+  /organizations/{uid}/networkSpaces:
+    get:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Get network spaces for an organization - deprecated, use GET /tenants/{uid}/networkSpaces
+      description: Returns a list of network spaces assigned to a specific organization.
+      operationId: getOrganizationNetworkSpaces
+      responses:
+        '200':
+          description: A list of network space names was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - netspace-1
+                    - netspace-2
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization.
+  /organizations/{uid}/networkSpaces/add:
+    post:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Add network spaces to an organization - deprecated, use POST /tenants/{uid}/networkSpaces/add
+      description: Assigns one or more network spaces to a specific organization without affecting existing assignments.
+      operationId: addOrganizationNetworkSpaces
+      responses:
+        '200':
+          description: The network spaces were successfully added.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - netspace-1
+                    - netspace-2
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network_space_names:
+                  description: An array of network space names to add. Provide names, IDs, or both.
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - netspace-1
+                network_space_ids:
+                  description: An array of network space IDs to add. Provide names, IDs, or both.
+                  type: array
+                  items:
+                    type: integer
+                  example:
+                  - 1
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization.
+  /organizations/{uid}/networkSpaces/remove:
+    post:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Remove network spaces from an organization - deprecated, use POST /tenants/{uid}/networkSpaces/remove
+      description: Removes one or more network spaces from a specific organization.
+      operationId: removeOrganizationNetworkSpaces
+      responses:
+        '200':
+          description: The network spaces were successfully removed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+                    example:
+                    - netspace-2
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                network_space_names:
+                  description: An array of network space names to remove. Provide names, IDs, or both.
+                  type: array
+                  items:
+                    type: string
+                  example:
+                  - netspace-1
+                network_space_ids:
+                  description: An array of network space IDs to remove. Provide names, IDs, or both.
+                  type: array
+                  items:
+                    type: integer
+                  example:
+                  - 1
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization.
+  /organizations/{uid}/revoke:
+    delete:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Revoke all user tokens for an organization - deprecated, use DELETE /tenants/{uid}/revoke
+      description: Immediately invalidates all active login sessions (GUI, CLI, API) for all users within a specific organization.
+      operationId: revokeOrganizationTokens
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the organization.
+  /organizations/{uid}/securityPolicy:
+    delete:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Reset security policies for an organization - deprecated, use DELETE /tenants/{uid}/securityPolicy
+      description: Removes all attached security policies from a specific organization.
+      operationId: resetOrganizationSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully removed from the organization.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the organization.
+        example: 00000000-0000-0000-0000-000000000000
+    get:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Get security policies for an organization - deprecated, use GET /tenants/{uid}/securityPolicy
+      description: Returns a list of all security policies attached to a specific organization.
+      operationId: getOrganizationSecurityPolicies
+      responses:
+        '200':
+          description: A list of attached security policies was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the organization.
+        example: 00000000-0000-0000-0000-000000000000
+    put:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Set security policies for an organization - deprecated, use PUT /tenants/{uid}/securityPolicy
+      description: Replaces all existing security policies on an organization with a new set. Any policies not included in the request will be detached.
+      operationId: setOrganizationSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully set for the organization.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: An array of security policy UIDs to apply to the organization.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the organization.
+        example: 00000000-0000-0000-0000-000000000000
+  /organizations/{uid}/securityPolicy/attach:
+    post:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Attach security policies to an organization - deprecated, use POST /tenants/{uid}/securityPolicy/attach
+      description: Attaches one or more security policies to a specific organization without affecting existing attachments.
+      operationId: attachOrganizationSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully attached.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: An array of security policy UIDs to attach to the organization.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the organization.
+        example: 00000000-0000-0000-0000-000000000000
+  /organizations/{uid}/securityPolicy/detach:
+    post:
+      deprecated: true
+      tags:
+      - Organization
+      summary: Detach security policies from an organization - deprecated, use POST /tenants/{uid}/securityPolicy/detach
+      description: Detaches one or more security policies from a specific organization.
+      operationId: detachOrganizationSecurityPolicies
+      responses:
+        '200':
+          description: The security policies were successfully detached.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/securityPolicyInfo'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                policies:
+                  description: An array of security policy UIDs to detach from the organization.
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                    example: 00000000-0000-0000-0000-000000000000
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: The unique identifier (UID) of the organization.
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+    organization:
+      type: object
+      properties:
+        total_quota:
+          type: number
+          example: 20000002048
+        id:
+          type: number
+          example: 1
+        ssd_quota:
+          type: number
+          example: 10000003072
+        ssd_allocated:
+          type: number
+          example: 0
+        name:
+          type: string
+          example: ORG-1
+        total_allocated:
+          type: number
+          example: 0
+        uid:
+          type: string
+          example: uid_string
+        security_policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/securityPolicyInfo'
+        enforce_fs_auth:
+          type: boolean
+          example: false
+          description: Enforce every filesystem created under this tenant requires authentication.
+        enforce_mount_netspace_access:
+          type: boolean
+          example: true
+          description: Enforce every mount requested coming from network space belonging to this tenant.
+        network_spaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/networkSpaceInfo'
+    networkSpaceInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: netspace-1
+        id:
+          type: string
+          example: NetspaceId<0>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,0 +1,1465 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory NFS API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: NFS
+paths:
+  /nfs/permissions:
+    get:
+      tags:
+      - NFS
+      summary: Get all NFS permissions
+      description: Returns a list of NFS permissions for client groups across all filesystems.
+      operationId: getNfsPermissions
+      responses:
+        '200':
+          description: A list of NFS permissions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/nfsPermission'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: query
+        name: fs_uid
+        description: The unique identifier (UID) of the filesystem to filter the results.
+        schema:
+          type: string
+    post:
+      tags:
+      - NFS
+      summary: Create an NFS permission
+      description: Grants a client group access to an NFS share by creating a new permission rule.
+      operationId: addNfsPermission
+      responses:
+        '200':
+          description: The permission was created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      exportId:
+                        type: integer
+                        description: The unique identifier (ID) of the export.
+                      container_restart_needed:
+                        type: boolean
+                        description: Indicates if a container restart is required to apply the permission.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - filesystem
+              - group
+              properties:
+                filesystem:
+                  type: string
+                  description: The name of the filesystem to apply the permission to.
+                  example: default
+                group:
+                  type: string
+                  description: The name of the client group to apply the permission to.
+                  example: DefaultClientGroup
+                path:
+                  type: string
+                  description: The path to the shared directory. The default is `/`.
+                  example: /
+                permission_type:
+                  type: string
+                  description: The access level to grant. `RO` for read-only or `RW` for read-write.
+                  enum:
+                  - RO
+                  - RW
+                squash_mode:
+                  type: string
+                  description: The user squashing mode to apply.
+                  enum:
+                  - none
+                  - root
+                  - all
+                anon_uid:
+                  type: number
+                  description: The anonymous user identifier (UID) for squashed users. Applies only when `squash_mode` is `root` or `all`.
+                  example: 65534
+                anon_gid:
+                  type: number
+                  example: 65534
+                  description: The anonymous group identifier (GID) for squashed users. Applies only when `squash_mode` is `root` or `all`.
+                obs_direct:
+                  type: boolean
+                  description: Enables or disables Object-Store Direct Mount for this permission.
+                  example: true
+                acl_type:
+                  type: string
+                  description: The Access Control List (ACL) enforcement type.
+                  example: posix
+                force_acl_type:
+                  type: boolean
+                  description: If true, forces a change to the ACL type for all existing permissions on the same filesystem.
+                  example: false
+                supported_versions:
+                  type: array
+                  description: A list of the supported NFS protocol versions.
+                  items:
+                    type: string
+                    enum:
+                    - V3
+                    - V4
+                  example:
+                  - V3
+                  - V4
+                priority:
+                  description: The priority for processing the permission. Permissions are evaluated in ascending order. If a client matches multiple permissions, the one with the highest priority number is used.
+                  type: number
+                  example: 10
+                enable_auth_types:
+                  type: array
+                  description: A list of the enabled authentication methods for this permission.
+                  items:
+                    type: string
+                    enum:
+                    - NONE
+                    - SYS
+                    - KRB5
+                    - KRB5i
+                    - KRB5p
+                  example:
+                  - KRB5
+  /nfs/permissions/{uid}:
+    get:
+      tags:
+      - NFS
+      summary: Get a specific NFS permission
+      description: Returns the access control rules for a specific NFS permission, identified by its unique identifier (UID).
+      operationId: getNfsPermission
+      responses:
+        '200':
+          description: The requested NFS permission.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/nfsPermission'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the permission.
+    put:
+      tags:
+      - NFS
+      summary: Update an NFS permission
+      description: Modifies an existing NFS permission to change access controls for a client group.
+      operationId: updateNfsPermission
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the permission.
+      responses:
+        '200':
+          description: The permission was updated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      container_restart_needed:
+                        type: boolean
+                        description: Indicates if a container restart is required to apply the change.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                path:
+                  type: string
+                  description: The path to the shared directory. The default is `/`.
+                  example: /
+                permission_type:
+                  type: string
+                  description: The access level to grant. `RO` for read-only or `RW` for read-write.
+                  enum:
+                  - RO
+                  - RW
+                squash_mode:
+                  type: string
+                  description: The user squashing mode to apply.
+                  enum:
+                  - none
+                  - root
+                  - all
+                anon_uid:
+                  type: number
+                  description: The anonymous user identifier (UID) for squashed users. Applies only when `squash_mode` is `root` or `all`.
+                  example: 65534
+                anon_gid:
+                  type: number
+                  example: 65534
+                  description: The anonymous group identifier (GID) for squashed users. Applies only when `squash_mode` is `root` or `all`.
+                obs_direct:
+                  type: boolean
+                  description: Enables or disables Object-Store Direct Mount for this permission.
+                  example: true
+                acl_type:
+                  type: string
+                  description: The Access Control List (ACL) enforcement type.
+                  example: posix
+                force_acl_type:
+                  type: boolean
+                  description: If true, forces a change to the ACL type for all existing permissions on the same filesystem.
+                  example: false
+                supported_versions:
+                  type: array
+                  description: A list of the supported NFS protocol versions.
+                  items:
+                    type: string
+                    enum:
+                    - V3
+                    - V4
+                  example:
+                  - V3
+                  - V4
+                priority:
+                  description: The priority for processing the permission. Permissions are evaluated in ascending order. If a client matches multiple permissions, the one with the highest priority number is used.
+                  type: number
+                  example: 10
+                enable_auth_types:
+                  type: array
+                  description: A list of the enabled authentication methods for this permission.
+                  items:
+                    type: string
+                    enum:
+                    - NONE
+                    - SYS
+                    - KRB5
+                    - KRB5i
+                    - KRB5p
+                  example:
+                  - KRB5
+    delete:
+      tags:
+      - NFS
+      summary: Remove an NFS permission
+      description: Revokes a client group's access to a filesystem by removing a specific NFS permission.
+      operationId: deleteNfsPermission
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the permission.
+      - in: query
+        name: path
+        schema:
+          type: string
+        description: The path of the shared directory. The default is `/`.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '404':
+          $ref: '#/components/responses/404'
+  /nfs/clientGroups:
+    get:
+      tags:
+      - NFS
+      summary: Get all NFS client groups
+      description: Returns a list of all client groups used for managing NFS access controls.
+      operationId: getClientGroups
+      responses:
+        '200':
+          description: A list of client groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/clientGroup'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - NFS
+      summary: Create an NFS client group
+      description: Create a new client group to manage access controls for NFS mounts.
+      operationId: createClientGroup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: A unique name for the client group.
+                  example: engineering_group
+              required:
+              - name
+      responses:
+        '200':
+          description: The client group was created successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      uid:
+                        type: string
+                        description: The unique identifier (UID) of the new client group.
+                        example: '340'
+                      rules:
+                        type: array
+                        items:
+                          type: object
+                        example: []
+                      id:
+                        type: string
+                        example: NfsClientGroupId<1>
+                      name:
+                        type: string
+                        example: engineering_group
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /nfs/clientGroups/{uid}:
+    get:
+      tags:
+      - NFS
+      summary: Get a specific NFS client group
+      description: Returns the details of a specific NFS client group.
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier (UID) of the client group.
+      operationId: getClientGroup
+      responses:
+        '200':
+          description: The requested client group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/clientGroup'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    delete:
+      tags:
+      - NFS
+      summary: Remove an NFS client group
+      description: Removes an existing NFS client group.
+      operationId: deleteClientGroup
+      parameters:
+      - in: path
+        name: uid
+        schema:
+          type: string
+        description: The unique identifier (UID) of the client group.
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /nfs/clientGroups/{uid}/rules:
+    post:
+      tags:
+      - NFS
+      summary: Create a rule for an NFS client group
+      description: Adds a DNS or IP-based rule to a client group. Clients matching the rule are granted access.
+      operationId: addClientGroupRule
+      parameters:
+      - in: path
+        name: uid
+        schema:
+          type: string
+        description: The unique identifier (UID) of the client group.
+        required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dns:
+                  type: string
+                  description: A DNS rule. Wildcards (*, ?, []) are supported.
+                  example: '*.weka.io'
+                ip:
+                  type: string
+                  description: An IP with a netmask rule. Both standard (1.1.1.1/255.255.0.0) and CIDR (1.1.1.1/16) formats are supported.
+                  example: 10.0.0.0/8
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /nfs/clientGroups/{uid}/rules/{rule_uid}:
+    delete:
+      tags:
+      - NFS
+      summary: Remove a rule from an NFS client group
+      description: Removes a DNS or IP-based rule from an NFS client group.
+      operationId: deleteClientGroupRule
+      parameters:
+      - in: path
+        name: uid
+        schema:
+          type: string
+        description: The unique identifier (UID) of the client group.
+        required: true
+      - in: path
+        name: rule_uid
+        schema:
+          type: string
+        description: The unique identifier (UID) of the rule.
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /nfs/globalConfig:
+    put:
+      tags:
+      - NFS
+      summary: Update the global NFS configuration
+      description: Modifies cluster-wide NFS parameters, including ports, the configuration filesystem, supported versions, and ACL settings.
+      operationId: updateNfsGlobalConfig
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mountd_port:
+                  type: integer
+                  minimum: 0
+                  maximum: 65535
+                  description: The listening port for the mountd service. The default is 0, which uses the default published port.
+                  example: 20048
+                config_fs:
+                  type: string
+                  description: The filesystem used for internal NFS configurations.
+                  example: .config_fs
+                force_config_fs:
+                  type: boolean
+                  description: If true, forces a change to the configuration filesystem when file-locking is enabled.
+                acl:
+                  type: boolean
+                  description: Enables or disables ACLs for NFS.
+                  example: true
+                default_acl_type:
+                  type: string
+                  description: The default Access Control List (ACL) enforcement type.
+                  example: posix
+                extended_stats:
+                  type: boolean
+                  description: Enables or disables the collection of extended NFS statistics for each client and permission.
+                  example: true
+                lockmgr_port:
+                  type: number
+                  description: The port for the NFSv3 network lock manager. The default is 0, which uses the default published port.
+                  example: 46999
+                statmon_port:
+                  type: number
+                  description: The port for the NFSv3 network status monitor. The default is 0, which uses the default published port.
+                  example: 47000
+                notify_port:
+                  type: number
+                  description: The port for the NFSv3 status notification service. The default is 0, which uses the default published port.
+                  example: 47001
+                default_supported_versions:
+                  type: array
+                  description: A list of the default NFS protocol versions for exports.
+                  items:
+                    type: string
+                    enum:
+                    - V3
+                    - V4
+                  example:
+                  - V3
+                enable_auth_types:
+                  type: array
+                  description: A list of the enabled NFS authentication methods.
+                  items:
+                    type: string
+                    enum:
+                    - NONE
+                    - SYS
+                    - KRB5
+                    - KRB5i
+                    - KRB5p
+                  example:
+                  - KRB5
+    get:
+      tags:
+      - NFS
+      summary: Get the global NFS configuration
+      description: Returns the cluster-wide NFS configuration, including ports, the configuration filesystem, and supported versions.
+      operationId: getNfsGlobalConfig
+      responses:
+        '200':
+          description: The global NFS configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      mountd_port:
+                        type: integer
+                        description: The listening port for the mountd service.
+                      config_fs:
+                        type: string
+                        description: The filesystem used for internal NFS configurations.
+                        example: .config_fs
+                      acl:
+                        type: boolean
+                        description: Indicates if ACLs are enabled for NFS.
+                        example: true
+                      default_acl_type:
+                        type: string
+                        description: The default Access Control List (ACL) enforcement type.
+                        example: posix
+                      direct_io:
+                        type: boolean
+                        description: Indicates if direct I/O for reads and writes is enabled.
+                        example: true
+                      extended_stats:
+                        type: boolean
+                        description: Indicates if the collection of extended NFS statistics is enabled.
+                        example: true
+                      locks:
+                        type: boolean
+                        description: Indicates if NFS file-locking support is enabled.
+                        example: true
+                      grace_period:
+                        type: number
+                        description: The maximum time in seconds for NFS clients to reclaim locks.
+                        example: 45
+                      lease_lifetime:
+                        type: number
+                        description: The time in seconds for NFS clients to renew a lock lease when using NFSv4.
+                        example: 30
+                      lock_recovery_period:
+                        type: number
+                        description: The maximum time in seconds for NFS servers to reclaim cluster-wide locks after a crash.
+                        example: 60
+                      lockmgr_port:
+                        type: number
+                        description: The port for the NFSv3 network lock manager.
+                        example: 46999
+                      statmon_port:
+                        type: number
+                        description: The port for the NFSv3 network status monitor.
+                        example: 47000
+                      notify_port:
+                        type: number
+                        description: The port for the NFSv3 status notification service.
+                        example: 47001
+                      default_supported_versions:
+                        type: array
+                        description: A list of the default NFS protocol versions for exports.
+                        items:
+                          type: string
+                          enum:
+                          - V3
+                          - V4
+                        example:
+                        - V3
+                      enabled_auth_types:
+                        type: array
+                        description: A list of the enabled NFS authentication methods.
+                        items:
+                          type: string
+                          enum:
+                          - NONE
+                          - SYS
+                          - KRB5
+                          - KRB5i
+                          - KRB5p
+                        example:
+                        - NONE
+                        - SYS
+                        - KRB5
+                      default_auth_types:
+                        type: array
+                        description: The default NFS authentication methods.
+                        items:
+                          type: string
+                          enum:
+                          - NONE
+                          - SYS
+                          - KRB5
+                          - KRB5i
+                          - KRB5p
+                        example:
+                        - KRB5
+                      supported_auth_types:
+                        type: array
+                        description: A list of the supported NFS authentication methods.
+                        items:
+                          type: string
+                          enum:
+                          - NONE
+                          - SYS
+                          - KRB5
+                          - KRB5i
+                          - KRB5p
+                        example:
+                        - NONE
+                        - SYS
+                        - KRB5
+                        - KRB5p
+                        - KRB5i
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /nfs/debug:
+    get:
+      tags:
+      - NFS
+      summary: Get the NFS debug level
+      description: Returns the logging verbosity level for the container processes in the NFS cluster.
+      operationId: getNFSDebugLevel
+      responses:
+        '200':
+          description: The current NFS debug level.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        host_id:
+                          type: string
+                          example: HostId<1>
+                        uid:
+                          type: string
+                          example: <host_uid>
+                        debug_level:
+                          type: string
+                          example: EVENT
+                        component:
+                          type: string
+                          example: FSAL
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - NFS
+      summary: Set the NFS debug level
+      description: Adjusts the logging verbosity for container processes in the NFS cluster to control the level of detail in logs.
+      operationId: setNFSDebugLevel
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - level
+              - host_uids
+              properties:
+                level:
+                  type: string
+                  description: The verbosity level for logging.
+                  example: EVENT
+                  enum:
+                  - EVENT
+                  - INFO
+                  - DEBUG
+                  - MID_DEBUG
+                  - FULL_DEBUG
+                host_uids:
+                  type: array
+                  description: A list of server unique identifiers (UIDs) to apply the log level to.
+                  items:
+                    type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /nfs/kerberosService:
+    put:
+      tags:
+      - NFS
+      summary: Set up the NFS-Kerberos service
+      description: Configures the NFS-Kerberos service. Integrating NFS with Kerberos enhances security by allowing mounts only from clients with valid Kerberos tickets.
+      operationId: setupNfsKerberosService
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                realm_name:
+                  type: string
+                  description: The Kerberos realm (domain) name.
+                  example: WEKA.IO
+                kdc_primary_server:
+                  type: string
+                  description: The fully qualified domain name (FQDN) of the primary Key Distribution Center (KDC) server.
+                  example: kdc-primary.weka.io
+                kdc_secondary_server:
+                  type: string
+                  description: The FQDN of the secondary KDC server.
+                  example: kdc-secondary.weka.io
+                kdc_admin_server:
+                  type: string
+                  description: The FQDN of the administrative KDC server.
+                  example: kdc-admin.weka.io
+                force:
+                  type: boolean
+                  description: If true, forces a reconfiguration of the Kerberos service.
+                  example: false
+    get:
+      tags:
+      - NFS
+      summary: Get the NFS-Kerberos service configuration
+      description: Returns the NFS-Kerberos service configuration details. Integrating NFS with Kerberos enhances security by allowing mounts only from clients with valid Kerberos tickets.
+      operationId: getNfsKerberosService
+      responses:
+        '200':
+          description: The NFS-Kerberos service configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      kdc_primary_server:
+                        type: string
+                        description: The FQDN of the primary Key Distribution Center (KDC) server.
+                      kdc_secondary_server:
+                        type: string
+                        description: The FQDN of the secondary KDC server.
+                      kdc_admin_server:
+                        type: string
+                        description: The FQDN of the administrative KDC server.
+                      realm_name:
+                        type: string
+                        description: The Kerberos realm (domain) name.
+                      service_generation_id:
+                        type: integer
+                        description: The generation ID of the service configuration.
+                      service_status:
+                        type: string
+                        description: The status of the Kerberos service.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /nfs/kerberosMitRegistration:
+    put:
+      tags:
+      - NFS
+      summary: Register NFS with MIT Kerberos
+      description: Registers NFS Kerberos service with MIT KDC. Running this endpoint with the restart option can disrupt the IO service for connected NFS clients.
+      operationId: setNfsMitKerberosRegistration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nfs_fqdn_service_name:
+                  type: string
+                  description: The fully qualified domain name (FQDN) of the NFS service.
+                  example: nfs-kerberos.weka.io
+                keytab_base64:
+                  type: string
+                  description: The base64-encoded content of the keytab file.
+                force:
+                  type: boolean
+                  description: If true, forces a reconfiguration of the service.
+                  example: false
+  /nfs/kerberosActiveDirectoryRegistration:
+    put:
+      tags:
+      - NFS
+      summary: Register NFS with Active Directory Kerberos
+      description: Registers NFS Kerberos service with Microsoft Active Directory (AD). Running this endpoint with the restart option can disrupt the IO service for connected NFS clients.
+      operationId: setNfsAdKerberosRegistration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nfs_fqdn_service_name:
+                  type: string
+                  description: The fully qualified domain name (FQDN) of the NFS service.
+                  example: nfs-kerberos.weka.io
+                realm_admin_name:
+                  type: string
+                  description: The username of the realm administrator.
+                  example: realmadmin
+                realm_admin_password:
+                  type: string
+                  description: The password of the realm administrator.
+                  example: realmpassword
+                force:
+                  type: boolean
+                  description: If true, forces a reconfiguration of the service.
+                  example: false
+                base_ou:
+                  type: string
+                  description: LDAP base OU to use when creating an account.
+                  example: OU=Weka,OU=Servers
+  /nfs/kerberosRegistration:
+    get:
+      tags:
+      - NFS
+      summary: Get the NFS-Kerberos registration configuration
+      description: Returns the NFS-Kerberos service registration details.
+      operationId: getNfsKerberosRegistration
+      responses:
+        '200':
+          description: The NFS-Kerberos registration configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      nfs_service_name:
+                        type: string
+                        description: The FQDN of the NFS Kerberos service.
+                      kdc_type:
+                        type: string
+                        description: The type of the NFS Kerberos service.
+                      registration_generation_id:
+                        type: integer
+                        description: The generation ID of the Kerberos registration.
+                      registration_status:
+                        type: string
+                        description: The status of the Kerberos registration.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /nfs/kerberosReset:
+    put:
+      tags:
+      - NFS
+      summary: Reset the Kerberos configuration for NFS
+      description: Removes the Kerberos service configuration data, allowing for a new integration to be set up.
+      operationId: resetNfsKerberosConfiguration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+                  description: If true, forces the reset of the Kerberos configuration.
+                  example: false
+  /nfs/useOnHostLdapClient:
+    put:
+      tags:
+      - NFS
+      summary: Set up host-based LDAP resolution for NFS
+      description: Enables NFS group resolution through the server's LDAP client. This supports over 16 groups by using host providers like SSSD.
+      operationId: setNfsUseOnHostLdapClient
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ldap_domain:
+                  type: string
+                  description: LDAP Server Domain.
+                  example: test.wekalab.io
+                force:
+                  type: boolean
+                  description: Re-configure LDAP service.
+                  example: false
+  /nfs/openLdapService:
+    put:
+      tags:
+      - NFS
+      summary: Set up NFS with OpenLDAP
+      description: Configures NFS to use an OpenLDAP service for user and group information, typically used with an MIT Kerberos integration.
+      operationId: setNfsOpenLdapConfiguration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ldap_server:
+                  type: string
+                  description: The name of the OpenLDAP server.
+                  example: ldap-server.weka.io
+                ldap_domain:
+                  type: string
+                  description: The domain of the OpenLDAP server.
+                  example: weka.io
+                ldap_reader_user_name:
+                  type: string
+                  description: The username of the OpenLDAP read-only user.
+                  example: CN=reader-admin,DC=weka,DC=io
+                ldap_reader_user_password:
+                  type: string
+                  description: The password of the OpenLDAP read-only user.
+                  example: ldappassword
+                ldap_base_dn:
+                  type: string
+                  description: The base Distinguished Name (DN) for the OpenLDAP directory.
+                  example: DC=weka,DC=io
+                ldap_port:
+                  type: integer
+                  description: The port number of the OpenLDAP server.
+                  example: 389
+                force:
+                  type: boolean
+                  description: If true, forces a reconfiguration of the OpenLDAP service.
+                  example: false
+  /nfs/activeDirectoryLdapService:
+    put:
+      tags:
+      - NFS
+      summary: Set up NFS with Active Directory LDAP
+      description: Configures NFS to use the LDAP service within Active Directory (AD) for user and group lookups.
+      operationId: setNfsAdLdapConfiguration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+                  description: If true, forces a reconfiguration of the Active Directory LDAP service.
+                  example: false
+  /nfs/activeDirectoryNoKrbLdapService:
+    put:
+      tags:
+      - NFS
+      summary: Set up Active Directory LDAP for ACLs (without Kerberos)
+      description: Configures NFS to use LDAP for ACLs when Kerberos authentication is not in use.
+      operationId: setNfsAdNoKrbLdapConfiguration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ldap_server:
+                  type: string
+                  description: The name of the LDAP server.
+                  example: ad-server.weka.io
+                ldap_domain:
+                  type: string
+                  description: The LDAP domain.
+                  example: weka.io
+                nfs_fqdn_service_name:
+                  type: string
+                  description: The fully qualified domain name (FQDN) of the NFS service.
+                  example: nfs-service.weka.io
+                ldap_admin_user_name:
+                  type: string
+                  description: The username of the administrator.
+                  example: realmadmin
+                ldap_admin_user_password:
+                  type: string
+                  description: The password of the administrator.
+                  example: realmpassword
+                force:
+                  type: boolean
+                  description: If true, forces a reconfiguration of the Active Directory service.
+                  example: false
+                base_ou:
+                  type: string
+                  description: LDAP base OU to use when creating an account.
+                  example: OU=Weka,OU=Servers
+  /nfs/ldapService:
+    get:
+      tags:
+      - NFS
+      summary: Get the LDAP configuration
+      description: Returns the LDAP configuration for the NFS service.
+      operationId: getNfsLdapService
+      responses:
+        '200':
+          description: The LDAP configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ldap_server_type:
+                    type: string
+                    description: The type of the LDAP server.
+                  ldap_server:
+                    type: string
+                    description: The name of the LDAP server.
+                  ldap_domain:
+                    type: string
+                    description: The domain of the LDAP server.
+                  ldap_base_dn:
+                    type: string
+                    description: The base Distinguished Name (DN) for the LDAP directory.
+                  ldap_reader_user_name:
+                    type: string
+                    description: The username of the LDAP read-only user.
+                  ldap_reader_user_password:
+                    type: string
+                    description: The password of the LDAP read-only user.
+                  ldap_port:
+                    type: integer
+                    description: The port number of the LDAP server.
+                  ldap_generation_id:
+                    type: integer
+                    description: The generation ID of the LDAP configuration.
+                  ldap_status:
+                    type: string
+                    description: The status of the LDAP service.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /nfs/ldapReset:
+    put:
+      tags:
+      - NFS
+      summary: Reset the LDAP configuration
+      description: Removes the NFS-LDAP configuration from the system.
+      operationId: resetNfsLdapConfiguration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force:
+                  type: boolean
+                  description: If true, forces the reset of the LDAP configuration.
+                  example: false
+  /nfs/ldapImport:
+    put:
+      tags:
+      - NFS
+      summary: Import an LDAP configuration
+      description: Imports an OpenLDAP configuration from a file and applies it to the NFS service.
+      operationId: importNfsLdapConfiguration
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ldap_server_type:
+                  type: string
+                  description: The type of the LDAP server.
+                  example: OpenLDAP
+                ldap_server:
+                  type: string
+                  description: The name of the LDAP server.
+                  example: ldap-server.weka.io
+                ldap_domain:
+                  type: string
+                  description: The domain of the LDAP server.
+                  example: weka.io
+                sssd_conf_base64:
+                  type: string
+                  description: The base64-encoded content of the sssd.conf file.
+                idmapd_conf_base64:
+                  type: string
+                  description: The base64-encoded content of the idmapd.conf file.
+                verify:
+                  type: boolean
+                  description: If true, verifies connectivity with the LDAP server.
+                  example: false
+                force:
+                  type: boolean
+                  description: If true, forces a reconfiguration of the LDAP service.
+                  example: false
+  /nfs/ldapExport:
+    post:
+      tags:
+      - NFS
+      summary: Export an LDAP configuration
+      description: Exports the OpenLDAP configuration for the NFS service to a file for backup or migration.
+      operationId: exportNfsLdapConfiguration
+      responses:
+        '200':
+          description: The exported LDAP configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      sssd_conf_base64:
+                        type: string
+                        description: The base64-encoded content of the sssd.conf file.
+                      idmapd_conf_base64:
+                        type: string
+                        description: The base64-encoded content of the idmapd.conf file.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ldap_server:
+                  type: string
+                  description: The name of the LDAP server.
+                  example: ldap-server.weka.io
+                ldap_domain:
+                  type: string
+                  description: The domain of the LDAP server.
+                  example: weka.io
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    clientGroup:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: '242'
+        rules:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: IP
+              uid:
+                type: string
+                example: '244'
+              rule:
+                type: string
+                example: 0.0.0.0/0.0.0.0
+              id:
+                type: string
+                example: NfsClientGroupRuleId<0>
+        id:
+          type: string
+          example: NfsClientGroupId<0>
+        name:
+          type: string
+          example: DefaultClientGroup
+    nfsPermission:
+      type: object
+      properties:
+        group_id:
+          type: string
+          example: NfsClientGroupId<0>
+        privileged_port:
+          type: boolean
+          example: false
+        supported_versions:
+          type: array
+          items:
+            type: string
+            example: V3
+        id:
+          type: string
+          example: NfsExportId<0>
+        obs_direct:
+          type: boolean
+          example: false
+        anon_uid:
+          type: string
+          example: '65534'
+        manage_gids:
+          type: boolean
+          example: false
+        custom_options:
+          type: string
+          example: ''
+        filesystem:
+          type: string
+          example: fs_1
+        uid:
+          type: string
+          example: '315'
+        group:
+          type: string
+          example: DefaultClientGroup
+        filesystem_id:
+          type: string
+          example: FSId<1>
+        permission_type:
+          type: string
+          example: RW
+        mount_options:
+          type: string
+          example: readcache,dentry_max_age_positive=1000,dentry_max_age_negative=0
+        path:
+          type: string
+          example: /1
+        squash_mode:
+          type: string
+          example: none
+        root_squashing:
+          type: boolean
+          example: false
+        anon_gid:
+          type: string
+          example: '65534'
+        enable_auth_types:
+          type: array
+          items:
+            type: string
+            example: KRB5
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

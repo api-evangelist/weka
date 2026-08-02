@@ -1,0 +1,563 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Interface group API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Interface group
+paths:
+  /interfaceGroups:
+    get:
+      tags:
+      - Interface group
+      summary: Get interface groups
+      description: Returns a list of all interface groups that manage floating IPs for NFS server resiliency.
+      operationId: getInterfaceGroups
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/interfaceGroup'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      tags:
+      - Interface group
+      summary: Create an interface group
+      description: Creates an interface group to manage floating IPs for NFS resiliency. <br> An interface group defines a collection of servers, network ports, and <br> floating IPs that work together to ensure continuous service.
+      operationId: createInterfaceGroup
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/interfaceGroup'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - type
+              properties:
+                name:
+                  type: string
+                  description: A unique name for the interface group.
+                  example: default
+                type:
+                  type: string
+                  description: The group type. Can only be `NFS`.
+                  example: nfs
+                subnet:
+                  type: string
+                  description: The subnet mask in the `255.255.0.0` format.
+                  example: 255.0.0.0
+                gateway:
+                  type: string
+                  description: The gateway IP address.
+                  example: 172.31.0.0
+  /interfaceGroups/{uid}:
+    get:
+      tags:
+      - Interface group
+      summary: Get interface group details
+      description: Returns the details of a specific interface group, including its assigned servers, ports, and floating IP ranges.
+      operationId: getInterfaceGroup
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/interfaceGroup'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the interface group.
+    delete:
+      tags:
+      - Interface group
+      summary: Delete an interface group
+      description: Removes an interface group, including its collection of servers, ports, and floating IPs.
+      operationId: deleteInterfaceGroup
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the interface group.
+    put:
+      tags:
+      - Interface group
+      summary: Update an interface group
+      description: Modifies the gateway and subnet of an existing interface group.
+      operationId: updateInterfaceGroup
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the interface group.
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/interfaceGroup'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                subnet:
+                  type: string
+                  description: The subnet mask in the `255.255.0.0` format.
+                  example: 255.0.0.0
+                gateway:
+                  type: string
+                  description: The gateway IP address.
+                  example: 172.31.0.0
+  /interfaceGroups/{uid}/ips:
+    post:
+      tags:
+      - Interface group
+      summary: Add IP range to interface group
+      description: Adds a range of floating IP addresses to an interface group.<br> These IPs can migrate between servers in the group to maintain service availability.
+      operationId: crateInterfaceGroupIp
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the interface group.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - ips
+              properties:
+                ips:
+                  type: string
+                  description: An IP range, such as `10.0.0.10-20`.
+                  example: 10.222.8.19
+  /interfaceGroups/{uid}/ports/{host_uid}:
+    post:
+      deprecated: true
+      tags:
+      - Interface group
+      summary: Add port to interface group - deprecated, use POST /interfaceGroups/{uid}/ports/{container_uid}
+      operationId: addPortToInterfaceGroupDeprecated
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Interface group uid.
+      - in: path
+        name: host_uid
+        required: true
+        schema:
+          type: string
+        description: Host uid.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - port
+              properties:
+                port:
+                  type: string
+                  description: Port's device. (e.g. eth1).
+                  example: eth0
+  /interfaceGroups/{uid}/ports/{container_uid}:
+    post:
+      tags:
+      - Interface group
+      summary: Add a port to an interface group
+      description: Assigns a network port from a specific container to an interface group,<br> making that container a potential host for the group's floating IPs.
+      operationId: addPortToInterfaceGroup
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the interface group.
+      - in: path
+        name: container_uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the container.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - port
+              properties:
+                port:
+                  type: string
+                  description: The port's device name, for example, `eth1`.
+                  example: eth0
+  /interfaceGroups/{uid}/ports/{host_uid}/{port}:
+    delete:
+      deprecated: true
+      tags:
+      - Interface group
+      summary: Delete port from interface group - deprecated, use DELETE /interfaceGroups/{uid}/ports/{container_uid}/{port}
+      operationId: deletePortFromInterfaceGroupDeprecated
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Interface group uid.
+      - in: path
+        name: host_uid
+        required: true
+        schema:
+          type: string
+        description: Host uid.
+      - in: path
+        name: port
+        required: true
+        schema:
+          type: string
+          example: eth0
+        description: Host:Port to delete from Interface Group.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /interfaceGroups/{uid}/ports/{container_uid}/{port}:
+    delete:
+      tags:
+      - Interface group
+      summary: Remove a port from an interface group
+      description: Removes a container's network port from an interface group, preventing it from hosting the group's floating IPs.
+      operationId: deletePortFromInterfaceGroup
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the interface group.
+      - in: path
+        name: container_uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the container.
+      - in: path
+        name: port
+        required: true
+        schema:
+          type: string
+          example: eth0
+        description: The port to remove from the interface group.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /interfaceGroups/{uid}/ips/{ips}:
+    delete:
+      tags:
+      - Interface group
+      summary: Remove an IP range from an interface group
+      description: Removes a floating IP address range from an interface group.
+      operationId: deleteIpRangeFromInterfaceGroup
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the interface group.
+      - in: path
+        name: ips
+        required: true
+        schema:
+          type: string
+          example: 172.31.5.5
+        description: The IP or IP range to remove.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /interfaceGroups/listAssignment:
+    get:
+      tags:
+      - Interface group
+      summary: Get floating IP assignments
+      description: Returns a list of all floating IPs and shows which container and port in the interface group currently host each IP.
+      operationId: getInterfaceGroupsListAssignment
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        uid:
+                          type: string
+                          example: 5356a13f-3f0e-8d63-04a8-ba5e5df601b0
+                        group:
+                          type: string
+                          example: DefaultInterfaceGroup
+                        ip:
+                          type: string
+                          example: 10.222.0.1
+                        host_id:
+                          type: string
+                          example: HostId<0>
+                        port:
+                          type: string
+                          example: eth0
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /interfaceGroups/port:
+    post:
+      tags:
+      - Interface group
+      summary: Add a port to an interface group
+      description: Assigns a network port from a specific server to an interface group,<br> making that server a potential host for the group's floating IPs.
+      operationId: interfaceGroupAddPort
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - uid
+              - host_uid
+              - port
+              properties:
+                uid:
+                  type: string
+                  description: The unique identifier of the interface group.
+                host_uid:
+                  type: string
+                  description: The unique identifier of the interface group.
+                port:
+                  type: string
+                  example: eth0
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    interfaceGroup:
+      type: object
+      properties:
+        subnet_mask:
+          type: string
+          example: 255.0.0.0
+        ports:
+          type: array
+          items:
+            type: object
+            properties:
+              host_uid:
+                type: string
+                example: uid_string
+              host_id:
+                type: string
+                example: HostId<0>
+              port:
+                type: string
+                example: eth0
+              status:
+                type: string
+                example: OK
+        name:
+          type: string
+          example: DefaultInterfaceGroup
+        uid:
+          type: string
+          example: uid_string
+        ips:
+          type: array
+          items:
+            type: string
+            example: 168.32.0.0
+        allow_manage_gids:
+          type: boolean
+          example: false
+        type:
+          type: string
+          example: NFS
+        gateway:
+          type: string
+          example: 172.31.0.0
+        status:
+          type: string
+          example: OK
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

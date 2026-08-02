@@ -1,0 +1,1160 @@
+openapi: 3.0.3
+info:
+  title: '@weka-api Active Directory Hosts API'
+  version: '5.1'
+  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+servers:
+- url: /api/v2
+security:
+- bearerAuth: []
+tags:
+- name: Hosts
+paths:
+  /hosts:
+    get:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Get all hosts - deprecated, use GET /containers
+      operationId: getHosts
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/host'
+        '401':
+          $ref: '#/components/responses/401'
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Add host to cluster  - deprecated, use POST /containers
+      operationId: addHost
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/host'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - hostname
+              type: object
+              properties:
+                hostname:
+                  type: string
+                  description: Management network hostname.
+                  example: hostname-6
+                ip:
+                  type: string
+                  example: 173.21.11.41
+                  description: Management IP; If empty, the hostname is resolved; If host is highly-available or mixed-networking, use IP set '<ip>+<ip>+...+<ip>'.
+                no_wait:
+                  type: boolean
+                  example: true
+  /hosts/{uid}:
+    get:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Get single host - deprecated, use GET /containers/{uid}
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+        description: Host uid.
+      operationId: getSingleHost
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/host'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+    put:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Configure host - Need to apply host after - deprecated use PUT /containers/{uid}
+      operationId: updateHost
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: Host uid.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                failure_domain_type:
+                  type: string
+                  description: A failure domain type.
+                  enum:
+                  - AUTO
+                  - USER
+                  - HA
+                failure_domain:
+                  type: string
+                  description: Set the host failure domain.
+                cores:
+                  type: number
+                  description: Dedicate host's cores to weka.
+                  example: 1
+                frontend_dedicated_cores:
+                  type: number
+                  description: Frontend dedicate cores.
+                  example: 1
+                drives_dedicated_cores:
+                  type: number
+                  description: Drives dedicate cores.
+                  example: 0
+                cores_ids_type:
+                  type: string
+                  description: A core id type.
+                  enum:
+                  - AUTO
+                  - USER
+                memory:
+                  type: number
+                  description: Dedicate a set amount of RAM to weka.
+                  example: 100
+                dedicated:
+                  type: boolean
+                  description: Set the host as dedicated to weka. For example it can be rebooted whenever needed, and configured by weka for optimal performance and stability.
+                  example: true
+                bandwidth:
+                  type: number
+                  description: Limit weka's bandwidth for the host.
+                  example: 1000
+                auto_remove_timeout:
+                  type: number
+                  description: Set how long to wait before removing this host if it disconnects from the cluster (for clients only).
+                management_ips:
+                  type: array
+                  description: Set the host's management node IPs. Setting 2 IPs will turn this hosts networking into highly-available mode.
+                  items:
+                    type: string
+                    example: 173.21.11.41
+                apply_host:
+                  type: boolean
+                  description: Apply the host after this change.
+                  example: false
+    delete:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Remove host from cluster - deprecated use DELETE /containers/{uid}
+      operationId: removeHost
+      parameters:
+      - in: path
+        name: uid
+        schema:
+          type: string
+        required: true
+        description: Host uid.
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+  /hosts/apply:
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Apply hosts - deprecated use POST /containers/apply
+      operationId: applyHosts
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - host_uids
+              properties:
+                host_uids:
+                  type: array
+                  description: Host uids to apply.
+                  items:
+                    type: string
+                    example: uid_string
+  /hosts/{uid}/apply:
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Apply host - deprecated, use /containers/{uid}/apply
+      operationId: applyHost
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: Host uid.
+        schema:
+          type: string
+  /hosts/lastFailureReason/{uid}:
+    delete:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Clear host last failure - deprecated, use DELETE /containers/lastFailureReason/{uid}
+      operationId: clearHostFailure
+      parameters:
+      - in: path
+        name: uid
+        description: Host uid.
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /hosts/{uid}/resources:
+    get:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Get host resources - deprecated, use GET /containers/{uid}/resources
+      operationId: getHostResources
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/hostResource'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        description: Host uid.
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: type
+        schema:
+          type: string
+        description: resource type can be Staging or Stable (Staging if empty).
+  /hosts/activate:
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Activate hosts - deprecated, use POST /containers/activate
+      operationId: activateHosts
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - host_uids
+              properties:
+                host_uids:
+                  type: array
+                  description: Host uids to activate.
+                  items:
+                    type: string
+  /hosts/{uid}/activate:
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Activate host - deprecated, use POST /containers/{uid}/activate
+      operationId: activateHost
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: Host uid.
+        schema:
+          type: string
+  /hosts/deactivate:
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Deactivate hosts - deprecated, use POST /containers/deactivate
+      operationId: deactivateHosts
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - host_uids
+              type: object
+              properties:
+                host_uids:
+                  type: array
+                  description: Host uids to deactivate.
+                  items:
+                    type: string
+  /hosts/{uid}/deactivate:
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Deactivate host - deprecated, use POST /containers/{uid}/deactivate
+      operationId: deactivateHost
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: Host uid.
+        schema:
+          type: string
+  /hosts/netdevs:
+    get:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Get all hosts network - deprecated, use GET /containers/netdevs
+      operationId: getAllHostsNetwork
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/netdev'
+        '401':
+          $ref: '#/components/responses/401'
+  /hosts/{uid}/netdevs:
+    get:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Get host network - deprecated, use GET /containers/{uid}/netdevs
+      operationId: getHostNetwork
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/netdev'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        description: Host uid.
+        schema:
+          type: string
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Create host network - Need to apply host after - deprecated, use POST /containers/{uid}/netdevs
+      operationId: createHostNetwork
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        description: Host uid.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                device:
+                  type: string
+                  description: Network device pci-slot/mac-address/interface-name(s).
+                  example: eth1
+                ips_type:
+                  type: string
+                  description: POOL - IPs from the default data networking IP pool would be used, USER - configured by the user.
+                  enum:
+                  - POOL
+                  - USER
+                ips:
+                  type: array
+                  description: IPs to be allocated to cores using the device. If not given - IPs may be set automatically according the interface's IPs, or taken from the default networking IPs pool (format - A.B.C.D-E.F.G.H or A.B.C.D-F.G.H or A.B.C.D-G.H or A.B.C.D-H).
+                  items:
+                    type: string
+                    example: 172.31.4.107
+                gateway:
+                  type: string
+                  example: 172.31.0.1
+                  description: Default gateway IP. In AWS this value is auto-detected, otherwise the default data networking gateway will be used.
+                netmask:
+                  type: number
+                  example: 20
+                  description: Netmask in bits number. In AWS this value is auto-detected, otherwise the default data networking netmask will be used.
+                name:
+                  type: string
+                  description: If empty, a name will be auto generated.
+                  example: netdev01
+                apply_host:
+                  type: boolean
+                  description: Apply the host after this change.
+                  example: false
+  /hosts/{uid}/netdevs/{netdev_uid}:
+    delete:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: Remove host network - Need to apply host after - deprecated, use DELETE /containers/{uid}/netdevs/{netdev_uid}
+      operationId: removeHostNetwork
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+      parameters:
+      - in: path
+        name: uid
+        description: Host uid.
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: netdev_uid
+        required: true
+        schema:
+          type: string
+        description: network device uid.
+      - in: query
+        name: apply_host
+        schema:
+          type: boolean
+        description: Apply the host after this change.
+        example: false
+  /hosts/infos:
+    post:
+      deprecated: true
+      tags:
+      - Hosts
+      summary: get hosts infos from IPs - deprecated, use POST /containers/infos
+      operationId: getHostsInfo
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      net:
+                        type: object
+                        properties:
+                          interfaces:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                mtu:
+                                  type: number
+                                  example: 65536
+                                pciSlot:
+                                  type: string
+                                  example: 0000:ff:ff.ff
+                                mac:
+                                  type: string
+                                  example: 00:00:00:00:00:00
+                                pciSlot_slaves:
+                                  type: array
+                                  items:
+                                    type: string
+                                ip4:
+                                  type: string
+                                  example: 127.0.0.1
+                                linkLayer:
+                                  type: string
+                                  example: ETH
+                                name:
+                                  type: string
+                                  example: lo
+                                ip4Netmask:
+                                  type: number
+                                  example: 8
+                                name_slaves:
+                                  type: array
+                                  items:
+                                    type: string
+                                bondType:
+                                  type: string
+                                  example: NONE
+                                ip6:
+                                  type: string
+                                  example: null
+                      disks:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            devName:
+                              type: string
+                              example: xvdw
+                            diskSizeBytes:
+                              type: number
+                              example: 20401094656
+                            isMounted:
+                              type: boolean
+                            uuid:
+                              type: string
+                              example: 00000000-0000-0000-0000-000000000000
+                            devNumber:
+                              type: string
+                              example: 202:5632
+                            isWekaPartition:
+                              type: boolean
+                            label:
+                              type: string
+                              example: null
+                            pciAddr:
+                              type: string
+                              example: null
+                            parentName:
+                              type: string
+                              example: null
+                            devPath:
+                              type: string
+                              example: /dev/xvdw
+                            sizeBytes:
+                              type: number
+                              example: 20401094656
+                            isRotational:
+                              type: boolean
+                            type:
+                              type: string
+                              example: DISK
+                            model:
+                              type: string
+                              example: null
+                      resolvedIp:
+                        type: string
+                        example: 172.31.23.127
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hostnames_ips:
+                  type: array
+                  items:
+                    type: string
+                info_types:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                    - VERSION
+                    - OSINFO
+                    - MEMORY
+                    - CORES
+                    - DISKS
+                    - ETHS
+                    - NET
+                    - IPS
+                    - AWS
+                    - OFED
+components:
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+  schemas:
+    hostResource:
+      type: object
+      properties:
+        mode:
+          type: string
+          example: BACKEND
+        memory:
+          type: number
+          example: 0
+        format:
+          type: number
+          example: 3
+        bandwidth:
+          type: number
+          example: 2000
+        drives:
+          type: array
+          items:
+            type: string
+            example: some_drive
+        failure_domain:
+          type: string
+          example: ''
+        hardware_watchdog:
+          type: boolean
+          example: false
+        wait_io_nodes_timeout:
+          type: number
+          example: 300
+        backend_endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              ip:
+                type: string
+                example: 172.31.13.97
+              port:
+                type: number
+                example: 14000
+        hostname:
+          type: string
+          example: ''
+        reserve_1g_hugepages:
+          type: boolean
+          example: true
+        net_devices:
+          type: array
+          items:
+            type: string
+            example: eth0
+        dedicate_memory:
+          type: boolean
+          example: true
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.11.41
+        ui_enabled:
+          type: boolean
+          example: true
+        join_secret:
+          type: array
+          items:
+            type: string
+            example: secret
+        nodes:
+          type: object
+          properties:
+            '0':
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+                    example: MANAGEMENT
+                core_id:
+                  type: number
+                  example: 4294967295
+                http_port:
+                  type: number
+                  example: 14000
+                dedicate_core:
+                  type: boolean
+                  example: false
+                rpc_port:
+                  type: number
+                  example: 14010
+                dedicated_mode:
+                  type: string
+                  example: FULL
+            '1':
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+                    example: FRONTEND
+                core_id:
+                  type: number
+                  example: 4294967295
+                http_port:
+                  type: number
+                  example: 14000
+                dedicate_core:
+                  type: boolean
+                  example: true
+                rpc_port:
+                  type: number
+                  example: 14011
+                dedicated_mode:
+                  type: string
+                  example: FULL
+        host_id:
+          type: number
+          example: 65535
+        auto_remove_timeout:
+          type: number
+          example: 0
+        disable_numa_balancing:
+          type: boolean
+          example: true
+        mask_interrupts:
+          type: boolean
+          example: true
+    netdev:
+      type: object
+      properties:
+        id:
+          type: string
+          example: NetDevId<3>
+        id_type:
+          type: string
+          example: INVALID
+        netmask_bits:
+          type: number
+          example: 20
+        owner_nodes:
+          type: array
+          items:
+            type: string
+            example: NodeId<1>
+        name:
+          type: string
+          example: '0000:00:04.0'
+        uid:
+          type: string
+          example: uid_str
+        hostname:
+          type: string
+          example: stewie-0
+        net_devices:
+          type: array
+          items:
+            type: object
+            properties:
+              mac_address:
+                type: string
+                example: 02:5a:d7:de:50:5c
+              mtu:
+                type: number
+                example: 0
+              is_virtual:
+                type: boolean
+                example: true
+              interface_alias:
+                type: string
+                example: 'some alias '
+              numa:
+                type: number
+                example: -1
+              aws:
+                type: object
+                properties:
+                  netmask_bits:
+                    type: number
+                    example: 20
+                  ip:
+                    type: string
+                    example: 172.31.12.149
+                  gateway:
+                    type: string
+                    example: 172.31.0.1
+              interface_name:
+                type: string
+                example: some name
+              max_vfs_num:
+                type: number
+                example: 0
+              vendor:
+                type: string
+                example: Amazon.com, Inc.
+              slave_devices:
+                type: array
+                items:
+                  type: string
+                  example: some_devices
+              pci_slot:
+                type: string
+                example: '0000:00:04.0'
+              device:
+                type: string
+                example: Elastic Network Adapter (ENA)
+              driver:
+                type: string
+                example: igb_uio
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.12.149
+        max_cores:
+          type: number
+          example: 1
+        vlan_id:
+          type: string
+          example: some_id
+        gateway:
+          type: string
+          example: 172.31.0.1
+        host_id:
+          type: string
+          example: HostId<0>
+        identifier:
+          type: string
+          example: '0000:00:04.0'
+        network_label:
+          type: string
+          example: label
+    host:
+      type: object
+      properties:
+        id:
+          type: string
+          example: HostId<0>
+        sw_release_string:
+          type: string
+          example: 4.2.1.8293-f8b6ea71df13d0395ff974e5164424a8
+        mode:
+          type: string
+          example: backend
+        failure_domain_id:
+          type: string
+          example: FailureDomainId<1>
+        container_name:
+          type: string
+          nullable: true
+          example: default
+        machine_identifier:
+          type: string
+          example: uid_string
+        bandwidth:
+          type: number
+          nullable: true
+          example: 6497
+        failure_domain:
+          type: string
+          example: DOM-000
+        added_time:
+          type: string
+          example: '2021-03-10T09:47:14.835443Z'
+        uid:
+          type: string
+          example: uid_string
+        drives_dedicated_cores:
+          type: number
+          example: 0
+        hostname:
+          type: string
+          example: exam-0
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.17.71
+        member_of_leadership:
+          type: boolean
+          example: true
+        io_nodes:
+          type: number
+          example: 1
+        cloud:
+          type: object
+          properties:
+            instance_type:
+              type: string
+              example: VM.Standard.E4.Flex
+            provider:
+              type: string
+              example: OCI
+            availability_zone:
+              type: string
+              example: eu-frankfurt-1
+            instance_id:
+              type: string
+              example: i-0286561555bf9dcc5
+        last_failure_time:
+          type: string
+          example: '2021-03-10T09:47:04.927107Z'
+        state:
+          type: string
+          example: ACTIVE
+        start_time:
+          type: string
+          example: '2021-03-10T09:47:05.563549Z'
+        aws:
+          type: object
+          properties:
+            instance_type:
+              type: string
+              example: i3.large
+            availability_zone:
+              type: string
+              example: eu-west-1a
+            instance_id:
+              type: string
+              example: i-0286561555bf9dcc5
+        sw_version:
+          type: string
+          example: 3.11.1.6928
+        os_info:
+          type: object
+          properties:
+            kernel_name:
+              type: string
+              example: Linux
+            platform:
+              type: string
+              example: x86_64
+            kernel_version:
+              type: string
+              example: '#1 SMP Mon Jul 29 17:46:05 UTC 2019'
+            os_name:
+              type: string
+              example: GNU/Linux
+            kernel_release:
+              type: string
+              example: 3.10.0-957.27.2.el7.x86_64
+            drivers:
+              type: object
+              properties:
+                ixgbe:
+                  type: string
+                  example: ''
+                ixgbevf:
+                  type: string
+                  example: ''
+                mlx5_core:
+                  type: string
+                  example: ''
+                ib_uverbs:
+                  type: string
+                  example: ''
+                uio_pci_generic:
+                  type: string
+                  example: 5f49bb7dc1b5d192fb01b442b17ddc0451313ea2
+        last_failure_code:
+          type: string
+          example: ApplyingResources
+        cores_ids:
+          type: array
+          items:
+            type: number
+            example: 1
+        memory:
+          type: number
+          example: 1493172224
+        frontend_dedicated_cores:
+          type: number
+          example: 0
+        failure_domain_type:
+          type: string
+          example: USER
+        leadership_role:
+          type: string
+          nullable: true
+          example: member
+        state_changed_time:
+          type: string
+          example: '2021-03-10T09:47:04.927107Z'
+        status:
+          type: string
+          example: UP
+        cores:
+          type: number
+          example: 1
+        host_ip:
+          type: string
+          example: 172.31.17.71
+        is_dedicated:
+          type: boolean
+          example: false
+        last_failure:
+          type: string
+          example: Applying resources on container
+        mgmt_port:
+          type: number
+          example: 14000
+        auto_remove_timeout:
+          type: number
+          nullable: true
+          example: 100
+        requested_action:
+          type: string
+          example: STOP
+        requested_action_failure:
+          type: string
+          example: Cannot start draining because there are not enough failure domains with active drives to support 1 protection.
+        requested_action_status:
+          type: string
+          example: NotEnoughDrivesForProtectionToDrain
+        requested_action_failure_time:
+          type: string
+          example: '2021-03-10T09:47:04.927107Z'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
