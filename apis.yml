@@ -1038,6 +1038,8 @@ apis:
   - type: Conformance
     url: conformance/weka-conformance.yml
 common:
+- type: Overlay
+  url: overlays/weka-openapi-overlay.yaml
 - type: AgenticAccess
   url: agentic-access/weka-agentic-access.yml
 - type: Authentication
