@@ -2,11 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/weka-openapi-original.json
-notes: >-
-  No official WEKA MCP server was found (no server in github.com/weka, none in
-  the MCP registry). This is a DERIVED candidate tool surface mapped from real
-  operationIds in the WEKA REST API OpenAPI (412 operations); a representative
-  read + core-management subset is listed. Tool names map 1:1 to operationIds.
+notes: No official WEKA MCP server was found (no server in github.com/weka, none in the MCP registry).
+  This is a DERIVED candidate tool surface mapped from real operationIds in the WEKA REST API OpenAPI
+  (412 operations); a representative read + core-management subset is listed. Tool names map 1:1 to operationIds.
 server:
   name: weka
   transport: http
@@ -48,3 +46,9 @@ tools:
 - name: whoami
   description: Get current user information.
   source_operation: openapi/weka-openapi-original.json#whoAmI
+deployment:
+  mode: none
+  verified: derived
+  tools: 12
+  checked: '2026-08-12'
+  source: catalog MCP census

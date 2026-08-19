@@ -1,0 +1,526 @@
+{
+  "item": [
+    {
+      "id": "e9a99396-05c8-4a3c-881e-b5ca38fb582e",
+      "name": "License",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb89d94f-fb2a-4755-ae57-0d2ef7d03795",
+          "name": "Get license details",
+          "request": {
+            "name": "Get license details",
+            "description": {
+              "content": "Returns details about the configured cluster license, including resource usage and validity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "license"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74418448-e2ef-4800-969b-afbacc8d3aaa",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"mode\": \"Classic\",\n    \"usage\": {\n      \"drive_capacity_gb\": 2374,\n      \"usable_capacity_gb\": 1024,\n      \"obs_capacity_gb\": 0\n    },\n    \"license\": \"license_string\",\n    \"limits\": {\n      \"drive_capacity_gb\": 2374,\n      \"usable_capacity_gb\": 18446744073709552000,\n      \"obs_capacity_gb\": 1000000000000000,\n      \"valid_from\": \"2021-03-16T07:52:39Z\",\n      \"expires_at\": \"2021-04-15T07:52:39Z\"\n    },\n    \"next_check\": \"2021-03-16T11:52:40Z\",\n    \"error\": \"\",\n    \"check_interval_secs\": 3600\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bc15a68-ad52-4542-8ece-ab9e2a8a249b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c42d4f48-2898-4ded-9bd4-6f91ebdccadb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2f738d93-7fba-4dcd-b7b0-4a7ebfe3780b",
+          "name": "Set license",
+          "request": {
+            "name": "Set license",
+            "description": {
+              "content": "Installs a new cluster license for continued operation. The license is a text-based file generated via get.weka.io for a specific cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "license"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"license\": \"<string>\",\n  \"plan_id\": \"<string>\",\n  \"secret_key\": \"<string>\",\n  \"url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1a8355b-5582-44e0-94ba-b178adfb4099",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license\": \"license_string\",\n  \"plan_id\": \"plan_string\",\n  \"secret_key\": \"key_string\",\n  \"url\": \"https://get.weka.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9a45eca-ef77-4ee6-b451-2084d5e28d48",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license\": \"license_string\",\n  \"plan_id\": \"plan_string\",\n  \"secret_key\": \"key_string\",\n  \"url\": \"https://get.weka.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed3a2d33-3ee4-4600-9fe8-5ffdb88fbb3a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"license\": \"license_string\",\n  \"plan_id\": \"plan_string\",\n  \"secret_key\": \"key_string\",\n  \"url\": \"https://get.weka.io\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d22d2f1a-66f5-4c43-b227-9b184a31b1f3",
+          "name": "Remove license",
+          "request": {
+            "name": "Remove license",
+            "description": {
+              "content": "Deactivates the existing license and returns the cluster to unlicensed mode.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "license"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a6356976-8d6e-4d31-a5ee-1cd2af5c1c7a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b00936d2-7071-4589-a439-7eb50c25d49b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "license"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "35e766e9-8b9c-46f8-8700-e529d45d297a",
+    "name": "@weka-api Active Directory License API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

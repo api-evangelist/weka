@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Stats API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/stats",
+            "params": [
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Array of categories."
+              },
+              {
+                "name": "stat",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resolution_secs",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "accumulated",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "per_process",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "process_uids",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "param",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "no_zeroes",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "show_internal",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns statistics related to the cluster's performance and resource usage."
+        },
+        {
+          "info": {
+            "name": "Get statistic descriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/stats/description"
+          },
+          "docs": "Returns detailed information about the statistics."
+        },
+        {
+          "info": {
+            "name": "Get real-time statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/stats/realtime"
+          },
+          "docs": "Returns live statistics for the cluster."
+        },
+        {
+          "info": {
+            "name": "Get statistics retention and disk usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/stats/retention",
+            "params": [
+              {
+                "name": "retention_duration",
+                "value": "",
+                "type": "query",
+                "description": "Duration (format - 1 minute 2 seconds, options - weeks, days, hours, minutes, seconds)."
+              }
+            ]
+          },
+          "docs": "Returns the retention period of statistics and the estimated disk space required for their storage."
+        },
+        {
+          "info": {
+            "name": "Set statistics retention",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/stats/retention",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the duration for which statistics are retained in storage."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

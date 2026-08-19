@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Machines API'
   version: '5.1'
@@ -69,82 +69,40 @@ paths:
         '401':
           $ref: '#/components/responses/401'
 components:
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
   schemas:
-    machines:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: c4c4de54-3593-11ec-8768-3f4687e5d883
-        roles:
-          type: array
-          items:
-            type: string
-            example: BACKEND
-        name:
-          type: string
-          example: machine_hostname
-        primary_ip_address:
-          type: string
-          example: 1.2.3.4
-        primary_port:
-          type: number
-          example: '14000'
-        deployment_mode:
-          type: string
-          enum:
-          - BACKEND
-          - CLIENT
-          - CONVERGED
-          - UNKNOWN
-          example: CONVERGED
-        status:
-          type: string
-          example: DEGRADED
-        up_since:
-          type: string
-          example: '2021-10-26T07:56:41.818Z'
-        load:
-          type: number
-          example: '55'
-        nodes:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                example: c4c4de54-3593-11ec-8768-3f4687e5d883
-              status:
-                type: string
-                example: OK
-              roles:
-                type: array
-                items:
-                  type: string
-                  example: MGMT
-              dedicated_core:
-                type: boolean
-                example: false
-        versions:
-          type: array
-          items:
-            type: string
-            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
-        ram_allocated:
-          type: number
-          example: '343597383680'
-        drives:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                example: c4c4de54-3593-11ec-8768-3f4687e5d883
-              status:
-                type: string
-                example: OK
     machine:
       type: object
       properties:
@@ -400,39 +358,81 @@ components:
         operating_system:
           type: string
           example: Ubuntu 20.04
-  responses:
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
+    machines:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: c4c4de54-3593-11ec-8768-3f4687e5d883
+        roles:
+          type: array
+          items:
+            type: string
+            example: BACKEND
+        name:
+          type: string
+          example: machine_hostname
+        primary_ip_address:
+          type: string
+          example: 1.2.3.4
+        primary_port:
+          type: number
+          example: '14000'
+        deployment_mode:
+          type: string
+          enum:
+          - BACKEND
+          - CLIENT
+          - CONVERGED
+          - UNKNOWN
+          example: CONVERGED
+        status:
+          type: string
+          example: DEGRADED
+        up_since:
+          type: string
+          example: '2021-10-26T07:56:41.818Z'
+        load:
+          type: number
+          example: '55'
+        nodes:
+          type: array
+          items:
+            type: object
             properties:
-              data:
+              uid:
                 type: string
-                example: Unauthorized
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+              roles:
+                type: array
+                items:
+                  type: string
+                  example: MGMT
+              dedicated_core:
+                type: boolean
+                example: false
+        versions:
+          type: array
+          items:
+            type: string
+            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
+        ram_allocated:
+          type: number
+          example: '343597383680'
+        drives:
+          type: array
+          items:
+            type: object
             properties:
-              message:
+              uid:
                 type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Failure domains API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Failure domains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List failure domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/failureDomains",
+            "params": [
+              {
+                "name": "show_removed",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists all failure domains in the cluster. A failure domain is a set of hardware components that can fail together from a single root cause."
+        },
+        {
+          "info": {
+            "name": "Get failure domain details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/failureDomains/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the failure domain."
+              }
+            ]
+          },
+          "docs": "Returns details for a specific failure domain, including its resources and capacity."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

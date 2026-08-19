@@ -1,0 +1,4583 @@
+{
+  "item": [
+    {
+      "id": "ab7acc2e-147f-401b-a894-53541f923e36",
+      "name": "Security",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8dfb0e2-374d-441d-bfaa-a6d4e470dc77",
+          "name": "Get token expiration configuration",
+          "request": {
+            "name": "Get token expiration configuration",
+            "description": {
+              "content": "Returns the configured default and maximum expiration times for access and refresh tokens. Token expiration ensures authentication credentials remain valid for a limited time, reducing risks such as unauthorized access and token misuse.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "defaultTokensExpiry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99af8c18-0dac-496e-945d-7659052a5c8b",
+              "name": "Token expiration configuration retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "defaultTokensExpiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"access_token_expiry\": 60,\n    \"refresh_token_expiry\": 86400,\n    \"max_access_token_expiry\": 3600,\n    \"max_refresh_token_expiry\": 8640000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f0cb2bb-460d-43f6-b6c9-fc75961188f9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "defaultTokensExpiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9173f79b-07a9-4cf0-a848-437308663e36",
+          "name": "Configure token expiration settings",
+          "request": {
+            "name": "Configure token expiration settings",
+            "description": {
+              "content": "Configures the default and maximum expiration times for access and refresh tokens to maintain a secure, policy-aligned authentication environment. Best practices recommend setting access tokens to 5 minutes and refresh tokens to 2 weeks to balance security and usability.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "defaultTokensExpiry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_token_expiry\": \"<number>\",\n  \"refresh_token_expiry\": \"<number>\",\n  \"max_access_token_expiry\": \"<number>\",\n  \"max_refresh_token_expiry\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0b6bcda-9882-4423-add8-b6c5528e6179",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "defaultTokensExpiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_token_expiry\": 60,\n  \"refresh_token_expiry\": 864000,\n  \"max_access_token_expiry\": 3600,\n  \"max_refresh_token_expiry\": 8640000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d2d4ecb-d55d-448b-8b1f-a74b137b530c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "defaultTokensExpiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_token_expiry\": 60,\n  \"refresh_token_expiry\": 864000,\n  \"max_access_token_expiry\": 3600,\n  \"max_refresh_token_expiry\": 8640000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e568ce4f-d511-4bbf-a836-90eaceeacafe",
+          "name": "Get login banner configuration",
+          "request": {
+            "name": "Get login banner configuration",
+            "description": {
+              "content": "Returns the current login banner text and enabled status. The login banner displays a customizable legal or security message on the GUI sign-in page to warn against unauthorized access and inform authorized users of their responsibilities and acceptable use policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "banner"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6df01184-f378-44ed-8cb5-e2627884d112",
+              "name": "Login banner configuration retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "banner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"text\": \"WARNING: Unauthorized access to this system is prohibited and may be prosecuted to the fullest extent of the law.\",\n    \"enabled\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c02122cd-6d77-47fc-960b-05bb3b2c4ef6",
+          "name": "Set or update the login banner",
+          "request": {
+            "name": "Set or update the login banner",
+            "description": {
+              "content": "Creates or modifies the login banner containing a security statement or legal message displayed on the sign-in page. The statement can warn potential intruders about illegal activities while advising authorized users of their obligations regarding acceptable system use.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "banner"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"login_banner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88a49cdb-78d6-40e0-bd4f-edde27c52832",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "banner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"login_banner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5dfe45b-771c-414c-a699-2925f89a1618",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "banner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"login_banner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b7ee8a00-bdb3-4f58-84ed-348e90333930",
+          "name": "Enable the login banner",
+          "request": {
+            "name": "Enable the login banner",
+            "description": {
+              "content": "Activates the login banner so it displays on the GUI sign-in page, presenting the configured security or legal message to all users attempting to access the system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "banner",
+                "enable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "79f1e7ba-42ac-450c-a84c-be319cf2413d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "banner",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af51535d-3b0d-4842-8366-471dfd340e67",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "banner",
+                    "enable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8abc11d-d27b-4d70-b5d1-6df5d15bf448",
+          "name": "Disable the login banner",
+          "request": {
+            "name": "Disable the login banner",
+            "description": {
+              "content": "Deactivates the login banner so it no longer displays on the GUI sign-in page. The banner text is preserved and can be re-enabled at any time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "banner",
+                "disable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00d138b6-bf79-4fed-8d1b-198818faf0f2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "banner",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "648023e4-f85c-451f-baee-2fac36fd7a5e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "banner",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "676573c0-7a8e-4ee4-b316-7027f4cbde8f",
+          "name": "Get token expiration times (deprecated)",
+          "request": {
+            "name": "Get token expiration times (deprecated)",
+            "description": {
+              "content": "This endpoint is deprecated. Use /security/defaultTokensExpiry instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "tokensExpiry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7a3ade4-633d-4db9-b350-a5eaab784654",
+              "name": "Token expiration configuration retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "tokensExpiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"access_token_expiry\": 100000,\n    \"refresh_token_expiry\": 31536000\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6bd4fe9-12e3-4d40-92a4-2436ccafc45f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "tokensExpiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2eafffcf-e7fc-46fb-86e1-026a8b4dec8c",
+          "name": "Get cluster join token",
+          "request": {
+            "name": "Get cluster join token",
+            "description": {
+              "content": "Get a cluster join token, used by clients to join the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "joinToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"access_token_expiry\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7f74e50a-a455-444f-a823-56616fdc4af4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "joinToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_token_expiry\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13785c87-aa42-4387-8b24-9dc8988788ad",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "joinToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"access_token_expiry\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c568410f-7355-4750-8b17-497315d4d1a0",
+          "name": "Upload custom CA certificate for cluster authentication",
+          "request": {
+            "name": "Upload custom CA certificate for cluster authentication",
+            "description": {
+              "content": "Uploads a custom Certificate Authority (CA) certificate to be used for secure cluster authentication with external services such as Vault. This certificate enables the cluster to verify the identity of external systems using TLS/SSL. If a certificate is already configured, this operation replaces it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "caCert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"certificate\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7516ae41-28b1-4085-bd74-5397597bda8c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "caCert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"certificate\": \"-----BEGIN CERTIFICATE-----\\\\n<all_the_content_of_cert.pem_with_\\\\n>\\\\n-----END CERTIFICATE-----\\\\n\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ada3b080-2b7f-4eb7-998d-ade21f005b2a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "caCert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"certificate\": \"-----BEGIN CERTIFICATE-----\\\\n<all_the_content_of_cert.pem_with_\\\\n>\\\\n-----END CERTIFICATE-----\\\\n\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b4ba133-dc0a-4415-8ee7-799aef5aeb17",
+          "name": "Remove custom CA certificate from cluster",
+          "request": {
+            "name": "Remove custom CA certificate from cluster",
+            "description": {
+              "content": "Removes the configured custom CA certificate from the cluster. After removal, the cluster will revert to using the default certificate validation mechanism.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "caCert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "67a36a5d-d983-46b6-9c95-f6b5ebaf0d1c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "caCert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43644cbb-50b4-40bf-bb41-e36e85861028",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "caCert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13d335e1-048e-41c6-9fde-b9290c5e9080",
+          "name": "Get CA certificate details and status",
+          "request": {
+            "name": "Get CA certificate details and status",
+            "description": {
+              "content": "Returns comprehensive information about the cluster's currently configured CA certificate, including its status, certificate metadata, and content. Use this endpoint to verify certificate configuration and expiration dates.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "caCert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d8961d7-a4d8-4a2b-8282-c8db65bf1a97",
+              "name": "CA certificate information retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "caCert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"enabled\": true,\n    \"country\": \"IL\",\n    \"state\": \"TA\",\n    \"locality\": \"Tel-Aviv\",\n    \"organization\": \"company\",\n    \"organization_unit\": \"qa\",\n    \"common_name\": \"t1831-*.company.io\",\n    \"email\": \"mail@company.io\",\n    \"expired_date\": \"2021-03-20T08:17:34Z\",\n    \"content\": \"-----BEGIN CERTIFICATE-----\\\\n<all_the_content_of_cert.pem_with_\\\\n>\\\\n-----END CERTIFICATE-----\\\"\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11610649-3064-4ae9-bc6c-90ba500c4742",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "caCert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d65b1b7-6ebe-4708-bbed-582cb6d04c73",
+          "name": "Create a CIDR-based security policy",
+          "request": {
+            "name": "Create a CIDR-based security policy",
+            "description": {
+              "content": "Creates a new security policy to regulate access to cluster management and POSIX data services. These policies strengthen security by permitting or blocking connections from specific client IP address ranges without requiring user authentication. Policies are evaluated in order of attachment, and updates do not affect active connections.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"read_only\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d43a1b0a-2a2b-4aa5-8ab6-94d443bd55a7",
+              "name": "Security policy created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts\",\n  \"description\": \"Allows admin access from admin workstations\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"192.168.2.0/21\",\n    \"192.168.2.0/21\"\n  ],\n  \"read_only\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"remoteAdmins\",\n    \"action\": \"Allow\",\n    \"description\": \"Admin access for remote admin network\",\n    \"id\": \"SecurityPolicy<5>\",\n    \"roles\": [\n      \"ClusterAdmin\",\n      \"ClusterAdmin\"\n    ],\n    \"ips\": [\n      \"10.1.4.0/24\",\n      \"10.1.4.0/24\"\n    ],\n    \"ref_count\": 1,\n    \"uid\": \"fe98008e-397d-227b-a095-577783714006\",\n    \"created_at\": \"2024-08-26T07:14:14.123Z\",\n    \"created_by\": \"alex-admin\",\n    \"modified_at\": \"2024-09-26T07:56:41.818Z\",\n    \"modified_by\": \"alex-admin\",\n    \"read_only\": false,\n    \"squash_mode\": \"root\",\n    \"anon_uid\": \"PosixUID<65534>\",\n    \"anon_gid\": \"PosixGID<65534>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "814702d2-c46f-4d6d-91e4-b7c82ed0133a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts\",\n  \"description\": \"Allows admin access from admin workstations\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"192.168.2.0/21\",\n    \"192.168.2.0/21\"\n  ],\n  \"read_only\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "086cc77c-b3d1-4f29-8939-94d0a0c90ead",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts\",\n  \"description\": \"Allows admin access from admin workstations\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"192.168.2.0/21\",\n    \"192.168.2.0/21\"\n  ],\n  \"read_only\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd190d36-b9d2-498b-9815-f02e1b203c50",
+          "name": "List all security policies",
+          "request": {
+            "name": "List all security policies",
+            "description": {
+              "content": "Returns a comprehensive list of all CIDR-based security policies defined in the cluster. These policies control access to cluster management and POSIX data services based on client IP ranges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4605b7d0-1580-49f2-a471-e459a8b4a320",
+              "name": "List of security policies retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"action\": \"Allow\",\n      \"description\": \"Admin access for remote admin network\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"roles\": [\n        \"ClusterAdmin\",\n        \"ClusterAdmin\"\n      ],\n      \"ips\": [\n        \"10.1.4.0/24\",\n        \"10.1.4.0/24\"\n      ],\n      \"ref_count\": 1,\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\",\n      \"created_at\": \"2024-08-26T07:14:14.123Z\",\n      \"created_by\": \"alex-admin\",\n      \"modified_at\": \"2024-09-26T07:56:41.818Z\",\n      \"modified_by\": \"alex-admin\",\n      \"read_only\": false,\n      \"squash_mode\": \"root\",\n      \"anon_uid\": \"PosixUID<65534>\",\n      \"anon_gid\": \"PosixGID<65534>\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"action\": \"Allow\",\n      \"description\": \"Admin access for remote admin network\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"roles\": [\n        \"ClusterAdmin\",\n        \"ClusterAdmin\"\n      ],\n      \"ips\": [\n        \"10.1.4.0/24\",\n        \"10.1.4.0/24\"\n      ],\n      \"ref_count\": 1,\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\",\n      \"created_at\": \"2024-08-26T07:14:14.123Z\",\n      \"created_by\": \"alex-admin\",\n      \"modified_at\": \"2024-09-26T07:56:41.818Z\",\n      \"modified_by\": \"alex-admin\",\n      \"read_only\": false,\n      \"squash_mode\": \"root\",\n      \"anon_uid\": \"PosixUID<65534>\",\n      \"anon_gid\": \"PosixGID<65534>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c836121b-d256-46e9-a9df-9fa2bb3992c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37fdb822-0801-4223-8c9d-5f193ecdf3d6",
+          "name": "Get a specific security policy",
+          "request": {
+            "name": "Get a specific security policy",
+            "description": {
+              "content": "Returns detailed configuration information for a specific security policy identified by its UUID. This includes the policy's name, description, action, roles, IP ranges, and read-only status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "policies",
+                ":policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "policy",
+                  "description": "(Required) Unique identifier (UUID) of the security policy to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "794a7cf1-2c51-4db8-95a8-578402aa2910",
+              "name": "Security policy details retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"remoteAdmins\",\n    \"action\": \"Allow\",\n    \"description\": \"Admin access for remote admin network\",\n    \"id\": \"SecurityPolicy<5>\",\n    \"roles\": [\n      \"ClusterAdmin\",\n      \"ClusterAdmin\"\n    ],\n    \"ips\": [\n      \"10.1.4.0/24\",\n      \"10.1.4.0/24\"\n    ],\n    \"ref_count\": 1,\n    \"uid\": \"fe98008e-397d-227b-a095-577783714006\",\n    \"created_at\": \"2024-08-26T07:14:14.123Z\",\n    \"created_by\": \"alex-admin\",\n    \"modified_at\": \"2024-09-26T07:56:41.818Z\",\n    \"modified_by\": \"alex-admin\",\n    \"read_only\": false,\n    \"squash_mode\": \"root\",\n    \"anon_uid\": \"PosixUID<65534>\",\n    \"anon_gid\": \"PosixGID<65534>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abf87bb8-07c5-431d-be03-fde0b2215153",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecc5f78a-215b-44ee-82c4-8d81320a1fbf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8bcfa846-14c5-495a-aae0-761d1cec6bca",
+          "name": "Delete a security policy",
+          "request": {
+            "name": "Delete a security policy",
+            "description": {
+              "content": "Permanently removes a security policy from the system. This operation does not affect currently active connections. The policy will no longer be evaluated for new connection attempts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "policies",
+                ":policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "policy",
+                  "description": "(Required) Unique identifier (UUID) of the security policy to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ceae7de-9cde-428d-957a-14cadb6ea7ba",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e51468fa-b12f-4a49-9e57-47f5450077d7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c56ec50c-137f-4444-8489-019e9ec6914a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54d9cb7f-a448-4f58-ac0c-9b8c96681584",
+          "name": "Update an existing security policy",
+          "request": {
+            "name": "Update an existing security policy",
+            "description": {
+              "content": "Modifies the configuration of an existing security policy. You can replace entire role or IP lists, or incrementally add/remove specific entries. Changes take effect immediately for new connections but do not impact existing active sessions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "policies",
+                ":policy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "policy",
+                  "description": "(Required) Unique identifier (UUID) of the security policy to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"add_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"add_ip\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove_ip\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"read_only\": \"<boolean>\",\n  \"squash_mode\": \"<string>\",\n  \"anon_uid\": \"<number>\",\n  \"anon_gid\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "389a9c92-6fcb-4646-bea2-63d0e534e5d0",
+              "name": "Security policy updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts\",\n  \"description\": \"Allows admin access from admin workstations\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"add_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"add_ip\": [\n    \"10.1.5.10-10.1.5.22\",\n    \"10.1.5.10-10.1.5.22\"\n  ],\n  \"remove_ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"read_only\": false,\n  \"squash_mode\": \"root\",\n  \"anon_uid\": 65534,\n  \"anon_gid\": 65534\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"remoteAdmins\",\n    \"action\": \"Allow\",\n    \"description\": \"Admin access for remote admin network\",\n    \"id\": \"SecurityPolicy<5>\",\n    \"roles\": [\n      \"ClusterAdmin\",\n      \"ClusterAdmin\"\n    ],\n    \"ips\": [\n      \"10.1.4.0/24\",\n      \"10.1.4.0/24\"\n    ],\n    \"ref_count\": 1,\n    \"uid\": \"fe98008e-397d-227b-a095-577783714006\",\n    \"created_at\": \"2024-08-26T07:14:14.123Z\",\n    \"created_by\": \"alex-admin\",\n    \"modified_at\": \"2024-09-26T07:56:41.818Z\",\n    \"modified_by\": \"alex-admin\",\n    \"read_only\": false,\n    \"squash_mode\": \"root\",\n    \"anon_uid\": \"PosixUID<65534>\",\n    \"anon_gid\": \"PosixGID<65534>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5832bbde-8255-4c1c-9262-ef56b7e1192b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts\",\n  \"description\": \"Allows admin access from admin workstations\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"add_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"add_ip\": [\n    \"10.1.5.10-10.1.5.22\",\n    \"10.1.5.10-10.1.5.22\"\n  ],\n  \"remove_ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"read_only\": false,\n  \"squash_mode\": \"root\",\n  \"anon_uid\": 65534,\n  \"anon_gid\": 65534\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f4cd7f0-712b-4039-a4e6-ccc80e572327",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts\",\n  \"description\": \"Allows admin access from admin workstations\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"add_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"add_ip\": [\n    \"10.1.5.10-10.1.5.22\",\n    \"10.1.5.10-10.1.5.22\"\n  ],\n  \"remove_ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"read_only\": false,\n  \"squash_mode\": \"root\",\n  \"anon_uid\": 65534,\n  \"anon_gid\": 65534\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ccb51a7-bf67-49df-a15a-47a93768aa19",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts\",\n  \"description\": \"Allows admin access from admin workstations\",\n  \"action\": \"<string>\",\n  \"role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"add_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"remove_role\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"add_ip\": [\n    \"10.1.5.10-10.1.5.22\",\n    \"10.1.5.10-10.1.5.22\"\n  ],\n  \"remove_ip\": [\n    \"10.1.4.0/24\",\n    \"10.1.4.0/24\"\n  ],\n  \"read_only\": false,\n  \"squash_mode\": \"root\",\n  \"anon_uid\": 65534,\n  \"anon_gid\": 65534\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f9b6398-ae26-474e-b4d1-dc61520109b2",
+          "name": "Duplicate an existing security policy",
+          "request": {
+            "name": "Duplicate an existing security policy",
+            "description": {
+              "content": "Creates a new security policy by copying all configuration settings from an existing policy. The new policy requires a unique name but inherits all other properties including description, action, roles, IP ranges, and read-only status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "policies",
+                ":policy",
+                "duplicate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "policy",
+                  "description": "(Required) Unique identifier (UUID) of the security policy to duplicate."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ca04cdc-4e2e-4c3f-93b4-8144d0ac2448",
+              "name": "Security policy duplicated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to duplicate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts_backup\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"remoteAdmins\",\n    \"action\": \"Allow\",\n    \"description\": \"Admin access for remote admin network\",\n    \"id\": \"SecurityPolicy<5>\",\n    \"roles\": [\n      \"ClusterAdmin\",\n      \"ClusterAdmin\"\n    ],\n    \"ips\": [\n      \"10.1.4.0/24\",\n      \"10.1.4.0/24\"\n    ],\n    \"ref_count\": 1,\n    \"uid\": \"fe98008e-397d-227b-a095-577783714006\",\n    \"created_at\": \"2024-08-26T07:14:14.123Z\",\n    \"created_by\": \"alex-admin\",\n    \"modified_at\": \"2024-09-26T07:56:41.818Z\",\n    \"modified_by\": \"alex-admin\",\n    \"read_only\": false,\n    \"squash_mode\": \"root\",\n    \"anon_uid\": \"PosixUID<65534>\",\n    \"anon_gid\": \"PosixGID<65534>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "898e2f92-74c2-411a-a9f4-96cfbbf9e5bd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to duplicate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts_backup\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2183ceea-6f12-4a48-a183-d198f9389deb",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    ":policy",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "policy",
+                      "description": "(Required) Unique identifier (UUID) of the security policy to duplicate."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"admin_hosts_backup\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d47cebb8-0f3b-4477-8ec1-b6ab4c6bed52",
+          "name": "Test security policy evaluation",
+          "request": {
+            "name": "Test security policy evaluation",
+            "description": {
+              "content": "Simulates how one or more security policies would evaluate a connection attempt for API access or cluster joining. Returns the resulting action (Allow/Deny), whether it was explicitly matched, and details of the matched policy. Use this endpoint to validate policy configurations before deployment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "policies",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "policies",
+                  "value": "<uuid>",
+                  "description": "(Required) List of security policy UUIDs to evaluate in the test."
+                },
+                {
+                  "disabled": false,
+                  "key": "policies",
+                  "value": "<uuid>",
+                  "description": "(Required) List of security policy UUIDs to evaluate in the test."
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "User role to simulate for API access evaluation."
+                },
+                {
+                  "disabled": false,
+                  "key": "join",
+                  "value": "<boolean>",
+                  "description": "When true, simulates a cluster join scenario instead of API access."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "995be900-5368-486f-9d6e-e6357d8c4a3e",
+              "name": "Policy test completed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policies",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "policies",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "join",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"action\": \"Allow\",\n    \"read_only\": false,\n    \"explicit\": false,\n    \"policy\": {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "541637fd-4da5-45ae-8e90-c6f79102bc2d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policies",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "policies",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "join",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78407a9e-4412-4e9a-8f7c-bb811a9b7352",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "policies",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policies",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "policies",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "join",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6935c5aa-753f-46c8-9e9b-05e079c96d0e",
+          "name": "Remove all security policies from cluster join configuration",
+          "request": {
+            "name": "Remove all security policies from cluster join configuration",
+            "description": {
+              "content": "Removes all security policies currently applied to the cluster join process for the specified mode (backend or client). This allows any container to join the cluster without IP-based security policy restrictions. The join secret authentication, if configured, remains active.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "join",
+                ":mode",
+                "securityPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "664d3d44-748e-4eac-a4c9-f534e2cbe44a",
+              "name": "All join security policies removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dd8bcfc-abcd-4283-b695-7e4e1f552051",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43e90dd5-ff47-4391-b3e2-ae6bf6575fc7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "118c71e1-15ca-445e-a5b0-41409cbeb76f",
+          "name": "Get security policies for cluster joining",
+          "request": {
+            "name": "Get security policies for cluster joining",
+            "description": {
+              "content": "Returns the list of security policies currently applied when containers or clients attempt to join the cluster for the specified mode. These policies work in conjunction with join secret authentication to secure cluster membership.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "join",
+                ":mode",
+                "securityPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "99f813f5-3773-4668-ab36-ba080bf19b75",
+              "name": "Join security policies retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b98f3cff-9aa8-4142-a124-b4c68583115d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e84a468-9cc1-4d68-b9da-6df0c497f7a6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "945ff420-294d-4243-b330-f36860d2e2b6",
+          "name": "Set cluster join security policies",
+          "request": {
+            "name": "Set cluster join security policies",
+            "description": {
+              "content": "Configures the complete set of security policies for containers or clients joining the cluster, replacing any existing policy configuration. These policies are evaluated to determine whether a join attempt from a specific IP address should be allowed or denied. Works in conjunction with join secret authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "join",
+                ":mode",
+                "securityPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policies\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b3964e4-a76f-4edc-b684-248a52dec75f",
+              "name": "Join security policies configured successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbcef8e2-d92c-478c-b0be-ad4bbc9af465",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbb08d5a-485f-4bc6-9e0d-916ad82d66d9",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f9790c47-58f1-4d3c-b7fc-633d3f906d70",
+          "name": "Attach security policies to cluster join configuration",
+          "request": {
+            "name": "Attach security policies to cluster join configuration",
+            "description": {
+              "content": "Adds one or more security policies to the existing list of policies applied during cluster joining for the specified mode. The new policies are appended to the end of the evaluation order. Use this endpoint to incrementally build up join security without replacing the entire policy set.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "join",
+                ":mode",
+                "securityPolicy",
+                "attach"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policies\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c82ea68-430c-4921-ad08-df168127dcdf",
+              "name": "Security policies attached successfully to join configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0d3db09-9299-4d3d-ba0e-e62a347b9323",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4b03dd6-582f-4257-a4fb-1a30b10116ea",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c6cd13c-621a-4789-9745-6c8bcaafd8fa",
+          "name": "Detach security policies from cluster join configuration",
+          "request": {
+            "name": "Detach security policies from cluster join configuration",
+            "description": {
+              "content": "Removes specific security policies from the list of policies applied during cluster joining for the specified mode. Other policies in the join configuration remain active and continue to be evaluated in their original order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "join",
+                ":mode",
+                "securityPolicy",
+                "detach"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mode",
+                  "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policies\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2de753f2-25ed-4c97-ba73-f46ce7187368",
+              "name": "Security policies detached successfully from join configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5959984-9522-474f-8c52-9a0b87e6d5ee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0768db3e-c28e-4200-98dc-3aa4cdaefda6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "join",
+                    ":mode",
+                    "securityPolicy",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mode",
+                      "description": "(Required) Cluster join mode - backend for server containers, client for POSIX clients."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fa75a4f-7aec-4eae-afde-d6e5ea04dcf0",
+          "name": "Get GUI idle timeout configuration",
+          "request": {
+            "name": "Get GUI idle timeout configuration",
+            "description": {
+              "content": "Returns the currently configured idle timeout duration for the graphical user interface. The GUI idle timeout automatically logs out users after a specified period of inactivity, reducing the risk of unauthorized access from unattended sessions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "guiIdleTimeout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0148a69b-a46f-48b5-bb7a-ae8a32d54912",
+              "name": "GUI idle timeout configuration retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "guiIdleTimeout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"timeout\": 1800\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4f0c1fc-638e-434f-a094-4c8d6c6db4e9",
+          "name": "Configure GUI idle timeout",
+          "request": {
+            "name": "Configure GUI idle timeout",
+            "description": {
+              "content": "Sets the duration after which inactive GUI sessions are automatically terminated. This security feature helps protect against unauthorized access by logging out users who leave their sessions unattended. The timeout value must be between 60 seconds (1 minute) and 86400 seconds (24 hours).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "guiIdleTimeout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"timeout\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1881b1bf-d2f4-42bf-9eb9-efb081a7f09b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "guiIdleTimeout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeout\": 7200\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38c98c0a-31a8-411b-b673-6b7bc1c37d69",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "guiIdleTimeout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeout\": 7200\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "606598f1-cd80-4e05-a777-9e6769fa960a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "guiIdleTimeout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"timeout\": 7200\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dad6c7af-d633-42c4-87cd-25ea2e65a1ab",
+          "name": "Reset GUI idle timeout to default",
+          "request": {
+            "name": "Reset GUI idle timeout to default",
+            "description": {
+              "content": "Restores the GUI idle timeout setting to its default system value, removing any custom configuration. This returns the timeout duration to the standard recommended setting for automatic session termination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "security",
+                "guiIdleTimeout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5105c77a-641b-4f9d-b481-84dbb5518e4c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "guiIdleTimeout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d76c1f56-bf0e-43f9-aa15-b00743496704",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "security",
+                    "guiIdleTimeout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "15270fc7-8e30-4d4e-9702-bcced5efb435",
+    "name": "@weka-api Active Directory Security API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Weka home API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Weka home",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get WEKA Home configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/wekaHome"
+          },
+          "docs": "Returns the current configuration for the WEKA Home cloud service."
+        },
+        {
+          "info": {
+            "name": "Get WEKA Home proxy URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/wekaHome/proxy"
+          },
+          "docs": "Returns the configured proxy URL for accessing WEKA Home."
+        },
+        {
+          "info": {
+            "name": "Set WEKA Home proxy URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/wekaHome/proxy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets or updates the proxy URL used for accessing WEKA Home."
+        },
+        {
+          "info": {
+            "name": "Get WEKA Home upload rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/wekaHome/uploadRate"
+          },
+          "docs": "Returns the current data upload rate limit for WEKA Home."
+        },
+        {
+          "info": {
+            "name": "Set WEKA Home upload rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/wekaHome/uploadRate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the maximum data upload rate to WEKA Home in bytes per second."
+        },
+        {
+          "info": {
+            "name": "Get WEKA Home URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/wekaHome/url"
+          },
+          "docs": "Returns the base URL for the WEKA Home cloud service."
+        },
+        {
+          "info": {
+            "name": "Enable WEKA Home",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/wekaHome/enable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables and configures the connection to the WEKA Home cloud service."
+        },
+        {
+          "info": {
+            "name": "Disable WEKA Home",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/wekaHome/disable"
+          },
+          "docs": "Disables the connection to the WEKA Home cloud service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

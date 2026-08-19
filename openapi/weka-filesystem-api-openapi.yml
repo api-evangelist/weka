@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Filesystem API'
   version: '5.1'
@@ -985,14 +985,6 @@ paths:
           $ref: '#/components/responses/404'
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -1002,6 +994,14 @@ components:
               message:
                 type: string
                 example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -1059,45 +1059,6 @@ components:
         inode_id:
           type: string
           example: '10092623495168'
-        path:
-          type: string
-          example: /
-        snap_name:
-          type: string
-          example: string
-        snap_view_id:
-          type: string
-          example: SnapViewId<1>
-    securityPolicyInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: remoteAdmins
-        id:
-          type: string
-          example: SecurityPolicy<5>
-        uid:
-          type: string
-          example: fe98008e-397d-227b-a095-577783714006
-    filesystemResolve:
-      type: object
-      properties:
-        access_point:
-          type: string
-          example: string
-        fs_id:
-          type: string
-          example: FSId<1>
-        fs_name:
-          type: string
-          example: default
-        inode_context:
-          type: string
-          example: InodeContext<1>
-        inode_id:
-          type: string
-          example: InodeId<1>
         path:
           type: string
           example: /
@@ -1290,6 +1251,45 @@ components:
         kms_role:
           type: string
           example: 11bc2535-671a-63ad-c4f4-93b21afe8cd6
+    filesystemResolve:
+      type: object
+      properties:
+        access_point:
+          type: string
+          example: string
+        fs_id:
+          type: string
+          example: FSId<1>
+        fs_name:
+          type: string
+          example: default
+        inode_context:
+          type: string
+          example: InodeContext<1>
+        inode_id:
+          type: string
+          example: InodeId<1>
+        path:
+          type: string
+          example: /
+        snap_name:
+          type: string
+          example: string
+        snap_view_id:
+          type: string
+          example: SnapViewId<1>
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
   securitySchemes:
     bearerAuth:
       type: http

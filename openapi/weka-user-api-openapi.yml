@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory User API'
   version: '5.1'
@@ -394,6 +394,15 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
+    userRole:
+      type: string
+      enum:
+      - ClusterAdmin
+      - TenantAdmin
+      - ReadOnly
+      - Regular
+      - S3
+      - CSI
     user:
       type: object
       properties:
@@ -421,15 +430,6 @@ components:
         policy:
           type: string
           example: readonly
-    userRole:
-      type: string
-      enum:
-      - ClusterAdmin
-      - TenantAdmin
-      - ReadOnly
-      - Regular
-      - S3
-      - CSI
   securitySchemes:
     bearerAuth:
       type: http

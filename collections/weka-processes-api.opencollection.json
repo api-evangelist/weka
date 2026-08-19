@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Processes API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Processes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of all processes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/processes",
+            "params": [
+              {
+                "name": "filter_type",
+                "value": "",
+                "type": "query",
+                "description": "The type of filter to apply to the process list."
+              },
+              {
+                "name": "container_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of container IDs to filter by. This parameter is only used when `filter_type` is set to `ByContainerOrProcess`."
+              },
+              {
+                "name": "process_ids",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of process IDs to filter by. This parameter is only used when `filter_type` is set to `ByContainerOrProcess`."
+              },
+              {
+                "name": "roles",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of process roles to filter by. This parameter is only used when `filter_type` is set to `Roles`. Valid roles include `Management`, `Drives`, `Compute`, and `Frontend`."
+              },
+              {
+                "name": "council",
+                "value": "",
+                "type": "query",
+                "description": "If true, query the cluster leadership members."
+              }
+            ]
+          },
+          "docs": "Returns information about all running processes within the cluster. The list can be filtered by type, container, process ID, or role."
+        },
+        {
+          "info": {
+            "name": "Get a specific process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/processes/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the process."
+              }
+            ]
+          },
+          "docs": "Returns information about a specific running process, identified by its UID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

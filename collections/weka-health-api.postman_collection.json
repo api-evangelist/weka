@@ -1,0 +1,237 @@
+{
+  "item": [
+    {
+      "id": "36701f4b-45f5-4f49-a381-103106e8e7a0",
+      "name": "Health",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c5f6e4d2-69b5-48e1-85a9-e35a8840d62d",
+          "name": "Check REST API status",
+          "request": {
+            "name": "Check REST API status",
+            "description": {
+              "content": "Verifies the availability of the REST API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "healthcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e423c7af-c0f4-46bc-9fe2-fee940941053",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"ok\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6620842e-8890-4c05-8fb6-a713a2c30e0e",
+          "name": "Check GUI status",
+          "request": {
+            "name": "Check GUI status",
+            "description": {
+              "content": "Verifies the availability of the GUI.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ui",
+                "healthcheck"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a13a18ce-a18b-4cf0-896b-6e950ef16e56",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"ok\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb668a41-1d60-4cea-9c2d-0bfb859ebe91",
+              "name": "Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ui",
+                    "healthcheck"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4a9c7cb4-9b53-4fd4-9d79-061be3e06384",
+    "name": "@weka-api Active Directory Health API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1229 @@
+{
+  "item": [
+    {
+      "id": "7a692b18-6b2e-43d5-b473-4c305fbbf063",
+      "name": "Traces",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52e50ca1-5510-4b2f-a18d-1c09c89857ea",
+          "name": "Get trace configuration",
+          "request": {
+            "name": "Get trace configuration",
+            "description": {
+              "content": "Returns the current trace collection settings, including status and storage limits for both server and client traces.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "traces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "45992bc0-e8c9-4f25-9c66-470ca3bb8787",
+              "name": "Trace configuration retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"enabled\": true,\n    \"level\": \"high\",\n    \"clients\": {\n      \"type\": \"default\"\n    },\n    \"clients_ensure_free\": {\n      \"type\": \"bytes\",\n      \"value\": 3000000000\n    },\n    \"servers\": {\n      \"type\": \"default\"\n    },\n    \"servers_ensure_free\": {\n      \"type\": \"bytes\",\n      \"value\": 3000000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0dfcacc-dc99-4b8d-8b86-050491903a60",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abfd499d-8881-4947-b373-2e4bda092e89",
+          "name": "Configure trace collection settings",
+          "request": {
+            "name": "Configure trace collection settings",
+            "description": {
+              "content": "Updates trace collection parameters, including storage allocation limits and free space thresholds for server and client trace data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "traces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"server_ensure_free\": \"<number>\",\n  \"client_ensure_free\": \"<number>\",\n  \"server_max\": \"<number>\",\n  \"client_max\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f25d413-577d-4039-b62f-25a11a910c24",
+              "name": "Trace configuration updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_ensure_free\": 300000,\n  \"client_ensure_free\": 300000,\n  \"server_max\": 600000,\n  \"client_max\": 600000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"enabled\": true,\n    \"level\": \"high\",\n    \"clients\": {\n      \"type\": \"default\"\n    },\n    \"clients_ensure_free\": {\n      \"type\": \"bytes\",\n      \"value\": 3000000000\n    },\n    \"servers\": {\n      \"type\": \"default\"\n    },\n    \"servers_ensure_free\": {\n      \"type\": \"bytes\",\n      \"value\": 3000000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02a279cd-cac8-4363-9141-57b8e5564c18",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_ensure_free\": 300000,\n  \"client_ensure_free\": 300000,\n  \"server_max\": 600000,\n  \"client_max\": 600000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce9bec98-ea32-43f7-9e3e-15c5cf8551c3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_ensure_free\": 300000,\n  \"client_ensure_free\": 300000,\n  \"server_max\": 600000,\n  \"client_max\": 600000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d360444-0b9f-4baf-aecb-08577c5fb009",
+          "name": "Reset trace configuration to defaults",
+          "request": {
+            "name": "Reset trace configuration to defaults",
+            "description": {
+              "content": "Restores all trace collection settings to their factory default values, including storage limits and collection status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "traces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c15db4bc-33f5-49db-92ad-2c82e82ea74a",
+              "name": "Trace configuration restored to defaults successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"enabled\": true,\n    \"level\": \"high\",\n    \"clients\": {\n      \"type\": \"default\"\n    },\n    \"clients_ensure_free\": {\n      \"type\": \"bytes\",\n      \"value\": 3000000000\n    },\n    \"servers\": {\n      \"type\": \"default\"\n    },\n    \"servers_ensure_free\": {\n      \"type\": \"bytes\",\n      \"value\": 3000000000\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acebb75d-1040-46de-9904-93dd65be4257",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0995a227-2ca1-4408-8396-c67a87f2ac16",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "823c229f-0fe6-4604-b268-4bc358be0099",
+          "name": "Get trace freeze period",
+          "request": {
+            "name": "Get trace freeze period",
+            "description": {
+              "content": "Returns the configured freeze period during which trace data is preserved and protected from automatic deletion to support troubleshooting and investigation activities.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "traces",
+                "freeze"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d07c3537-b51a-4b7c-9217-c95208482eba",
+              "name": "Trace freeze period retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"start_time\": \"2022-01-01T00:00:00.000Z\",\n    \"end_time\": \"2022-01-01T00:00:00.000Z\",\n    \"retention\": 0,\n    \"comment\": \"WEKAPP-XXXXX\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff9be77f-3e77-4121-ae94-6ad6dbcbefd2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02cd68a4-96d0-486b-97f1-1f9618b00bc5",
+          "name": "Set trace freeze period",
+          "request": {
+            "name": "Set trace freeze period",
+            "description": {
+              "content": "Configures a time range during which trace data is preserved and protected from deletion. This ensures diagnostic data remains available for analysis and troubleshooting of specific incidents or issues.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "traces",
+                "freeze"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_time\": \"<string>\",\n  \"end_time\": \"<string>\",\n  \"freeze_retention\": \"<number>\",\n  \"override_existing_period\": \"<boolean>\",\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c1b7aac-db0d-4f13-9485-6365534ac669",
+              "name": "Trace freeze period configured successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2022-01-01T00:00:00.000Z\",\n  \"end_time\": \"2022-01-01T00:00:00.000Z\",\n  \"freeze_retention\": 0,\n  \"override_existing_period\": true,\n  \"comment\": \"WEKAPP-XXXXX\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"start_time\": \"2022-01-01T00:00:00.000Z\",\n    \"end_time\": \"2022-01-01T00:00:00.000Z\",\n    \"retention\": 0,\n    \"comment\": \"WEKAPP-XXXXX\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52588b52-fd86-4062-8d1f-705ab0d2cb34",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2022-01-01T00:00:00.000Z\",\n  \"end_time\": \"2022-01-01T00:00:00.000Z\",\n  \"freeze_retention\": 0,\n  \"override_existing_period\": true,\n  \"comment\": \"WEKAPP-XXXXX\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc68bed6-7a43-4939-8e9e-55d64c86a25f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_time\": \"2022-01-01T00:00:00.000Z\",\n  \"end_time\": \"2022-01-01T00:00:00.000Z\",\n  \"freeze_retention\": 0,\n  \"override_existing_period\": true,\n  \"comment\": \"WEKAPP-XXXXX\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8bdfa6d-d45d-462f-bcd4-6f114393c00b",
+          "name": "Clear trace freeze period",
+          "request": {
+            "name": "Clear trace freeze period",
+            "description": {
+              "content": "Removes the active trace freeze configuration and allows frozen trace data to be subject to normal retention policies. This action clears all freeze period settings and releases preserved traces.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "traces",
+                "freeze"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8ca49b1-e1e3-47d9-9d31-f4bb2381ebdf",
+              "name": "Trace freeze period cleared successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"start_time\": \"2022-01-01T00:00:00.000Z\",\n    \"end_time\": \"2022-01-01T00:00:00.000Z\",\n    \"retention\": 0,\n    \"comment\": \"WEKAPP-XXXXX\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10e59edb-6978-4e85-9c61-cdb2281b7b9b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0ffdf23-2a4d-42d4-9b11-a649def4c4c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "freeze"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "418c6005-06da-45b5-8aae-39d5367e5647",
+          "name": "Set trace verbosity level",
+          "request": {
+            "name": "Set trace verbosity level",
+            "description": {
+              "content": "Adjusts the granularity of trace data collection. LOW level captures essential information suitable for routine troubleshooting with minimal storage impact. HIGH level captures comprehensive diagnostic details required for complex issue analysis and root cause investigation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "traces",
+                "level"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"level\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe592b38-935a-4467-9f87-f6a1b39f7506",
+              "name": "Trace level updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "level"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"level\": \"HIGH\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"HIGH\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c77b6afc-5031-4135-8877-b347156feb4d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "level"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"level\": \"HIGH\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "539c7f67-e6d5-4947-8a2d-70fb0e435867",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "traces",
+                    "level"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"level\": \"HIGH\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dc40efab-12f1-424d-9a68-6c9608da43e6",
+    "name": "@weka-api Active Directory Traces API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

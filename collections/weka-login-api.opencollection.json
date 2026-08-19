@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Login API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Login",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Log in to the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/login",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticates and grants access to the cluster using valid credentials.<br> Securely saves user credentials in the user's home directory upon successful login."
+        },
+        {
+          "info": {
+            "name": "Get access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/login/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Obtains a new access token using an existing refresh token.<br> The system creates an authentication token file and saves it in `~/.weka/auth-token.json`.<br> The token file contains both the access token and the refresh token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory LDAP API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LDAP",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get LDAP configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/ldap"
+          },
+          "docs": "Returns the LDAP configuration."
+        },
+        {
+          "info": {
+            "name": "Update LDAP configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/ldap",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the configuration for connecting to your LDAP server."
+        },
+        {
+          "info": {
+            "name": "Disable LDAP configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/ldap"
+          },
+          "docs": "Deactivates the integration with your LDAP server for user authentication."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

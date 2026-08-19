@@ -1,0 +1,197 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory User API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all local users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/users",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "query",
+                "description": "Organization name or ID. Defaults to the callers organization."
+              },
+              {
+                "name": "include_tenants",
+                "value": "",
+                "type": "query",
+                "description": "Include users from all tenants (ClusterAdmin only, ignored for other users)."
+              }
+            ]
+          },
+          "docs": "Returns all local user accounts for the specified organization. ClusterAdmin users can use include_tenants to get users from all tenants."
+        },
+        {
+          "info": {
+            "name": "Create a new local user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new local user account with the specified credentials and permissions. Cluster admins can create users in any tenant by specifying the org parameter."
+        },
+        {
+          "info": {
+            "name": "Update user details",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/users/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique user identifier (UUID format)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies role and POSIX settings for an existing local user."
+        },
+        {
+          "info": {
+            "name": "Delete a local user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/users/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique user identifier (UUID format)."
+              }
+            ]
+          },
+          "docs": "Permanently removes a local user account and associated data from the system."
+        },
+        {
+          "info": {
+            "name": "Change user password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/users/password",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a user's password. Users can change their own password with their current credentials.<br> Administrators can change any user's password within their organization."
+        },
+        {
+          "info": {
+            "name": "Set user password (admin)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/users/:uid/password",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique user identifier (UUID format)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a new password to a local user without requiring the current password. Requires administrative privileges."
+        },
+        {
+          "info": {
+            "name": "Get current user information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/users/whoami"
+          },
+          "docs": "Returns profile information for the authenticated user making the request."
+        },
+        {
+          "info": {
+            "name": "Revoke all user sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/users/:uid/revoke",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique user identifier (UUID format)."
+              }
+            ]
+          },
+          "docs": "Immediately invalidates all active authentication tokens for the specified user, terminating all GUI, CLI, and API sessions."
+        },
+        {
+          "info": {
+            "name": "Reset S3 API credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/users/:uid/s3/resetCredentials",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique user identifier (UUID format)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a new S3 access key and secret key for the specified S3 user, invalidating any existing credentials. The new credentials are returned in the response and cannot be retrieved again."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

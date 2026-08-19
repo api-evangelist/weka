@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Tasks API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get background tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tasks",
+            "params": [
+              {
+                "name": "show_waiting",
+                "value": "",
+                "type": "query",
+                "description": "Include tasks in waiting state."
+              }
+            ]
+          },
+          "docs": "Returns all background tasks currently running in the cluster, with optional filtering for waiting tasks."
+        },
+        {
+          "info": {
+            "name": "Resume paused task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tasks/:uid/resume",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Task UUID."
+              }
+            ]
+          },
+          "docs": "Resumes execution of a previously paused background task."
+        },
+        {
+          "info": {
+            "name": "Pause running task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tasks/:uid/pause",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Task UUID."
+              }
+            ]
+          },
+          "docs": "Temporarily pauses a running background task. The task can be resumed later without losing progress."
+        },
+        {
+          "info": {
+            "name": "Abort running task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tasks/:uid/abort",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Task UUID."
+              }
+            ]
+          },
+          "docs": "Permanently terminates a background task and discards any incomplete work. This action cannot be undone."
+        },
+        {
+          "info": {
+            "name": "Get task resource limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tasks/limits"
+          },
+          "docs": "Returns the current CPU resource limits configured for background task execution."
+        },
+        {
+          "info": {
+            "name": "Update task resource limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/tasks/limits",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures the maximum CPU resources that can be allocated to background tasks cluster-wide."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

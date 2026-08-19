@@ -1,0 +1,493 @@
+{
+  "item": [
+    {
+      "id": "9d6eb6dd-5358-48f1-8835-efabf0d3a6c8",
+      "name": "Object store",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "570267f5-e076-4a07-a1e2-441bf86eb242",
+          "name": "Update a specific object store",
+          "request": {
+            "name": "Update a specific object store",
+            "description": {
+              "content": "Updates the connection details for an existing object store.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStores",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier (UID) of the object store to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"new_name\": \"<string>\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"port\": \"<number>\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"<string>\",\n  \"access_key_id\": \"<string>\",\n  \"secret_key\": \"<string>\",\n  \"bandwidth\": \"<number>\",\n  \"max_concurrent_downloads\": \"<number>\",\n  \"max_concurrent_uploads\": \"<number>\",\n  \"max_concurrent_removals\": \"<number>\",\n  \"max_extents_in_data_blob\": \"<number>\",\n  \"max_blocks_in_data_blob\": \"<number>\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"<string>\",\n  \"sts_role_session_name\": \"<string>\",\n  \"sts_session_duration\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd97af0a-9672-4185-9269-713fbdeea5f9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStores",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"bandwidth\": 1000,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dad9927-0b13-4dc8-b97a-a98422eac53d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStores",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"bandwidth\": 1000,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f54f4f80-eeb2-4f96-8062-539ea7c5077c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStores",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"bandwidth\": 1000,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f4450f25-d3d3-4e73-bed6-9b79c2a497c8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStores",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"bandwidth\": 1000,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d408332-f854-4022-8c17-86e3ff2c8181",
+          "name": "Get OBS bucket capacity utilization information",
+          "request": {
+            "name": "Get OBS bucket capacity utilization information",
+            "description": {
+              "content": "Retrieves capacity usage details for object store buckets. This includes total consumed bytes, active user data, and reclaimable space percentages per filesystem. Use this endpoint to monitor tiered storage health and trigger data refreshes for accurate capacity reporting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStores",
+                "capacities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filesystem",
+                  "value": "<string>",
+                  "description": "Optional filesystem name to filter results."
+                },
+                {
+                  "disabled": false,
+                  "key": "force_fresh",
+                  "value": "<boolean>",
+                  "description": "Force refresh of capacity data."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47e408c2-7be7-40d6-bc43-083ce4bebabb",
+              "name": "OBS bucket capacity information with total consumed, used, and reclaimable data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStores",
+                    "capacities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filesystem",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "force_fresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"filesystem_name\": \"default\",\n      \"filesystem_uid\": \"12345678-1234-1234-1234-123456789012\",\n      \"obs_bucket_name\": \"obs-bucket-1\",\n      \"obs_bucket_uid\": \"87654321-4321-4321-4321-210987654321\",\n      \"total_consumed_bytes\": 22548578304,\n      \"used_bytes\": 5456609280,\n      \"reclaimable_percent\": 76.09,\n      \"reclaimable_threshold\": 80,\n      \"reclaimable_low_threshold\": 70,\n      \"reclaimable_high_threshold\": 90\n    },\n    {\n      \"filesystem_name\": \"default\",\n      \"filesystem_uid\": \"12345678-1234-1234-1234-123456789012\",\n      \"obs_bucket_name\": \"obs-bucket-1\",\n      \"obs_bucket_uid\": \"87654321-4321-4321-4321-210987654321\",\n      \"total_consumed_bytes\": 22548578304,\n      \"used_bytes\": 5456609280,\n      \"reclaimable_percent\": 76.09,\n      \"reclaimable_threshold\": 80,\n      \"reclaimable_low_threshold\": 70,\n      \"reclaimable_high_threshold\": 90\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06918015-5de6-4070-84e0-7de7ad0fc53d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStores",
+                    "capacities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filesystem",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "force_fresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5423afd5-ba83-4929-bfa2-88ece9e5b2e6",
+    "name": "@weka-api Active Directory Object store API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,435 @@
+{
+  "item": [
+    {
+      "id": "a06b12b2-59a1-45d1-8e75-1f220740b982",
+      "name": "Machines",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "73e079c3-710f-4c8b-9442-332dd6ac5b5e",
+          "name": "Get all machines - deprecated, use GET /servers",
+          "request": {
+            "name": "Get all machines - deprecated, use GET /servers",
+            "description": {},
+            "url": {
+              "path": [
+                "machines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d184e876-40fd-41eb-876d-63740d6d564e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n      \"roles\": [\n        \"BACKEND\",\n        \"BACKEND\"\n      ],\n      \"name\": \"machine_hostname\",\n      \"primary_ip_address\": \"1.2.3.4\",\n      \"primary_port\": 8092.818736828079,\n      \"deployment_mode\": \"CONVERGED\",\n      \"status\": \"DEGRADED\",\n      \"up_since\": \"2021-10-26T07:56:41.818Z\",\n      \"load\": 7447.2831558061125,\n      \"nodes\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        }\n      ],\n      \"versions\": [\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\",\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\"\n      ],\n      \"ram_allocated\": 8348.315267194428,\n      \"drives\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        }\n      ]\n    },\n    {\n      \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n      \"roles\": [\n        \"BACKEND\",\n        \"BACKEND\"\n      ],\n      \"name\": \"machine_hostname\",\n      \"primary_ip_address\": \"1.2.3.4\",\n      \"primary_port\": 1912.5774867622358,\n      \"deployment_mode\": \"CONVERGED\",\n      \"status\": \"DEGRADED\",\n      \"up_since\": \"2021-10-26T07:56:41.818Z\",\n      \"load\": 2977.9733961929633,\n      \"nodes\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        }\n      ],\n      \"versions\": [\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\",\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\"\n      ],\n      \"ram_allocated\": 5548.784177177836,\n      \"drives\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d7e2084-0681-4d7d-a6c3-afedb9191ac6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1e56ae8-4e61-4195-a39f-8dc74506ff0d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3c32e32-2f20-4430-a2ed-05bfcbb18378",
+          "name": "Get single machine - deprecated, use GET /servers/{uid}",
+          "request": {
+            "name": "Get single machine - deprecated, use GET /servers/{uid}",
+            "description": {},
+            "url": {
+              "path": [
+                "machines",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Machine uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f160d9d4-d54a-4b9c-8089-82d18460c3b6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Machine uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n    \"roles\": [\n      \"BACKEND\",\n      \"BACKEND\"\n    ],\n    \"name\": \"machine_hostname\",\n    \"primary_ip_address\": \"1.2.3.4\",\n    \"primary_port\": 14000,\n    \"status\": \"DEGRADED\",\n    \"up_since\": \"2021-10-26T07:56:41.818Z\",\n    \"load\": 55,\n    \"nodes\": [\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"status\": \"OK\",\n        \"id\": 41,\n        \"roles\": [\n          \"MGMT\",\n          \"MGMT\"\n        ],\n        \"container_uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"container_name\": \"default\",\n        \"executable\": \"wekanode\",\n        \"ip_addresses\": [\n          \"172.31.17.71\",\n          \"172.31.17.71\"\n        ],\n        \"socket_id\": 0,\n        \"core_id\": 0,\n        \"dedicated_core\": false\n      },\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"status\": \"OK\",\n        \"id\": 41,\n        \"roles\": [\n          \"MGMT\",\n          \"MGMT\"\n        ],\n        \"container_uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"container_name\": \"default\",\n        \"executable\": \"wekanode\",\n        \"ip_addresses\": [\n          \"172.31.17.71\",\n          \"172.31.17.71\"\n        ],\n        \"socket_id\": 0,\n        \"core_id\": 0,\n        \"dedicated_core\": false\n      }\n    ],\n    \"versions\": [\n      \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\",\n      \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\"\n    ],\n    \"ram_allocated\": 343597383680,\n    \"drives\": [\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"uuid\": \"11d0c5f9-7b68-4d81-be41-2025c8368913\",\n        \"status\": \"OK\",\n        \"should_be_active\": true,\n        \"id\": 1,\n        \"model\": \"OK\",\n        \"vendor\": \"OK\",\n        \"raw_capacity\": \"OK\"\n      },\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"uuid\": \"11d0c5f9-7b68-4d81-be41-2025c8368913\",\n        \"status\": \"OK\",\n        \"should_be_active\": true,\n        \"id\": 1,\n        \"model\": \"OK\",\n        \"vendor\": \"OK\",\n        \"raw_capacity\": \"OK\"\n      }\n    ],\n    \"containers\": [\n      {\n        \"id\": \"HostId<0>\",\n        \"uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"name\": \"default\",\n        \"type\": \"weka\",\n        \"ram_allocated\": 1493172224,\n        \"failure_domain_uid\": \"<some_uid>\",\n        \"failure_domain\": \"DOM-004\",\n        \"dedicated_memory\": false,\n        \"bandwidth\": 6412,\n        \"ips\": [\n          \"123.33.42.12\",\n          \"123.33.42.12\"\n        ],\n        \"version\": \"3.15.1.326\",\n        \"version_string\": \"3.15.1.326-58a3655fb45d16d2f8802afa112cce96\"\n      },\n      {\n        \"id\": \"HostId<0>\",\n        \"uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"name\": \"default\",\n        \"type\": \"weka\",\n        \"ram_allocated\": 1493172224,\n        \"failure_domain_uid\": \"<some_uid>\",\n        \"failure_domain\": \"DOM-004\",\n        \"dedicated_memory\": false,\n        \"bandwidth\": 6412,\n        \"ips\": [\n          \"123.33.42.12\",\n          \"123.33.42.12\"\n        ],\n        \"version\": \"3.15.1.326\",\n        \"version_string\": \"3.15.1.326-58a3655fb45d16d2f8802afa112cce96\"\n      }\n    ],\n    \"network_devices\": [\n      {\n        \"model\": \"Elastic Network Adapter (ENA)\",\n        \"vendor\": \"Amazon.com, Inc.\",\n        \"link_layer_type\": \"ETH\",\n        \"speed\": 1493172224,\n        \"driver\": \"igb_uio\",\n        \"pci_address\": \"00:08.0\",\n        \"device_name\": \"enx00e04c68049c\"\n      },\n      {\n        \"model\": \"Elastic Network Adapter (ENA)\",\n        \"vendor\": \"Amazon.com, Inc.\",\n        \"link_layer_type\": \"ETH\",\n        \"speed\": 1493172224,\n        \"driver\": \"igb_uio\",\n        \"pci_address\": \"00:08.0\",\n        \"device_name\": \"enx00e04c68049c\"\n      }\n    ],\n    \"processors\": {\n      \"socket_count\": 5504.898167529815,\n      \"architecture\": \"x86_64\",\n      \"model\": \"Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz\",\n      \"vendor\": \"GenuineIntel\"\n    },\n    \"platform\": {\n      \"vendor_code\": \"hp\",\n      \"vendor\": \"Hewlett Packard\",\n      \"is_physical\": true,\n      \"vendor_specific_info\": {\n        \"family\": \"server family\",\n        \"model\": \"server_model\",\n        \"instance_id\": \"aws_instance_id\",\n        \"instance_type\": \"aws_instance_type\",\n        \"availability_zone\": \"aws_availability_zone\"\n      }\n    },\n    \"services\": {\n      \"smb\": {\n        \"administrative_state\": \"ENABLED\",\n        \"status\": \"OK\"\n      },\n      \"nfs\": {\n        \"administrative_state\": \"ENABLED\",\n        \"status\": \"OK\"\n      },\n      \"s3\": {\n        \"administrative_state\": \"ENABLED\",\n        \"status\": \"OK\"\n      }\n    },\n    \"operating_system\": \"Ubuntu 20.04\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39594d1c-8b72-4eb7-9a11-527cae65fb29",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Machine uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f979d9ea-8d6e-4b24-bb2e-ad3fcd08015e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "machines",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Machine uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bf77b81d-f917-4b11-994d-646f8dc69977",
+    "name": "@weka-api Active Directory Machines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

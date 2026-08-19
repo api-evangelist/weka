@@ -1,0 +1,2742 @@
+{
+  "item": [
+    {
+      "id": "14b14895-d551-4b05-a955-e2f17f2b3daf",
+      "name": "Snapshots",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c91f1b43-460c-4b55-8547-18f9c84fd320",
+          "name": "List all snapshots",
+          "request": {
+            "name": "List all snapshots",
+            "description": {
+              "content": "Returns a list of all filesystem snapshots in the system. Snapshots are point-in-time copies used for backup, archiving, and testing. Filter results by filesystem using the query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filesystem",
+                  "value": "<string>",
+                  "description": "Filter by specific filesystem."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02ee37cb-f501-4cde-a045-4346f002bd38",
+              "name": "Successfully retrieved snapshot list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filesystem",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"SnapViewId<10>\",\n      \"isWritable\": false,\n      \"uploadSize\": {\n        \"LOCAL\": 0,\n        \"REMOTE\": 0\n      },\n      \"task_ids\": [\n        \"task_id\",\n        \"task_id\"\n      ],\n      \"remoteStowInfo\": {\n        \"stowProgress\": \"100%\",\n        \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n        \"stowStatus\": \"SYNCHRONIZED\"\n      },\n      \"filesystemId\": \"FSId<0>\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"isRemoving\": false,\n      \"filesystemUid\": \"7a6bfe5e-9944-4bf4-b799-527e9b5c2a13\",\n      \"name\": \"base\",\n      \"filesystem\": \"default\",\n      \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n      \"localStowInfo\": {\n        \"stowProgress\": \"100%\",\n        \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n        \"stowStatus\": \"SYNCHRONIZED\"\n      },\n      \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n      \"stowStatus\": \"SYNCHRONIZED\",\n      \"creationTime\": \"2022-07-27T10:41:10Z\",\n      \"objectProgress\": \"100%\",\n      \"estReclaimableSize\": 0\n    },\n    {\n      \"id\": \"SnapViewId<10>\",\n      \"isWritable\": false,\n      \"uploadSize\": {\n        \"LOCAL\": 0,\n        \"REMOTE\": 0\n      },\n      \"task_ids\": [\n        \"task_id\",\n        \"task_id\"\n      ],\n      \"remoteStowInfo\": {\n        \"stowProgress\": \"100%\",\n        \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n        \"stowStatus\": \"SYNCHRONIZED\"\n      },\n      \"filesystemId\": \"FSId<0>\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"isRemoving\": false,\n      \"filesystemUid\": \"7a6bfe5e-9944-4bf4-b799-527e9b5c2a13\",\n      \"name\": \"base\",\n      \"filesystem\": \"default\",\n      \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n      \"localStowInfo\": {\n        \"stowProgress\": \"100%\",\n        \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n        \"stowStatus\": \"SYNCHRONIZED\"\n      },\n      \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n      \"stowStatus\": \"SYNCHRONIZED\",\n      \"creationTime\": \"2022-07-27T10:41:10Z\",\n      \"objectProgress\": \"100%\",\n      \"estReclaimableSize\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06db6f9a-0cab-4bd6-93bd-3d9556844d19",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filesystem",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "030f086f-f387-49f0-94b4-d8ea2d3f4ffa",
+          "name": "Create a new snapshot",
+          "request": {
+            "name": "Create a new snapshot",
+            "description": {
+              "content": "Creates a point-in-time snapshot of an existing filesystem. Snapshots are read-only by default and do not impact system performance. Writable snapshots enable data modification for testing environments.<br> Snapshots consume minimal space based on 4KB granularity differences. Once created as writable, a snapshot cannot be converted to read-only.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fs_uid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"access_point\": \"<string>\",\n  \"source_snap_uid\": \"<string>\",\n  \"is_writable\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e59bcb7e-0bb2-4563-979d-58bd38c9dc8d",
+              "name": "Snapshot created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"name\": \"daily_backup_2024_10_13\",\n  \"access_point\": \"snap_mount_point\",\n  \"source_snap_uid\": \"87654321-4321-4321-4321-cba987654321\",\n  \"is_writable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapViewId<10>\",\n    \"isWritable\": false,\n    \"uploadSize\": {\n      \"LOCAL\": 0,\n      \"REMOTE\": 0\n    },\n    \"task_ids\": [\n      \"task_id\",\n      \"task_id\"\n    ],\n    \"remoteStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"filesystemId\": \"FSId<0>\",\n    \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n    \"isRemoving\": false,\n    \"filesystemUid\": \"7a6bfe5e-9944-4bf4-b799-527e9b5c2a13\",\n    \"name\": \"base\",\n    \"filesystem\": \"default\",\n    \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n    \"localStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n    \"stowStatus\": \"SYNCHRONIZED\",\n    \"creationTime\": \"2022-07-27T10:41:10Z\",\n    \"objectProgress\": \"100%\",\n    \"estReclaimableSize\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c24aa04-d198-41f9-b74c-cb490b926745",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"name\": \"daily_backup_2024_10_13\",\n  \"access_point\": \"snap_mount_point\",\n  \"source_snap_uid\": \"87654321-4321-4321-4321-cba987654321\",\n  \"is_writable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a883528-28ab-43d6-a2a7-9e503a0c0c75",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"name\": \"daily_backup_2024_10_13\",\n  \"access_point\": \"snap_mount_point\",\n  \"source_snap_uid\": \"87654321-4321-4321-4321-cba987654321\",\n  \"is_writable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4696d0a3-7836-481d-a0ac-4b0320931d26",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"name\": \"daily_backup_2024_10_13\",\n  \"access_point\": \"snap_mount_point\",\n  \"source_snap_uid\": \"87654321-4321-4321-4321-cba987654321\",\n  \"is_writable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd12aa3f-8b71-46b6-9b88-3e363b63046c",
+          "name": "Get snapshot details",
+          "request": {
+            "name": "Get snapshot details",
+            "description": {
+              "content": "Returns detailed information about a specific snapshot, including creation timestamp, parent filesystem, size, and writability status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier of the snapshot (UUID format)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e4fe7532-cc96-41e2-b5d7-09f420eade39",
+              "name": "Successfully retrieved snapshot details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapViewId<10>\",\n    \"isWritable\": false,\n    \"uploadSize\": {\n      \"LOCAL\": 0,\n      \"REMOTE\": 0\n    },\n    \"task_ids\": [\n      \"task_id\",\n      \"task_id\"\n    ],\n    \"remoteStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"filesystemId\": \"FSId<0>\",\n    \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n    \"isRemoving\": false,\n    \"filesystemUid\": \"7a6bfe5e-9944-4bf4-b799-527e9b5c2a13\",\n    \"name\": \"base\",\n    \"filesystem\": \"default\",\n    \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n    \"localStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n    \"stowStatus\": \"SYNCHRONIZED\",\n    \"creationTime\": \"2022-07-27T10:41:10Z\",\n    \"objectProgress\": \"100%\",\n    \"estReclaimableSize\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bb2df42-6a61-4e2d-b74c-f68fc4d10dee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6e3a3aa-c13c-4d2c-a81b-34e5124cafe6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4aa9872-b1a1-423e-b30d-ea21bb6ae051",
+          "name": "Update snapshot configuration",
+          "request": {
+            "name": "Update snapshot configuration",
+            "description": {
+              "content": "Modifies snapshot name or access point. The snapshot's data and point-in-time state remain unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier of the snapshot to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"new_name\": \"<string>\",\n  \"access_point\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34c42db1-322e-4cef-acff-67583dcf0bdf",
+              "name": "Snapshot updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"weekly_backup_renamed\",\n  \"access_point\": \"new_mount_point\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapViewId<10>\",\n    \"stowInfo\": {\n      \"LOCAL\": {\n        \"stowProgress\": \"100%\",\n        \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n        \"multiObs\": false,\n        \"locatorInfo\": {\n          \"guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"snapLayerId\": \"SnapLayerId<0>\"\n        },\n        \"stowStatus\": \"SYNCHRONIZED\",\n        \"stowVersion\": \"StowVersion<INVALID>\",\n        \"generation\": \"SnapLayerStowGeneration<INVALID>\",\n        \"isDownloaded\": \"no\"\n      },\n      \"REMOTE\": {\n        \"stowProgress\": \"100%\",\n        \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n        \"multiObs\": false,\n        \"locatorInfo\": {\n          \"guid\": \"00000000-0000-0000-0000-000000000000\",\n          \"snapLayerId\": \"SnapLayerId<0>\"\n        },\n        \"stowStatus\": \"SYNCHRONIZED\",\n        \"stowVersion\": \"StowVersion<INVALID>\",\n        \"generation\": \"SnapLayerStowGeneration<INVALID>\",\n        \"isDownloaded\": \"no\"\n      }\n    },\n    \"isWritable\": false,\n    \"filesystemId\": \"FSId<0>\",\n    \"isRemoving\": false,\n    \"name\": \"base\",\n    \"filesystem\": \"default\",\n    \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n    \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n    \"snapLayerId\": \"SnapLayerId<1>\",\n    \"creationTime\": \"2022-07-27T10:41:10Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8d68379-7d04-44e2-afa2-795705c4b5de",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"weekly_backup_renamed\",\n  \"access_point\": \"new_mount_point\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "669cd1e6-5f83-4988-8b30-f961f06ba704",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"weekly_backup_renamed\",\n  \"access_point\": \"new_mount_point\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6004fb17-fb3f-4de3-b03c-18c9878eab65",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"weekly_backup_renamed\",\n  \"access_point\": \"new_mount_point\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83001f6d-5c2d-4ca4-a136-00958657594b",
+          "name": "Delete a snapshot",
+          "request": {
+            "name": "Delete a snapshot",
+            "description": {
+              "content": "Permanently removes a snapshot from the system and frees storage space consumed by its unique data. If the snapshot has been downloaded to another filesystem, deletion may cause that filesystem to malfunction. Ensure downloaded snapshots are un-tiered or migrated before deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier of the snapshot to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa96ed84-217b-458d-9741-176765966bab",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cc94c7b-726f-4012-80a3-4425a97237be",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b94371f-d736-4aab-ab6f-ba11699241d7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ef7c675-98f6-445f-8df1-be40824cc33d",
+          "name": "Create a copy of a snapshot",
+          "request": {
+            "name": "Create a copy of a snapshot",
+            "description": {
+              "content": "Creates a duplicate of an existing snapshot within the same filesystem. Useful for creating multiple versions or preserving snapshot state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                ":uid",
+                "copy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier of the source snapshot to copy."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"destination_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "55514be3-aa54-4423-97f8-05a7275f025d",
+              "name": "Snapshot copied successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot to copy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_name\": \"backup_copy_2024_10_13\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapViewId<10>\",\n    \"isWritable\": false,\n    \"uploadSize\": {\n      \"LOCAL\": 0,\n      \"REMOTE\": 0\n    },\n    \"task_ids\": [\n      \"task_id\",\n      \"task_id\"\n    ],\n    \"remoteStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"filesystemId\": \"FSId<0>\",\n    \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n    \"isRemoving\": false,\n    \"filesystemUid\": \"7a6bfe5e-9944-4bf4-b799-527e9b5c2a13\",\n    \"name\": \"base\",\n    \"filesystem\": \"default\",\n    \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n    \"localStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n    \"stowStatus\": \"SYNCHRONIZED\",\n    \"creationTime\": \"2022-07-27T10:41:10Z\",\n    \"objectProgress\": \"100%\",\n    \"estReclaimableSize\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cda1313-22ca-4514-a405-62b1dbe965e9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot to copy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_name\": \"backup_copy_2024_10_13\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4887a257-777f-42e0-9e75-bf8626332a33",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot to copy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_name\": \"backup_copy_2024_10_13\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c3bdd3d-de2d-4b95-8452-1b9d06422ba4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid",
+                    "copy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot to copy."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"destination_name\": \"backup_copy_2024_10_13\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5222fa00-93ff-4649-92bc-6e0d46ea169c",
+          "name": "Upload snapshot to object store",
+          "request": {
+            "name": "Upload snapshot to object store",
+            "description": {
+              "content": "Transfers a snapshot to object storage using the Snap-To-Object feature. Consolidates all snapshot data, including filesystem metadata and files, for backup, archiving, or disaster recovery. Only read-only snapshots can be uploaded. Upload snapshots in chronological order for optimal efficiency.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                ":uid",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier of the snapshot to upload."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"obs_site\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "01c43222-8d56-4725-992f-81c71c6236dc",
+              "name": "Snapshot upload initiated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_site\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"extra\": {},\n    \"locator\": \"59c2ddf9/d/s/16/spec/b365-4e7a-b924-b2f0956b7f9c\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adb55777-be78-4f94-a41b-de14f09c9445",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_site\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa6214fa-6172-40a8-b878-09ac9831c63e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":uid",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the snapshot to upload."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_site\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "509a30ed-e139-4edc-a645-c62d0954b810",
+          "name": "Download snapshot from object store",
+          "request": {
+            "name": "Download snapshot from object store",
+            "description": {
+              "content": "Downloads a previously uploaded snapshot from object storage to a filesystem. Enables data restoration, disaster recovery, and filesystem migration. Snapshots are incrementally reconstructed on the target filesystem. Apply snapshots in chronological order for optimal consistency. Use the locator obtained during snapshot upload. Downloading snapshots from object stores within the same cluster is not supported.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fs_uid\": \"<string>\",\n  \"locator\": \"<string>\",\n  \"name\": \"<string>\",\n  \"access_point\": \"<string>\",\n  \"allow_non_chronological\": \"<boolean>\",\n  \"allow_divergence\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9fe43ad0-bd22-4b9a-8cda-2367947367ef",
+              "name": "Snapshot download initiated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\",\n  \"name\": \"restored_backup_2024\",\n  \"access_point\": \"restored_mount\",\n  \"allow_non_chronological\": \"<boolean>\",\n  \"allow_divergence\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapViewId<10>\",\n    \"isWritable\": false,\n    \"uploadSize\": {\n      \"LOCAL\": 0,\n      \"REMOTE\": 0\n    },\n    \"task_ids\": [\n      \"task_id\",\n      \"task_id\"\n    ],\n    \"remoteStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"filesystemId\": \"FSId<0>\",\n    \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n    \"isRemoving\": false,\n    \"filesystemUid\": \"7a6bfe5e-9944-4bf4-b799-527e9b5c2a13\",\n    \"name\": \"base\",\n    \"filesystem\": \"default\",\n    \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n    \"localStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n    \"stowStatus\": \"SYNCHRONIZED\",\n    \"creationTime\": \"2022-07-27T10:41:10Z\",\n    \"objectProgress\": \"100%\",\n    \"estReclaimableSize\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63254553-ddfe-4c18-9c7e-4abcb03c6407",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\",\n  \"name\": \"restored_backup_2024\",\n  \"access_point\": \"restored_mount\",\n  \"allow_non_chronological\": \"<boolean>\",\n  \"allow_divergence\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "503f40e1-c0e7-4fc9-80cc-90467f1e200c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\",\n  \"name\": \"restored_backup_2024\",\n  \"access_point\": \"restored_mount\",\n  \"allow_non_chronological\": \"<boolean>\",\n  \"allow_divergence\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc0e6e17-8b99-42d7-914d-e0d13229c03e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uid\": \"12345678-1234-1234-1234-123456789abc\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\",\n  \"name\": \"restored_backup_2024\",\n  \"access_point\": \"restored_mount\",\n  \"allow_non_chronological\": \"<boolean>\",\n  \"allow_divergence\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "399b2c3c-3a57-4e7e-b0d7-b3cf9a39b858",
+          "name": "Restore filesystem from snapshot",
+          "request": {
+            "name": "Restore filesystem from snapshot",
+            "description": {
+              "content": "Restores a filesystem to a previous state using a specified snapshot. This operation overwrites the current filesystem content. This operation is destructive. Ensure appropriate backups exist before proceeding. Consider creating a snapshot of the current filesystem state first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                ":fs_uid",
+                ":uid",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fs_uid",
+                  "description": "(Required) Unique identifier of the target filesystem to restore."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier of the source snapshot."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "df122594-057d-4e66-96ec-395c3c134827",
+              "name": "Filesystem restoration initiated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":fs_uid",
+                    ":uid",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fs_uid",
+                      "description": "(Required) Unique identifier of the target filesystem to restore."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapViewId<10>\",\n    \"isWritable\": false,\n    \"uploadSize\": {\n      \"LOCAL\": 0,\n      \"REMOTE\": 0\n    },\n    \"task_ids\": [\n      \"task_id\",\n      \"task_id\"\n    ],\n    \"remoteStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"filesystemId\": \"FSId<0>\",\n    \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n    \"isRemoving\": false,\n    \"filesystemUid\": \"7a6bfe5e-9944-4bf4-b799-527e9b5c2a13\",\n    \"name\": \"base\",\n    \"filesystem\": \"default\",\n    \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n    \"localStowInfo\": {\n      \"stowProgress\": \"100%\",\n      \"locator\": \"0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498\",\n      \"stowStatus\": \"SYNCHRONIZED\"\n    },\n    \"accessPoint\": \"@GMT-2022.07.27-10.41.09\",\n    \"stowStatus\": \"SYNCHRONIZED\",\n    \"creationTime\": \"2022-07-27T10:41:10Z\",\n    \"objectProgress\": \"100%\",\n    \"estReclaimableSize\": 0\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea5e0623-a2fc-4b20-b503-f8b7b00e3547",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":fs_uid",
+                    ":uid",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fs_uid",
+                      "description": "(Required) Unique identifier of the target filesystem to restore."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60b66353-8276-47f5-a1e2-69e0cb8508af",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":fs_uid",
+                    ":uid",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fs_uid",
+                      "description": "(Required) Unique identifier of the target filesystem to restore."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3c9f8db-008d-4866-8648-fbd951da7b6b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    ":fs_uid",
+                    ":uid",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fs_uid",
+                      "description": "(Required) Unique identifier of the target filesystem to restore."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the source snapshot."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c418d8c-7ea2-4416-a880-bca0e4598bba",
+          "name": "Get snapshot metadata from object store",
+          "request": {
+            "name": "Get snapshot metadata from object store",
+            "description": {
+              "content": "Returns detailed metadata about a snapshot stored in object storage using its locator string. Queries the object store directly without requiring the snapshot to be downloaded.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                "locatorInfo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_storage\": \"<string>\",\n  \"locator\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "42ec6cdb-a239-4478-8187-4e6a400a6cea",
+              "name": "Snapshot metadata retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "locatorInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_storage\": \"primary_obs\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"fs_name\": \"fs1\",\n    \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n    \"snap_view_id\": \"SnapViewId<1>\",\n    \"min_weka_version\": \"4.4.0\",\n    \"access_point\": \"@GMT-2024.10.14-09.23.51\",\n    \"fs_ssd_capacity\": 10000003072,\n    \"root_inode_id\": \"InodeId<304574939398144>\",\n    \"has_legacy_v34_data\": false,\n    \"orig_fq_fs_id\": {\n      \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n      \"fsId\": \"FSId<8>\"\n    },\n    \"snapshot_name\": \"s1\",\n    \"snap_layers_num\": 1,\n    \"deprecation_weka_version\": \"INVALID\",\n    \"is_encrypted\": true,\n    \"customizationKmsType\": \"unset\",\n    \"kmsNamespace\": \"\",\n    \"kmsKeyName\": \"\",\n    \"stow_version\": \"StowVersion<11>\",\n    \"fs_max_files\": 0,\n    \"num_unique_guids\": 1,\n    \"snap_layers_info\": [\n      {\n        \"indexInParent_deprecated\": 0,\n        \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n        \"freezeTimestamp\": {\n          \"nanosecs\": {\n            \"val\": 246200232\n          },\n          \"secs\": {\n            \"val\": 1728897831\n          }\n        },\n        \"squashDepth\": \"SnapDepth<INVALID>\",\n        \"origFqSnapLayerId\": {\n          \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n          \"snapLayerId\": \"SnapLayerId<9>\"\n        },\n        \"capacity\": {\n          \"metadata\": 0,\n          \"data\": 1\n        },\n        \"bucketsNum\": 72,\n        \"timestamp\": {\n          \"nanosecs\": {\n            \"val\": 10\n          },\n          \"secs\": {\n            \"val\": 0\n          }\n        },\n        \"snapLayerId\": \"SnapLayerId<9>\",\n        \"isForked\": \"no\",\n        \"generation\": \"SnapLayerStowGeneration<0>\",\n        \"depth\": \"SnapDepth<0>\",\n        \"origLastMergedParent\": {\n          \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n          \"snapLayerId\": \"SnapLayerId<9>\"\n        },\n        \"stowVersion\": \"StowVersion<11>\"\n      },\n      {\n        \"indexInParent_deprecated\": 0,\n        \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n        \"freezeTimestamp\": {\n          \"nanosecs\": {\n            \"val\": 246200232\n          },\n          \"secs\": {\n            \"val\": 1728897831\n          }\n        },\n        \"squashDepth\": \"SnapDepth<INVALID>\",\n        \"origFqSnapLayerId\": {\n          \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n          \"snapLayerId\": \"SnapLayerId<9>\"\n        },\n        \"capacity\": {\n          \"metadata\": 0,\n          \"data\": 1\n        },\n        \"bucketsNum\": 72,\n        \"timestamp\": {\n          \"nanosecs\": {\n            \"val\": 10\n          },\n          \"secs\": {\n            \"val\": 0\n          }\n        },\n        \"snapLayerId\": \"SnapLayerId<9>\",\n        \"isForked\": \"no\",\n        \"generation\": \"SnapLayerStowGeneration<0>\",\n        \"depth\": \"SnapDepth<0>\",\n        \"origLastMergedParent\": {\n          \"guid\": \"d758af08-f03d-4acf-b289-35433cf433f6\",\n          \"snapLayerId\": \"SnapLayerId<9>\"\n        },\n        \"stowVersion\": \"StowVersion<11>\"\n      }\n    ],\n    \"total_ssd_metadata_size\": 4096,\n    \"fs_total_capacity\": 10000003072,\n    \"total_size\": 4096,\n    \"fs_id\": \"FSId<8>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28b3a459-de44-4f98-ad8f-9cfaf9a48b6f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "locatorInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_storage\": \"primary_obs\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7f15a107-8464-48b0-bb00-85ab624ac383",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "locatorInfo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_storage\": \"primary_obs\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce7c810a-34c7-485a-ad41-167d6d25410c",
+          "name": "Initialize snapshot differential analysis",
+          "request": {
+            "name": "Initialize snapshot differential analysis",
+            "description": {
+              "content": "Prepares the system for computing differences between two snapshots by generating processing tokens (cookies). This is the first step in a two-phase operation for identifying changed, added, or deleted files. The operation divides the comparison workload into parallel chunks based on the requested parallelism. Use the returned cookies in subsequent getResults calls.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                "diff",
+                "prepare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fs_name\": \"<string>\",\n  \"recent_snap\": \"<string>\",\n  \"parallelism\": \"<number>\",\n  \"older_snap\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5facef6-cb95-407a-a54b-2bb947a1ba3c",
+              "name": "Differential analysis prepared successfully with cookie tokens.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "diff",
+                    "prepare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_name\": \"production_fs\",\n  \"recent_snap\": \"backup_oct_13\",\n  \"parallelism\": 16,\n  \"older_snap\": \"backup_oct_12\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"0-0-0-3-4-0-0\",\n    \"2-0-40000000-3-4-40000000-0\",\n    \"4-0-80000000-3-4-80000000-0\",\n    \"6-0-C0000000-3-4-C0000000-0\",\n    \"9-0-0-3-4-0-0\",\n    \"B-0-40000000-3-4-40000000-0\",\n    \"D-0-80000000-3-4-80000000-0\",\n    \"F-0-C0000000-3-4-C0000000-0\",\n    \"12-0-0-3-4-0-0\",\n    \"14-0-40000000-3-4-40000000-0\",\n    \"16-0-80000000-3-4-80000000-0\",\n    \"18-0-C0000000-3-4-C0000000-0\",\n    \"1B-0-0-3-4-0-0\",\n    \"1D-0-40000000-3-4-40000000-0\",\n    \"1F-0-80000000-3-4-80000000-0\",\n    \"21-0-C0000000-3-4-C0000000-0\",\n    \"FFFF-FFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-0\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f670391e-a733-4b63-b2be-65c6786cfffd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "diff",
+                    "prepare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_name\": \"production_fs\",\n  \"recent_snap\": \"backup_oct_13\",\n  \"parallelism\": 16,\n  \"older_snap\": \"backup_oct_12\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05f50496-d98a-402c-8051-0051f1dad14e",
+          "name": "Get snapshot differential results",
+          "request": {
+            "name": "Get snapshot differential results",
+            "description": {
+              "content": "Retrieves the actual differences between two snapshots, including changed, added, and deleted files. Must be called after preparing the differential analysis using the prepare endpoint. Supports efficient pagination through resume and stop tokens. Use resume_token from previous responses to continue where you left off.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshots",
+                "diff",
+                "getResults"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fs_name\": \"<string>\",\n  \"recent_snap\": \"<string>\",\n  \"max_results\": \"<number>\",\n  \"older_snap\": \"<string>\",\n  \"resume_token\": \"<string>\",\n  \"stop_token\": \"<string>\",\n  \"output_type\": \"<string>\",\n  \"resolve_path\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef300c4e-7025-43d0-8ef7-806886211a92",
+              "name": "Snapshot differences retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "diff",
+                    "getResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_name\": \"production_fs\",\n  \"recent_snap\": \"backup_oct_13\",\n  \"max_results\": 100,\n  \"older_snap\": \"backup_oct_12\",\n  \"resume_token\": \"0-0-0-3-2-0-0\",\n  \"stop_token\": \"FFFF-FFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-0\",\n  \"output_type\": \"<string>\",\n  \"resolve_path\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"results_count\": 100,\n    \"next_resume_token\": \"0-1-10F326D8-3-4-0-0\",\n    \"results\": [\n      {\n        \"parent_inode\": \"InodeContext<15166635913519693827>\",\n        \"op_type\": \"FILE_CREATE\",\n        \"prev_path\": \"\",\n        \"inode\": \"InodeContext<3483843281618403331>\",\n        \"path\": \"/dataset/dirdata/dir_5039/dir_x/dir_y/dir_z/file.txt\",\n        \"renamed\": false\n      },\n      {\n        \"parent_inode\": \"InodeContext<3871279636400046083>\",\n        \"op_type\": \"DIR_CREATE\",\n        \"prev_path\": \"\",\n        \"inode\": \"InodeContext<12194863564207620099>\",\n        \"path\": \"/dataset/dirdata/dir_8159\",\n        \"renamed\": false\n      },\n      {\n        \"parent_inode\": \"InodeContext<15458283659613437955>\",\n        \"op_type\": \"DIR_CREATE\",\n        \"prev_path\": \"\",\n        \"inode\": \"InodeContext<17697929275669610499>\",\n        \"path\": \"/dataset/dirdata/dir_3037/dir_x/dir_y/dir_z\",\n        \"renamed\": false\n      },\n      {\n        \"parent_inode\": \"InodeContext<3871279636400046083>\",\n        \"op_type\": \"DIR_CREATE\",\n        \"prev_path\": \"\",\n        \"inode\": \"InodeContext<11175523706379436035>\",\n        \"path\": \"/dataset/dirdata/dir_1695\",\n        \"renamed\": false\n      },\n      {\n        \"parent_inode\": \"InodeContext<6118543810050523139>\",\n        \"op_type\": \"DIR_CREATE\",\n        \"prev_path\": \"\",\n        \"inode\": \"InodeContext<11077777077828321283>\",\n        \"path\": \"/dataset/dirdata/dir_9291/dir_x\",\n        \"renamed\": false\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "236033d5-5a40-419a-9ada-190ace0c847a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshots",
+                    "diff",
+                    "getResults"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_name\": \"production_fs\",\n  \"recent_snap\": \"backup_oct_13\",\n  \"max_results\": 100,\n  \"older_snap\": \"backup_oct_12\",\n  \"resume_token\": \"0-0-0-3-2-0-0\",\n  \"stop_token\": \"FFFF-FFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-FFFFFFFF-0\",\n  \"output_type\": \"<string>\",\n  \"resolve_path\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3f5bef5b-7cf0-41d9-8a18-316b444a98f4",
+    "name": "@weka-api Active Directory Snapshots API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

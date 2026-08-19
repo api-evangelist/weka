@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Catalog API'
   version: '5.1'
@@ -117,8 +117,9 @@ paths:
                   page_size:
                     type: integer
                   next_cookie:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                   total_records:
                     type: integer
                     description: Total number of records matching the query criteria (for pagination UI)
@@ -304,8 +305,9 @@ paths:
                       symlink_modify:
                         type: integer
                   next_cookie:
-                    type: string
-                    nullable: true
+                    type:
+                    - string
+                    - 'null'
                     description: Pagination token for next page (null if no more pages)
               example:
                 success: true

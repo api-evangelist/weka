@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Events API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/events",
+            "params": [
+              {
+                "name": "num_results",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "type_list",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "category_list",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "show_internal",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "by_digested_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists cluster events, with options to filter by severity, category, and time range."
+        },
+        {
+          "info": {
+            "name": "List event types and descriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/events/describe",
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "A list of event types to describe."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "A list of event categories to describe."
+              },
+              {
+                "name": "show_internal",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists all event types and provides a detailed description for each, including its meaning and potential causes."
+        },
+        {
+          "info": {
+            "name": "Aggregate events by time",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/events/aggregate",
+            "params": [
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "int",
+                "value": "",
+                "type": "query",
+                "description": "The time interval for the aggregation in seconds."
+              },
+              {
+                "name": "show_internal",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Aggregates events over a specified time interval to show event frequency and trends."
+        },
+        {
+          "info": {
+            "name": "List local server events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/events/local",
+            "params": [
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "stem_mode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "show_internal",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists events generated only by the server that receives the API request, which is useful for targeted troubleshooting."
+        },
+        {
+          "info": {
+            "name": "Create a custom event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/events/custom",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and records a custom event with a user-defined message for enhanced monitoring and logging."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

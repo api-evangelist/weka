@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Network Space API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NetworkSpace",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List network spaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/networkSpaces",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tenant name or ID."
+              }
+            ]
+          },
+          "docs": "List the cluster's network spaces. Optionally filter by tenant."
+        },
+        {
+          "info": {
+            "name": "Add a network space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/networkSpaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new network space with its corresponding VLAN and IP pool for backend cluster use."
+        },
+        {
+          "info": {
+            "name": "Show network space usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/networkSpaces/:name/usage",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The network space name or numeric ID (nid)."
+              },
+              {
+                "name": "only_clients",
+                "value": "",
+                "type": "query",
+                "description": "Show only client containers."
+              },
+              {
+                "name": "only_backends",
+                "value": "",
+                "type": "query",
+                "description": "Show only backend containers."
+              }
+            ]
+          },
+          "docs": "Show which containers are using IPs from a specific network space."
+        },
+        {
+          "info": {
+            "name": "Update a network space",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/networkSpaces/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The network space name or numeric ID (nid)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing network space's VLAN and IP pool configuration."
+        },
+        {
+          "info": {
+            "name": "Remove a network space",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/networkSpaces/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "The network space name or numeric ID (nid)."
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force remove even when clients are present."
+              }
+            ]
+          },
+          "docs": "Remove a network space from the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Drive API'
   version: '5.1'
@@ -319,12 +319,14 @@ components:
           type: string
           example: 0
         removed_time:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: '2021-03-07T09:28:48.46952Z'
         serial_number:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: AWS66292A9B076E48A38
         should_be_active:
           type: boolean

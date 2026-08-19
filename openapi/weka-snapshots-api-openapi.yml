@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Snapshots API'
   version: '5.1'
@@ -678,173 +678,6 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
-    snapshotLocatorInfoDetails:
-      type: object
-      properties:
-        fs_name:
-          type: string
-          example: fs1
-        guid:
-          type: string
-          example: d758af08-f03d-4acf-b289-35433cf433f6
-        snap_view_id:
-          type: string
-          example: SnapViewId<1>
-        min_weka_version:
-          type: string
-          example: 4.4.0
-        access_point:
-          type: string
-          example: '@GMT-2024.10.14-09.23.51'
-        fs_ssd_capacity:
-          type: number
-          example: 10000003072
-        root_inode_id:
-          type: string
-          example: InodeId<304574939398144>
-        has_legacy_v34_data:
-          type: boolean
-          example: false
-        orig_fq_fs_id:
-          type: object
-          properties:
-            guid:
-              type: string
-              example: d758af08-f03d-4acf-b289-35433cf433f6
-            fsId:
-              type: string
-              example: FSId<8>
-        snapshot_name:
-          type: string
-          example: s1
-        snap_layers_num:
-          type: number
-          example: 1
-        deprecation_weka_version:
-          type: string
-          example: INVALID
-        is_encrypted:
-          type: boolean
-          example: true
-        customizationKmsType:
-          type: string
-          example: unset
-        kmsNamespace:
-          type: string
-          example: ''
-        kmsKeyName:
-          type: string
-          example: ''
-        stow_version:
-          type: string
-          example: StowVersion<11>
-        fs_max_files:
-          type: number
-          example: 0
-        num_unique_guids:
-          type: number
-          example: 1
-        snap_layers_info:
-          type: array
-          items:
-            type: object
-            properties:
-              indexInParent_deprecated:
-                type: number
-                example: 0
-              guid:
-                type: string
-                example: d758af08-f03d-4acf-b289-35433cf433f6
-              freezeTimestamp:
-                type: object
-                properties:
-                  nanosecs:
-                    type: object
-                    properties:
-                      val:
-                        type: number
-                        example: 246200232
-                  secs:
-                    type: object
-                    properties:
-                      val:
-                        type: number
-                        example: 1728897831
-              squashDepth:
-                type: string
-                example: SnapDepth<INVALID>
-              origFqSnapLayerId:
-                type: object
-                properties:
-                  guid:
-                    type: string
-                    example: d758af08-f03d-4acf-b289-35433cf433f6
-                  snapLayerId:
-                    type: string
-                    example: SnapLayerId<9>
-              capacity:
-                type: object
-                properties:
-                  metadata:
-                    type: number
-                    example: 0
-                  data:
-                    type: number
-                    example: 1
-              bucketsNum:
-                type: number
-                example: 72
-              timestamp:
-                type: object
-                properties:
-                  nanosecs:
-                    type: object
-                    properties:
-                      val:
-                        type: number
-                        example: 10
-                  secs:
-                    type: object
-                    properties:
-                      val:
-                        type: number
-                        example: 0
-              snapLayerId:
-                type: string
-                example: SnapLayerId<9>
-              isForked:
-                type: string
-                example: 'no'
-              generation:
-                type: string
-                example: SnapLayerStowGeneration<0>
-              depth:
-                type: string
-                example: SnapDepth<0>
-              origLastMergedParent:
-                type: object
-                properties:
-                  guid:
-                    type: string
-                    example: d758af08-f03d-4acf-b289-35433cf433f6
-                  snapLayerId:
-                    type: string
-                    example: SnapLayerId<9>
-              stowVersion:
-                type: string
-                example: StowVersion<11>
-        total_ssd_metadata_size:
-          type: number
-          example: 4096
-        fs_total_capacity:
-          type: number
-          example: 10000003072
-        total_size:
-          type: number
-          example: 4096
-        fs_id:
-          type: string
-          example: FSId<8>
     cookielist:
       type: array
       items:
@@ -1036,6 +869,173 @@ components:
           type: string
           format: date-time
           example: '2022-07-27T10:41:10Z'
+    snapshotLocatorInfoDetails:
+      type: object
+      properties:
+        fs_name:
+          type: string
+          example: fs1
+        guid:
+          type: string
+          example: d758af08-f03d-4acf-b289-35433cf433f6
+        snap_view_id:
+          type: string
+          example: SnapViewId<1>
+        min_weka_version:
+          type: string
+          example: 4.4.0
+        access_point:
+          type: string
+          example: '@GMT-2024.10.14-09.23.51'
+        fs_ssd_capacity:
+          type: number
+          example: 10000003072
+        root_inode_id:
+          type: string
+          example: InodeId<304574939398144>
+        has_legacy_v34_data:
+          type: boolean
+          example: false
+        orig_fq_fs_id:
+          type: object
+          properties:
+            guid:
+              type: string
+              example: d758af08-f03d-4acf-b289-35433cf433f6
+            fsId:
+              type: string
+              example: FSId<8>
+        snapshot_name:
+          type: string
+          example: s1
+        snap_layers_num:
+          type: number
+          example: 1
+        deprecation_weka_version:
+          type: string
+          example: INVALID
+        is_encrypted:
+          type: boolean
+          example: true
+        customizationKmsType:
+          type: string
+          example: unset
+        kmsNamespace:
+          type: string
+          example: ''
+        kmsKeyName:
+          type: string
+          example: ''
+        stow_version:
+          type: string
+          example: StowVersion<11>
+        fs_max_files:
+          type: number
+          example: 0
+        num_unique_guids:
+          type: number
+          example: 1
+        snap_layers_info:
+          type: array
+          items:
+            type: object
+            properties:
+              indexInParent_deprecated:
+                type: number
+                example: 0
+              guid:
+                type: string
+                example: d758af08-f03d-4acf-b289-35433cf433f6
+              freezeTimestamp:
+                type: object
+                properties:
+                  nanosecs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 246200232
+                  secs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 1728897831
+              squashDepth:
+                type: string
+                example: SnapDepth<INVALID>
+              origFqSnapLayerId:
+                type: object
+                properties:
+                  guid:
+                    type: string
+                    example: d758af08-f03d-4acf-b289-35433cf433f6
+                  snapLayerId:
+                    type: string
+                    example: SnapLayerId<9>
+              capacity:
+                type: object
+                properties:
+                  metadata:
+                    type: number
+                    example: 0
+                  data:
+                    type: number
+                    example: 1
+              bucketsNum:
+                type: number
+                example: 72
+              timestamp:
+                type: object
+                properties:
+                  nanosecs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 10
+                  secs:
+                    type: object
+                    properties:
+                      val:
+                        type: number
+                        example: 0
+              snapLayerId:
+                type: string
+                example: SnapLayerId<9>
+              isForked:
+                type: string
+                example: 'no'
+              generation:
+                type: string
+                example: SnapLayerStowGeneration<0>
+              depth:
+                type: string
+                example: SnapDepth<0>
+              origLastMergedParent:
+                type: object
+                properties:
+                  guid:
+                    type: string
+                    example: d758af08-f03d-4acf-b289-35433cf433f6
+                  snapLayerId:
+                    type: string
+                    example: SnapLayerId<9>
+              stowVersion:
+                type: string
+                example: StowVersion<11>
+        total_ssd_metadata_size:
+          type: number
+          example: 4096
+        fs_total_capacity:
+          type: number
+          example: 10000003072
+        total_size:
+          type: number
+          example: 4096
+        fs_id:
+          type: string
+          example: FSId<8>
     diff_list:
       type: object
       properties:

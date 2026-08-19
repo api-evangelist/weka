@@ -1,0 +1,155 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Drive API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Drive",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all drives",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/drives",
+            "params": [
+              {
+                "name": "show_removed",
+                "value": "",
+                "type": "query",
+                "description": "Show drives that were removed from the cluster."
+              },
+              {
+                "name": "container_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filters the list to show drives from the specified container IDs only."
+              }
+            ]
+          },
+          "docs": "Lists all SSD drives in the cluster and provides details such as size, UUID, and status."
+        },
+        {
+          "info": {
+            "name": "Add a drive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/drives",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attaches an SSD drive to a specific container to expand its resources."
+        },
+        {
+          "info": {
+            "name": "Get drive details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/drives/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the drive."
+              }
+            ]
+          },
+          "docs": "Returns detailed information for a specific SSD drive."
+        },
+        {
+          "info": {
+            "name": "Remove a drive",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/drives/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the drive."
+              }
+            ]
+          },
+          "docs": "Detaches a specified SSD drive from the cluster, making it unavailable."
+        },
+        {
+          "info": {
+            "name": "Identify a drive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/drives/:uid/identify",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Drive uid"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Locate a physical drive by controlling its indicator LED. This operation enables or disables the LED for a specific drive, assisting with maintenance or hardware identification."
+        },
+        {
+          "info": {
+            "name": "Activate drives",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/drives/activate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates one or more inactive SSD drives, making them available for use."
+        },
+        {
+          "info": {
+            "name": "Deactivate drives",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/drives/deactivate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deactivates one or more SSD drives, preventing their use while preserving the data on them."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

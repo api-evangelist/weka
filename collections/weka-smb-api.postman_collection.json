@@ -1,0 +1,3819 @@
+{
+  "item": [
+    {
+      "id": "496e9bba-5971-490f-a5f0-d66937ee8e99",
+      "name": "SMB",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5473f5e1-1fd0-496c-904d-1617ac7f4bce",
+          "name": "Get SMB cluster configuration",
+          "request": {
+            "name": "Get SMB cluster configuration",
+            "description": {
+              "content": "Returns comprehensive details about the existing SMB cluster, including<br> domain membership status, container assignments, ID mapping configuration,<br> encryption settings, and feature enablement flags.<br> Use this endpoint to audit the current cluster state or verify configuration changes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a31c220-7465-49b7-9d8e-3ef91764ae57",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"joinedDomainMappingToId\": 4290000000,\n    \"sambaHosts\": [\n      \"HostId<0>\",\n      \"HostId<0>\"\n    ],\n    \"idmapBackend\": \"rfc2307\",\n    \"sambaIps\": [\n      \"some_ip\",\n      \"some_ip\"\n    ],\n    \"defaultDomainMappingToId\": 4291000000,\n    \"domainName\": \"ad.company.com\",\n    \"name\": \"CompanySMB\",\n    \"encryption\": \"enabled\",\n    \"domainJoined\": true,\n    \"joinedDomainMappingFromId\": 0,\n    \"domainAdminUsername\": \"wekadmin\",\n    \"defaultDomainMappingFromId\": 4290000001,\n    \"domainNetbiosName\": \"ad\",\n    \"symlink\": false,\n    \"smbw\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69ba23c7-4065-4643-b114-d8773b74ce62",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1573cd23-ee63-4b43-a852-85ff7ac9b896",
+          "name": "Create a new SMB cluster",
+          "request": {
+            "name": "Create a new SMB cluster",
+            "description": {
+              "content": "Creates a new SMB cluster and establishes its foundational configuration. This includes setting the domain association, assigning containers to serve the SMB protocol, and defining security policies.<br> This operation creates the cluster structure but does not join it to an Active Directory domain. After the cluster is created, use the POST /smb/activeDirectory endpoint to complete the domain integration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"domain\": \"<string>\",\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"samba_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"domain_netbios_name\": \"<string>\",\n  \"idmap_backend\": \"<string>\",\n  \"default_domain_mapping_from_id\": \"<number>\",\n  \"default_domain_mapping_to_id\": \"<number>\",\n  \"joined_domain_mapping_from_id\": \"<number>\",\n  \"joined_domain_mapping_to_id\": \"<number>\",\n  \"encryption\": \"<string>\",\n  \"symlink\": \"<boolean>\",\n  \"smbw\": \"<boolean>\",\n  \"config_fs_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d589c0a9-3917-4112-b543-1337558ff362",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"companySMB\",\n  \"domain\": \"ad.company.com\",\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"samba_ips\": [\n    \"172.68.34.23\",\n    \"172.68.34.23\"\n  ],\n  \"domain_netbios_name\": \"ad\",\n  \"idmap_backend\": \"rfc2307\",\n  \"default_domain_mapping_from_id\": 4290000001,\n  \"default_domain_mapping_to_id\": 4291000000,\n  \"joined_domain_mapping_from_id\": 0,\n  \"joined_domain_mapping_to_id\": 4290000000,\n  \"encryption\": \"<string>\",\n  \"symlink\": \"<boolean>\",\n  \"smbw\": \"<boolean>\",\n  \"config_fs_name\": \"default\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10712255-9679-4d26-b0a4-02a61d19d301",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"companySMB\",\n  \"domain\": \"ad.company.com\",\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"samba_ips\": [\n    \"172.68.34.23\",\n    \"172.68.34.23\"\n  ],\n  \"domain_netbios_name\": \"ad\",\n  \"idmap_backend\": \"rfc2307\",\n  \"default_domain_mapping_from_id\": 4290000001,\n  \"default_domain_mapping_to_id\": 4291000000,\n  \"joined_domain_mapping_from_id\": 0,\n  \"joined_domain_mapping_to_id\": 4290000000,\n  \"encryption\": \"<string>\",\n  \"symlink\": \"<boolean>\",\n  \"smbw\": \"<boolean>\",\n  \"config_fs_name\": \"default\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a3d3cae-1f09-4adb-ab79-6875e286be01",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"companySMB\",\n  \"domain\": \"ad.company.com\",\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"samba_ips\": [\n    \"172.68.34.23\",\n    \"172.68.34.23\"\n  ],\n  \"domain_netbios_name\": \"ad\",\n  \"idmap_backend\": \"rfc2307\",\n  \"default_domain_mapping_from_id\": 4290000001,\n  \"default_domain_mapping_to_id\": 4291000000,\n  \"joined_domain_mapping_from_id\": 0,\n  \"joined_domain_mapping_to_id\": 4290000000,\n  \"encryption\": \"<string>\",\n  \"symlink\": \"<boolean>\",\n  \"smbw\": \"<boolean>\",\n  \"config_fs_name\": \"default\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07b89bbe-9256-40a5-9e43-98cb3d6e8b55",
+          "name": "Modify SMB cluster settings",
+          "request": {
+            "name": "Modify SMB cluster settings",
+            "description": {
+              "content": "Updates cluster-wide configuration parameters for an existing SMB deployment.<br> Supports modification of encryption policy and floating IP address assignments.<br> Changing the encryption policy affects new connections. Existing connections maintain their original encryption state until reconnection.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"encryption\": \"<string>\",\n  \"samba_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "449de1af-06c2-4349-870e-382e6a8eaf08",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryption\": \"<string>\",\n  \"samba_ips\": [\n    \"172.68.34.23\",\n    \"172.68.34.23\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60db2f2c-486f-4fc7-afdc-1cc578d8c186",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryption\": \"<string>\",\n  \"samba_ips\": [\n    \"172.68.34.23\",\n    \"172.68.34.23\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61ca6f7b-b4ff-4a00-aa53-b4005c34ce83",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryption\": \"<string>\",\n  \"samba_ips\": [\n    \"172.68.34.23\",\n    \"172.68.34.23\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e32e4ac-d6a9-4ffc-a4bc-70b9197050be",
+          "name": "Disable SMB cluster",
+          "request": {
+            "name": "Disable SMB cluster",
+            "description": {
+              "content": "Disables the SMB cluster and removes its configuration. This action terminates all active client sessions, removes associated floating IPs, and automatically disconnects the cluster from its Active Directory domain, if joined.<br> The underlying filesystem data is preserved. This operation only removes network access through the SMB protocol.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4c08760-7cd1-4856-b8f7-ada20d7ccdba",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40c3d38c-1da5-479b-8900-e0dc329a4131",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca6b2fa5-7f23-45b3-b947-a2ce99e887d9",
+          "name": "Get trusted domain list",
+          "request": {
+            "name": "Get trusted domain list",
+            "description": {
+              "content": "Returns all trusted domains configured within the SMB cluster.<br> Trusted domains enable cross-domain authentication and resource access in multi-domain<br> Active Directory environments. Each domain includes ID mapping range specifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "domains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b749622f-7a92-44f5-bdaa-cefda5ffb3de",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"SMBTrustedDomainId<0>\",\n      \"uid\": \"uid_string\",\n      \"idmapBackend\": \"rfc2307\",\n      \"mappingFromId\": 4291000001,\n      \"mappingToId\": 4294967294,\n      \"domainName\": \"ad.company.com\"\n    },\n    {\n      \"id\": \"SMBTrustedDomainId<0>\",\n      \"uid\": \"uid_string\",\n      \"idmapBackend\": \"rfc2307\",\n      \"mappingFromId\": 4291000001,\n      \"mappingToId\": 4294967294,\n      \"domainName\": \"ad.company.com\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f010e2b5-2772-4dac-8951-db14f718adf3",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd18912c-d7e2-465c-bf72-cd413cfa3918",
+          "name": "Add trusted domain to cluster",
+          "request": {
+            "name": "Add trusted domain to cluster",
+            "description": {
+              "content": "Registers a new trusted domain with the SMB cluster and configures its ID mapping range.<br> Trusted domains allow users and groups from additional Active Directory domains to access SMB resources.<br> This operation automatically restarts SMB services to apply the new trust configuration, which may cause a brief service interruption.<br> Ensure the specified ID mapping range (mapping_from_id–mapping_to_id) does not overlap with existing domain ranges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "domains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"domain_name\": \"<string>\",\n  \"mapping_from_id\": \"<number>\",\n  \"mapping_to_id\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54bc7ca2-c130-4912-becb-6f394354900a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain_name\": \"partner.company.com\",\n  \"mapping_from_id\": 4291000001,\n  \"mapping_to_id\": 4294967294\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SMBTrustedDomainId<0>\",\n    \"uid\": \"uid_string\",\n    \"idmapBackend\": \"rfc2307\",\n    \"mappingFromId\": 4291000001,\n    \"mappingToId\": 4294967294,\n    \"domainName\": \"ad.company.com\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01f714c7-52d0-4091-a709-361c795611b1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain_name\": \"partner.company.com\",\n  \"mapping_from_id\": 4291000001,\n  \"mapping_to_id\": 4294967294\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de0af124-ec7a-49ed-a706-f827b3d38b21",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"domain_name\": \"partner.company.com\",\n  \"mapping_from_id\": 4291000001,\n  \"mapping_to_id\": 4294967294\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "43626a5e-7998-4ae4-9605-1f5fb9bfc90b",
+          "name": "Get smb mount options",
+          "request": {
+            "name": "Get smb mount options",
+            "description": {},
+            "url": {
+              "path": [
+                "smb",
+                "mount"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4d14a9ad-ce69-4a62-94b0-6bf923b9b933",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "mount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"coherent\",\n    \"readcache\",\n    \"writecache\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1579ef14-c210-45c3-91ca-0dfbfa4f6e8c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "mount"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "01ddec6f-1c2d-4cd5-941a-76a44765bde6",
+          "name": "Get all SMB shares",
+          "request": {
+            "name": "Get all SMB shares",
+            "description": {
+              "content": "Returns a comprehensive list of all shares configured within the SMB cluster.<br> Each share includes access permissions, encryption settings, filesystem mappings,<br> user access lists, and configuration parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "shares"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ed0edae-9044-4f26-833c-2df51d1c5be3",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"SambaShareId<0>\",\n      \"innerPath\": \"/\",\n      \"fileCreateMask\": \"0744\",\n      \"mountOptions\": \"writecache\",\n      \"readWriteUsers\": [\n        \"wekadmin\",\n        \"wekadmin\"\n      ],\n      \"readOnly\": true,\n      \"validUsers\": [\n        \"username\",\n        \"username\"\n      ],\n      \"invalidUsers\": [\n        \"username2\",\n        \"username2\"\n      ],\n      \"hidden\": false,\n      \"shareName\": \"share-1\",\n      \"readOnlyUsers\": [\n        \"username3\",\n        \"username3\"\n      ],\n      \"encryption\": \"cluster_default\",\n      \"uid\": \"435\",\n      \"acl\": true,\n      \"additionalShareOptions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"directoryCreateMask\": \"0755\",\n      \"description\": \"some description\",\n      \"obsDirect\": true,\n      \"allowGuestAccess\": false,\n      \"fsName\": \"default\",\n      \"caseSensitivity\": true,\n      \"namedStreams\": true,\n      \"mapAcls\": \"posix\"\n    },\n    {\n      \"id\": \"SambaShareId<0>\",\n      \"innerPath\": \"/\",\n      \"fileCreateMask\": \"0744\",\n      \"mountOptions\": \"writecache\",\n      \"readWriteUsers\": [\n        \"wekadmin\",\n        \"wekadmin\"\n      ],\n      \"readOnly\": true,\n      \"validUsers\": [\n        \"username\",\n        \"username\"\n      ],\n      \"invalidUsers\": [\n        \"username2\",\n        \"username2\"\n      ],\n      \"hidden\": false,\n      \"shareName\": \"share-1\",\n      \"readOnlyUsers\": [\n        \"username3\",\n        \"username3\"\n      ],\n      \"encryption\": \"cluster_default\",\n      \"uid\": \"435\",\n      \"acl\": true,\n      \"additionalShareOptions\": [\n        \"string\",\n        \"string\"\n      ],\n      \"directoryCreateMask\": \"0755\",\n      \"description\": \"some description\",\n      \"obsDirect\": true,\n      \"allowGuestAccess\": false,\n      \"fsName\": \"default\",\n      \"caseSensitivity\": true,\n      \"namedStreams\": true,\n      \"mapAcls\": \"posix\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8c5bf3f8-5ee0-4184-bd5a-1b5068b3d1ca",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7ab2cad-aad3-4159-905b-5cb854158767",
+          "name": "Add SMB share",
+          "request": {
+            "name": "Add SMB share",
+            "description": {
+              "content": "Provisions a new share within the SMB cluster, mapping a filesystem path to a network-accessible share.<br> The share becomes immediately available to authorized users upon creation.<br> For access control, use the user_list_type and users parameters to define initial access permissions. After creating a user, additional users can be added using the POST /smb/users endpoint. For ACL options, use the map_acls parameter to determine how Windows ACLs are translated to filesystem permissions (posix, windows, or hybrid mode).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "shares"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"share_name\": \"<string>\",\n  \"fs_name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"sub_path\": \"<string>\",\n  \"mount_options\": \"<string>\",\n  \"file_create_mask\": \"<string>\",\n  \"directory_create_mask\": \"<string>\",\n  \"acl\": \"<boolean>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"obs_direct\": \"<boolean>\",\n  \"encryption\": \"<string>\",\n  \"case_sensitivity\": \"<boolean>\",\n  \"read_only\": \"<boolean>\",\n  \"user_list_type\": \"<string>\",\n  \"users\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additional_share_options\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"named_streams\": \"<boolean>\",\n  \"map_acls\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e42e973-6c74-4c23-804d-7274f1631895",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"share_name\": \"share-1\",\n  \"fs_name\": \"default\",\n  \"description\": \"Some description\",\n  \"sub_path\": \"/projects/data\",\n  \"mount_options\": \"writecache\",\n  \"file_create_mask\": \"<string>\",\n  \"directory_create_mask\": \"<string>\",\n  \"acl\": \"<boolean>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"obs_direct\": \"<boolean>\",\n  \"encryption\": \"<string>\",\n  \"case_sensitivity\": \"<boolean>\",\n  \"read_only\": \"<boolean>\",\n  \"user_list_type\": \"read_write\",\n  \"users\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additional_share_options\": [\n    \"string\",\n    \"string\"\n  ],\n  \"named_streams\": \"<boolean>\",\n  \"map_acls\": \"posix\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SambaShareId<0>\",\n    \"innerPath\": \"/\",\n    \"fileCreateMask\": \"0744\",\n    \"mountOptions\": \"writecache\",\n    \"readWriteUsers\": [\n      \"wekadmin\",\n      \"wekadmin\"\n    ],\n    \"readOnly\": true,\n    \"validUsers\": [\n      \"username\",\n      \"username\"\n    ],\n    \"invalidUsers\": [\n      \"username2\",\n      \"username2\"\n    ],\n    \"hidden\": false,\n    \"shareName\": \"share-1\",\n    \"readOnlyUsers\": [\n      \"username3\",\n      \"username3\"\n    ],\n    \"encryption\": \"cluster_default\",\n    \"uid\": \"435\",\n    \"acl\": true,\n    \"additionalShareOptions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"directoryCreateMask\": \"0755\",\n    \"description\": \"some description\",\n    \"obsDirect\": true,\n    \"allowGuestAccess\": false,\n    \"fsName\": \"default\",\n    \"caseSensitivity\": true,\n    \"namedStreams\": true,\n    \"mapAcls\": \"posix\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d3c1f3e-0a16-4b44-a6df-d4992734185f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"share_name\": \"share-1\",\n  \"fs_name\": \"default\",\n  \"description\": \"Some description\",\n  \"sub_path\": \"/projects/data\",\n  \"mount_options\": \"writecache\",\n  \"file_create_mask\": \"<string>\",\n  \"directory_create_mask\": \"<string>\",\n  \"acl\": \"<boolean>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"obs_direct\": \"<boolean>\",\n  \"encryption\": \"<string>\",\n  \"case_sensitivity\": \"<boolean>\",\n  \"read_only\": \"<boolean>\",\n  \"user_list_type\": \"read_write\",\n  \"users\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additional_share_options\": [\n    \"string\",\n    \"string\"\n  ],\n  \"named_streams\": \"<boolean>\",\n  \"map_acls\": \"posix\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2de4228e-9d8c-4da3-afcd-bbbdc25bebf0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"share_name\": \"share-1\",\n  \"fs_name\": \"default\",\n  \"description\": \"Some description\",\n  \"sub_path\": \"/projects/data\",\n  \"mount_options\": \"writecache\",\n  \"file_create_mask\": \"<string>\",\n  \"directory_create_mask\": \"<string>\",\n  \"acl\": \"<boolean>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"obs_direct\": \"<boolean>\",\n  \"encryption\": \"<string>\",\n  \"case_sensitivity\": \"<boolean>\",\n  \"read_only\": \"<boolean>\",\n  \"user_list_type\": \"read_write\",\n  \"users\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"additional_share_options\": [\n    \"string\",\n    \"string\"\n  ],\n  \"named_streams\": \"<boolean>\",\n  \"map_acls\": \"posix\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4695ce6-9ea1-4084-ab09-16ce63cb9275",
+          "name": "Join Active Directory domain",
+          "request": {
+            "name": "Join Active Directory domain",
+            "description": {
+              "content": "Joins the SMB cluster to the Active Directory domain specified during the initial cluster creation.<br> This operation creates the necessary computer account in Active Directory, establishes trust, and enables authentication for domain users and groups.<br> Before using this endpoint, you must first create the SMB cluster using POST /smb.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "activeDirectory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"debug_mode\": \"<boolean>\",\n  \"server\": \"<string>\",\n  \"create_computerOU\": \"<string>\",\n  \"extra_options\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"asynchronous\": \"<boolean>\",\n  \"poll\": \"<boolean>\",\n  \"timeout\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6562a2b-f2c8-458a-b117-aa0b72836a40",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "activeDirectory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"debug_mode\": \"<boolean>\",\n  \"server\": \"<string>\",\n  \"create_computerOU\": \"OU=Servers,DC=ad,DC=company,DC=com\",\n  \"extra_options\": \"<string>\",\n  \"task_id\": \"<string>\",\n  \"asynchronous\": \"<boolean>\",\n  \"poll\": \"<boolean>\",\n  \"timeout\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b376026b-bc54-467a-b752-c8651d318a92",
+          "name": "Disconnect from Active Directory domain",
+          "request": {
+            "name": "Disconnect from Active Directory domain",
+            "description": {
+              "content": "Disconnects the SMB cluster from the Active Directory domain.<br> This action deletes the cluster account from Active Directory and terminates domain-based authentication, making shares immediately inaccessible to all domain users. Before leaving the domain, configure an alternative authentication method if you require continued access to the shares.<br> Administrator credentials may be necessary to complete the operation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "activeDirectory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\",\n  \"debug_mode\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eaa0168d-4e09-43ec-a164-db41e0a9592f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "activeDirectory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"Administrator\",\n  \"password\": \"smbPassword\",\n  \"debug_mode\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Deleted account for 'WEKASMB' in realm 'AD.COMPANY>COM'\\\\n\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1829366-d209-4928-b43b-e1b36ccd513c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "activeDirectory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"Administrator\",\n  \"password\": \"smbPassword\",\n  \"debug_mode\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35c6243a-6e95-417e-a613-4fdd446d899f",
+          "name": "Configure SMB container logging verbosity",
+          "request": {
+            "name": "Configure SMB container logging verbosity",
+            "description": {
+              "content": "Adjusts the debug logging level for SMB container processes on specified containers.<br> Higher debug levels increase logging verbosity, which is useful for troubleshooting but may impact performance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "debug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"debug_level\": \"<number>\",\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17faaf5e-d3b9-492d-b4d8-c926803c801f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "debug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debug_level\": 1,\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77d3e40b-1446-4fb3-ac6e-d46b33db153a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "debug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debug_level\": 1,\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcafc876-bf91-4de7-9684-052575a8dcfc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "debug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debug_level\": 1,\n  \"samba_hosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54d6883b-15f5-4640-8a1a-93dd69cdf4a3",
+          "name": "Modify share configuration",
+          "request": {
+            "name": "Modify share configuration",
+            "description": {
+              "content": "Updates operational parameters for an existing SMB share.<br> Changes take effect immediately and apply to new client connections. Active sessions may need to reconnect to observe changes.<br> Only a subset of share properties can be modified after creation. To change immutable properties (for example, filesystem, sub_path), delete and recreate the share.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "shares",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier of the share to modify."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"encryption\": \"<string>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"read_only\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7dcfe8fc-55e7-4712-928f-2a868666a53a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the share to modify."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryption\": \"<string>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"read_only\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SambaShareId<0>\",\n    \"innerPath\": \"/\",\n    \"fileCreateMask\": \"0744\",\n    \"mountOptions\": \"writecache\",\n    \"readWriteUsers\": [\n      \"wekadmin\",\n      \"wekadmin\"\n    ],\n    \"readOnly\": true,\n    \"validUsers\": [\n      \"username\",\n      \"username\"\n    ],\n    \"invalidUsers\": [\n      \"username2\",\n      \"username2\"\n    ],\n    \"hidden\": false,\n    \"shareName\": \"share-1\",\n    \"readOnlyUsers\": [\n      \"username3\",\n      \"username3\"\n    ],\n    \"encryption\": \"cluster_default\",\n    \"uid\": \"435\",\n    \"acl\": true,\n    \"additionalShareOptions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"directoryCreateMask\": \"0755\",\n    \"description\": \"some description\",\n    \"obsDirect\": true,\n    \"allowGuestAccess\": false,\n    \"fsName\": \"default\",\n    \"caseSensitivity\": true,\n    \"namedStreams\": true,\n    \"mapAcls\": \"posix\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9c87354-be9c-437d-be1b-a9bdf7224d56",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the share to modify."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryption\": \"<string>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"read_only\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "931ddbff-551b-486f-ac58-11977dad36e4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier of the share to modify."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"encryption\": \"<string>\",\n  \"hidden\": \"<boolean>\",\n  \"allow_guest_access\": \"<boolean>\",\n  \"read_only\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "552399d4-52ce-4a0a-a815-e721f371b2dc",
+          "name": "Remove SMB share",
+          "request": {
+            "name": "Remove SMB share",
+            "description": {
+              "content": "Removes an SMB share from the cluster, terminating network access to the associated filesystem path.<br> Active client connections to this share are forcibly disconnected.<br> Underlying filesystem data remains intact. Only the SMB network share configuration is removed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "shares",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Share UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2b5d170b-32c0-43ca-8476-f653222342f6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Share UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6918e18-adad-4dcf-a79a-93026d4b40c7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Share UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b9764fe-3010-48c6-9afd-877af3b00a80",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "shares",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Share UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7539c7bd-08ff-459b-aa1e-f3e3615aae9a",
+          "name": "Remove trusted domain",
+          "request": {
+            "name": "Remove trusted domain",
+            "description": {
+              "content": "Removes a trusted domain from the SMB cluster, revoking authentication and access rights for all users and groups within that domain.<br> This operation triggers a background restart of the SMB services, which may cause a brief service interruption. Before removing a domain, ensure no active share permissions reference its users or groups.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "domains",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Domain uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82d195fb-edc3-40d4-a4f2-76948ba261b6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Domain uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38c4d141-63da-4657-b877-99fae8c14921",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Domain uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9df0ef3c-c237-4114-8db3-15a55e97bb6e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "domains",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Domain uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6d8a267a-d8d6-4b02-be7a-537f4ee4e8f1",
+          "name": "Grant share access to users",
+          "request": {
+            "name": "Grant share access to users",
+            "description": {
+              "content": "Adds specified users or groups to a share's access control list with designated permission level.<br> Users can be Active Directory users, groups, or domain aliases.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "users",
+                ":share_uid",
+                ":user_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "share_uid",
+                  "description": "(Required) Unique identifier of the target share."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_type",
+                  "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5b5681b1-bd9d-44df-adf9-5dcdd0d18d64",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    ":share_uid",
+                    ":user_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Unique identifier of the target share."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"AD\\\\EnterpriseAdmins\",\n    \"AD\\\\EnterpriseAdmins\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "144b70db-4167-4661-a3a1-bffd31a2f3ad",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    ":share_uid",
+                    ":user_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Unique identifier of the target share."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"AD\\\\EnterpriseAdmins\",\n    \"AD\\\\EnterpriseAdmins\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "081fbd65-125e-4651-b4ff-d2eed00e8b61",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    ":share_uid",
+                    ":user_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Unique identifier of the target share."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"AD\\\\EnterpriseAdmins\",\n    \"AD\\\\EnterpriseAdmins\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cfc2f7f-40fc-42d7-a43e-037cffebb6ba",
+          "name": "Remove all users from the access list",
+          "request": {
+            "name": "Remove all users from the access list",
+            "description": {
+              "content": "Removes all users and groups from the specified access permission category for a given share.<br> This is a bulk operation that clears the entire user list for the specified category.<br> Useful when reconfiguring share permissions from scratch or removing all entries before applying a new access control policy.<br> To remove individual users, use DELETE /smb/users/{share_uid}/{user_type}/{user} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "users",
+                "reset",
+                ":share_uid",
+                ":user_type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "share_uid",
+                  "description": "(Required) Share UID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_type",
+                  "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a1937ff-1b93-481a-bf55-40cabe23df48",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    "reset",
+                    ":share_uid",
+                    ":user_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Share UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f83106e-31f9-4704-9750-784e3f56b041",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    "reset",
+                    ":share_uid",
+                    ":user_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Share UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5cf5d1af-0207-4141-8b3d-897fae43e1e7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    "reset",
+                    ":share_uid",
+                    ":user_type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Share UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) Access permission category to add users to. User type options:<br> - read_only - Users can view and read files, but cannot modify content<br> - read_write - Users have full read and write access<br> - valid - Users explicitly allowed to access the share<br> - invalid - Users explicitly denied access (takes precedence over other permissions)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3284dd9b-10b4-40c8-aefe-bc6b254239f1",
+          "name": "Remove specific user from share access",
+          "request": {
+            "name": "Remove specific user from share access",
+            "description": {
+              "content": "Removes an individual user or group from the specified access permission category.<br> The user immediately loses the associated permissions, but may retain access through other permission categories or group memberships.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "users",
+                ":share_uid",
+                ":user_type",
+                ":user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "share_uid",
+                  "description": "(Required) Share UID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user_type",
+                  "description": "(Required) read_only, read_write, valid, invalid."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "user",
+                  "description": "(Required) Username or group name to remove (format - DOMAIN\\name, for example, \"AD\\jdoe\")."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03c8db36-b383-40e9-a6cc-2fc01ad04ae9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    ":share_uid",
+                    ":user_type",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Share UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) read_only, read_write, valid, invalid."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) Username or group name to remove (format - DOMAIN\\name, for example, \"AD\\jdoe\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e639a7d-f1c9-4d66-81a5-2d01a914c741",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    ":share_uid",
+                    ":user_type",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Share UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) read_only, read_write, valid, invalid."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) Username or group name to remove (format - DOMAIN\\name, for example, \"AD\\jdoe\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55224873-80a9-45aa-9eec-e8b3df6b6325",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "users",
+                    ":share_uid",
+                    ":user_type",
+                    ":user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "share_uid",
+                      "description": "(Required) Share UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user_type",
+                      "description": "(Required) read_only, read_write, valid, invalid."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "user",
+                      "description": "(Required) Username or group name to remove (format - DOMAIN\\name, for example, \"AD\\jdoe\")."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a14e3187-de13-453a-a8cd-1971bcf61b32",
+          "name": "Verify SMB container readiness",
+          "request": {
+            "name": "Verify SMB container readiness",
+            "description": {
+              "content": "Checks the operational readiness of all containers participating in the SMB cluster.<br> The response indicates whether each container SMB process is fully operational and ready to serve client requests.<br> Use this endpoint to monitor cluster health or to verify that configuration changes have been applied successfully.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "containersAreReady"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "74e28799-9512-47ec-a968-f4343bde1e9a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "containersAreReady"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"ContainerId<0>\": true,\n    \"ContainerId<1>\": true,\n    \"ContainerId<2>\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99832ea6-5eaf-4124-a8bc-1f4cfba69563",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "containersAreReady"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adf7750c-e743-4a80-ae8e-5d7c379ce055",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "containersAreReady"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f81e0838-f234-4f29-8be9-d8a4d97f2979",
+          "name": "Add containers to SMB cluster",
+          "request": {
+            "name": "Add containers to SMB cluster",
+            "description": {
+              "content": "Expands the SMB cluster by adding containers to distribute the SMB service load.<br> Newly added containers immediately handle SMB requests and participate in HA failover.<br> Requires properly configured hosts and sufficient floating IPs.<br> Used to scale SMB capacity for increased load or improved fault tolerance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "servers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"addedHosts\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "307dc2b3-4778-4b6b-8dc5-b7e7d4969f9c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addedHosts\": [\n    \"uid-1\",\n    \"uid-2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78a31242-7f03-40b8-b224-2582836d6b65",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"addedHosts\": [\n    \"uid-1\",\n    \"uid-2\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e58a132-59a2-4d1e-996f-9dbaae4930a3",
+          "name": "Remove containers from SMB cluster",
+          "request": {
+            "name": "Remove containers from SMB cluster",
+            "description": {
+              "content": "Removes specified containers from the SMB cluster. Client connections on the removed containers migrate to the remaining active containers in the cluster.<br> Use this operation to decommission containers for maintenance or to reduce the cluster size during periods of low demand.<br> Before proceeding, ensure that at least one container remains in the cluster and that the removal does not violate the cluster's minimum redundancy requirements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "smb",
+                "servers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "removedHosts",
+                  "value": "<string>",
+                  "description": "(Required) Array of container unique identifiers (UIDs) to remove from the cluster."
+                },
+                {
+                  "disabled": false,
+                  "key": "removedHosts",
+                  "value": "<string>",
+                  "description": "(Required) Array of container unique identifiers (UIDs) to remove from the cluster."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "18a42d43-c08c-463a-92f2-853ab374ad0b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "removedHosts",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "removedHosts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fd91e35-a632-4399-b7d6-2dfda65a091f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "smb",
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "removedHosts",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "removedHosts",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "02a35b93-2735-4535-88ce-cb864789192c",
+    "name": "@weka-api Active Directory SMB API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

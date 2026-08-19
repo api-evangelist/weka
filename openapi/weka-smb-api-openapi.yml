@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory SMB API'
   version: '5.1'
@@ -809,14 +809,6 @@ paths:
         description: Array of container unique identifiers (UIDs) to remove from the cluster.
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -826,6 +818,14 @@ components:
               message:
                 type: string
                 example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -859,6 +859,27 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
+    smbDomain:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SMBTrustedDomainId<0>
+        uid:
+          type: string
+          example: uid_string
+        idmapBackend:
+          type: string
+          example: rfc2307
+        mappingFromId:
+          type: number
+          example: 4291000001
+        mappingToId:
+          type: number
+          example: 4294967294
+        domainName:
+          type: string
+          example: ad.company.com
     smbShare:
       type: object
       properties:
@@ -941,27 +962,6 @@ components:
         mapAcls:
           type: string
           example: posix
-    smbDomain:
-      type: object
-      properties:
-        id:
-          type: string
-          example: SMBTrustedDomainId<0>
-        uid:
-          type: string
-          example: uid_string
-        idmapBackend:
-          type: string
-          example: rfc2307
-        mappingFromId:
-          type: number
-          example: 4291000001
-        mappingToId:
-          type: number
-          example: 4294967294
-        domainName:
-          type: string
-          example: ad.company.com
   securitySchemes:
     bearerAuth:
       type: http

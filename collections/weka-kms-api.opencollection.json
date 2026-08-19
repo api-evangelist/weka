@@ -1,0 +1,123 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory KMS API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KMS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get KMS configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/kms",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "query",
+                "description": "Organization name or ID. Defaults to the callers organization."
+              }
+            ]
+          },
+          "docs": "Returns the Key Management Service (KMS) configuration for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Set KMS configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/kms",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets a new Key Management Service (KMS) configuration (Hashicorp Vault or KMIP) for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Delete KMS configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/kms",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "query",
+                "description": "Organization name or ID. Defaults to the callers organization."
+              },
+              {
+                "name": "force_delete",
+                "value": "",
+                "type": "query",
+                "description": "For tenant KMS deletion, allows switching encrypted filesystems to use the cluster-wide KMS configuration. Requires a cluster-wide KMS to be configured."
+              },
+              {
+                "name": "allow_downgrade",
+                "value": "",
+                "type": "query",
+                "description": "Allows downgrading encrypted filesystems to local encryption. Required when deleting cluster-wide KMS with encrypted filesystems, or when deleting tenant KMS without a cluster-wide KMS configured."
+              }
+            ]
+          },
+          "docs": "Removes the KMS configuration for the specified organization. For tenant KMS deletion with encrypted filesystems, use force_delete to switch to cluster-wide KMS, or allow_downgrade to fall back to local encryption if no cluster KMS exists."
+        },
+        {
+          "info": {
+            "name": "Get KMS type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/kms/type",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "query",
+                "description": "Organization name or ID. Defaults to the callers organization."
+              }
+            ]
+          },
+          "docs": "Returns the configured KMS type (HashiCorp Vault or KMIP) for the specified organization."
+        },
+        {
+          "info": {
+            "name": "Rewrap KMS key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/kms/rewrap",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the encryption keys for existing filesystems with a new KMS master key for the specified organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

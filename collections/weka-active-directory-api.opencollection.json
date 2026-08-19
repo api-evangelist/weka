@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Active Directory",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update the Active Directory configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/activeDirectory",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures the integration with an Active Directory server for user management. This allows for authenticating users and mapping their group memberships to the cluster user roles."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

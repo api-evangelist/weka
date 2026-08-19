@@ -1,0 +1,5093 @@
+{
+  "item": [
+    {
+      "id": "35b09b0b-6b9f-4f8f-bb1a-7678604eb382",
+      "name": "Filesystem",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f426ef62-4ef5-4b5b-b175-ad702aae8190",
+          "name": "List all filesystems",
+          "request": {
+            "name": "List all filesystems",
+            "description": {
+              "content": "Returns a list of all filesystems in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force_fresh",
+                  "value": "<boolean>",
+                  "description": "Refresh the capacities to ensure they are current."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24d5c612-685e-41e3-b703-b12c0692b202",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_fresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"FSId<2>\",\n      \"auto_max_files\": false,\n      \"used_ssd_data\": 0,\n      \"name\": \"fs1\",\n      \"uid\": \"245\",\n      \"is_removing\": false,\n      \"group_id\": \"FSGroupId<0>\",\n      \"is_creating\": true,\n      \"free_total\": 1073737728,\n      \"is_encrypted\": true,\n      \"metadata_budget\": 4202496,\n      \"used_total_data\": 0,\n      \"used_total\": 4096,\n      \"ssd_budget\": 1073741824,\n      \"is_ready\": false,\n      \"group_name\": \"default\",\n      \"available_total\": 1073741824,\n      \"status\": \"CREATING\",\n      \"used_ssd_metadata\": 4096,\n      \"auth_required\": true,\n      \"available_ssd_metadata\": 4202496,\n      \"total_budget\": 1073741824,\n      \"used_ssd\": 4096,\n      \"object_storages\": [\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        },\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        }\n      ],\n      \"obs_buckets\": [\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        },\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        }\n      ],\n      \"available_ssd\": 1073741824,\n      \"free_ssd\": 1073737728,\n      \"data_reduction\": true,\n      \"data_reduction_ratio\": 5.2,\n      \"used_ssd_pending\": 1073737728,\n      \"compressed_estimation\": 1073737728,\n      \"kms_key_identifier\": \"weka_fs_key1\",\n      \"kms_namespace\": \"namespace1\",\n      \"kms_role\": \"11bc2535-671a-63ad-c4f4-93b21afe8cd6\"\n    },\n    {\n      \"id\": \"FSId<2>\",\n      \"auto_max_files\": false,\n      \"used_ssd_data\": 0,\n      \"name\": \"fs1\",\n      \"uid\": \"245\",\n      \"is_removing\": false,\n      \"group_id\": \"FSGroupId<0>\",\n      \"is_creating\": true,\n      \"free_total\": 1073737728,\n      \"is_encrypted\": true,\n      \"metadata_budget\": 4202496,\n      \"used_total_data\": 0,\n      \"used_total\": 4096,\n      \"ssd_budget\": 1073741824,\n      \"is_ready\": false,\n      \"group_name\": \"default\",\n      \"available_total\": 1073741824,\n      \"status\": \"CREATING\",\n      \"used_ssd_metadata\": 4096,\n      \"auth_required\": true,\n      \"available_ssd_metadata\": 4202496,\n      \"total_budget\": 1073741824,\n      \"used_ssd\": 4096,\n      \"object_storages\": [\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        },\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        }\n      ],\n      \"obs_buckets\": [\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        },\n        {\n          \"uid\": \"237\",\n          \"state\": \"ACTIVE\",\n          \"status\": \"UP\",\n          \"detachProgress\": 0,\n          \"obsId\": \"ObjectStorageId<0>\",\n          \"mode\": \"WRITABLE\",\n          \"name\": \"OBS_1\"\n        }\n      ],\n      \"available_ssd\": 1073741824,\n      \"free_ssd\": 1073737728,\n      \"data_reduction\": true,\n      \"data_reduction_ratio\": 5.2,\n      \"used_ssd_pending\": 1073737728,\n      \"compressed_estimation\": 1073737728,\n      \"kms_key_identifier\": \"weka_fs_key1\",\n      \"kms_namespace\": \"namespace1\",\n      \"kms_role\": \"11bc2535-671a-63ad-c4f4-93b21afe8cd6\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fce48b0-0053-450c-a789-81ccd46920f6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_fresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba7a7434-8ca8-4053-9c36-01318b539724",
+          "name": "Create filesystem",
+          "request": {
+            "name": "Create filesystem",
+            "description": {
+              "content": "Creates a new filesystem in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"group_name\": \"<string>\",\n  \"total_capacity\": \"<long>\",\n  \"obs_name\": \"<string>\",\n  \"ssd_capacity\": \"<long>\",\n  \"thin_provision_min_ssd\": \"<long>\",\n  \"thin_provision_max_ssd\": \"<long>\",\n  \"encrypted\": \"<boolean>\",\n  \"auth_required\": \"<boolean>\",\n  \"allow_no_kms\": \"<boolean>\",\n  \"kms_vault_key_identifier\": \"<string>\",\n  \"kms_vault_namespace\": \"<string>\",\n  \"kms_vault_role_id\": \"<string>\",\n  \"kms_vault_secret_id\": \"<string>\",\n  \"data_reduction\": \"<boolean>\",\n  \"audit\": \"<boolean>\",\n  \"audit_open_close\": \"<boolean>\",\n  \"index_enabled\": \"<boolean>\",\n  \"has_permissions\": \"<boolean>\",\n  \"org\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83c68996-8dea-4648-aa37-a7d28b4e1e76",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"fs1\",\n  \"group_name\": \"default\",\n  \"total_capacity\": 1073741824,\n  \"obs_name\": \"OBS_1\",\n  \"ssd_capacity\": 1073741824,\n  \"thin_provision_min_ssd\": 1073741824,\n  \"thin_provision_max_ssd\": 1073741824,\n  \"encrypted\": true,\n  \"auth_required\": true,\n  \"allow_no_kms\": true,\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"data_reduction\": true,\n  \"audit\": true,\n  \"audit_open_close\": true,\n  \"index_enabled\": true,\n  \"has_permissions\": false,\n  \"org\": \"org1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"FSId<2>\",\n    \"auto_max_files\": false,\n    \"used_ssd_data\": 0,\n    \"name\": \"fs1\",\n    \"uid\": \"245\",\n    \"is_removing\": false,\n    \"group_id\": \"FSGroupId<0>\",\n    \"is_creating\": true,\n    \"free_total\": 1073737728,\n    \"is_encrypted\": true,\n    \"metadata_budget\": 4202496,\n    \"used_total_data\": 0,\n    \"used_total\": 4096,\n    \"ssd_budget\": 1073741824,\n    \"is_ready\": false,\n    \"group_name\": \"default\",\n    \"available_total\": 1073741824,\n    \"status\": \"CREATING\",\n    \"used_ssd_metadata\": 4096,\n    \"auth_required\": true,\n    \"available_ssd_metadata\": 4202496,\n    \"total_budget\": 1073741824,\n    \"used_ssd\": 4096,\n    \"object_storages\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"obs_buckets\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"available_ssd\": 1073741824,\n    \"free_ssd\": 1073737728,\n    \"data_reduction\": true,\n    \"data_reduction_ratio\": 5.2,\n    \"used_ssd_pending\": 1073737728,\n    \"compressed_estimation\": 1073737728,\n    \"kms_key_identifier\": \"weka_fs_key1\",\n    \"kms_namespace\": \"namespace1\",\n    \"kms_role\": \"11bc2535-671a-63ad-c4f4-93b21afe8cd6\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b597740-f09c-460c-9462-766f27c27a5a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"fs1\",\n  \"group_name\": \"default\",\n  \"total_capacity\": 1073741824,\n  \"obs_name\": \"OBS_1\",\n  \"ssd_capacity\": 1073741824,\n  \"thin_provision_min_ssd\": 1073741824,\n  \"thin_provision_max_ssd\": 1073741824,\n  \"encrypted\": true,\n  \"auth_required\": true,\n  \"allow_no_kms\": true,\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"data_reduction\": true,\n  \"audit\": true,\n  \"audit_open_close\": true,\n  \"index_enabled\": true,\n  \"has_permissions\": false,\n  \"org\": \"org1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a869f42-f15c-43d8-84de-bb29d27a63d2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"fs1\",\n  \"group_name\": \"default\",\n  \"total_capacity\": 1073741824,\n  \"obs_name\": \"OBS_1\",\n  \"ssd_capacity\": 1073741824,\n  \"thin_provision_min_ssd\": 1073741824,\n  \"thin_provision_max_ssd\": 1073741824,\n  \"encrypted\": true,\n  \"auth_required\": true,\n  \"allow_no_kms\": true,\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"data_reduction\": true,\n  \"audit\": true,\n  \"audit_open_close\": true,\n  \"index_enabled\": true,\n  \"has_permissions\": false,\n  \"org\": \"org1\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b3ff427-e2cc-4a1e-87f5-b3b51b3a9e78",
+          "name": "Get filesystem details",
+          "request": {
+            "name": "Get filesystem details",
+            "description": {
+              "content": "Returns detailed information about a specific filesystem, such as its size, quota, and usage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "force_fresh",
+                  "value": "<boolean>",
+                  "description": "Refresh the capacities to ensure they are current."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the filesystem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "64704786-7c12-4a20-ad64-59af88f11b5b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_fresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"FSId<2>\",\n    \"auto_max_files\": false,\n    \"used_ssd_data\": 0,\n    \"name\": \"fs1\",\n    \"uid\": \"245\",\n    \"is_removing\": false,\n    \"group_id\": \"FSGroupId<0>\",\n    \"is_creating\": true,\n    \"free_total\": 1073737728,\n    \"is_encrypted\": true,\n    \"metadata_budget\": 4202496,\n    \"used_total_data\": 0,\n    \"used_total\": 4096,\n    \"ssd_budget\": 1073741824,\n    \"is_ready\": false,\n    \"group_name\": \"default\",\n    \"available_total\": 1073741824,\n    \"status\": \"CREATING\",\n    \"used_ssd_metadata\": 4096,\n    \"auth_required\": true,\n    \"available_ssd_metadata\": 4202496,\n    \"total_budget\": 1073741824,\n    \"used_ssd\": 4096,\n    \"object_storages\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"obs_buckets\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"available_ssd\": 1073741824,\n    \"free_ssd\": 1073737728,\n    \"data_reduction\": true,\n    \"data_reduction_ratio\": 5.2,\n    \"used_ssd_pending\": 1073737728,\n    \"compressed_estimation\": 1073737728,\n    \"kms_key_identifier\": \"weka_fs_key1\",\n    \"kms_namespace\": \"namespace1\",\n    \"kms_role\": \"11bc2535-671a-63ad-c4f4-93b21afe8cd6\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "077d56b1-0724-45b4-b697-b23df787f8f5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_fresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9bc68fe-64a5-4385-b586-984ae4fbab02",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "force_fresh",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec1aea51-720b-4569-a6b2-4d29eac1f472",
+          "name": "Update a filesystem",
+          "request": {
+            "name": "Update a filesystem",
+            "description": {
+              "content": "Updates the settings of an existing filesystem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the filesystem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"new_name\": \"<string>\",\n  \"total_capacity\": \"<long>\",\n  \"ssd_capacity\": \"<long>\",\n  \"thin_provision_min_ssd\": \"<long>\",\n  \"thin_provision_max_ssd\": \"<long>\",\n  \"auth_required\": \"<boolean>\",\n  \"audit\": \"<boolean>\",\n  \"audit_open_close\": \"<boolean>\",\n  \"kms_vault_key_identifier\": \"<string>\",\n  \"kms_vault_namespace\": \"<string>\",\n  \"kms_vault_role_id\": \"<string>\",\n  \"kms_vault_secret_id\": \"<string>\",\n  \"use_cluster_kms_conf\": \"<boolean>\",\n  \"index_enabled\": \"<boolean>\",\n  \"has_permissions\": \"<boolean>\",\n  \"owner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad8cf913-ea9c-435a-ba8d-4b77b60c8df4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"newFs\",\n  \"total_capacity\": 1073741824,\n  \"ssd_capacity\": 1073741824,\n  \"thin_provision_min_ssd\": 1073741824,\n  \"thin_provision_max_ssd\": 1073741824,\n  \"auth_required\": true,\n  \"audit\": true,\n  \"audit_open_close\": true,\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"use_cluster_kms_conf\": true,\n  \"index_enabled\": true,\n  \"has_permissions\": false,\n  \"owner\": \"9df5a0ff-3828-470e-9537-a12d54172526\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"FSId<2>\",\n    \"auto_max_files\": false,\n    \"used_ssd_data\": 0,\n    \"name\": \"fs1\",\n    \"uid\": \"245\",\n    \"is_removing\": false,\n    \"group_id\": \"FSGroupId<0>\",\n    \"is_creating\": true,\n    \"free_total\": 1073737728,\n    \"is_encrypted\": true,\n    \"metadata_budget\": 4202496,\n    \"used_total_data\": 0,\n    \"used_total\": 4096,\n    \"ssd_budget\": 1073741824,\n    \"is_ready\": false,\n    \"group_name\": \"default\",\n    \"available_total\": 1073741824,\n    \"status\": \"CREATING\",\n    \"used_ssd_metadata\": 4096,\n    \"auth_required\": true,\n    \"available_ssd_metadata\": 4202496,\n    \"total_budget\": 1073741824,\n    \"used_ssd\": 4096,\n    \"object_storages\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"obs_buckets\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"available_ssd\": 1073741824,\n    \"free_ssd\": 1073737728,\n    \"data_reduction\": true,\n    \"data_reduction_ratio\": 5.2,\n    \"used_ssd_pending\": 1073737728,\n    \"compressed_estimation\": 1073737728,\n    \"kms_key_identifier\": \"weka_fs_key1\",\n    \"kms_namespace\": \"namespace1\",\n    \"kms_role\": \"11bc2535-671a-63ad-c4f4-93b21afe8cd6\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c1ef5be-d2c3-4be1-bf92-df710a86ee72",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"newFs\",\n  \"total_capacity\": 1073741824,\n  \"ssd_capacity\": 1073741824,\n  \"thin_provision_min_ssd\": 1073741824,\n  \"thin_provision_max_ssd\": 1073741824,\n  \"auth_required\": true,\n  \"audit\": true,\n  \"audit_open_close\": true,\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"use_cluster_kms_conf\": true,\n  \"index_enabled\": true,\n  \"has_permissions\": false,\n  \"owner\": \"9df5a0ff-3828-470e-9537-a12d54172526\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1d9d5b6-2439-4fa0-84f4-5ca8db138d9d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"newFs\",\n  \"total_capacity\": 1073741824,\n  \"ssd_capacity\": 1073741824,\n  \"thin_provision_min_ssd\": 1073741824,\n  \"thin_provision_max_ssd\": 1073741824,\n  \"auth_required\": true,\n  \"audit\": true,\n  \"audit_open_close\": true,\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"use_cluster_kms_conf\": true,\n  \"index_enabled\": true,\n  \"has_permissions\": false,\n  \"owner\": \"9df5a0ff-3828-470e-9537-a12d54172526\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6fccb7b-5336-46b8-8eeb-b390a94d4db2",
+          "name": "Remove a filesystem",
+          "request": {
+            "name": "Remove a filesystem",
+            "description": {
+              "content": "Removes a specified filesystem and its data from the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "purge_from_obs",
+                  "value": "<boolean>",
+                  "description": "Delete the filesystem's objects from Object Storage, making all uploaded snapshots unusable."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the filesystem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a52eee7-de05-4fe8-852e-2cf982f10f94",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "purge_from_obs",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "593ca4b2-05a4-4383-959b-4277f2fe9036",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "purge_from_obs",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e85fa055-bd6d-476a-bab7-9710a799e783",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "purge_from_obs",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea6394f6-0d9b-49cd-b393-3f6560c87d33",
+          "name": "Obtain mount token for filesystem",
+          "request": {
+            "name": "Obtain mount token for filesystem",
+            "description": {
+              "content": "Generates a long-lived authentication token to mount a specific filesystem. This token enables persistent access and supports controlled permissions, such as read-only access or defined expiration periods.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "mountToken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"read_only\": \"<boolean>\",\n  \"expires\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7bdb0d10-94fd-4e4b-98ab-aa1eeb49208f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "mountToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"read_only\": true,\n  \"expires\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55f244d7-d6c2-4138-ad67-8c2f3d199ea3",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "mountToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"read_only\": true,\n  \"expires\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8476e4c5-ed03-46ff-88cc-7d8eda2c2710",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "mountToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"read_only\": true,\n  \"expires\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f170d066-7886-4b91-9b6f-ff65a796a589",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "mountToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"read_only\": true,\n  \"expires\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f40911fd-ee6e-45ff-9590-581f1762ef3a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "mountToken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"read_only\": true,\n  \"expires\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2e95a62-f91a-4e77-85c4-b76674291c9e",
+          "name": "Attach an object store bucket (Deprecated)",
+          "request": {
+            "name": "Attach an object store bucket (Deprecated)",
+            "description": {
+              "content": "This endpoint is deprecated. Use POST /fileSystems/{uid}/objectStoreBuckets instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "objectStores"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"obs_name\": \"<string>\",\n  \"obs_mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be1f0c13-8a99-4a77-9002-ac897761d5c0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb2e41c5-00d0-4973-a491-593cb3bd3108",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d024d20-fb49-4f23-8b9c-d912764b45ae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7ea6de4-de79-4554-9ff5-044617d5bb71",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d2111ef-ecc8-47ef-9057-87a79c5f9d1f",
+          "name": "Attach an object store bucket",
+          "request": {
+            "name": "Attach an object store bucket",
+            "description": {
+              "content": "Links an object store bucket to a filesystem, allowing tiered data access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "objectStoreBuckets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the filesystem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"obs_name\": \"<string>\",\n  \"obs_mode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4972c5cb-8f12-4ac4-af5b-54a642702e74",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80497ef1-0e8f-402a-859b-130a2ddf1852",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b82c8e7-b3eb-411d-bffc-64df8b92e392",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b01c556-779c-4e0c-8a06-d63a7a58f003",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"obs_name\": \"obs1\",\n  \"obs_mode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc582f78-ce18-4a10-b0aa-4663f0ea4387",
+          "name": "Detach an object store bucket (Deprecated)",
+          "request": {
+            "name": "Detach an object store bucket (Deprecated)",
+            "description": {
+              "content": "This endpoint is deprecated. Use DELETE /fileSystems/{uid}/objectStoreBuckets/{obs_uid} instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "objectStores",
+                ":obs_uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "obs_uid",
+                  "description": "(Required) Object store system UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a3488e0-1d00-4807-9b17-c168618b7f01",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"CWTaskId<278>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1610e729-f382-4019-8ed2-734d0fe64de8",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f8a25c2-e940-4edd-91d6-b9c62e79dc2a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9273f73-2ba8-4d0e-b5d5-983aceb9dfbf",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStores",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40f58082-732b-4314-9382-6d157edec8a7",
+          "name": "Get path by inode ID",
+          "request": {
+            "name": "Get path by inode ID",
+            "description": {
+              "content": "Returns the full path of a file or directory using its inode ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":inode_id",
+                "getPath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) The unique identifier of the inode."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fbaae0e8-4782-412e-8dd9-b84c7eae0176",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":inode_id",
+                    "getPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) The unique identifier of the inode."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"access_point\": \"string\",\n    \"fs_id\": \"FSId<1>\",\n    \"fs_name\": \"default\",\n    \"inode_id\": \"10092623495168\",\n    \"path\": \"/\",\n    \"snap_name\": \"string\",\n    \"snap_view_id\": \"SnapViewId<1>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6cecaf76-81c6-43b2-aa0e-14a14abe7f78",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":inode_id",
+                    "getPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) The unique identifier of the inode."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c2f21dd-939e-480a-b248-a38e74e98f32",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":inode_id",
+                    "getPath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) The unique identifier of the inode."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12e5a58e-4fa8-4482-bcff-8793335ab433",
+          "name": "Get filesystem by inode ID (Deprecated)",
+          "request": {
+            "name": "Get filesystem by inode ID (Deprecated)",
+            "description": {
+              "content": "This endpoint is deprecated. Use GET /fileSystems/{inode_id}/getPath instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":inode_id",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) The unique identifier of the inode."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d7f14c3-df10-4e5d-8152-bbf231380ac6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":inode_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) The unique identifier of the inode."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"access_point\": \"string\",\n    \"fs_id\": \"FSId<1>\",\n    \"fs_name\": \"default\",\n    \"inode_context\": \"InodeContext<1>\",\n    \"inode_id\": \"InodeId<1>\",\n    \"path\": \"/\",\n    \"snap_name\": \"string\",\n    \"snap_view_id\": \"SnapViewId<1>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "707df166-42fd-4f1e-b0a0-ac77420639e9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":inode_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) The unique identifier of the inode."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "370c3e1f-c088-493f-aaaf-69b2134381fd",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":inode_id",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) The unique identifier of the inode."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6510293-c207-43f0-96c7-f8a0d9d794a7",
+          "name": "Detach object store bucket from filesystem",
+          "request": {
+            "name": "Detach object store bucket from filesystem",
+            "description": {
+              "content": "Disconnects an object store bucket from a filesystem, separating their data access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "objectStoreBuckets",
+                ":obs_uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "obs_uid",
+                  "description": "(Required) Object store system UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b6b44cef-cac2-43c4-8b65-3a81350dc940",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"CWTaskId<278>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2deeebbc-4696-4874-8480-330599c812ef",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "443da110-d446-4404-a70a-6940f5d9abf5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bfd13b2-8eb3-4a0d-b168-4cebb0dafafc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "objectStoreBuckets",
+                    ":obs_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "obs_uid",
+                      "description": "(Required) Object store system UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0bce21eb-aa93-46e1-adbb-b579b3ce6765",
+          "name": "Download filesystem from object store",
+          "request": {
+            "name": "Download filesystem from object store",
+            "description": {
+              "content": "Creates a new filesystem based on a saved snapshot stored in an object store bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                "download"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"group_name\": \"<string>\",\n  \"total_capacity\": \"<long>\",\n  \"object_storage\": \"<string>\",\n  \"locator\": \"<string>\",\n  \"ssd_capacity\": \"<long>\",\n  \"auth_required\": \"<boolean>\",\n  \"additional_object_storage\": \"<string>\",\n  \"snapshot_name\": \"<string>\",\n  \"access_point\": \"<string>\",\n  \"kms_vault_key_identifier\": \"<string>\",\n  \"kms_vault_namespace\": \"<string>\",\n  \"kms_vault_role_id\": \"<string>\",\n  \"kms_vault_secret_id\": \"<string>\",\n  \"audit\": \"<boolean>\",\n  \"audit_open_close\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64929df4-03d7-4e14-b4cf-a5975c2613d6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"new_fs\",\n  \"group_name\": \"default\",\n  \"total_capacity\": 10000000000,\n  \"object_storage\": \"obs1\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\",\n  \"ssd_capacity\": 10000000000,\n  \"auth_required\": true,\n  \"additional_object_storage\": \"obs2\",\n  \"snapshot_name\": \"snapName\",\n  \"access_point\": \"111d3\",\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"audit\": true,\n  \"audit_open_close\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"FSId<2>\",\n    \"auto_max_files\": false,\n    \"used_ssd_data\": 0,\n    \"name\": \"fs1\",\n    \"uid\": \"245\",\n    \"is_removing\": false,\n    \"group_id\": \"FSGroupId<0>\",\n    \"is_creating\": true,\n    \"free_total\": 1073737728,\n    \"is_encrypted\": true,\n    \"metadata_budget\": 4202496,\n    \"used_total_data\": 0,\n    \"used_total\": 4096,\n    \"ssd_budget\": 1073741824,\n    \"is_ready\": false,\n    \"group_name\": \"default\",\n    \"available_total\": 1073741824,\n    \"status\": \"CREATING\",\n    \"used_ssd_metadata\": 4096,\n    \"auth_required\": true,\n    \"available_ssd_metadata\": 4202496,\n    \"total_budget\": 1073741824,\n    \"used_ssd\": 4096,\n    \"object_storages\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"obs_buckets\": [\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      },\n      {\n        \"uid\": \"237\",\n        \"state\": \"ACTIVE\",\n        \"status\": \"UP\",\n        \"detachProgress\": 0,\n        \"obsId\": \"ObjectStorageId<0>\",\n        \"mode\": \"WRITABLE\",\n        \"name\": \"OBS_1\"\n      }\n    ],\n    \"available_ssd\": 1073741824,\n    \"free_ssd\": 1073737728,\n    \"data_reduction\": true,\n    \"data_reduction_ratio\": 5.2,\n    \"used_ssd_pending\": 1073737728,\n    \"compressed_estimation\": 1073737728,\n    \"kms_key_identifier\": \"weka_fs_key1\",\n    \"kms_namespace\": \"namespace1\",\n    \"kms_role\": \"11bc2535-671a-63ad-c4f4-93b21afe8cd6\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad595f2b-f14c-477a-993d-d88f47e0d7f4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"new_fs\",\n  \"group_name\": \"default\",\n  \"total_capacity\": 10000000000,\n  \"object_storage\": \"obs1\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\",\n  \"ssd_capacity\": 10000000000,\n  \"auth_required\": true,\n  \"additional_object_storage\": \"obs2\",\n  \"snapshot_name\": \"snapName\",\n  \"access_point\": \"111d3\",\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"audit\": true,\n  \"audit_open_close\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07e9c5fb-401b-489d-aecd-796933264c44",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "download"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"new_fs\",\n  \"group_name\": \"default\",\n  \"total_capacity\": 10000000000,\n  \"object_storage\": \"obs1\",\n  \"locator\": \"bba696fb/d/s/4/spec/fc35-4d51-96b6-028488d349dc\",\n  \"ssd_capacity\": 10000000000,\n  \"auth_required\": true,\n  \"additional_object_storage\": \"obs2\",\n  \"snapshot_name\": \"snapName\",\n  \"access_point\": \"111d3\",\n  \"kms_vault_key_identifier\": \"weka_fs_key1\",\n  \"kms_vault_namespace\": \"namespace1\",\n  \"kms_vault_role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"kms_vault_secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"audit\": true,\n  \"audit_open_close\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d8255a2-64b8-449c-bf5d-7849c70c301a",
+          "name": "Get thin-provisioning reserve status",
+          "request": {
+            "name": "Get thin-provisioning reserve status",
+            "description": {
+              "content": "Returns the existing allocated thin-provisioning space reserved for your organization within the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                "thinProvisionReserve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6d5f33bc-13fc-476e-a7cd-2d49d52e4da2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": 0,\n      \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n      \"name\": \"Root\",\n      \"ssd_reserve\": 0\n    },\n    {\n      \"id\": 0,\n      \"uid\": \"d4d24f1f-1d4b-58bc-c3de-169055ee6b95\",\n      \"name\": \"Root\",\n      \"ssd_reserve\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f225301f-573b-48f2-adf3-e5510db2f5e6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fec5830a-e3b4-43fa-bff2-90234384023f",
+          "name": "Set thin-provisioning reserve",
+          "request": {
+            "name": "Set thin-provisioning reserve",
+            "description": {
+              "content": "Sets the thin-provisioning space for your organization's filesystems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                "thinProvisionReserve",
+                ":org_uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_uid",
+                  "description": "(Required) Organization UID to set the thin-provisioning space."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ssd_capacity\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4cf83e72-8c49-48e8-b0c8-283f1f2e1485",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve",
+                    ":org_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_uid",
+                      "description": "(Required) Organization UID to set the thin-provisioning space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ssd_capacity\": 1073741824\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "7762",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50ddbfc8-1292-4421-a780-0ea33f8c786c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve",
+                    ":org_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_uid",
+                      "description": "(Required) Organization UID to set the thin-provisioning space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ssd_capacity\": 1073741824\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56ad4892-88c5-4b65-b639-c012a615594f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve",
+                    ":org_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_uid",
+                      "description": "(Required) Organization UID to set the thin-provisioning space."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ssd_capacity\": 1073741824\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d9c6bdc-d5b0-4129-ac66-383184f6c559",
+          "name": "Remove thin-provisioning reserve",
+          "request": {
+            "name": "Remove thin-provisioning reserve",
+            "description": {
+              "content": "Removes the existing reserved thin-provisioning space allocated for your organization's filesystems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                "thinProvisionReserve",
+                ":org_uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org_uid",
+                  "description": "(Required) Organization UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d87f6d5-fc1e-4759-8d7c-47d2ba7c213d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve",
+                    ":org_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_uid",
+                      "description": "(Required) Organization UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "7762",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53c64bcb-22c3-428d-8cf9-e4a568900c41",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve",
+                    ":org_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_uid",
+                      "description": "(Required) Organization UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60925402-fbad-4001-b6bf-932aec1b4cbd",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "thinProvisionReserve",
+                    ":org_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org_uid",
+                      "description": "(Required) Organization UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4235e90a-ecc7-4c78-aaca-9c4631b74c59",
+          "name": "Remove all security policies from a filesystem",
+          "request": {
+            "name": "Remove all security policies from a filesystem",
+            "description": {
+              "content": "Detaches all security policies from a specific filesystem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "securityPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1e18c6b-8e94-4513-bbba-3427045b08af",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67d6e91f-d042-44f1-9618-5b36183bd7cf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "583418c5-2178-4fbc-b582-8488b6408c25",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3ff60fcf-abed-42df-8c04-9fa58eea1374",
+          "name": "Get security policies for a filesystem",
+          "request": {
+            "name": "Get security policies for a filesystem",
+            "description": {
+              "content": "Returns a list of all security policies attached to a specific filesystem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "securityPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cef7860b-8b6c-4a6b-b212-82948442b625",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f1bc3e5-c825-4aef-9cf7-1c977d8fe449",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7189b221-a553-4ce4-9c86-9af2780ebeea",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6b9fc07-af7a-4e38-a69b-b825d1f22a3d",
+          "name": "Set filesystem security policies",
+          "request": {
+            "name": "Set filesystem security policies",
+            "description": {
+              "content": "Replaces all security policies on a filesystem with a new, specified set of policies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "securityPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policies\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7fd948ae-31f3-4892-a455-9d10f1862013",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5bc13d8-048b-4fa9-b8d9-7b6014f8dde7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2610a6f7-ac6d-4969-b3a1-0a8e53fe448d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26df2e58-d933-4369-a6ce-592b975fa174",
+          "name": "Attach security policies to a filesystem",
+          "request": {
+            "name": "Attach security policies to a filesystem",
+            "description": {
+              "content": "Adds one or more security policies to a filesystem's existing policy list.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "securityPolicy",
+                "attach"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policies\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57579b58-f25b-43e3-8b2f-e9724d0af946",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8594f7d5-328a-404b-b0f0-0ba4cc1d1cd5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40a2ad66-d4bf-4523-be9d-80c47a58121e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edd3e5e7-58d4-461d-9162-fb11a7cddccc",
+          "name": "Detach security policies from a filesystem",
+          "request": {
+            "name": "Detach security policies from a filesystem",
+            "description": {
+              "content": "Removes one or more specified security policies from a filesystem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "securityPolicy",
+                "detach"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policies\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9444b208-6901-4c02-acdf-8d42e06fe40a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    },\n    {\n      \"name\": \"remoteAdmins\",\n      \"id\": \"SecurityPolicy<5>\",\n      \"uid\": \"fe98008e-397d-227b-a095-577783714006\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aff5b9ef-c767-4b05-a7c5-c5b435df2dce",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a7e4e76-1d2f-4960-8303-5208de10b361",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "securityPolicy",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    \"00000000-0000-0000-0000-000000000000\",\n    \"00000000-0000-0000-0000-000000000000\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "863adca9-015e-4b48-ac8e-131c5d2ea920",
+          "name": "Get available space in an organization",
+          "request": {
+            "name": "Get available space in an organization",
+            "description": {
+              "content": "Returns the total unprovisioned and reclaimable SSD space available for new or existing filesystems within the user's organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                "freeSpaceInOrg"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a8b07c3e-2de9-4c2c-a858-7c766f700bdd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "freeSpaceInOrg"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"unprovisionedSpace\": 1073741824,\n  \"reclaimableSpace\": 536870912\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e3d08d3-b967-44cf-a3d6-d986dac55fd6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "freeSpaceInOrg"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fb879bc-35c2-4de4-8cf8-a02524323960",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "freeSpaceInOrg"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0be52e05-9fcf-4426-a6a1-9a2b49d95ffc",
+    "name": "@weka-api Active Directory Filesystem API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

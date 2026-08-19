@@ -1,0 +1,2209 @@
+{
+  "item": [
+    {
+      "id": "6717be72-8b29-445b-9fad-ec07c5fbf6db",
+      "name": "Telemetry",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a908556-a51d-452f-b099-302f7253832e",
+          "name": "Get telemetry configuration",
+          "request": {
+            "name": "Get telemetry configuration",
+            "description": {
+              "content": "Returns the cluster-wide telemetry configuration, including audit and forwarding settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a84278c0-df2d-4e06-a61e-45d6d94350df",
+              "name": "Successfully retrieved telemetry configuration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"enabled\": true,\n    \"uiEnabled\": true,\n    \"auditTracesEnabled\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36bab031-47f9-4e22-9c0b-0777a3f58f8d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cbc9434-0a2d-43ce-9c33-13f87f0b49fe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "757a99c7-8411-4934-bfc3-9e7e0d9a0e21",
+          "name": "Update telemetry configuration",
+          "request": {
+            "name": "Update telemetry configuration",
+            "description": {
+              "content": "Modifies cluster-wide telemetry settings, including enabling/disabling audit logging and configuring tracked operations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"audit_traces_enabled\": \"<boolean>\",\n  \"resolve_full_file_paths\": \"<boolean>\",\n  \"operations\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bb7431f-bf05-4ad0-a580-2ee23a33c01c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"audit_traces_enabled\": true,\n  \"resolve_full_file_paths\": true,\n  \"operations\": [\n    \"Create\",\n    \"Delete\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acba091f-8d9b-4acd-8aef-a3dd44a64069",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"audit_traces_enabled\": true,\n  \"resolve_full_file_paths\": true,\n  \"operations\": [\n    \"Create\",\n    \"Delete\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f384467-ef00-4cc2-823c-c98df7850c34",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"audit_traces_enabled\": true,\n  \"resolve_full_file_paths\": true,\n  \"operations\": [\n    \"Create\",\n    \"Delete\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90c5b49e-222f-4374-bbc9-6bdc57cbde4c",
+          "name": "Get all telemetry exports",
+          "request": {
+            "name": "Get all telemetry exports",
+            "description": {
+              "content": "Returns all configured export destinations for telemetry data (for example, Splunk, S3, Kafka).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry",
+                "exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09304fb5-3c75-45a7-99a0-38ce01891123",
+              "name": "Successfully retrieved telemetry exports.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uid\": \"1234-abcd-4321-dcba\",\n      \"id\": \"TelemetrySinkId<0>\",\n      \"name\": \"somesink\",\n      \"target\": \"/some/target\",\n      \"type\": \"File\",\n      \"s3_bucket_name\": \"somebucket\",\n      \"s3_region\": \"eu-central-1\",\n      \"s3_key\": \"somekey\",\n      \"s3_secret\": \"secretkey\",\n      \"ca_type\": \"Unverified\",\n      \"syslog_mode\": \"tcp\",\n      \"syslog_rfc\": \"rfc5424\",\n      \"syslog_facility\": \"local0\",\n      \"sources\": [\n        \"Audit\",\n        \"Audit\"\n      ]\n    },\n    {\n      \"uid\": \"1234-abcd-4321-dcba\",\n      \"id\": \"TelemetrySinkId<0>\",\n      \"name\": \"somesink\",\n      \"target\": \"/some/target\",\n      \"type\": \"File\",\n      \"s3_bucket_name\": \"somebucket\",\n      \"s3_region\": \"eu-central-1\",\n      \"s3_key\": \"somekey\",\n      \"s3_secret\": \"secretkey\",\n      \"ca_type\": \"Unverified\",\n      \"syslog_mode\": \"tcp\",\n      \"syslog_rfc\": \"rfc5424\",\n      \"syslog_facility\": \"local0\",\n      \"sources\": [\n        \"Audit\",\n        \"Audit\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "970895c7-ac03-402f-91d9-102c2253971b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "159ab2fb-6a55-402e-a858-f2b70bfd18ff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70c0bc27-5e41-42a0-b878-adb64832e4d6",
+          "name": "Create a telemetry export",
+          "request": {
+            "name": "Create a telemetry export",
+            "description": {
+              "content": "Configures a new export destination to forward telemetry events to an external system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry",
+                "exports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"target\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"token\": \"<string>\",\n  \"ca_cert_pem\": \"<string>\",\n  \"allow_unverified_certificate\": \"<boolean>\",\n  \"clear_tls_settings\": \"<boolean>\",\n  \"use_cluster_ca_cert\": \"<boolean>\",\n  \"s3_bucket_name\": \"<string>\",\n  \"s3_region\": \"<string>\",\n  \"s3_key\": \"<string>\",\n  \"s3_secret\": \"<string>\",\n  \"syslog_mode\": \"<string>\",\n  \"syslog_rfc\": \"<string>\",\n  \"syslog_facility\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "65cb2baa-206e-4aa6-9f98-94dc02ec85e2",
+              "name": "Export created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"enabled\": true,\n  \"token\": \"123-abc-123abc\",\n  \"ca_cert_pem\": \"-----BEGIN CERTIFICATE-----\",\n  \"allow_unverified_certificate\": false,\n  \"clear_tls_settings\": false,\n  \"use_cluster_ca_cert\": true,\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"type\": \"File\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"1234-abcd-4321-dcba\",\n  \"id\": \"TelemetrySinkId<0>\",\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"type\": \"File\",\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"ca_type\": \"Unverified\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bae7559f-84fe-4129-b131-41200f15577b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"enabled\": true,\n  \"token\": \"123-abc-123abc\",\n  \"ca_cert_pem\": \"-----BEGIN CERTIFICATE-----\",\n  \"allow_unverified_certificate\": false,\n  \"clear_tls_settings\": false,\n  \"use_cluster_ca_cert\": true,\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"type\": \"File\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "974f9e3e-f05e-4528-b7f5-85250c580d8c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"enabled\": true,\n  \"token\": \"123-abc-123abc\",\n  \"ca_cert_pem\": \"-----BEGIN CERTIFICATE-----\",\n  \"allow_unverified_certificate\": false,\n  \"clear_tls_settings\": false,\n  \"use_cluster_ca_cert\": true,\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"type\": \"File\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70e210f1-1fa6-43f3-a024-1dc7d863a911",
+          "name": "Get a telemetry export",
+          "request": {
+            "name": "Get a telemetry export",
+            "description": {
+              "content": "Returns the configuration and status of a specific export destination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry",
+                "exports",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique export identifier (UUID format)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4eb77f6d-afbc-4e93-a05c-dc944d51f1e1",
+              "name": "Successfully retrieved telemetry export.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uid\": \"1234-abcd-4321-dcba\",\n    \"id\": \"TelemetrySinkId<0>\",\n    \"name\": \"somesink\",\n    \"target\": \"/some/target\",\n    \"type\": \"File\",\n    \"s3_bucket_name\": \"somebucket\",\n    \"s3_region\": \"eu-central-1\",\n    \"s3_key\": \"somekey\",\n    \"s3_secret\": \"secretkey\",\n    \"ca_type\": \"Unverified\",\n    \"syslog_mode\": \"tcp\",\n    \"syslog_rfc\": \"rfc5424\",\n    \"syslog_facility\": \"local0\",\n    \"sources\": [\n      \"Audit\",\n      \"Audit\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e12baff1-357e-4722-a646-5bb78d8644e6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "299e955c-ee05-4461-8f2a-d217fcdb25ba",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0293875-2b5f-42ab-8ad9-69095977ef4c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14077562-dad9-42e1-b78d-2935ac1ce376",
+          "name": "Update a telemetry export",
+          "request": {
+            "name": "Update a telemetry export",
+            "description": {
+              "content": "Modifies the configuration of an existing export destination (for example, endpoint URL, authentication credentials).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry",
+                "exports",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique export identifier (UUID format)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"target\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"token\": \"<string>\",\n  \"ca_cert_pem\": \"<string>\",\n  \"allow_unverified_certificate\": \"<boolean>\",\n  \"clear_tls_settings\": \"<boolean>\",\n  \"use_cluster_ca_cert\": \"<boolean>\",\n  \"s3_bucket_name\": \"<string>\",\n  \"s3_region\": \"<string>\",\n  \"s3_key\": \"<string>\",\n  \"s3_secret\": \"<string>\",\n  \"syslog_mode\": \"<string>\",\n  \"syslog_rfc\": \"<string>\",\n  \"syslog_facility\": \"<string>\",\n  \"type\": \"<string>\",\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20ec7912-0934-49bd-8cee-c6b073770341",
+              "name": "Export updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"enabled\": true,\n  \"token\": \"123-abc-123abc\",\n  \"ca_cert_pem\": \"-----BEGIN CERTIFICATE-----\",\n  \"allow_unverified_certificate\": false,\n  \"clear_tls_settings\": false,\n  \"use_cluster_ca_cert\": true,\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"type\": \"File\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uid\": \"1234-abcd-4321-dcba\",\n    \"id\": \"TelemetrySinkId<0>\",\n    \"name\": \"somesink\",\n    \"target\": \"/some/target\",\n    \"type\": \"File\",\n    \"s3_bucket_name\": \"somebucket\",\n    \"s3_region\": \"eu-central-1\",\n    \"s3_key\": \"somekey\",\n    \"s3_secret\": \"secretkey\",\n    \"ca_type\": \"Unverified\",\n    \"syslog_mode\": \"tcp\",\n    \"syslog_rfc\": \"rfc5424\",\n    \"syslog_facility\": \"local0\",\n    \"sources\": [\n      \"Audit\",\n      \"Audit\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e96cfbd-3c35-4d67-acc2-beef97735573",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"enabled\": true,\n  \"token\": \"123-abc-123abc\",\n  \"ca_cert_pem\": \"-----BEGIN CERTIFICATE-----\",\n  \"allow_unverified_certificate\": false,\n  \"clear_tls_settings\": false,\n  \"use_cluster_ca_cert\": true,\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"type\": \"File\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "623191aa-fcc4-4756-9097-fad61357ebcb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"enabled\": true,\n  \"token\": \"123-abc-123abc\",\n  \"ca_cert_pem\": \"-----BEGIN CERTIFICATE-----\",\n  \"allow_unverified_certificate\": false,\n  \"clear_tls_settings\": false,\n  \"use_cluster_ca_cert\": true,\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"type\": \"File\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e19070d8-4c5c-4c5c-adef-a8c6ecbb43fc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"somesink\",\n  \"target\": \"/some/target\",\n  \"enabled\": true,\n  \"token\": \"123-abc-123abc\",\n  \"ca_cert_pem\": \"-----BEGIN CERTIFICATE-----\",\n  \"allow_unverified_certificate\": false,\n  \"clear_tls_settings\": false,\n  \"use_cluster_ca_cert\": true,\n  \"s3_bucket_name\": \"somebucket\",\n  \"s3_region\": \"eu-central-1\",\n  \"s3_key\": \"somekey\",\n  \"s3_secret\": \"secretkey\",\n  \"syslog_mode\": \"tcp\",\n  \"syslog_rfc\": \"rfc5424\",\n  \"syslog_facility\": \"local0\",\n  \"type\": \"File\",\n  \"sources\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8abaf160-3c50-4d2d-9f9d-383a4086537e",
+          "name": "Delete a telemetry export",
+          "request": {
+            "name": "Delete a telemetry export",
+            "description": {
+              "content": "Removes an export destination, stopping all telemetry forwarding to that endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry",
+                "exports",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique export identifier (UUID format)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b1f1377-1006-4626-a10b-927612612f09",
+              "name": "Export deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uid\": \"1234-abcd-4321-dcba\",\n      \"id\": \"TelemetrySinkId<0>\",\n      \"name\": \"somesink\",\n      \"target\": \"/some/target\",\n      \"type\": \"File\",\n      \"s3_bucket_name\": \"somebucket\",\n      \"s3_region\": \"eu-central-1\",\n      \"s3_key\": \"somekey\",\n      \"s3_secret\": \"secretkey\",\n      \"ca_type\": \"Unverified\",\n      \"syslog_mode\": \"tcp\",\n      \"syslog_rfc\": \"rfc5424\",\n      \"syslog_facility\": \"local0\",\n      \"sources\": [\n        \"Audit\",\n        \"Audit\"\n      ]\n    },\n    {\n      \"uid\": \"1234-abcd-4321-dcba\",\n      \"id\": \"TelemetrySinkId<0>\",\n      \"name\": \"somesink\",\n      \"target\": \"/some/target\",\n      \"type\": \"File\",\n      \"s3_bucket_name\": \"somebucket\",\n      \"s3_region\": \"eu-central-1\",\n      \"s3_key\": \"somekey\",\n      \"s3_secret\": \"secretkey\",\n      \"ca_type\": \"Unverified\",\n      \"syslog_mode\": \"tcp\",\n      \"syslog_rfc\": \"rfc5424\",\n      \"syslog_facility\": \"local0\",\n      \"sources\": [\n        \"Audit\",\n        \"Audit\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cc0fd08-33f9-47da-a860-4c68217e8697",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd32f308-e834-422b-ab0d-cdf8d4139bee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c22152c7-18ac-461f-8f16-b2ced2b7e859",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67b21ed1-e932-4995-994d-9968d06e6119",
+          "name": "Attach data sources to export",
+          "request": {
+            "name": "Attach data sources to export",
+            "description": {
+              "content": "Associates one or more data sources (for example, 'Audit') with an export destination to begin forwarding that data type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry",
+                "exports",
+                ":uid",
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique export identifier (UUID format)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2173a017-4537-486d-87b8-3c9950abd516",
+              "name": "Sources attached successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a601f3a5-058d-4f2b-a3f1-6f14e6b99bde",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "252b4292-497d-48d5-a65c-211893a20bcf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1060a92c-c8e1-40ce-803b-116b5ba0acf6",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "907ce76a-69ac-4059-a2fe-96053b67e7a4",
+          "name": "Detach data sources from export",
+          "request": {
+            "name": "Detach data sources from export",
+            "description": {
+              "content": "Removes one or more data sources from an export destination, stopping the forwarding of that data type.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "telemetry",
+                "exports",
+                ":uid",
+                "sources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique export identifier (UUID format)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d46de499-0bcc-48a6-9b4d-615338c5d2c6",
+              "name": "Sources detached successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"Audit\",\n    \"Audit\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0b31b2d-9314-4a94-806c-efc562a6c579",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b3d03fe-3c97-42be-b2d3-a0410310794c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cd63fb4-bb4d-4ffc-80ec-7eb225a8b4d1",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "telemetry",
+                    "exports",
+                    ":uid",
+                    "sources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique export identifier (UUID format)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"Audit\",\n  \"Audit\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "adb22996-7430-41c8-a060-3dd470034e50",
+    "name": "@weka-api Active Directory Telemetry API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

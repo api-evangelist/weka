@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Machines API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Machines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all machines - deprecated, use GET /servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/machines",
+            "params": [
+              {
+                "name": "role",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all machines - deprecated, use GET /servers"
+        },
+        {
+          "info": {
+            "name": "Get single machine - deprecated, use GET /servers/{uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/machines/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid."
+              }
+            ]
+          },
+          "docs": "Get single machine - deprecated, use GET /servers/{uid}"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

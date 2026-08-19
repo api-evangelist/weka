@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Default network API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Default network",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get default network",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/defaultNet"
+          },
+          "docs": "Get default network"
+        },
+        {
+          "info": {
+            "name": "Set default network settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/defaultNet",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines the IP address range, gateway, and subnet mask for future container network assignments."
+        },
+        {
+          "info": {
+            "name": "Update default network settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/defaultNet",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies existing default network settings, such as the IP range, gateway, or subnet mask."
+        },
+        {
+          "info": {
+            "name": "Reset default network settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/defaultNet"
+          },
+          "docs": "Removes custom default network settings and reverts to the initial system baseline."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

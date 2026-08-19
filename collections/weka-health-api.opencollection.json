@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Health API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Health",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check REST API status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/healthcheck"
+          },
+          "docs": "Verifies the availability of the REST API."
+        },
+        {
+          "info": {
+            "name": "Check GUI status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/ui/healthcheck"
+          },
+          "docs": "Verifies the availability of the GUI."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

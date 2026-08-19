@@ -1,0 +1,871 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory S3 API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "S3",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get S3 cluster information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3"
+          },
+          "docs": "Returns details about the S3 cluster managed by the system."
+        },
+        {
+          "info": {
+            "name": "Create an S3 cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Establishes a new S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Update an S3 cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the configuration of an existing S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Delete an S3 cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3",
+            "params": [
+              {
+                "name": "purge_config",
+                "value": "",
+                "type": "query",
+                "description": "Purge the existing configuration by default."
+              }
+            ]
+          },
+          "docs": "Removes an S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Get S3 settings for the calling tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/tenantSetup"
+          },
+          "docs": "Returns the calling tenant's effective S3 default filesystem and anonymous POSIX UID/GID.\nDefault filesystem falls back to the cluster-wide default when no tenant override is set.\n"
+        },
+        {
+          "info": {
+            "name": "Update S3 settings for the calling tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/tenantSetup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the calling tenant's S3 default filesystem and/or anonymous POSIX UID/GID.\nUID and GID must be set together. At least one parameter must be provided.\n"
+        },
+        {
+          "info": {
+            "name": "Get S3 buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/buckets"
+          },
+          "docs": "Returns a list of all buckets within an S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Add an S3 bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/buckets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new bucket within an S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Get S3 user policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/userPolicies"
+          },
+          "docs": "Returns a list of S3 user policies."
+        },
+        {
+          "info": {
+            "name": "Delete an S3 bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/buckets/:bucket",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              },
+              {
+                "name": "unlink",
+                "value": "",
+                "type": "query",
+                "description": "Unlinks the bucket, but leaves the data directory in place."
+              }
+            ]
+          },
+          "docs": "Removes a specified S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Get S3 IAM policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/policies"
+          },
+          "docs": "Returns a list of S3 IAM policies."
+        },
+        {
+          "info": {
+            "name": "Add an S3 IAM policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new S3 IAM policy."
+        },
+        {
+          "info": {
+            "name": "Get S3 IAM policy details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/policies/:policy",
+            "params": [
+              {
+                "name": "policy",
+                "value": "",
+                "type": "path",
+                "description": "policy name."
+              }
+            ]
+          },
+          "docs": "Returns details about a specific S3 IAM policy."
+        },
+        {
+          "info": {
+            "name": "Delete an S3 IAM policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/policies/:policy",
+            "params": [
+              {
+                "name": "policy",
+                "value": "",
+                "type": "path",
+                "description": "policy name."
+              }
+            ]
+          },
+          "docs": "Removes an S3 IAM policy."
+        },
+        {
+          "info": {
+            "name": "Attach an S3 IAM policy to a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/policies/attach",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns an S3 IAM policy to a user."
+        },
+        {
+          "info": {
+            "name": "Detach an S3 IAM policy from a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/policies/detach",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unassigns an S3 IAM policy from a user."
+        },
+        {
+          "info": {
+            "name": "Get S3 service accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/serviceAccounts"
+          },
+          "docs": "Returns the S3 service accounts added by the S3 user, including their access keys."
+        },
+        {
+          "info": {
+            "name": "Add an S3 service account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/serviceAccounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new S3 service account."
+        },
+        {
+          "info": {
+            "name": "Get S3 service account details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/serviceAccounts/:access_key",
+            "params": [
+              {
+                "name": "access_key",
+                "value": "",
+                "type": "path",
+                "description": "Access key of the service account."
+              }
+            ]
+          },
+          "docs": "Returns a specific S3 service account."
+        },
+        {
+          "info": {
+            "name": "Remove an S3 service account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/serviceAccounts/:access_key",
+            "params": [
+              {
+                "name": "access_key",
+                "value": "",
+                "type": "path",
+                "description": "Access key of the service account."
+              }
+            ]
+          },
+          "docs": "Removes an S3 service account."
+        },
+        {
+          "info": {
+            "name": "Create an S3 STS token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/sts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an S3 STS token with an assumed role."
+        },
+        {
+          "info": {
+            "name": "Get lifecycle rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/buckets/:bucket/lifecycle/rules",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              }
+            ]
+          },
+          "docs": "Returns a list of all lifecycle rules for an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Add a lifecycle rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/buckets/:bucket/lifecycle/rules",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new lifecycle rule for an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Delete lifecycle rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/buckets/:bucket/lifecycle/rules",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              }
+            ]
+          },
+          "docs": "Removes all lifecycle rules for an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Delete a lifecycle rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/buckets/:bucket/lifecycle/rules/:rule",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              },
+              {
+                "name": "rule",
+                "value": "",
+                "type": "path",
+                "description": "rule ID."
+              }
+            ]
+          },
+          "docs": "Removes a specific lifecycle rule from an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Get S3 bucket policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/buckets/:bucket/policy",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              }
+            ]
+          },
+          "docs": "Returns the policy attached to an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Set S3 bucket policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/buckets/:bucket/policy",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a policy to an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Get S3 bucket policy (JSON)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/buckets/:bucket/policyJson",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name."
+              }
+            ]
+          },
+          "docs": "Returns the bucket policy in JSON format."
+        },
+        {
+          "info": {
+            "name": "Set S3 bucket policy (JSON)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/buckets/:bucket/policyJson",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the bucket policy using a JSON file."
+        },
+        {
+          "info": {
+            "name": "Set S3 bucket quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/buckets/:bucket/quota",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Defines a storage quota for an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Unset S3 bucket quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/buckets/:bucket/quota",
+            "params": [
+              {
+                "name": "bucket",
+                "value": "",
+                "type": "path",
+                "description": "bucket name"
+              }
+            ]
+          },
+          "docs": "Removes a storage quota from an S3 bucket."
+        },
+        {
+          "info": {
+            "name": "Get container readiness",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/containersAreReady"
+          },
+          "docs": "Returns the readiness status of containers within the S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Add servers to S3 cluster - deprecated, use POST /s3/containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/hosts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a server to the S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Remove servers from S3 cluster - deprecated use /s3/containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/hosts",
+            "params": [
+              {
+                "name": "host_uids",
+                "value": "",
+                "type": "query",
+                "description": "UIDs of servers to remove from S3 cluster"
+              }
+            ]
+          },
+          "docs": "Removes a server from the S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Add container to S3 cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/containers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a container to the S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Remove containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/containers",
+            "params": [
+              {
+                "name": "container_uids",
+                "value": "",
+                "type": "query",
+                "description": "UIDs of containers to remove from S3 cluster"
+              }
+            ]
+          },
+          "docs": "Removes containers from the S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Get logging verbosity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/debug"
+          },
+          "docs": "Returns the logging level for container processes within the S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Set logging verbosity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/debug",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adjusts the logging level for container processes within the S3 cluster."
+        },
+        {
+          "info": {
+            "name": "Enable S3 audit webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/auditWebhook/enable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates the S3 audit webhook."
+        },
+        {
+          "info": {
+            "name": "Disable S3 audit webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/auditWebhook/disable"
+          },
+          "docs": "Deactivates the S3 audit webhook."
+        },
+        {
+          "info": {
+            "name": "Get S3 audit webhook configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/auditWebhook"
+          },
+          "docs": "Returns details about the S3 audit webhook configuration."
+        },
+        {
+          "info": {
+            "name": "Get S3 OIDC configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/s3/oidc"
+          },
+          "docs": "Returns the current OIDC configuration."
+        },
+        {
+          "info": {
+            "name": "Add S3 OIDC configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/oidc",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds OIDC (OpenID Connect) configuration for S3 authentication."
+        },
+        {
+          "info": {
+            "name": "Update S3 OIDC configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/oidc",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates existing OIDC configuration."
+        },
+        {
+          "info": {
+            "name": "Remove S3 OIDC configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/oidc"
+          },
+          "docs": "Removes the OIDC configuration."
+        },
+        {
+          "info": {
+            "name": "Import LDAP user for S3 access",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/ldapImportUser"
+          },
+          "docs": "Provisions S3 access for an existing LDAP user in tenant 0. Use /s3/{tenantId}/ldapImportUser for other tenants."
+        },
+        {
+          "info": {
+            "name": "Update an S3 user through LDAP authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/ldapImportUser"
+          },
+          "docs": "Updates an S3 user's credentials and policy through LDAP authentication in tenant 0. Use /s3/{tenantId}/ldapImportUser for other tenants."
+        },
+        {
+          "info": {
+            "name": "Remove an S3 user through LDAP username",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/ldapImportUser"
+          },
+          "docs": "Deletes an S3 user authenticated through LDAP in tenant 0. Use /s3/{tenantId}/ldapImportUser for other tenants."
+        },
+        {
+          "info": {
+            "name": "Import LDAP user for S3 access in specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/s3/:tenantId/ldapImportUser",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The tenant ID (organization ID) to import the user into"
+              }
+            ]
+          },
+          "docs": "Provisions S3 access for an existing LDAP user. It authenticates the user against the configured LDAP directory for the specified tenant and generates unique S3 access and secret keys."
+        },
+        {
+          "info": {
+            "name": "Update an S3 user through LDAP authentication in specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/:tenantId/ldapImportUser",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The tenant ID (organization ID)"
+              }
+            ]
+          },
+          "docs": "Updates an S3 user's credentials and policy through LDAP authentication for the specified tenant."
+        },
+        {
+          "info": {
+            "name": "Remove an S3 user through LDAP username in specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/s3/:tenantId/ldapImportUser",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The tenant ID (organization ID)"
+              }
+            ]
+          },
+          "docs": "Deletes an S3 user authenticated through LDAP for the specified tenant."
+        },
+        {
+          "info": {
+            "name": "Refresh all LDAP S3 users",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/refresh-imported"
+          },
+          "docs": "Synchronizes UID, GID, and S3 policies for all LDAP-imported users to ensure cluster permissions match the current directory state. This operation updates existing identities and reports success or failure counts."
+        },
+        {
+          "info": {
+            "name": "Refresh all LDAP S3 users for a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/s3/:tenantId/refresh-imported",
+            "params": [
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "path",
+                "description": "The tenant ID (organization ID)"
+              }
+            ]
+          },
+          "docs": "Synchronizes UID, GID, and S3 policies for all LDAP-imported users in the specified tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory TLS API'
   version: '5.1'
@@ -82,7 +82,7 @@ paths:
                   example: '-----BEGIN CERTIFICATE-----\n<certificate_content\n>\n-----END CERTIFICATE-----"'
                 tls_key_pem:
                   type: string
-                  example: 'REDACTED_PRIVATE_KEY_EXAMPLE"'
+                  example: REDACTED_PRIVATE_KEY_EXAMPLE"
     delete:
       tags:
       - TLS
@@ -114,19 +114,6 @@ paths:
         '401':
           $ref: '#/components/responses/401'
 components:
-  schemas:
-    tlsCertificate:
-      type: object
-      properties:
-        config_state:
-          type: string
-          example: USER_DEFINED
-        enabled:
-          type: boolean
-          example: true
-        certificate:
-          type: string
-          example: '-----BEGIN CERTIFICATE-----\n<all_the_content_of_cert.pem_with_\n>\n-----END CERTIFICATE-----"'
   responses:
     '200':
       description: Success
@@ -145,6 +132,19 @@ components:
               data:
                 type: string
                 example: Unauthorized
+  schemas:
+    tlsCertificate:
+      type: object
+      properties:
+        config_state:
+          type: string
+          example: USER_DEFINED
+        enabled:
+          type: boolean
+          example: true
+        certificate:
+          type: string
+          example: '-----BEGIN CERTIFICATE-----\n<all_the_content_of_cert.pem_with_\n>\n-----END CERTIFICATE-----"'
   securitySchemes:
     bearerAuth:
       type: http

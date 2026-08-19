@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Alerts API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all cluster alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/alerts",
+            "params": [
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filters alerts by a minimum severity level, including alerts of equal or higher severity.<br>The default is warning. Accepted values are debug, warning, minor, major, or critical."
+              }
+            ]
+          },
+          "docs": "Returns a list of active cluster alerts to monitor the system's health. The list includes silenced alerts and can be filtered by severity level."
+        },
+        {
+          "info": {
+            "name": "List all possible alert types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/alerts/types"
+          },
+          "docs": "Returns a comprehensive list of all possible alert types that the system can generate."
+        },
+        {
+          "info": {
+            "name": "List alert descriptions and recommended actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/alerts/description"
+          },
+          "docs": "Returns detailed descriptions and recommended troubleshooting actions for all possible alert types."
+        },
+        {
+          "info": {
+            "name": "List all active alert mute rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/alerts/muteList"
+          },
+          "docs": "Returns all currently active alert mute rules. Muted alerts do not generate notifications."
+        },
+        {
+          "info": {
+            "name": "Mute alerts by type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/alerts/:alert_type/mute",
+            "params": [
+              {
+                "name": "alert_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of alert to silence. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a rule to temporarily mute a specific type of alert.<br> This is useful for preventing notifications during maintenance or for known, non-critical issues.<br> The mute can be applied globally to an alert type or filtered to specific servers, containers, or processes."
+        },
+        {
+          "info": {
+            "name": "Add parameters to alert mute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/alerts/:alert_type/muteAdd",
+            "params": [
+              {
+                "name": "alert_type",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Expands the scope of an existing alert mute by adding specific processes, containers, or servers. This action allows for granular suppression of notifications for a particular alert type without modifying the entire entry."
+        },
+        {
+          "info": {
+            "name": "Remove parameters from alert mute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/alerts/:alert_type/muteRemove",
+            "params": [
+              {
+                "name": "alert_type",
+                "value": "",
+                "type": "path",
+                "description": "Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Selectively restore alerts for processes, containers, or servers by removing them from an active alert mute. This action reactivates notifications for the specified identifiers while keeping other components under the same alert type silenced."
+        },
+        {
+          "info": {
+            "name": "Unmute alerts by type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/alerts/:alert_type/unmute",
+            "params": [
+              {
+                "name": "alert_type",
+                "value": "",
+                "type": "path",
+                "description": "The type of alert to reactivate. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+              }
+            ]
+          },
+          "docs": "Removes all active mute rules for a specific alert type, causing it to generate notifications again."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

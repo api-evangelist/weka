@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory NFS API'
   version: '5.1'
@@ -1315,14 +1315,6 @@ paths:
                   example: weka.io
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -1332,6 +1324,14 @@ components:
               message:
                 type: string
                 example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -1365,35 +1365,6 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
-    clientGroup:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: '242'
-        rules:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-                example: IP
-              uid:
-                type: string
-                example: '244'
-              rule:
-                type: string
-                example: 0.0.0.0/0.0.0.0
-              id:
-                type: string
-                example: NfsClientGroupRuleId<0>
-        id:
-          type: string
-          example: NfsClientGroupId<0>
-        name:
-          type: string
-          example: DefaultClientGroup
     nfsPermission:
       type: object
       properties:
@@ -1458,6 +1429,35 @@ components:
           items:
             type: string
             example: KRB5
+    clientGroup:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: '242'
+        rules:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+                example: IP
+              uid:
+                type: string
+                example: '244'
+              rule:
+                type: string
+                example: 0.0.0.0/0.0.0.0
+              id:
+                type: string
+                example: NfsClientGroupRuleId<0>
+        id:
+          type: string
+          example: NfsClientGroupId<0>
+        name:
+          type: string
+          example: DefaultClientGroup
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,0 +1,2633 @@
+{
+  "item": [
+    {
+      "id": "e8a4e4c0-2021-48c0-86c4-2bf7861e696f",
+      "name": "Snapshot Policy",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a5a86c3c-e86e-4a19-b445-58fb091e8634",
+          "name": "Create snapshot policy",
+          "request": {
+            "name": "Create snapshot policy",
+            "description": {
+              "content": "Creates a new snapshot policy with specified scheduling parameters, retention rules, and configuration settings for automated point-in-time data copies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"retention\": \"<number>\",\n      \"time\": \"<string>\",\n      \"upload\": \"<string>\"\n    },\n    \"hourly\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"hours\": \"<string>\",\n      \"minuteOffset\": \"<number>\",\n      \"retention\": \"<number>\",\n      \"upload\": \"<string>\"\n    },\n    \"monthly\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"months\": \"<string>\",\n      \"retention\": \"<number>\",\n      \"time\": \"<string>\",\n      \"upload\": \"<string>\"\n    },\n    \"periodic\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"end_time\": \"<string>\",\n      \"interval\": \"<number>\",\n      \"retention\": \"<number>\",\n      \"start_time\": \"<string>\",\n      \"upload\": \"<string>\"\n    },\n    \"weekly\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"retention\": \"<number>\",\n      \"time\": \"<string>\",\n      \"upload\": \"<string>\"\n    }\n  },\n  \"enable\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cfd2115f-989c-466f-ae06-249f823fc917",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Backup\",\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  },\n  \"enable\": true,\n  \"description\": \"Backup filesystem\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uid\": \"fe08008e-397d-237b-a095-577783714006\",\n    \"id\": \"SnapPolicyId<1>\",\n    \"name\": \"Backup\",\n    \"description\": \"Periodic filesystem backup\",\n    \"enable\": true,\n    \"filesystems\": [\n      \"default\",\n      \"default\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2ed4201-eac7-4067-8e80-9246c272499d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Backup\",\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  },\n  \"enable\": true,\n  \"description\": \"Backup filesystem\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d890c481-b4e0-49fd-b0ab-c48b16e7b12c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Backup\",\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  },\n  \"enable\": true,\n  \"description\": \"Backup filesystem\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a09a64f1-0e1c-4c8f-9469-5ea9ab3dac7e",
+          "name": "Get all snapshot policies",
+          "request": {
+            "name": "Get all snapshot policies",
+            "description": {
+              "content": "Returns a complete list of all snapshot policies configured in the cluster with their current settings and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfbe23d8-42a6-4265-9519-ed9cb7957862",
+              "name": "List of snapshot policies.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uid\": \"fe08008e-397d-237b-a095-577783714006\",\n      \"id\": \"SnapPolicyId<1>\",\n      \"name\": \"Backup\",\n      \"description\": \"Periodic filesystem backup\",\n      \"enable\": true,\n      \"filesystems\": [\n        \"default\",\n        \"default\"\n      ]\n    },\n    {\n      \"uid\": \"fe08008e-397d-237b-a095-577783714006\",\n      \"id\": \"SnapPolicyId<1>\",\n      \"name\": \"Backup\",\n      \"description\": \"Periodic filesystem backup\",\n      \"enable\": true,\n      \"filesystems\": [\n        \"default\",\n        \"default\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "598c8194-f759-4c01-9439-265ff9f3763f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e353b75-8bd1-4d6a-8ee3-412006859287",
+          "name": "Get a snapshot policy",
+          "request": {
+            "name": "Get a snapshot policy",
+            "description": {
+              "content": "Returns detailed configuration for a specific snapshot policy, including schedule definitions, retention parameters, and attached filesystem associations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) snapshot policy uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9beb906c-abf8-4719-94b1-69c27b947fe6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapPolicyId<1>\",\n    \"name\": \"Backup\",\n    \"description\": \"Periodic filesystem backup\",\n    \"enable\": true,\n    \"filesystems\": [\n      \"default\",\n      \"default\"\n    ],\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "534c3fe5-4d83-44cc-9883-66bebbe0f9d1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7910555-2d16-47de-af70-f561b5cfd2be",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b4b7e33d-34c3-47d8-a48d-7b9e863f54d1",
+          "name": "Update snapshot policy",
+          "request": {
+            "name": "Update snapshot policy",
+            "description": {
+              "content": "Updates configuration settings for an existing snapshot policy, including name, description, schedule parameters, retention rules, and activation status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Snapshot policy uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"retention\": \"<number>\",\n      \"time\": \"<string>\",\n      \"upload\": \"<string>\"\n    },\n    \"hourly\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"hours\": \"<string>\",\n      \"minuteOffset\": \"<number>\",\n      \"retention\": \"<number>\",\n      \"upload\": \"<string>\"\n    },\n    \"monthly\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"months\": \"<string>\",\n      \"retention\": \"<number>\",\n      \"time\": \"<string>\",\n      \"upload\": \"<string>\"\n    },\n    \"periodic\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"end_time\": \"<string>\",\n      \"interval\": \"<number>\",\n      \"retention\": \"<number>\",\n      \"start_time\": \"<string>\",\n      \"upload\": \"<string>\"\n    },\n    \"weekly\": {\n      \"days\": \"<string>\",\n      \"enable\": \"<boolean>\",\n      \"retention\": \"<number>\",\n      \"time\": \"<string>\",\n      \"upload\": \"<string>\"\n    }\n  },\n  \"new_name\": \"<string>\",\n  \"enable\": \"<boolean>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee09717b-3c11-4d6a-8645-f6da3cd3bf04",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  },\n  \"new_name\": \"NewBackup\",\n  \"enable\": \"<boolean>\",\n  \"description\": \"Backup Filesystem New\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uid\": \"fe08008e-397d-237b-a095-577783714006\",\n    \"id\": \"SnapPolicyId<1>\",\n    \"name\": \"Backup\",\n    \"description\": \"Periodic filesystem backup\",\n    \"enable\": true,\n    \"filesystems\": [\n      \"default\",\n      \"default\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b5219bc-7a7e-4bbc-9c3c-d66a3bd5e556",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  },\n  \"new_name\": \"NewBackup\",\n  \"enable\": \"<boolean>\",\n  \"description\": \"Backup Filesystem New\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c9feb54-6159-47a8-9094-3688e5806a3d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  },\n  \"new_name\": \"NewBackup\",\n  \"enable\": \"<boolean>\",\n  \"description\": \"Backup Filesystem New\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba7dd262-7c23-4915-b56b-44bc89227f75",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policy_params\": {\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  },\n  \"new_name\": \"NewBackup\",\n  \"enable\": \"<boolean>\",\n  \"description\": \"Backup Filesystem New\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba0e7c90-416b-4e09-97e6-896a3575f1a5",
+          "name": "Delete snapshot policy",
+          "request": {
+            "name": "Delete snapshot policy",
+            "description": {
+              "content": "Permanently removes a snapshot policy from the system. All filesystems must be detached from the policy before deletion can proceed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Snapshot policy uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3679236-6ead-4607-b090-a0ade303b6a9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c716e89a-1c50-498f-9d7c-ef09d7648f06",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b620397-e6fb-4cc7-a6b5-d61dbb999744",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c98082ef-14d0-4c15-8f18-140e3a3144ec",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4dc74170-a481-4c6b-8cdd-ef2ac9572991",
+          "name": "List filesystems attached to a snapshot policy",
+          "request": {
+            "name": "List filesystems attached to a snapshot policy",
+            "description": {
+              "content": "Returns a list of all filesystem identifiers currently associated with a specific snapshot policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid",
+                "filesystems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Snapshot policy uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e3406d7-c257-4550-9cd2-fd137054a2ff",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"default\",\n    \"default\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e01bc12b-7b53-459f-9048-23842625e33a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01408eb8-bcd4-4b8a-a317-58b7bda34020",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "70dd5232-572d-4f16-aba3-d8c5c35ca62e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66301e7d-b0dd-40e3-b9f2-e84706b12e67",
+          "name": "Attach filesystems to snapshot policy",
+          "request": {
+            "name": "Attach filesystems to snapshot policy",
+            "description": {
+              "content": "Associates one or more filesystems with a snapshot policy, applying the policy's scheduling and retention rules to the specified filesystems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid",
+                "filesystems",
+                "attach"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Snapshot policy uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filesystems\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6877f391-1145-4611-91ad-9c3810b562e0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"default\",\n    \"default\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22b5fe97-9cee-42b6-8c12-6f54fe831a3e",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40e4609e-2e21-4282-bf68-59bed8d68b1c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9c245db-c536-4d89-ba99-381316297a5d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "attach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d44f029d-4cc7-4eae-8bbb-7584ba104363",
+          "name": "Detach filesystems from snapshot policy",
+          "request": {
+            "name": "Detach filesystems from snapshot policy",
+            "description": {
+              "content": "Removes the association between a snapshot policy and one or more filesystems, discontinuing automated snapshot operations for those filesystems.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid",
+                "filesystems",
+                "detach"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "remove_waiting_tasks",
+                  "value": "<boolean>",
+                  "description": "Allow to delete all waiting tasks corresponding to the filesystems."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Snapshot policy UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filesystems\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3ca2996d-1131-4c8d-afbb-6112d9be0f27",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remove_waiting_tasks",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"default\",\n    \"default\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7a532c0-e4f2-4414-b37f-930c10ee55b5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remove_waiting_tasks",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4c7674b-7f66-43a5-b0d5-6d3a39120bee",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remove_waiting_tasks",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06bb302c-9cbb-41fd-98a6-57a59cf01c3c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "filesystems",
+                    "detach"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "remove_waiting_tasks",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filesystems\": [\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\",\n    \"7bd47da6-6769-44ca-5f7c-6bebc27beeab\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d5db4dc-c3e7-4865-8573-6a47ba616780",
+          "name": "Duplicate a snapshot policy",
+          "request": {
+            "name": "Duplicate a snapshot policy",
+            "description": {
+              "content": "Creates a copy of an existing snapshot policy with its configuration settings, optionally including filesystem associations. Useful for establishing similar policies with minor variations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid",
+                "duplicate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include_attached_filesystems",
+                  "value": "<boolean>",
+                  "description": "Define whether or not to include the attached filesystems."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Snapshot policy uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6481e135-cfa8-48ce-a572-8269238f8a7b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_attached_filesystems",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"policy_dup\",\n  \"description\": \"duplicate policy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"SnapPolicyId<1>\",\n    \"name\": \"Backup\",\n    \"description\": \"Periodic filesystem backup\",\n    \"enable\": true,\n    \"filesystems\": [\n      \"default\",\n      \"default\"\n    ],\n    \"daily\": {\n      \"days\": \"all\",\n      \"enable\": true,\n      \"retention\": 7,\n      \"time\": \"22:05\",\n      \"upload\": \"local\"\n    },\n    \"hourly\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": true,\n      \"hours\": \"09, 10, 11, 12, 13, 14, 15, 16, 17, 18\",\n      \"minuteOffset\": 5,\n      \"retention\": 10,\n      \"upload\": \"none\"\n    },\n    \"monthly\": {\n      \"days\": \"07\",\n      \"enable\": true,\n      \"months\": \"all\",\n      \"retention\": 12,\n      \"time\": \"00:05\",\n      \"upload\": \"local\"\n    },\n    \"periodic\": {\n      \"days\": \"monday, tuesday, wednesday, thursday, friday\",\n      \"enable\": false,\n      \"end_time\": \"18:00\",\n      \"interval\": 30,\n      \"retention\": 4,\n      \"start_time\": \"09:00\",\n      \"upload\": \"none\"\n    },\n    \"weekly\": {\n      \"days\": \"saturday\",\n      \"enable\": true,\n      \"retention\": 4,\n      \"time\": \"23:05\",\n      \"upload\": \"local\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20c83729-fc56-40ed-8475-99ae7f042c7c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_attached_filesystems",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"policy_dup\",\n  \"description\": \"duplicate policy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7810fa3-cf54-4578-aee0-5141f44622b8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_attached_filesystems",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"policy_dup\",\n  \"description\": \"duplicate policy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9422fffb-7cba-4ba1-960d-92af305225a4",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "duplicate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include_attached_filesystems",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"policy_dup\",\n  \"description\": \"duplicate policy\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2517112a-2db7-4d2b-9f89-b99625e2e78c",
+          "name": "Run the snapshot policy schedule once",
+          "request": {
+            "name": "Run the snapshot policy schedule once",
+            "description": {
+              "content": "Runs a specified schedule type immediately, creating snapshots for all attached filesystems without waiting for the scheduled time.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "snapshotPolicy",
+                ":uid",
+                "runOnce"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Snapshot policy uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schedule_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b4981da-d349-4404-92f9-b9c46e3238b7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "runOnce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedule_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Background jobs are initiated to generate snapshots for all attached filesystems.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "007297df-9ce3-4b84-a6ed-5a3f859ea6d1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "runOnce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedule_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3aabe9c5-c253-4ce1-b244-31b59dc42943",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "runOnce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedule_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57c448b2-671d-440e-9b54-18548c9d1b8c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "snapshotPolicy",
+                    ":uid",
+                    "runOnce"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Snapshot policy uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schedule_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8e190b19-f4b0-468d-9ccd-8459c337671d",
+    "name": "@weka-api Active Directory Snapshot Policy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

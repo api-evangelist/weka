@@ -1,0 +1,1315 @@
+{
+  "item": [
+    {
+      "id": "4f176f14-8c4d-4efa-9f11-228a57e94276",
+      "name": "Object store bucket",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f528e8e5-28dd-4541-92fe-bb4e8f048c94",
+          "name": "Get object store bucket configurations",
+          "request": {
+            "name": "Get object store bucket configurations",
+            "description": {
+              "content": "Retrieves a list of all object store bucket configurations and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStoreBuckets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c05c25f-a6c1-4670-b90a-b8e5a1307b17",
+              "name": "A list of object store bucket configurations was successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"status_remove\": \"UP\",\n      \"id\": \"ObsBucketId<1>\",\n      \"secret_key\": \"**********\",\n      \"errors_timeout\": 60,\n      \"bandwidth\": {\n        \"_mbps\": 1000\n      },\n      \"name\": \"OBS_1\",\n      \"obs_name\": \"default\",\n      \"obs_site\": \"local\",\n      \"prefetch_mib\": 10,\n      \"uid\": \"302\",\n      \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n      \"enable_upload_tags\": true,\n      \"data_storage_class\": \"INTELLIGENT_TIERING\",\n      \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n      \"unknown_nodes\": [\n        \"NodeId<61>\",\n        \"NodeId<61>\"\n      ],\n      \"unknown_count\": 0,\n      \"up_nodes\": [\n        \"NodeId<100>\",\n        \"NodeId<100>\"\n      ],\n      \"up_count\": 14,\n      \"down_count\": 0,\n      \"max_concurrent_uploads\": 10,\n      \"auth_method\": \"AWSSignature4\",\n      \"status_upload\": \"UP\",\n      \"download_bandwidth\": {\n        \"_mbps\": 4294967295\n      },\n      \"max_concurrent_removals\": 10,\n      \"max_extents_in_data_blob\": 10,\n      \"max_blocks_in_data_blob\": 10,\n      \"upload_bandwidth\": {\n        \"_mbps\": 4294967295\n      },\n      \"up_since\": \"2021-03-09T08:56:27.923664Z\",\n      \"access_key_id\": \"REDACTED_AWS_ACCESS_KEY_ID\",\n      \"last_errors\": \"last error\",\n      \"port\": 80,\n      \"status_download\": \"UP\",\n      \"bucket\": \"eu-west-1-aws.weka.io.def-oo-test/obs_1\",\n      \"status\": \"UP\",\n      \"obs_type\": \"AWS\",\n      \"max_concurrent_downloads\": 10,\n      \"obs_id\": \"ObsId<0>\",\n      \"region\": \"eu-west-1\",\n      \"protocol\": \"HTTP\",\n      \"down_nodes\": [\n        \"NodeId<60>\",\n        \"NodeId<60>\"\n      ]\n    },\n    {\n      \"status_remove\": \"UP\",\n      \"id\": \"ObsBucketId<1>\",\n      \"secret_key\": \"**********\",\n      \"errors_timeout\": 60,\n      \"bandwidth\": {\n        \"_mbps\": 1000\n      },\n      \"name\": \"OBS_1\",\n      \"obs_name\": \"default\",\n      \"obs_site\": \"local\",\n      \"prefetch_mib\": 10,\n      \"uid\": \"302\",\n      \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n      \"enable_upload_tags\": true,\n      \"data_storage_class\": \"INTELLIGENT_TIERING\",\n      \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n      \"unknown_nodes\": [\n        \"NodeId<61>\",\n        \"NodeId<61>\"\n      ],\n      \"unknown_count\": 0,\n      \"up_nodes\": [\n        \"NodeId<100>\",\n        \"NodeId<100>\"\n      ],\n      \"up_count\": 14,\n      \"down_count\": 0,\n      \"max_concurrent_uploads\": 10,\n      \"auth_method\": \"AWSSignature4\",\n      \"status_upload\": \"UP\",\n      \"download_bandwidth\": {\n        \"_mbps\": 4294967295\n      },\n      \"max_concurrent_removals\": 10,\n      \"max_extents_in_data_blob\": 10,\n      \"max_blocks_in_data_blob\": 10,\n      \"upload_bandwidth\": {\n        \"_mbps\": 4294967295\n      },\n      \"up_since\": \"2021-03-09T08:56:27.923664Z\",\n      \"access_key_id\": \"REDACTED_AWS_ACCESS_KEY_ID\",\n      \"last_errors\": \"last error\",\n      \"port\": 80,\n      \"status_download\": \"UP\",\n      \"bucket\": \"eu-west-1-aws.weka.io.def-oo-test/obs_1\",\n      \"status\": \"UP\",\n      \"obs_type\": \"AWS\",\n      \"max_concurrent_downloads\": 10,\n      \"obs_id\": \"ObsId<0>\",\n      \"region\": \"eu-west-1\",\n      \"protocol\": \"HTTP\",\n      \"down_nodes\": [\n        \"NodeId<60>\",\n        \"NodeId<60>\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7693a75-ced1-4315-b9cd-b0519d89de11",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f1179b3-6a0c-4288-a210-b723eafdba29",
+          "name": "Create an object store bucket configuration",
+          "request": {
+            "name": "Create an object store bucket configuration",
+            "description": {
+              "content": "Establishes a new object store bucket configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStoreBuckets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"new_name\": \"<string>\",\n  \"new_obs_name\": \"<string>\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"port\": \"<number>\",\n  \"bucket\": \"<string>\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"<string>\",\n  \"access_key_id\": \"<string>\",\n  \"secret_key\": \"<string>\",\n  \"dry_run\": \"<boolean>\",\n  \"skip_verification\": \"<boolean>\",\n  \"bandwidth\": \"<number>\",\n  \"verbose_errors\": \"<boolean>\",\n  \"errors_timeout\": \"<string>\",\n  \"prefetch_mib\": \"<number>\",\n  \"max_concurrent_downloads\": \"<number>\",\n  \"max_concurrent_uploads\": \"<number>\",\n  \"max_concurrent_removals\": \"<number>\",\n  \"max_extents_in_data_blob\": \"<number>\",\n  \"max_blocks_in_data_blob\": \"<number>\",\n  \"data_storage_class\": \"<string>\",\n  \"metadata_storage_class\": \"<string>\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"<string>\",\n  \"sts_role_session_name\": \"<string>\",\n  \"sts_session_duration\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "181d9bc9-6a9e-4d62-abfc-ce45a4683f36",
+              "name": "The object store bucket was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": \"<boolean>\",\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status_remove\": \"UP\",\n    \"id\": \"ObsBucketId<1>\",\n    \"secret_key\": \"**********\",\n    \"errors_timeout\": 60,\n    \"bandwidth\": {\n      \"_mbps\": 1000\n    },\n    \"name\": \"OBS_1\",\n    \"obs_name\": \"default\",\n    \"obs_site\": \"local\",\n    \"prefetch_mib\": 10,\n    \"uid\": \"302\",\n    \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n    \"enable_upload_tags\": true,\n    \"data_storage_class\": \"INTELLIGENT_TIERING\",\n    \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n    \"unknown_nodes\": [\n      \"NodeId<61>\",\n      \"NodeId<61>\"\n    ],\n    \"unknown_count\": 0,\n    \"up_nodes\": [\n      \"NodeId<100>\",\n      \"NodeId<100>\"\n    ],\n    \"up_count\": 14,\n    \"down_count\": 0,\n    \"max_concurrent_uploads\": 10,\n    \"auth_method\": \"AWSSignature4\",\n    \"status_upload\": \"UP\",\n    \"download_bandwidth\": {\n      \"_mbps\": 4294967295\n    },\n    \"max_concurrent_removals\": 10,\n    \"max_extents_in_data_blob\": 10,\n    \"max_blocks_in_data_blob\": 10,\n    \"upload_bandwidth\": {\n      \"_mbps\": 4294967295\n    },\n    \"up_since\": \"2021-03-09T08:56:27.923664Z\",\n    \"access_key_id\": \"REDACTED_AWS_ACCESS_KEY_ID\",\n    \"last_errors\": \"last error\",\n    \"port\": 80,\n    \"status_download\": \"UP\",\n    \"bucket\": \"eu-west-1-aws.weka.io.def-oo-test/obs_1\",\n    \"status\": \"UP\",\n    \"obs_type\": \"AWS\",\n    \"max_concurrent_downloads\": 10,\n    \"obs_id\": \"ObsId<0>\",\n    \"region\": \"eu-west-1\",\n    \"protocol\": \"HTTP\",\n    \"down_nodes\": [\n      \"NodeId<60>\",\n      \"NodeId<60>\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9b6f0fc-059f-4830-a40c-232d5420fb5b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": \"<boolean>\",\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6af75bc-c027-4891-9256-024a857b0ab7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": \"<boolean>\",\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12978328-7a69-4c55-8bd6-47b449e7ecb7",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": \"<boolean>\",\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3931e6e4-3887-4e9f-a06d-00416caf608f",
+          "name": "Get a specific object store bucket configuration",
+          "request": {
+            "name": "Get a specific object store bucket configuration",
+            "description": {
+              "content": "Retrieves a specific object store bucket configuration and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStoreBuckets",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier (UID) of the object store bucket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "860c4707-3716-4d32-ba0f-a0330efb1cc4",
+              "name": "The object store bucket configuration details were successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status_remove\": \"UP\",\n    \"id\": \"ObsBucketId<1>\",\n    \"secret_key\": \"**********\",\n    \"errors_timeout\": 60,\n    \"bandwidth\": {\n      \"_mbps\": 1000\n    },\n    \"name\": \"OBS_1\",\n    \"obs_name\": \"default\",\n    \"obs_site\": \"local\",\n    \"prefetch_mib\": 10,\n    \"uid\": \"302\",\n    \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n    \"enable_upload_tags\": true,\n    \"data_storage_class\": \"INTELLIGENT_TIERING\",\n    \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n    \"unknown_nodes\": [\n      \"NodeId<61>\",\n      \"NodeId<61>\"\n    ],\n    \"unknown_count\": 0,\n    \"up_nodes\": [\n      \"NodeId<100>\",\n      \"NodeId<100>\"\n    ],\n    \"up_count\": 14,\n    \"down_count\": 0,\n    \"max_concurrent_uploads\": 10,\n    \"auth_method\": \"AWSSignature4\",\n    \"status_upload\": \"UP\",\n    \"download_bandwidth\": {\n      \"_mbps\": 4294967295\n    },\n    \"max_concurrent_removals\": 10,\n    \"max_extents_in_data_blob\": 10,\n    \"max_blocks_in_data_blob\": 10,\n    \"upload_bandwidth\": {\n      \"_mbps\": 4294967295\n    },\n    \"up_since\": \"2021-03-09T08:56:27.923664Z\",\n    \"access_key_id\": \"REDACTED_AWS_ACCESS_KEY_ID\",\n    \"last_errors\": \"last error\",\n    \"port\": 80,\n    \"status_download\": \"UP\",\n    \"bucket\": \"eu-west-1-aws.weka.io.def-oo-test/obs_1\",\n    \"status\": \"UP\",\n    \"obs_type\": \"AWS\",\n    \"max_concurrent_downloads\": 10,\n    \"obs_id\": \"ObsId<0>\",\n    \"region\": \"eu-west-1\",\n    \"protocol\": \"HTTP\",\n    \"down_nodes\": [\n      \"NodeId<60>\",\n      \"NodeId<60>\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13024f34-6d2a-4ebd-b653-d3b6ea99e00a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74559d7e-85e9-4084-b03b-511f3a440571",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ee650a4-db54-46d5-a9b9-d44fd2750a3c",
+          "name": "Delete an object store bucket configuration",
+          "request": {
+            "name": "Delete an object store bucket configuration",
+            "description": {
+              "content": "Removes an existing object store bucket configuration if the bucket is not attached to a filesystem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStoreBuckets",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier (UID) of the object store bucket to delete."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4cf40ea-de61-4ad8-9616-27b610d7ba8b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92774973-1b88-4e40-93b6-d53b5aaa9eff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6031873-73c8-407d-aed7-d184f07e6e21",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket to delete."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3e8e465-83fe-414e-a777-5f8e82a9b947",
+          "name": "Update an object store bucket configuration",
+          "request": {
+            "name": "Update an object store bucket configuration",
+            "description": {
+              "content": "Modifies an existing object store bucket configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStoreBuckets",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier (UID) of the object store bucket to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"new_name\": \"<string>\",\n  \"new_obs_name\": \"<string>\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"<string>\",\n  \"port\": \"<number>\",\n  \"bucket\": \"<string>\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"<string>\",\n  \"access_key_id\": \"<string>\",\n  \"secret_key\": \"<string>\",\n  \"dry_run\": \"<boolean>\",\n  \"skip_verification\": \"<boolean>\",\n  \"bandwidth\": \"<number>\",\n  \"verbose_errors\": \"<boolean>\",\n  \"errors_timeout\": \"<string>\",\n  \"prefetch_mib\": \"<number>\",\n  \"max_concurrent_downloads\": \"<number>\",\n  \"max_concurrent_uploads\": \"<number>\",\n  \"max_concurrent_removals\": \"<number>\",\n  \"max_extents_in_data_blob\": \"<number>\",\n  \"max_blocks_in_data_blob\": \"<number>\",\n  \"data_storage_class\": \"<string>\",\n  \"metadata_storage_class\": \"<string>\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"<string>\",\n  \"sts_role_session_name\": \"<string>\",\n  \"sts_session_duration\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57f525b5-4c14-4551-9cdb-25ca68b31639",
+              "name": "The object store bucket configuration was updated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": false,\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"status_remove\": \"UP\",\n    \"id\": \"ObsBucketId<1>\",\n    \"secret_key\": \"**********\",\n    \"errors_timeout\": 60,\n    \"bandwidth\": {\n      \"_mbps\": 1000\n    },\n    \"name\": \"OBS_1\",\n    \"obs_name\": \"default\",\n    \"obs_site\": \"local\",\n    \"prefetch_mib\": 10,\n    \"uid\": \"302\",\n    \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n    \"enable_upload_tags\": true,\n    \"data_storage_class\": \"INTELLIGENT_TIERING\",\n    \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n    \"unknown_nodes\": [\n      \"NodeId<61>\",\n      \"NodeId<61>\"\n    ],\n    \"unknown_count\": 0,\n    \"up_nodes\": [\n      \"NodeId<100>\",\n      \"NodeId<100>\"\n    ],\n    \"up_count\": 14,\n    \"down_count\": 0,\n    \"max_concurrent_uploads\": 10,\n    \"auth_method\": \"AWSSignature4\",\n    \"status_upload\": \"UP\",\n    \"download_bandwidth\": {\n      \"_mbps\": 4294967295\n    },\n    \"max_concurrent_removals\": 10,\n    \"max_extents_in_data_blob\": 10,\n    \"max_blocks_in_data_blob\": 10,\n    \"upload_bandwidth\": {\n      \"_mbps\": 4294967295\n    },\n    \"up_since\": \"2021-03-09T08:56:27.923664Z\",\n    \"access_key_id\": \"REDACTED_AWS_ACCESS_KEY_ID\",\n    \"last_errors\": \"last error\",\n    \"port\": 80,\n    \"status_download\": \"UP\",\n    \"bucket\": \"eu-west-1-aws.weka.io.def-oo-test/obs_1\",\n    \"status\": \"UP\",\n    \"obs_type\": \"AWS\",\n    \"max_concurrent_downloads\": 10,\n    \"obs_id\": \"ObsId<0>\",\n    \"region\": \"eu-west-1\",\n    \"protocol\": \"HTTP\",\n    \"down_nodes\": [\n      \"NodeId<60>\",\n      \"NodeId<60>\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfe7c81c-31ed-492d-afdc-40cff342c51d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": false,\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc1c85ac-f2c4-401e-9ffe-5b1243febb41",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": false,\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40285d9e-dbd6-447b-83c4-d4eb76bcf943",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"new_name\": \"OBS_1\",\n  \"new_obs_name\": \"ON_PREM1\",\n  \"protocol\": \"<string>\",\n  \"hostname\": \"s3.eu-west-1.amazonaws.com\",\n  \"port\": 80,\n  \"bucket\": \"eu-west-1-aws.company.def-oo-test/obs_1\",\n  \"auth_method\": \"<string>\",\n  \"region\": \"eu-west-1\",\n  \"access_key_id\": \"some_key\",\n  \"secret_key\": \"some_secret_key\",\n  \"dry_run\": false,\n  \"skip_verification\": false,\n  \"bandwidth\": 1000,\n  \"verbose_errors\": false,\n  \"errors_timeout\": \"1 minute\",\n  \"prefetch_mib\": 10,\n  \"max_concurrent_downloads\": 10,\n  \"max_concurrent_uploads\": 10,\n  \"max_concurrent_removals\": 10,\n  \"max_extents_in_data_blob\": 10,\n  \"max_blocks_in_data_blob\": 10,\n  \"data_storage_class\": \"INTELLIGENT_TIERING\",\n  \"metadata_storage_class\": \"INTELLIGENT_TIERING\",\n  \"sts_operation_type\": \"<string>\",\n  \"sts_role_arn\": \"arn:aws:iam::123456789012:role/MyRole\",\n  \"sts_role_session_name\": \"weka-session\",\n  \"sts_session_duration\": 3600\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "860d9711-bd93-4f6d-adb2-d91bf2fa5882",
+          "name": "Get object store bucket operations",
+          "request": {
+            "name": "Get object store bucket operations",
+            "description": {
+              "content": "Retrieves a list of live, low-level I/O operations (such as uploads and downloads) for a specific object store bucket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "objectStoreBuckets",
+                ":uid",
+                "operations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier (UID) of the object store bucket."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8bba6d1-517d-40dd-b90f-a9b3d4c9eb76",
+              "name": "The list of live operations was successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"NodeId<121>\": [\n      {\n        \"chanType\": \"Upload\",\n        \"info\": {\n          \"concurrencyAtEnd\": 0,\n          \"executionTimeUSecs\": 265839,\n          \"key\": \"B_84/23caf2eb-246e-4743-b6f1-ebcc70672b07/s/I_0/17/0\",\n          \"concurrencyAtStart\": 3,\n          \"size\": 56,\n          \"lastCurlError\": \"ok\",\n          \"lastLatencyUSecs\": 265821,\n          \"fsId\": \"FSId<0>\",\n          \"lastHTTPRespCode\": \"INVALID\",\n          \"curlErrorStr\": \"\",\n          \"startTime\": {\n            \"usecs\": 1615473402366933\n          },\n          \"extentSpec\": {\n            \"snapLayerId\": \"SnapLayerId<INVALID>\",\n            \"extentKey\": {\n              \"extentIndex\": \"ExtentIndex<INVALID>\",\n              \"inodeId\": \"InodeId<INVALID>\"\n            }\n          },\n          \"counts\": {\n            \"SUCCESS\": 1\n          }\n        },\n        \"opPhase\": \"Recent\"\n      },\n      {\n        \"chanType\": \"Upload\",\n        \"info\": {\n          \"concurrencyAtEnd\": 0,\n          \"executionTimeUSecs\": 265839,\n          \"key\": \"B_84/23caf2eb-246e-4743-b6f1-ebcc70672b07/s/I_0/17/0\",\n          \"concurrencyAtStart\": 3,\n          \"size\": 56,\n          \"lastCurlError\": \"ok\",\n          \"lastLatencyUSecs\": 265821,\n          \"fsId\": \"FSId<0>\",\n          \"lastHTTPRespCode\": \"INVALID\",\n          \"curlErrorStr\": \"\",\n          \"startTime\": {\n            \"usecs\": 1615473402366933\n          },\n          \"extentSpec\": {\n            \"snapLayerId\": \"SnapLayerId<INVALID>\",\n            \"extentKey\": {\n              \"extentIndex\": \"ExtentIndex<INVALID>\",\n              \"inodeId\": \"InodeId<INVALID>\"\n            }\n          },\n          \"counts\": {\n            \"SUCCESS\": 1\n          }\n        },\n        \"opPhase\": \"Recent\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be87183b-79cc-44b3-9c8d-228e7bf2737d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e8ea7fb-1974-42df-9e54-9a3bfc37cc3e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "objectStoreBuckets",
+                    ":uid",
+                    "operations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier (UID) of the object store bucket."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ebe0fd11-2fce-4aba-993b-63bd07902972",
+    "name": "@weka-api Active Directory Object store bucket API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

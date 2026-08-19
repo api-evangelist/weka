@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "97edad27-d8a7-42ee-b541-bf2d2e66e50c",
+      "name": "Active Directory",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56537fca-8d46-4a25-9c7a-bbf4e1d21504",
+          "name": "Update the Active Directory configuration",
+          "request": {
+            "name": "Update the Active Directory configuration",
+            "description": {
+              "content": "Configures the integration with an Active Directory server for user management. This allows for authenticating users and mapping their group memberships to the cluster user roles.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "activeDirectory"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"server_uri\": \"<string>\",\n  \"start_tls\": \"<boolean>\",\n  \"ignore_start_tls_failure\": \"<boolean>\",\n  \"server_timeout_secs\": \"<number>\",\n  \"domain\": \"<string>\",\n  \"reader_username\": \"<string>\",\n  \"reader_password\": \"<string>\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"<string>\",\n    \"OrgAdmin\": \"<string>\",\n    \"Regular\": \"<string>\",\n    \"ReadOnly\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a75897e-13c0-4685-89d1-7f1eb523753d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activeDirectory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_uri\": \"ad.comapny.com\",\n  \"start_tls\": false,\n  \"ignore_start_tls_failure\": false,\n  \"server_timeout_secs\": 30,\n  \"domain\": \"ad.comapny.com\",\n  \"reader_username\": \"read_admin\",\n  \"reader_password\": \"read_pass\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"Enterprise admins\",\n    \"OrgAdmin\": \"\",\n    \"Regular\": \"WekaGroup\",\n    \"ReadOnly\": \"TestGroup\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "415eac2c-7ded-4625-b719-d1c3d352a83a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activeDirectory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_uri\": \"ad.comapny.com\",\n  \"start_tls\": false,\n  \"ignore_start_tls_failure\": false,\n  \"server_timeout_secs\": 30,\n  \"domain\": \"ad.comapny.com\",\n  \"reader_username\": \"read_admin\",\n  \"reader_password\": \"read_pass\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"Enterprise admins\",\n    \"OrgAdmin\": \"\",\n    \"Regular\": \"WekaGroup\",\n    \"ReadOnly\": \"TestGroup\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7413b45d-fd91-4d6d-99b5-6eefc94cfa02",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "activeDirectory"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_uri\": \"ad.comapny.com\",\n  \"start_tls\": false,\n  \"ignore_start_tls_failure\": false,\n  \"server_timeout_secs\": 30,\n  \"domain\": \"ad.comapny.com\",\n  \"reader_username\": \"read_admin\",\n  \"reader_password\": \"read_pass\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"Enterprise admins\",\n    \"OrgAdmin\": \"\",\n    \"Regular\": \"WekaGroup\",\n    \"ReadOnly\": \"TestGroup\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2536b75f-7795-4e7b-b859-0d493646795b",
+    "name": "@weka-api Active Directory API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

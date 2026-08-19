@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Filesystem group API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Filesystem group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get filesystem groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystemGroups"
+          },
+          "docs": "Returns a list of all filesystem groups in the cluster."
+        },
+        {
+          "info": {
+            "name": "Create a filesystem group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystemGroups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new group to manage policies and settings for a collection of filesystems."
+        },
+        {
+          "info": {
+            "name": "Get a specific filesystem group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystemGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem group."
+              }
+            ]
+          },
+          "docs": "Returns the properties of a specific filesystem group by providing its UID."
+        },
+        {
+          "info": {
+            "name": "Update filesystem group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/fileSystemGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the properties of an existing filesystem group."
+        },
+        {
+          "info": {
+            "name": "Delete filesystem group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystemGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem group."
+              }
+            ]
+          },
+          "docs": "Removes a filesystem group from the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

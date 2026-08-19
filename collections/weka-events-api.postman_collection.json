@@ -1,0 +1,1091 @@
+{
+  "item": [
+    {
+      "id": "437ffc96-69af-455e-96c9-39bbe581dfcc",
+      "name": "Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c452349a-71ff-4b70-80d8-4e5811c22fe1",
+          "name": "List events",
+          "request": {
+            "name": "List events",
+            "description": {
+              "content": "Lists cluster events, with options to filter by severity, category, and time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "num_results",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type_list",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type_list",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category_list",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category_list",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort_order",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_internal",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "by_digested_time",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_token",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fe612bc-a823-4ab2-ae65-1a969b340c1d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "num_results",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "by_digested_time",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"category\": \"Filesystem\",\n      \"cloud_digested_ts\": \"2021-03-11T08:48:52.020804Z\",\n      \"cloud_id\": \"91b5d073-2e3f-febe-b731-ad43d021ae45\",\n      \"entity\": \"ClusterAdmin internal user (admin from 172.31.41.19)\",\n      \"guid\": \"23caf2eb-246e-4743-b6f1-ebcc70672b07\",\n      \"hash\": 0,\n      \"is_backend\": true,\n      \"nid\": \"NodeId<40>\",\n      \"org_id\": \"OrgId<1>\",\n      \"params\": {\n        \"name\": \"default\",\n        \"parameters\": \"GroupName: default, TotalCapacity: 1829454741504, SSDCapacity: 1829454741504\"\n      },\n      \"permission\": \"USER\",\n      \"related_node_ids\": [\n        40,\n        40\n      ],\n      \"s3_time\": \"2021-03-11T08:48:52.020804Z\",\n      \"severity\": \"INFO\",\n      \"snid\": [\n        0,\n        0\n      ],\n      \"sqs_message_time\": \"2021-03-11T08:48:52.020804Z\",\n      \"timestamp\": \"2021-03-11T08:48:47.570754Z\",\n      \"description\": \"User login failed\",\n      \"type\": \"FilesystemAdded\"\n    },\n    {\n      \"category\": \"Filesystem\",\n      \"cloud_digested_ts\": \"2021-03-11T08:48:52.020804Z\",\n      \"cloud_id\": \"91b5d073-2e3f-febe-b731-ad43d021ae45\",\n      \"entity\": \"ClusterAdmin internal user (admin from 172.31.41.19)\",\n      \"guid\": \"23caf2eb-246e-4743-b6f1-ebcc70672b07\",\n      \"hash\": 0,\n      \"is_backend\": true,\n      \"nid\": \"NodeId<40>\",\n      \"org_id\": \"OrgId<1>\",\n      \"params\": {\n        \"name\": \"default\",\n        \"parameters\": \"GroupName: default, TotalCapacity: 1829454741504, SSDCapacity: 1829454741504\"\n      },\n      \"permission\": \"USER\",\n      \"related_node_ids\": [\n        40,\n        40\n      ],\n      \"s3_time\": \"2021-03-11T08:48:52.020804Z\",\n      \"severity\": \"INFO\",\n      \"snid\": [\n        0,\n        0\n      ],\n      \"sqs_message_time\": \"2021-03-11T08:48:52.020804Z\",\n      \"timestamp\": \"2021-03-11T08:48:47.570754Z\",\n      \"description\": \"User login failed\",\n      \"type\": \"FilesystemAdded\"\n    }\n  ],\n  \"next_token\": \"91b5d073-2e3f-febe-b731-ad43d021ae45\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3490277e-1121-4ddd-aa3b-f4c9783c7e66",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "num_results",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category_list",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "by_digested_time",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4003eaba-a1c0-41c7-b5f6-ed10abb5f4fe",
+          "name": "List event types and descriptions",
+          "request": {
+            "name": "List event types and descriptions",
+            "description": {
+              "content": "Lists all event types and provides a detailed description for each, including its meaning and potential causes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "describe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "A list of event types to describe."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "A list of event types to describe."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "A list of event categories to describe."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "A list of event categories to describe."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_internal",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6166c911-048e-46d1-b741-fcbe9c08dfc2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "describe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"dedup_parameters\": [\n        \"string\",\n        \"string\"\n      ],\n      \"parameters\": [\n        \"username\",\n        \"username\"\n      ],\n      \"severity\": \"INFO\",\n      \"is_dedup_event\": false,\n      \"permission\": \"User\",\n      \"category\": \"User\",\n      \"type\": \"UserLoginFailed\",\n      \"description\": \"User login failed\",\n      \"formatString\": \"`{username}` failed logging-in: {reason}\"\n    },\n    {\n      \"dedup_parameters\": [\n        \"string\",\n        \"string\"\n      ],\n      \"parameters\": [\n        \"username\",\n        \"username\"\n      ],\n      \"severity\": \"INFO\",\n      \"is_dedup_event\": false,\n      \"permission\": \"User\",\n      \"category\": \"User\",\n      \"type\": \"UserLoginFailed\",\n      \"description\": \"User login failed\",\n      \"formatString\": \"`{username}` failed logging-in: {reason}\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06116802-4b77-4de4-bc9e-58cb8a72bcc6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "describe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b955426c-fd61-4697-b3d0-e878659fc63e",
+          "name": "Aggregate events by time",
+          "request": {
+            "name": "Aggregate events by time",
+            "description": {
+              "content": "Aggregates events over a specified time interval to show event frequency and trends.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "aggregate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "int",
+                  "value": "<number>",
+                  "description": "The time interval for the aggregation in seconds."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_internal",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9d226c82-a352-4c00-b040-5fdb9cfef270",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "int",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"event-type\": 3\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bbf3835-f2fd-431e-95bc-8595dd641c71",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "aggregate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "int",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "353c5c8f-100c-469c-b357-4ca054e129e0",
+          "name": "List local server events",
+          "request": {
+            "name": "List local server events",
+            "description": {
+              "content": "Lists events generated only by the server that receives the API request, which is useful for targeted troubleshooting.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "local"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "stem_mode",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_internal",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_token",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffe80119-e068-4945-919c-d043aebed667",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stem_mode",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"time\": \"2021-03-21T08:23:11.4965413Z\",\n      \"hash\": 0,\n      \"entity\": \"Cluster\",\n      \"severity\": \"INFO\",\n      \"permission\": \"User\",\n      \"category\": \"Node\",\n      \"description\": \"User login failed\",\n      \"eventFields\": {\n        \"swRelease\": \"3.11.1.8425-0d19171073bfbb7a5cca4cc3a8a4bfdf\",\n        \"nodeId\": 0,\n        \"pid\": 170,\n        \"swVersion\": \"3.11.1.8425\"\n      },\n      \"type\": \"NodeStarted\",\n      \"nid\": \"NodeId<0>\"\n    },\n    {\n      \"time\": \"2021-03-21T08:23:11.4965413Z\",\n      \"hash\": 0,\n      \"entity\": \"Cluster\",\n      \"severity\": \"INFO\",\n      \"permission\": \"User\",\n      \"category\": \"Node\",\n      \"description\": \"User login failed\",\n      \"eventFields\": {\n        \"swRelease\": \"3.11.1.8425-0d19171073bfbb7a5cca4cc3a8a4bfdf\",\n        \"nodeId\": 0,\n        \"pid\": 170,\n        \"swVersion\": \"3.11.1.8425\"\n      },\n      \"type\": \"NodeStarted\",\n      \"nid\": \"NodeId<0>\"\n    }\n  ],\n  \"next_token\": \"2021-03-21T08:24:01.561Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ecd9c377-4776-4f78-80e3-0356c0dd6804",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "local"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stem_mode",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dad49862-b7ab-4594-b405-0849b0e5902b",
+          "name": "Create a custom event",
+          "request": {
+            "name": "Create a custom event",
+            "description": {
+              "content": "Creates and records a custom event with a user-defined message for enhanced monitoring and logging.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "events",
+                "custom"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e37b55e6-379d-48c7-ba5f-35111a74acf1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a0c32ce-a955-4666-85d5-f6ffce19a9bf",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e14a9e91-7787-42e1-90da-c759535c6e85",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "events",
+                    "custom"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "761a0bda-3131-47b3-884b-a36e2543d07a",
+    "name": "@weka-api Active Directory Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

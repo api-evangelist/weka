@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Telemetry API'
   version: '5.1'
@@ -302,14 +302,6 @@ paths:
           $ref: '#/components/responses/404'
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -319,6 +311,14 @@ components:
               message:
                 type: string
                 example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -352,6 +352,90 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
+    telemetryExport:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: 1234-abcd-4321-dcba
+        id:
+          type: string
+          example: TelemetrySinkId<0>
+        name:
+          type: string
+          example: somesink
+        target:
+          type: string
+          example: /some/target
+        type:
+          type: string
+          example: File
+          enum:
+          - File
+          - Splunk
+          - S3
+          - Vector
+          - Kafka
+          - Syslog
+        s3_bucket_name:
+          type: string
+          example: somebucket
+        s3_region:
+          type: string
+          example: eu-central-1
+        s3_key:
+          type: string
+          example: somekey
+        s3_secret:
+          type: string
+          example: secretkey
+        ca_type:
+          type: string
+          example: Unverified
+        syslog_mode:
+          type: string
+          example: tcp
+          enum:
+          - tcp
+          - udp
+          description: 'Syslog transport mode. Default: tcp.'
+        syslog_rfc:
+          type: string
+          example: rfc5424
+          enum:
+          - rfc5424
+          - rfc3164
+          description: 'Syslog message format. Default: rfc5424.'
+        syslog_facility:
+          type: string
+          example: local0
+          enum:
+          - local0
+          - local1
+          - local2
+          - local3
+          - local4
+          - local5
+          - local6
+          - local7
+          description: 'Syslog facility level for log routing. Default: local0.'
+        sources:
+          type: array
+          items:
+            type: string
+            example: Audit
+    telemetryInfo:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          example: true
+        uiEnabled:
+          type: boolean
+          example: true
+        auditTracesEnabled:
+          type: boolean
+          example: true
     telemetryExportReq:
       type: object
       properties:
@@ -428,90 +512,6 @@ components:
           - Vector
           - Kafka
           - Syslog
-        sources:
-          type: array
-          items:
-            type: string
-            example: Audit
-    telemetryInfo:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-          example: true
-        uiEnabled:
-          type: boolean
-          example: true
-        auditTracesEnabled:
-          type: boolean
-          example: true
-    telemetryExport:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: 1234-abcd-4321-dcba
-        id:
-          type: string
-          example: TelemetrySinkId<0>
-        name:
-          type: string
-          example: somesink
-        target:
-          type: string
-          example: /some/target
-        type:
-          type: string
-          example: File
-          enum:
-          - File
-          - Splunk
-          - S3
-          - Vector
-          - Kafka
-          - Syslog
-        s3_bucket_name:
-          type: string
-          example: somebucket
-        s3_region:
-          type: string
-          example: eu-central-1
-        s3_key:
-          type: string
-          example: somekey
-        s3_secret:
-          type: string
-          example: secretkey
-        ca_type:
-          type: string
-          example: Unverified
-        syslog_mode:
-          type: string
-          example: tcp
-          enum:
-          - tcp
-          - udp
-          description: 'Syslog transport mode. Default: tcp.'
-        syslog_rfc:
-          type: string
-          example: rfc5424
-          enum:
-          - rfc5424
-          - rfc3164
-          description: 'Syslog message format. Default: rfc5424.'
-        syslog_facility:
-          type: string
-          example: local0
-          enum:
-          - local0
-          - local1
-          - local2
-          - local3
-          - local4
-          - local5
-          - local6
-          - local7
-          description: 'Syslog facility level for log routing. Default: local0.'
         sources:
           type: array
           items:

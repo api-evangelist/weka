@@ -1,0 +1,4426 @@
+{
+  "item": [
+    {
+      "id": "78765fda-0ce3-4132-9968-357d4c868d32",
+      "name": "Containers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "58271c80-2fbc-4449-afdb-8be78e374026",
+          "name": "Get containers",
+          "request": {
+            "name": "Get containers",
+            "description": {
+              "content": "Returns a list of all containers in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "filter_type",
+                  "value": "<string>",
+                  "description": "Filters the list of containers. Use 'ByContainer' to specify a list of container IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "container_ids",
+                  "value": "<number>",
+                  "description": "A list of container IDs to retrieve. Required when 'filter_type' is 'ByContainer'."
+                },
+                {
+                  "disabled": false,
+                  "key": "container_ids",
+                  "value": "<number>",
+                  "description": "A list of container IDs to retrieve. Required when 'filter_type' is 'ByContainer'."
+                },
+                {
+                  "disabled": false,
+                  "key": "council",
+                  "value": "<boolean>",
+                  "description": "If true, query the cluster leadership members."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c183a6fb-6cc1-49cf-a57c-34c460853ba4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container_ids",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "container_ids",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "council",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"HostId<0>\",\n      \"sw_release_string\": \"4.2.1.8293-f1b6ea71df13d4395ff974e5164424a8\",\n      \"mode\": \"backend\",\n      \"failure_domain_id\": \"FailureDomainId<1>\",\n      \"bandwidth\": 6497,\n      \"container_name\": \"default\",\n      \"failure_domain\": \"DOM-000\",\n      \"added_time\": \"2021-03-10T09:47:14.835443Z\",\n      \"uid\": \"uid_string\",\n      \"server_identifier\": \"uid_string\",\n      \"drives_dedicated_cores\": 0,\n      \"hostname\": \"exam-0\",\n      \"ips\": [\n        \"172.31.17.71\",\n        \"172.31.17.71\"\n      ],\n      \"member_of_leadership\": true,\n      \"cloud\": {\n        \"instance_type\": \"VM.Standard.E4.Flex\",\n        \"provider\": \"OCI\",\n        \"availability_zone\": \"eu-frankfurt-1\",\n        \"instance_id\": \"i-0286561555bf9dcc5\"\n      },\n      \"io_processes\": 1,\n      \"last_failure_time\": \"2021-03-10T09:47:04.927107Z\",\n      \"state\": \"ACTIVE\",\n      \"start_time\": \"2021-03-10T09:47:05.563549Z\",\n      \"aws\": {\n        \"instance_type\": \"i3.large\",\n        \"availability_zone\": \"eu-west-1a\",\n        \"instance_id\": \"i-0286561555bf9dcc5\"\n      },\n      \"sw_version\": \"3.11.1.6928\",\n      \"os_info\": {\n        \"kernel_name\": \"Linux\",\n        \"platform\": \"x86_64\",\n        \"kernel_version\": \"#1 SMP Mon Jul 29 17:46:05 UTC 2019\",\n        \"os_name\": \"GNU/Linux\",\n        \"kernel_release\": \"3.10.0-957.27.2.el7.x86_64\",\n        \"drivers\": {\n          \"ixgbe\": \"\",\n          \"ixgbevf\": \"\",\n          \"mlx5_core\": \"\",\n          \"ib_uverbs\": \"\",\n          \"uio_pci_generic\": \"5f49bb7dc1b5d192fb01b442b17ddc0451313ea2\"\n        }\n      },\n      \"last_failure_code\": \"ApplyingResources\",\n      \"cores_ids\": [\n        1,\n        1\n      ],\n      \"memory\": 1493172224,\n      \"frontend_dedicated_cores\": 0,\n      \"failure_domain_type\": \"USER\",\n      \"leadership_role\": \"member\",\n      \"state_changed_time\": \"2021-03-10T09:47:04.927107Z\",\n      \"status\": \"UP\",\n      \"cores\": 1,\n      \"container_ip\": \"172.31.17.71\",\n      \"is_dedicated\": false,\n      \"last_failure\": \"Applying resources on container\",\n      \"mgmt_port\": 14000,\n      \"auto_remove_timeout\": 100,\n      \"requested_action\": \"STOP\",\n      \"requested_action_failure\": \"Cannot start draining because there are not enough failure domains with active drives to support 1 protection.\",\n      \"requested_action_status\": \"NotEnoughDrivesForProtectionToDrain\",\n      \"requested_action_failure_time\": \"2021-03-10T09:47:04.927107Z\"\n    },\n    {\n      \"id\": \"HostId<0>\",\n      \"sw_release_string\": \"4.2.1.8293-f1b6ea71df13d4395ff974e5164424a8\",\n      \"mode\": \"backend\",\n      \"failure_domain_id\": \"FailureDomainId<1>\",\n      \"bandwidth\": 6497,\n      \"container_name\": \"default\",\n      \"failure_domain\": \"DOM-000\",\n      \"added_time\": \"2021-03-10T09:47:14.835443Z\",\n      \"uid\": \"uid_string\",\n      \"server_identifier\": \"uid_string\",\n      \"drives_dedicated_cores\": 0,\n      \"hostname\": \"exam-0\",\n      \"ips\": [\n        \"172.31.17.71\",\n        \"172.31.17.71\"\n      ],\n      \"member_of_leadership\": true,\n      \"cloud\": {\n        \"instance_type\": \"VM.Standard.E4.Flex\",\n        \"provider\": \"OCI\",\n        \"availability_zone\": \"eu-frankfurt-1\",\n        \"instance_id\": \"i-0286561555bf9dcc5\"\n      },\n      \"io_processes\": 1,\n      \"last_failure_time\": \"2021-03-10T09:47:04.927107Z\",\n      \"state\": \"ACTIVE\",\n      \"start_time\": \"2021-03-10T09:47:05.563549Z\",\n      \"aws\": {\n        \"instance_type\": \"i3.large\",\n        \"availability_zone\": \"eu-west-1a\",\n        \"instance_id\": \"i-0286561555bf9dcc5\"\n      },\n      \"sw_version\": \"3.11.1.6928\",\n      \"os_info\": {\n        \"kernel_name\": \"Linux\",\n        \"platform\": \"x86_64\",\n        \"kernel_version\": \"#1 SMP Mon Jul 29 17:46:05 UTC 2019\",\n        \"os_name\": \"GNU/Linux\",\n        \"kernel_release\": \"3.10.0-957.27.2.el7.x86_64\",\n        \"drivers\": {\n          \"ixgbe\": \"\",\n          \"ixgbevf\": \"\",\n          \"mlx5_core\": \"\",\n          \"ib_uverbs\": \"\",\n          \"uio_pci_generic\": \"5f49bb7dc1b5d192fb01b442b17ddc0451313ea2\"\n        }\n      },\n      \"last_failure_code\": \"ApplyingResources\",\n      \"cores_ids\": [\n        1,\n        1\n      ],\n      \"memory\": 1493172224,\n      \"frontend_dedicated_cores\": 0,\n      \"failure_domain_type\": \"USER\",\n      \"leadership_role\": \"member\",\n      \"state_changed_time\": \"2021-03-10T09:47:04.927107Z\",\n      \"status\": \"UP\",\n      \"cores\": 1,\n      \"container_ip\": \"172.31.17.71\",\n      \"is_dedicated\": false,\n      \"last_failure\": \"Applying resources on container\",\n      \"mgmt_port\": 14000,\n      \"auto_remove_timeout\": 100,\n      \"requested_action\": \"STOP\",\n      \"requested_action_failure\": \"Cannot start draining because there are not enough failure domains with active drives to support 1 protection.\",\n      \"requested_action_status\": \"NotEnoughDrivesForProtectionToDrain\",\n      \"requested_action_failure_time\": \"2021-03-10T09:47:04.927107Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ae89a9d-2377-4abf-8d27-992a8c2236d1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "filter_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "container_ids",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "container_ids",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "council",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2c05ab4-d04c-42d5-aea5-c193137a4b71",
+          "name": "Add a container",
+          "request": {
+            "name": "Add a container",
+            "description": {
+              "content": "Adds a new container to the cluster. The container configuration must be applied to activate it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_name\": \"<string>\",\n  \"ip\": \"<string>\",\n  \"no_wait\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e098585-3c95-41bb-b748-5863b74fdcca",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_name\": \"new-container-01\",\n  \"ip\": \"173.21.11.41\",\n  \"no_wait\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"HostId<0>\",\n    \"sw_release_string\": \"4.2.1.8293-f1b6ea71df13d4395ff974e5164424a8\",\n    \"mode\": \"backend\",\n    \"failure_domain_id\": \"FailureDomainId<1>\",\n    \"bandwidth\": 6497,\n    \"container_name\": \"default\",\n    \"failure_domain\": \"DOM-000\",\n    \"added_time\": \"2021-03-10T09:47:14.835443Z\",\n    \"uid\": \"uid_string\",\n    \"server_identifier\": \"uid_string\",\n    \"drives_dedicated_cores\": 0,\n    \"hostname\": \"exam-0\",\n    \"ips\": [\n      \"172.31.17.71\",\n      \"172.31.17.71\"\n    ],\n    \"member_of_leadership\": true,\n    \"cloud\": {\n      \"instance_type\": \"VM.Standard.E4.Flex\",\n      \"provider\": \"OCI\",\n      \"availability_zone\": \"eu-frankfurt-1\",\n      \"instance_id\": \"i-0286561555bf9dcc5\"\n    },\n    \"io_processes\": 1,\n    \"last_failure_time\": \"2021-03-10T09:47:04.927107Z\",\n    \"state\": \"ACTIVE\",\n    \"start_time\": \"2021-03-10T09:47:05.563549Z\",\n    \"aws\": {\n      \"instance_type\": \"i3.large\",\n      \"availability_zone\": \"eu-west-1a\",\n      \"instance_id\": \"i-0286561555bf9dcc5\"\n    },\n    \"sw_version\": \"3.11.1.6928\",\n    \"os_info\": {\n      \"kernel_name\": \"Linux\",\n      \"platform\": \"x86_64\",\n      \"kernel_version\": \"#1 SMP Mon Jul 29 17:46:05 UTC 2019\",\n      \"os_name\": \"GNU/Linux\",\n      \"kernel_release\": \"3.10.0-957.27.2.el7.x86_64\",\n      \"drivers\": {\n        \"ixgbe\": \"\",\n        \"ixgbevf\": \"\",\n        \"mlx5_core\": \"\",\n        \"ib_uverbs\": \"\",\n        \"uio_pci_generic\": \"5f49bb7dc1b5d192fb01b442b17ddc0451313ea2\"\n      }\n    },\n    \"last_failure_code\": \"ApplyingResources\",\n    \"cores_ids\": [\n      1,\n      1\n    ],\n    \"memory\": 1493172224,\n    \"frontend_dedicated_cores\": 0,\n    \"failure_domain_type\": \"USER\",\n    \"leadership_role\": \"member\",\n    \"state_changed_time\": \"2021-03-10T09:47:04.927107Z\",\n    \"status\": \"UP\",\n    \"cores\": 1,\n    \"container_ip\": \"172.31.17.71\",\n    \"is_dedicated\": false,\n    \"last_failure\": \"Applying resources on container\",\n    \"mgmt_port\": 14000,\n    \"auto_remove_timeout\": 100,\n    \"requested_action\": \"STOP\",\n    \"requested_action_failure\": \"Cannot start draining because there are not enough failure domains with active drives to support 1 protection.\",\n    \"requested_action_status\": \"NotEnoughDrivesForProtectionToDrain\",\n    \"requested_action_failure_time\": \"2021-03-10T09:47:04.927107Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5174cce-649d-478d-97e8-9989b477c12f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_name\": \"new-container-01\",\n  \"ip\": \"173.21.11.41\",\n  \"no_wait\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1ffe704-fc38-405d-b730-e745e17b20cf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_name\": \"new-container-01\",\n  \"ip\": \"173.21.11.41\",\n  \"no_wait\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78b02814-2960-447a-b083-5fb037262bf5",
+          "name": "Get container details",
+          "request": {
+            "name": "Get container details",
+            "description": {
+              "content": "Returns the details, including resources and state, for a specific container.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ff151957-4faf-4e6a-b2d4-e0d1e9d4f9fc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"HostId<0>\",\n    \"sw_release_string\": \"4.2.1.8293-f1b6ea71df13d4395ff974e5164424a8\",\n    \"mode\": \"backend\",\n    \"failure_domain_id\": \"FailureDomainId<1>\",\n    \"bandwidth\": 6497,\n    \"container_name\": \"default\",\n    \"failure_domain\": \"DOM-000\",\n    \"added_time\": \"2021-03-10T09:47:14.835443Z\",\n    \"uid\": \"uid_string\",\n    \"server_identifier\": \"uid_string\",\n    \"drives_dedicated_cores\": 0,\n    \"hostname\": \"exam-0\",\n    \"ips\": [\n      \"172.31.17.71\",\n      \"172.31.17.71\"\n    ],\n    \"member_of_leadership\": true,\n    \"cloud\": {\n      \"instance_type\": \"VM.Standard.E4.Flex\",\n      \"provider\": \"OCI\",\n      \"availability_zone\": \"eu-frankfurt-1\",\n      \"instance_id\": \"i-0286561555bf9dcc5\"\n    },\n    \"io_processes\": 1,\n    \"last_failure_time\": \"2021-03-10T09:47:04.927107Z\",\n    \"state\": \"ACTIVE\",\n    \"start_time\": \"2021-03-10T09:47:05.563549Z\",\n    \"aws\": {\n      \"instance_type\": \"i3.large\",\n      \"availability_zone\": \"eu-west-1a\",\n      \"instance_id\": \"i-0286561555bf9dcc5\"\n    },\n    \"sw_version\": \"3.11.1.6928\",\n    \"os_info\": {\n      \"kernel_name\": \"Linux\",\n      \"platform\": \"x86_64\",\n      \"kernel_version\": \"#1 SMP Mon Jul 29 17:46:05 UTC 2019\",\n      \"os_name\": \"GNU/Linux\",\n      \"kernel_release\": \"3.10.0-957.27.2.el7.x86_64\",\n      \"drivers\": {\n        \"ixgbe\": \"\",\n        \"ixgbevf\": \"\",\n        \"mlx5_core\": \"\",\n        \"ib_uverbs\": \"\",\n        \"uio_pci_generic\": \"5f49bb7dc1b5d192fb01b442b17ddc0451313ea2\"\n      }\n    },\n    \"last_failure_code\": \"ApplyingResources\",\n    \"cores_ids\": [\n      1,\n      1\n    ],\n    \"memory\": 1493172224,\n    \"frontend_dedicated_cores\": 0,\n    \"failure_domain_type\": \"USER\",\n    \"leadership_role\": \"member\",\n    \"state_changed_time\": \"2021-03-10T09:47:04.927107Z\",\n    \"status\": \"UP\",\n    \"cores\": 1,\n    \"container_ip\": \"172.31.17.71\",\n    \"is_dedicated\": false,\n    \"last_failure\": \"Applying resources on container\",\n    \"mgmt_port\": 14000,\n    \"auto_remove_timeout\": 100,\n    \"requested_action\": \"STOP\",\n    \"requested_action_failure\": \"Cannot start draining because there are not enough failure domains with active drives to support 1 protection.\",\n    \"requested_action_status\": \"NotEnoughDrivesForProtectionToDrain\",\n    \"requested_action_failure_time\": \"2021-03-10T09:47:04.927107Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "52f1e63e-ae5d-4b4a-aa40-b248e5a25e05",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08fca742-833f-4ad0-8bac-61e0504f9fdc",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8f61014-1a4f-4cda-965b-9798d2f681a5",
+          "name": "Update container configuration",
+          "request": {
+            "name": "Update container configuration",
+            "description": {
+              "content": "Updates the staged configuration for a specific container. Any resource configuration change, such as memory or cores, requires an apply action to take effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"failure_domain_type\": \"<string>\",\n  \"failure_domain\": \"<string>\",\n  \"cores\": \"<number>\",\n  \"frontend_dedicated_cores\": \"<number>\",\n  \"drives_dedicated_cores\": \"<number>\",\n  \"memory\": \"<number>\",\n  \"dedicated\": \"<boolean>\",\n  \"bandwidth\": \"<number>\",\n  \"auto_remove_timeout\": \"<number>\",\n  \"management_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"join_secret\": \"<string>\",\n  \"purge_old_secrets\": \"<boolean>\",\n  \"apply_container\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c5cf89c-bd26-494c-8aa8-2a9ceba03693",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"failure_domain_type\": \"<string>\",\n  \"failure_domain\": \"<string>\",\n  \"cores\": 4,\n  \"frontend_dedicated_cores\": 1,\n  \"drives_dedicated_cores\": 2,\n  \"memory\": 16000000000,\n  \"dedicated\": true,\n  \"bandwidth\": 1000,\n  \"auto_remove_timeout\": \"<number>\",\n  \"management_ips\": [\n    \"173.21.11.41\",\n    \"173.21.11.41\"\n  ],\n  \"join_secret\": \"some-secret\",\n  \"purge_old_secrets\": false,\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdd2872e-f5cc-454e-a940-ecc08c5fe999",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"failure_domain_type\": \"<string>\",\n  \"failure_domain\": \"<string>\",\n  \"cores\": 4,\n  \"frontend_dedicated_cores\": 1,\n  \"drives_dedicated_cores\": 2,\n  \"memory\": 16000000000,\n  \"dedicated\": true,\n  \"bandwidth\": 1000,\n  \"auto_remove_timeout\": \"<number>\",\n  \"management_ips\": [\n    \"173.21.11.41\",\n    \"173.21.11.41\"\n  ],\n  \"join_secret\": \"some-secret\",\n  \"purge_old_secrets\": false,\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3621bacc-b5e8-4c7f-ba49-fd5c4f7f2573",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"failure_domain_type\": \"<string>\",\n  \"failure_domain\": \"<string>\",\n  \"cores\": 4,\n  \"frontend_dedicated_cores\": 1,\n  \"drives_dedicated_cores\": 2,\n  \"memory\": 16000000000,\n  \"dedicated\": true,\n  \"bandwidth\": 1000,\n  \"auto_remove_timeout\": \"<number>\",\n  \"management_ips\": [\n    \"173.21.11.41\",\n    \"173.21.11.41\"\n  ],\n  \"join_secret\": \"some-secret\",\n  \"purge_old_secrets\": false,\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba564ea5-2fc9-4633-ad31-297b0dc7477d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"failure_domain_type\": \"<string>\",\n  \"failure_domain\": \"<string>\",\n  \"cores\": 4,\n  \"frontend_dedicated_cores\": 1,\n  \"drives_dedicated_cores\": 2,\n  \"memory\": 16000000000,\n  \"dedicated\": true,\n  \"bandwidth\": 1000,\n  \"auto_remove_timeout\": \"<number>\",\n  \"management_ips\": [\n    \"173.21.11.41\",\n    \"173.21.11.41\"\n  ],\n  \"join_secret\": \"some-secret\",\n  \"purge_old_secrets\": false,\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "366bb92d-2c88-4da4-9032-6df5feff8e73",
+          "name": "Remove a container",
+          "request": {
+            "name": "Remove a container",
+            "description": {
+              "content": "Deactivates and removes a container from the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "12510868-9f4f-4e0b-aa86-77be767625d0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e24554c-fd0f-4fa7-9773-e9603fe3f3b6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d779bd97-4cb0-4d65-a5c1-4d1a035b78f5",
+          "name": "Perform action on protocol containers",
+          "request": {
+            "name": "Perform action on protocol containers",
+            "description": {
+              "content": "Performs an action, such as a restart, on specified protocol containers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "manageProtoContainers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_names\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"container_operation\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3f02d12-235e-4416-8e7e-5330bc6ca1a8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "manageProtoContainers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_names\": [\n    \"ganesha\"\n  ],\n  \"container_operation\": \"RESTART_CONTAINER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc411281-c47e-45d9-a730-e7cfc1f48bfb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "manageProtoContainers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_names\": [\n    \"ganesha\"\n  ],\n  \"container_operation\": \"RESTART_CONTAINER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fceff7fb-124e-4cef-98fc-aa5e99c6b141",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "manageProtoContainers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_names\": [\n    \"ganesha\"\n  ],\n  \"container_operation\": \"RESTART_CONTAINER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "441b44fe-a649-4b95-8a7c-a8021ec204b4",
+          "name": "Apply configuration updates to multiple containers",
+          "request": {
+            "name": "Apply configuration updates to multiple containers",
+            "description": {
+              "content": "Applies staged configuration changes to a specified list of containers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "apply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e3a77a0-03cd-4302-afd8-dc03e981c8d7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb1229cc-a255-4d0f-bed4-b4f035e29e12",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47e947b5-8587-4f11-a433-fdd025043019",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e7383025-1fd7-4ee5-af6c-ba6617a7e9c0",
+          "name": "Apply configuration updates to a container",
+          "request": {
+            "name": "Apply configuration updates to a container",
+            "description": {
+              "content": "Applies staged configuration changes to a specific container.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid",
+                "apply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95718aa1-055f-42fa-ae1a-0f049f83d97b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "feff4886-c10e-41ab-97ed-c6916a9a1d46",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c777731e-8b15-411d-b530-7c76e5e6d0c3",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60620dcb-f4fd-4e5b-ba33-9be4504b6e4a",
+          "name": "Clear last failure for a container",
+          "request": {
+            "name": "Clear last failure for a container",
+            "description": {
+              "content": "Resets the last failure reason for a specific container.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "lastFailureReason",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38784a61-e55f-49f6-8fd7-00c6d3adc46b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "lastFailureReason",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "af1d4c7d-8f34-425d-97ce-eb64e7bb282f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "lastFailureReason",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45ed525a-5f0e-4aff-a35d-bfaec84e5f72",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "lastFailureReason",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4ed38f2d-e70d-4dad-9e1d-71064f1d0a64",
+          "name": "Get container resources",
+          "request": {
+            "name": "Get container resources",
+            "description": {
+              "content": "Returns the resource allocation (CPU, memory) for a specific container.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid",
+                "resources"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The resource type to retrieve, either 'Staging' or 'Stable'. Defaults to 'Staging'."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "41177df5-743e-454f-8f9c-a9f39642e8d1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"mode\": \"BACKEND\",\n    \"memory\": 0,\n    \"format\": 3,\n    \"bandwidth\": 2000,\n    \"drives\": [\n      \"some_drive\",\n      \"some_drive\"\n    ],\n    \"failure_domain\": \"\",\n    \"hardware_watchdog\": false,\n    \"wait_io_nodes_timeout\": 300,\n    \"backend_endpoints\": [\n      {\n        \"ip\": \"172.31.13.97\",\n        \"port\": 14000\n      },\n      {\n        \"ip\": \"172.31.13.97\",\n        \"port\": 14000\n      }\n    ],\n    \"hostname\": \"\",\n    \"reserve_1g_hugepages\": true,\n    \"net_devices\": [\n      \"eth0\",\n      \"eth0\"\n    ],\n    \"dedicate_memory\": true,\n    \"ips\": [\n      \"172.31.11.41\",\n      \"172.31.11.41\"\n    ],\n    \"ui_enabled\": true,\n    \"join_secret\": [\n      \"secret\",\n      \"secret\"\n    ],\n    \"nodes\": {\n      \"0\": {\n        \"roles\": [\n          \"MANAGEMENT\",\n          \"MANAGEMENT\"\n        ],\n        \"core_id\": 4294967295,\n        \"http_port\": 14000,\n        \"dedicate_core\": false,\n        \"rpc_port\": 14010,\n        \"dedicated_mode\": \"FULL\"\n      },\n      \"1\": {\n        \"roles\": [\n          \"FRONTEND\",\n          \"FRONTEND\"\n        ],\n        \"core_id\": 4294967295,\n        \"http_port\": 14000,\n        \"dedicate_core\": true,\n        \"rpc_port\": 14011,\n        \"dedicated_mode\": \"FULL\"\n      }\n    },\n    \"container_id\": 65535,\n    \"auto_remove_timeout\": 0,\n    \"disable_numa_balancing\": true,\n    \"mask_interrupts\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b45a04b9-5992-43ec-8f4e-620c6edc46cd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ad3d04c-b7b0-48ce-88c4-79f1083f3d58",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "resources"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3e104ca5-a22c-4904-a137-d08ed6376849",
+          "name": "Activate containers",
+          "request": {
+            "name": "Activate containers",
+            "description": {
+              "content": "Activates a list of specified containers, bringing them online.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d2a133d-49e7-4ae6-9a58-89e63d56e5e9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf70f073-c659-4c5d-8a44-738d32a491b6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c4bdf3a-a684-4bf4-899d-e27d328d8bf2",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebc3cc95-01b9-4e7c-9747-59fce75b2eed",
+          "name": "Activate a container",
+          "request": {
+            "name": "Activate a container",
+            "description": {
+              "content": "Activates a specific container, bringing it online.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1f5ac0ec-dd1c-4218-93c2-eeb5d682c4a7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6970946e-8a7a-4f42-b455-6263dbddb754",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d50cd948-7498-4bc9-9cfd-6489318669b8",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e85758e9-aeee-42b3-92c5-0f61ed5ab72a",
+          "name": "Deactivate containers",
+          "request": {
+            "name": "Deactivate containers",
+            "description": {
+              "content": "Deactivates a list of specified containers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "deactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb36c113-dc68-49c0-8709-67afdf22e202",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eae9f21e-9c23-4b6c-9bc2-bf3fb6de2ffe",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91937522-869f-4e73-ab24-b647c59ead6b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4fc6858-59a3-4362-b4f1-b500cb4b80b6",
+          "name": "Perform container deactivation check",
+          "request": {
+            "name": "Perform container deactivation check",
+            "description": {
+              "content": "Simulates container deactivation to assess whether the operation can be performed safely without impacting the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "deactivation-check"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da10cce6-a65d-46bd-844d-9ab0c92a8c67",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "deactivation-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87ffa38b-8f4b-4ef1-8de3-442cc68774aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "deactivation-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0751a67d-02e3-4b51-97d5-9797d4bcf70e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "deactivation-check"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_uids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b07911ca-474e-4ef3-94ab-220a66f1f903",
+          "name": "Deactivate a container",
+          "request": {
+            "name": "Deactivate a container",
+            "description": {
+              "content": "Deactivates a specific container.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid",
+                "deactivate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "885537e5-b8c2-4323-80dc-0d2d38f0e0ed",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc7ed847-55b6-4c83-8c11-dfbe5a4a9dd4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d56a59a-6d0d-4d61-b5aa-b96580193390",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "deactivate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "721a1ea7-fc68-4bbc-bd30-4c32ecb0b0cf",
+          "name": "Get network devices for all containers",
+          "request": {
+            "name": "Get network devices for all containers",
+            "description": {
+              "content": "Returns the network device configurations for all containers in the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "netdevs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "29805cf9-202e-4b70-9a24-abb9b0068c87",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"NetDevId<3>\",\n      \"id_type\": \"INVALID\",\n      \"netmask_bits\": 20,\n      \"owner_processes\": [\n        \"NodeId<1>\",\n        \"NodeId<1>\"\n      ],\n      \"name\": \"0000:00:04.0\",\n      \"uid\": \"uid_str\",\n      \"hostname\": \"stewie-0\",\n      \"net_devices\": [\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        },\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        }\n      ],\n      \"ips\": [\n        \"172.31.12.149\",\n        \"172.31.12.149\"\n      ],\n      \"max_cores\": 1,\n      \"vlan_id\": \"some_id\",\n      \"gateway\": \"172.31.0.1\",\n      \"container_id\": \"HostId<0>\",\n      \"identifier\": \"0000:00:04.0\",\n      \"network_label\": \"label\"\n    },\n    {\n      \"id\": \"NetDevId<3>\",\n      \"id_type\": \"INVALID\",\n      \"netmask_bits\": 20,\n      \"owner_processes\": [\n        \"NodeId<1>\",\n        \"NodeId<1>\"\n      ],\n      \"name\": \"0000:00:04.0\",\n      \"uid\": \"uid_str\",\n      \"hostname\": \"stewie-0\",\n      \"net_devices\": [\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        },\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        }\n      ],\n      \"ips\": [\n        \"172.31.12.149\",\n        \"172.31.12.149\"\n      ],\n      \"max_cores\": 1,\n      \"vlan_id\": \"some_id\",\n      \"gateway\": \"172.31.0.1\",\n      \"container_id\": \"HostId<0>\",\n      \"identifier\": \"0000:00:04.0\",\n      \"network_label\": \"label\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2136ecd7-14f6-41a3-b272-c1048c2406fc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5938f126-fe86-4a88-8971-aaa50df9d4dd",
+          "name": "Get network devices for a container",
+          "request": {
+            "name": "Get network devices for a container",
+            "description": {
+              "content": "Returns the network device configurations for a specific container.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid",
+                "netdevs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "228fddce-ed81-4221-8a30-03e6dc12a904",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"NetDevId<3>\",\n      \"id_type\": \"INVALID\",\n      \"netmask_bits\": 20,\n      \"owner_processes\": [\n        \"NodeId<1>\",\n        \"NodeId<1>\"\n      ],\n      \"name\": \"0000:00:04.0\",\n      \"uid\": \"uid_str\",\n      \"hostname\": \"stewie-0\",\n      \"net_devices\": [\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        },\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        }\n      ],\n      \"ips\": [\n        \"172.31.12.149\",\n        \"172.31.12.149\"\n      ],\n      \"max_cores\": 1,\n      \"vlan_id\": \"some_id\",\n      \"gateway\": \"172.31.0.1\",\n      \"container_id\": \"HostId<0>\",\n      \"identifier\": \"0000:00:04.0\",\n      \"network_label\": \"label\"\n    },\n    {\n      \"id\": \"NetDevId<3>\",\n      \"id_type\": \"INVALID\",\n      \"netmask_bits\": 20,\n      \"owner_processes\": [\n        \"NodeId<1>\",\n        \"NodeId<1>\"\n      ],\n      \"name\": \"0000:00:04.0\",\n      \"uid\": \"uid_str\",\n      \"hostname\": \"stewie-0\",\n      \"net_devices\": [\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        },\n        {\n          \"mac_address\": \"02:5a:d7:de:50:5c\",\n          \"mtu\": 0,\n          \"is_virtual\": true,\n          \"interface_alias\": \"some alias \",\n          \"numa\": -1,\n          \"aws\": {\n            \"netmask_bits\": 20,\n            \"ip\": \"172.31.12.149\",\n            \"gateway\": \"172.31.0.1\"\n          },\n          \"interface_name\": \"some name\",\n          \"max_vfs_num\": 0,\n          \"vendor\": \"Amazon.com, Inc.\",\n          \"slave_devices\": [\n            \"some_devices\",\n            \"some_devices\"\n          ],\n          \"pci_slot\": \"0000:00:04.0\",\n          \"device\": \"Elastic Network Adapter (ENA)\",\n          \"driver\": \"igb_uio\"\n        }\n      ],\n      \"ips\": [\n        \"172.31.12.149\",\n        \"172.31.12.149\"\n      ],\n      \"max_cores\": 1,\n      \"vlan_id\": \"some_id\",\n      \"gateway\": \"172.31.0.1\",\n      \"container_id\": \"HostId<0>\",\n      \"identifier\": \"0000:00:04.0\",\n      \"network_label\": \"label\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b0b0c89-8385-46ae-aa96-9f78b2a81e67",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02bfbb27-9105-4956-b222-a61b1e9b7e1a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cacd7de-dd90-4c13-9a48-28d990830579",
+          "name": "Add a dedicated network device to a container",
+          "request": {
+            "name": "Add a dedicated network device to a container",
+            "description": {
+              "content": "Allocates a dedicated network device to a specific container. The change must be applied to take effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid",
+                "netdevs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"device\": \"<string>\",\n  \"ips_type\": \"<string>\",\n  \"ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"gateway\": \"<string>\",\n  \"netmask\": \"<number>\",\n  \"name\": \"<string>\",\n  \"apply_container\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "241884ca-e6bd-41cb-a11c-34f90e54b017",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"device\": \"eth1\",\n  \"ips_type\": \"<string>\",\n  \"ips\": [\n    \"172.31.4.107\",\n    \"172.31.4.107\"\n  ],\n  \"gateway\": \"172.31.0.1\",\n  \"netmask\": 20,\n  \"name\": \"netdev01\",\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "673d77fe-c570-44b5-b51c-dad56fa0c3bd",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"device\": \"eth1\",\n  \"ips_type\": \"<string>\",\n  \"ips\": [\n    \"172.31.4.107\",\n    \"172.31.4.107\"\n  ],\n  \"gateway\": \"172.31.0.1\",\n  \"netmask\": 20,\n  \"name\": \"netdev01\",\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a0d2087-81e6-4450-8f24-a47c6b757505",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"device\": \"eth1\",\n  \"ips_type\": \"<string>\",\n  \"ips\": [\n    \"172.31.4.107\",\n    \"172.31.4.107\"\n  ],\n  \"gateway\": \"172.31.0.1\",\n  \"netmask\": 20,\n  \"name\": \"netdev01\",\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf2a85d1-b38c-496d-b9f9-7a3913b9df6d",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"device\": \"eth1\",\n  \"ips_type\": \"<string>\",\n  \"ips\": [\n    \"172.31.4.107\",\n    \"172.31.4.107\"\n  ],\n  \"gateway\": \"172.31.0.1\",\n  \"netmask\": 20,\n  \"name\": \"netdev01\",\n  \"apply_container\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c6c7902-5d4f-4cad-8afe-13f05061a1ae",
+          "name": "Remove a dedicated network device",
+          "request": {
+            "name": "Remove a dedicated network device",
+            "description": {
+              "content": "Removes a dedicated network device from a container. The change must be applied to take effect.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                ":uid",
+                "netdevs",
+                ":netdev_uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apply_container",
+                  "value": "<boolean>",
+                  "description": "If true, applies the configuration change to the container immediately."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the container."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "netdev_uid",
+                  "description": "(Required) The unique identifier of the network device."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f3324ac-d813-4468-a131-098b711cd7a9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs",
+                    ":netdev_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apply_container",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "netdev_uid",
+                      "description": "(Required) The unique identifier of the network device."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "658f01d2-f9d1-4bbe-b8a9-e9cc2f25de0a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs",
+                    ":netdev_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apply_container",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "netdev_uid",
+                      "description": "(Required) The unique identifier of the network device."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff30dca2-743c-4003-bff5-481b2cd05982",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    ":uid",
+                    "netdevs",
+                    ":netdev_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apply_container",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the container."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "netdev_uid",
+                      "description": "(Required) The unique identifier of the network device."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bff46823-5055-4a77-97ea-bcfc195aa126",
+          "name": "Get container hardware information",
+          "request": {
+            "name": "Get container hardware information",
+            "description": {
+              "content": "Returns hardware information for one or more containers, specified by IP or hostname.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "infos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"containers_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"info_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ec5d6b2-9f03-4497-9c35-68719be718d0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "infos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containers_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"info_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"net\": {\n      \"interfaces\": [\n        {\n          \"mtu\": 65536,\n          \"pciSlot\": \"0000:ff:ff.ff\",\n          \"mac\": \"00:00:00:00:00:00\",\n          \"pciSlot_slaves\": [\n            \"string\",\n            \"string\"\n          ],\n          \"ip4\": \"127.0.0.1\",\n          \"linkLayer\": \"ETH\",\n          \"name\": \"lo\",\n          \"ip4Netmask\": 8,\n          \"name_slaves\": [\n            \"string\",\n            \"string\"\n          ],\n          \"bondType\": \"NONE\",\n          \"ip6\": \"string\"\n        },\n        {\n          \"mtu\": 65536,\n          \"pciSlot\": \"0000:ff:ff.ff\",\n          \"mac\": \"00:00:00:00:00:00\",\n          \"pciSlot_slaves\": [\n            \"string\",\n            \"string\"\n          ],\n          \"ip4\": \"127.0.0.1\",\n          \"linkLayer\": \"ETH\",\n          \"name\": \"lo\",\n          \"ip4Netmask\": 8,\n          \"name_slaves\": [\n            \"string\",\n            \"string\"\n          ],\n          \"bondType\": \"NONE\",\n          \"ip6\": \"string\"\n        }\n      ]\n    },\n    \"disks\": [\n      {\n        \"devName\": \"xvdw\",\n        \"diskSizeBytes\": 20401094656,\n        \"isMounted\": false,\n        \"uuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"devNumber\": \"202:5632\",\n        \"isWekaPartition\": true,\n        \"label\": \"string\",\n        \"pciAddr\": \"string\",\n        \"parentName\": \"string\",\n        \"devPath\": \"/dev/xvdw\",\n        \"sizeBytes\": 20401094656,\n        \"isRotational\": true,\n        \"type\": \"DISK\",\n        \"model\": \"string\"\n      },\n      {\n        \"devName\": \"xvdw\",\n        \"diskSizeBytes\": 20401094656,\n        \"isMounted\": false,\n        \"uuid\": \"00000000-0000-0000-0000-000000000000\",\n        \"devNumber\": \"202:5632\",\n        \"isWekaPartition\": false,\n        \"label\": \"string\",\n        \"pciAddr\": \"string\",\n        \"parentName\": \"string\",\n        \"devPath\": \"/dev/xvdw\",\n        \"sizeBytes\": 20401094656,\n        \"isRotational\": true,\n        \"type\": \"DISK\",\n        \"model\": \"string\"\n      }\n    ],\n    \"resolvedIp\": \"172.31.23.127\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4d7863a-ce9c-4a54-97f1-2fb75a2dd764",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "infos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containers_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"info_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0ef24f8-c4ed-44a5-b8cd-40d8a921bc93",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "infos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containers_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"info_types\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf8463ce-1024-4b98-9590-53ce961e6268",
+          "name": "Set a requested action on containers",
+          "request": {
+            "name": "Set a requested action on containers",
+            "description": {
+              "content": "Sets a requested action, such as STOP or RESTART, to be performed on one or more containers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "containers",
+                "requestedAction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"container_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ],\n  \"requested_action\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "68d782d4-0ef5-4025-8509-4aa3ec7fc84d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "requestedAction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_ids\": [\n    0,\n    1,\n    2\n  ],\n  \"requested_action\": \"RESTART\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5594b2f-bfee-4ed6-b4a3-a959cd1cc8d6",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "requestedAction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_ids\": [\n    0,\n    1,\n    2\n  ],\n  \"requested_action\": \"RESTART\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fefb9cd7-426f-4314-8884-7b3ded7b212f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "containers",
+                    "requestedAction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"container_ids\": [\n    0,\n    1,\n    2\n  ],\n  \"requested_action\": \"RESTART\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5cf24076-771b-48c4-a597-18474ab796cd",
+    "name": "@weka-api Active Directory Containers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2761 @@
+{
+  "item": [
+    {
+      "id": "84bde0b5-0c33-4602-8ba2-d9ae0fdafe0d",
+      "name": "Catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91c04a3a-6820-4fa9-9983-7d95c60298af",
+          "name": "Run catalog query with nested filters",
+          "request": {
+            "name": "Run catalog query with nested filters",
+            "description": {
+              "content": "Execute a catalog query over the catalog view with nested AND/OR criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "query"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fs_uuid\": \"<string>\",\n  \"select_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"point_in_time\": \"<string>\",\n  \"page_size\": \"<integer>\",\n  \"resume_cookie\": \"<string>\",\n  \"return_count_only\": \"<boolean>\",\n  \"sort\": {\n    \"field\": \"<string>\",\n    \"order\": \"<string>\"\n  },\n  \"criteria\": {\n    \"operator\": \"<string>\",\n    \"conditions\": [\n      \"<object>\",\n      \"<object>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e53c816-bcb2-46b1-b2f6-e556d45b7533",
+              "name": "Query result",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"point_in_time\": \"@GMT-2025.09.20-12.00.00\",\n  \"select_fields\": [\n    \"inode\",\n    \"filepath\",\n    \"filename\",\n    \"size\",\n    \"uid\",\n    \"gid\"\n  ],\n  \"page_size\": 1000,\n  \"resume_cookie\": \"eyJzb3J0RmllbGQiOiJmaWxlbmFtZSIsInNvcnRPcmRlciI6IkRFU0MiLCJsYXN0U29ydCI6Im15ZmlsZS50eHQiLCJsYXN0SW5vZGUiOjEyMzQ1Nn0\",\n  \"sort\": {\n    \"field\": \"filename\",\n    \"order\": \"DESC\"\n  },\n  \"criteria\": {\n    \"operator\": \"OR\",\n    \"conditions\": [\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/prod/docs/%\"\n          },\n          {\n            \"field\": \"modify_time\",\n            \"operation\": \"BEFORE\",\n            \"value\": \"2025-01-01T00:00:00Z\"\n          }\n        ]\n      },\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/logs/%\"\n          },\n          {\n            \"field\": \"file_extension\",\n            \"operation\": \"EQUALS\",\n            \"value\": \".log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"page_size\": 2599,\n  \"next_cookie\": null,\n  \"total_records\": 2193\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a917ccca-01cc-4826-b408-74094f3c8159",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"point_in_time\": \"@GMT-2025.09.20-12.00.00\",\n  \"select_fields\": [\n    \"inode\",\n    \"filepath\",\n    \"filename\",\n    \"size\",\n    \"uid\",\n    \"gid\"\n  ],\n  \"page_size\": 1000,\n  \"resume_cookie\": \"eyJzb3J0RmllbGQiOiJmaWxlbmFtZSIsInNvcnRPcmRlciI6IkRFU0MiLCJsYXN0U29ydCI6Im15ZmlsZS50eHQiLCJsYXN0SW5vZGUiOjEyMzQ1Nn0\",\n  \"sort\": {\n    \"field\": \"filename\",\n    \"order\": \"DESC\"\n  },\n  \"criteria\": {\n    \"operator\": \"OR\",\n    \"conditions\": [\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/prod/docs/%\"\n          },\n          {\n            \"field\": \"modify_time\",\n            \"operation\": \"BEFORE\",\n            \"value\": \"2025-01-01T00:00:00Z\"\n          }\n        ]\n      },\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/logs/%\"\n          },\n          {\n            \"field\": \"file_extension\",\n            \"operation\": \"EQUALS\",\n            \"value\": \".log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a9d89e22-5fee-4121-9d49-531a91ab36b1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"point_in_time\": \"@GMT-2025.09.20-12.00.00\",\n  \"select_fields\": [\n    \"inode\",\n    \"filepath\",\n    \"filename\",\n    \"size\",\n    \"uid\",\n    \"gid\"\n  ],\n  \"page_size\": 1000,\n  \"resume_cookie\": \"eyJzb3J0RmllbGQiOiJmaWxlbmFtZSIsInNvcnRPcmRlciI6IkRFU0MiLCJsYXN0U29ydCI6Im15ZmlsZS50eHQiLCJsYXN0SW5vZGUiOjEyMzQ1Nn0\",\n  \"sort\": {\n    \"field\": \"filename\",\n    \"order\": \"DESC\"\n  },\n  \"criteria\": {\n    \"operator\": \"OR\",\n    \"conditions\": [\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/prod/docs/%\"\n          },\n          {\n            \"field\": \"modify_time\",\n            \"operation\": \"BEFORE\",\n            \"value\": \"2025-01-01T00:00:00Z\"\n          }\n        ]\n      },\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/logs/%\"\n          },\n          {\n            \"field\": \"file_extension\",\n            \"operation\": \"EQUALS\",\n            \"value\": \".log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b2e775b-7b7d-41fb-9fc0-5abfb1c66dde",
+              "name": "Catalog service unavailable or not configured",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"point_in_time\": \"@GMT-2025.09.20-12.00.00\",\n  \"select_fields\": [\n    \"inode\",\n    \"filepath\",\n    \"filename\",\n    \"size\",\n    \"uid\",\n    \"gid\"\n  ],\n  \"page_size\": 1000,\n  \"resume_cookie\": \"eyJzb3J0RmllbGQiOiJmaWxlbmFtZSIsInNvcnRPcmRlciI6IkRFU0MiLCJsYXN0U29ydCI6Im15ZmlsZS50eHQiLCJsYXN0SW5vZGUiOjEyMzQ1Nn0\",\n  \"sort\": {\n    \"field\": \"filename\",\n    \"order\": \"DESC\"\n  },\n  \"criteria\": {\n    \"operator\": \"OR\",\n    \"conditions\": [\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/prod/docs/%\"\n          },\n          {\n            \"field\": \"modify_time\",\n            \"operation\": \"BEFORE\",\n            \"value\": \"2025-01-01T00:00:00Z\"\n          }\n        ]\n      },\n      {\n        \"operator\": \"AND\",\n        \"conditions\": [\n          {\n            \"field\": \"filepath\",\n            \"operation\": \"LIKE\",\n            \"value\": \"/data/logs/%\"\n          },\n          {\n            \"field\": \"file_extension\",\n            \"operation\": \"EQUALS\",\n            \"value\": \".log\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8848241c-191e-4d8b-b3bd-d6efefe243ae",
+          "name": "Compare two point-in-time snapshots and return differences",
+          "request": {
+            "name": "Compare two point-in-time snapshots and return differences",
+            "description": {
+              "content": "Compare two point-in-time snapshots and return the differences.\nThis API shows what changed between two snapshots using FsOperationType values:\n- FILE_CREATE, DIR_CREATE, SYMLINK_CREATE: New entries in the newer snapshot\n- FILE_DELETE, DIR_DELETE, SYMLINK_DELETE: Entries removed in the newer snapshot\n- FILE_MODIFY, DIR_MODIFY, SYMLINK_MODIFY: Entries with changed attributes\n\nWhen `show_changed_fields=true`, MODIFY records include a `changed_fields` object\nshowing old/new values for ALL modified fields (not just select_fields).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "query",
+                "diff"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fs_uuid\": \"<string>\",\n  \"old_point_in_time\": \"<string>\",\n  \"new_point_in_time\": \"<string>\",\n  \"select_fields\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"change_types\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"filepath\": \"<string>\",\n  \"include_directories\": false,\n  \"show_changed_fields\": false,\n  \"page_size\": 1000,\n  \"resume_cookie\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9a6ecd99-38ad-4a41-9d9b-805acbaded87",
+              "name": "Diff results between snapshots",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query",
+                    "diff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"old_point_in_time\": \"@GMT-2025.01.01-00.00.00\",\n  \"new_point_in_time\": \"@GMT-2025.02.01-00.00.00\",\n  \"select_fields\": [\n    \"size\",\n    \"modify_time\"\n  ],\n  \"change_types\": [\n    \"FILE_CREATE\",\n    \"FILE_MODIFY\"\n  ],\n  \"filepath\": \"/data/\",\n  \"show_changed_fields\": false,\n  \"page_size\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"old_snapshot\": \"@GMT-2025.01.01-00.00.00\",\n  \"new_snapshot\": \"@GMT-2025.02.01-00.00.00\",\n  \"data\": [\n    {\n      \"inode\": \"12345\",\n      \"change_type\": \"FILE_CREATE\",\n      \"parent_inode\": \"100\",\n      \"filepath\": \"/data/new\",\n      \"filename\": \"file.txt\",\n      \"size\": 1024,\n      \"modify_time\": \"2025-02-01T10:00:00Z\"\n    },\n    {\n      \"inode\": \"67890\",\n      \"change_type\": \"FILE_MODIFY\",\n      \"parent_inode\": \"100\",\n      \"filepath\": \"/data/existing\",\n      \"filename\": \"doc.txt\",\n      \"size\": 2048,\n      \"modify_time\": \"2025-02-01T12:00:00Z\",\n      \"changed_fields\": {\n        \"size\": {\n          \"old\": 1024,\n          \"new\": 2048\n        },\n        \"modify_time\": {\n          \"old\": \"2025-01-15T10:00:00Z\",\n          \"new\": \"2025-02-01T12:00:00Z\"\n        }\n      }\n    }\n  ],\n  \"summary\": {\n    \"file_create\": 150,\n    \"file_delete\": 10,\n    \"file_modify\": 25,\n    \"dir_create\": 5,\n    \"dir_delete\": 2,\n    \"dir_modify\": 3,\n    \"symlink_create\": 0,\n    \"symlink_delete\": 0,\n    \"symlink_modify\": 0\n  },\n  \"next_cookie\": \"eyJsYXN0SW5vZGUiOiIxMjM0NTY3ODkwIn0\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0fe41073-34a5-4922-92bc-f46e02976880",
+              "name": "Validation error (missing required fields, invalid values)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query",
+                    "diff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"old_point_in_time\": \"@GMT-2025.01.01-00.00.00\",\n  \"new_point_in_time\": \"@GMT-2025.02.01-00.00.00\",\n  \"select_fields\": [\n    \"size\",\n    \"modify_time\"\n  ],\n  \"change_types\": [\n    \"FILE_CREATE\",\n    \"FILE_MODIFY\"\n  ],\n  \"filepath\": \"/data/\",\n  \"show_changed_fields\": false,\n  \"page_size\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16f3e4ea-50a0-40fe-9433-e77b4123f351",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query",
+                    "diff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"old_point_in_time\": \"@GMT-2025.01.01-00.00.00\",\n  \"new_point_in_time\": \"@GMT-2025.02.01-00.00.00\",\n  \"select_fields\": [\n    \"size\",\n    \"modify_time\"\n  ],\n  \"change_types\": [\n    \"FILE_CREATE\",\n    \"FILE_MODIFY\"\n  ],\n  \"filepath\": \"/data/\",\n  \"show_changed_fields\": false,\n  \"page_size\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c241855-f23e-4ee2-9ebc-87083d65e039",
+              "name": "Snapshot not found for the specified point-in-time",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query",
+                    "diff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"old_point_in_time\": \"@GMT-2025.01.01-00.00.00\",\n  \"new_point_in_time\": \"@GMT-2025.02.01-00.00.00\",\n  \"select_fields\": [\n    \"size\",\n    \"modify_time\"\n  ],\n  \"change_types\": [\n    \"FILE_CREATE\",\n    \"FILE_MODIFY\"\n  ],\n  \"filepath\": \"/data/\",\n  \"show_changed_fields\": false,\n  \"page_size\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4dd83e0b-233c-4c8a-b419-2b946813afd7",
+              "name": "Catalog service unavailable or not configured",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query",
+                    "diff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"old_point_in_time\": \"@GMT-2025.01.01-00.00.00\",\n  \"new_point_in_time\": \"@GMT-2025.02.01-00.00.00\",\n  \"select_fields\": [\n    \"size\",\n    \"modify_time\"\n  ],\n  \"change_types\": [\n    \"FILE_CREATE\",\n    \"FILE_MODIFY\"\n  ],\n  \"filepath\": \"/data/\",\n  \"show_changed_fields\": false,\n  \"page_size\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e63fcdca-86d1-45af-8341-ae409f805dce",
+              "name": "Query timed out",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "query",
+                    "diff"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fs_uuid\": \"326933be-23fe-b497-a50f-58774d6cbe4b\",\n  \"old_point_in_time\": \"@GMT-2025.01.01-00.00.00\",\n  \"new_point_in_time\": \"@GMT-2025.02.01-00.00.00\",\n  \"select_fields\": [\n    \"size\",\n    \"modify_time\"\n  ],\n  \"change_types\": [\n    \"FILE_CREATE\",\n    \"FILE_MODIFY\"\n  ],\n  \"filepath\": \"/data/\",\n  \"show_changed_fields\": false,\n  \"page_size\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19a632ac-5d8a-419a-8f79-76117cb86450",
+          "name": "Get filesystem usage statistics by user",
+          "request": {
+            "name": "Get filesystem usage statistics by user",
+            "description": {
+              "content": "Query filesystem usage statistics grouped by user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "stats",
+                "usageByUser"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "point_in_time",
+                  "value": "<string>",
+                  "description": "Snapshot access point for point-in-time query"
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<integer>",
+                  "description": "Filter by user ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "gid",
+                  "value": "<integer>",
+                  "description": "Filter by group ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "filepath",
+                  "value": "/",
+                  "description": "Filter by directory path"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e22fbf0-e3a9-4af7-aec6-d798562c6024",
+              "name": "Usage statistics by user",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "usageByUser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "49714df6-2093-436d-b873-52ebcc870602",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "usageByUser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5215754f-6cf0-4ee4-9939-c31f3bcfd4c8",
+              "name": "Catalog service unavailable or not configured",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "usageByUser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "gid",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0db39047-ed92-44ff-8980-68de5721f117",
+          "name": "Get filesystem usage statistics by group",
+          "request": {
+            "name": "Get filesystem usage statistics by group",
+            "description": {
+              "content": "Query filesystem usage statistics grouped by group name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "stats",
+                "usageByGroup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "point_in_time",
+                  "value": "<string>",
+                  "description": "Snapshot access point for point-in-time query"
+                },
+                {
+                  "disabled": false,
+                  "key": "filepath",
+                  "value": "/",
+                  "description": "Filter by directory path"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d5b4bc40-80db-4589-b16f-4a56619b67af",
+              "name": "Usage statistics by group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "usageByGroup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1862d4e1-6a11-420d-81f3-adb5dce54890",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "usageByGroup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37862a3f-3bf2-42e5-9304-fb5538f67c56",
+          "name": "Get list of snapshot metadata available for a filesystem in the catalog",
+          "request": {
+            "name": "Get list of snapshot metadata available for a filesystem in the catalog",
+            "description": {
+              "content": "Retrieve a list of snapshot metadata available for a filesystem in the catalog",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "snapshots",
+                ":fs_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fs_uuid",
+                  "description": "(Required) Filesystem UUID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c7ac9e2-1a1e-48e8-8b9d-4c78c9f7cb8a",
+              "name": "List of snapshots for the filesystem",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "snapshots",
+                    ":fs_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fs_uuid",
+                      "description": "(Required) Filesystem UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"filesystem_uuid\": \"string\",\n  \"filesystem_name\": \"string\",\n  \"latest_snapshot\": {\n    \"access_point\": \"string\",\n    \"snapshot_id\": \"string\",\n    \"snapshot_name\": \"string\",\n    \"sequence_number\": 3790\n  },\n  \"snapshots\": [\n    {\n      \"access_point\": \"string\",\n      \"snapshot_name\": \"string\",\n      \"snapshot_id\": \"string\",\n      \"sequence_number\": 4830,\n      \"completion_timestamp\": \"string\"\n    },\n    {\n      \"access_point\": \"string\",\n      \"snapshot_name\": \"string\",\n      \"snapshot_id\": \"string\",\n      \"sequence_number\": 2542,\n      \"completion_timestamp\": \"string\"\n    }\n  ],\n  \"total_count\": 3311\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eadaaf56-648d-4739-b7ca-a4b154ee889d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "snapshots",
+                    ":fs_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fs_uuid",
+                      "description": "(Required) Filesystem UUID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2e099b1-f7b1-45d2-ab08-502d76b2a969",
+          "name": "Get file distribution by extension",
+          "request": {
+            "name": "Get file distribution by extension",
+            "description": {
+              "content": "Query file count distribution grouped by file extension",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "stats",
+                "distributionByExtension"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "point_in_time",
+                  "value": "<string>",
+                  "description": "Snapshot access point for point-in-time query"
+                },
+                {
+                  "disabled": false,
+                  "key": "filepath",
+                  "value": "/",
+                  "description": "Filter by directory path"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe58dd10-f73f-4386-be24-1ef34b37d514",
+              "name": "File distribution by extension",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "distributionByExtension"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e46a327-2589-46b6-84f7-a704dc00f6bc",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "distributionByExtension"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "74ab17ba-3905-4edb-8ecc-06186caedb89",
+          "name": "Get files by size buckets",
+          "request": {
+            "name": "Get files by size buckets",
+            "description": {
+              "content": "Query file distribution grouped by size ranges (0-1KB, 1KB-10KB, 10KB-100KB, 100KB-1MB, 1MB-10MB, 10MB-100MB, 100MB-1GB, 1GB-10GB, 10GB-100GB, 100GB-1TB, 1TB-10TB, 10TB+)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "stats",
+                "filesBySize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "point_in_time",
+                  "value": "<string>",
+                  "description": "Snapshot access point for point-in-time query"
+                },
+                {
+                  "disabled": false,
+                  "key": "filepath",
+                  "value": "/",
+                  "description": "Filter by directory path"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "19926ce7-360c-430e-a68e-bab83da22f6f",
+              "name": "File distribution by size buckets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "filesBySize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"size_bucket\": \"1KB-10KB\",\n      \"file_count\": 8234,\n      \"total_size_bytes\": 41234567,\n      \"total_size_formatted\": \"39.32 MB\"\n    },\n    {\n      \"size_bucket\": \"1KB-10KB\",\n      \"file_count\": 8234,\n      \"total_size_bytes\": 41234567,\n      \"total_size_formatted\": \"39.32 MB\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9809ed13-37a7-4f4d-9a79-fd59e2c6c5cb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "filesBySize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9f711a1-837e-4265-ae6b-a64fc0a787be",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "filesBySize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba1c1fd2-3b70-4e9c-b46f-5d1213211f95",
+          "name": "Get capacity by file age",
+          "request": {
+            "name": "Get capacity by file age",
+            "description": {
+              "content": "Query total file capacity grouped by file age based on modification time (< 1 week, 1 week - 1 month, 1-3 months, 3-6 months, 6-12 months, 1-2 years, 2-5 years, 5+ years)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "stats",
+                "capacityByFileAge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "point_in_time",
+                  "value": "<string>",
+                  "description": "Snapshot access point for point-in-time query"
+                },
+                {
+                  "disabled": false,
+                  "key": "filepath",
+                  "value": "/",
+                  "description": "Filter by directory path"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5039a27a-633c-455b-aab0-7b9bf160b5aa",
+              "name": "File capacity by age buckets",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "capacityByFileAge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"age_bucket\": \"1-3 months\",\n      \"file_count\": 15234,\n      \"total_size_bytes\": 512345678,\n      \"total_size_formatted\": \"488.56 MB\"\n    },\n    {\n      \"age_bucket\": \"1-3 months\",\n      \"file_count\": 15234,\n      \"total_size_bytes\": 512345678,\n      \"total_size_formatted\": \"488.56 MB\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8d90f34-e459-4c39-bf8e-b09a431c73df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "capacityByFileAge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a46c248-d18a-400a-90f6-9afb020c308b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "capacityByFileAge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "592d518e-323a-4d36-81b2-a98e4dcc37e5",
+          "name": "Get dashboard statistics",
+          "request": {
+            "name": "Get dashboard statistics",
+            "description": {
+              "content": "Get combined statistics including quick stats, top users, and file types",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "stats",
+                "dashboard"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "point_in_time",
+                  "value": "<string>",
+                  "description": "Snapshot access point for point-in-time query"
+                },
+                {
+                  "disabled": false,
+                  "key": "filepath",
+                  "value": "/",
+                  "description": "Filter by directory path"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8027329-fa28-46d6-bda3-0a4edcad24c4",
+              "name": "Dashboard statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "dashboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea832cdc-6d7e-4f54-bab7-841b0cf0cf93",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "dashboard"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filepath",
+                      "value": "/"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5d3bd09-3f9a-4f4b-9cd7-9d179d90bf9c",
+          "name": "Get hierarchical directory tree with size statistics",
+          "request": {
+            "name": "Get hierarchical directory tree with size statistics",
+            "description": {
+              "content": "Retrieve directory tree showing multiple levels with direct and recursive size aggregations. All sizes returned in bytes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "stats",
+                "directoryTree"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "/",
+                  "description": "Starting directory path"
+                },
+                {
+                  "disabled": false,
+                  "key": "levels",
+                  "value": "2",
+                  "description": "Number of directory levels to return (1-5)"
+                },
+                {
+                  "disabled": false,
+                  "key": "point_in_time",
+                  "value": "<string>",
+                  "description": "Snapshot access point for point-in-time query"
+                },
+                {
+                  "disabled": false,
+                  "key": "min_size",
+                  "value": "<integer>",
+                  "description": "Minimum recursive size in bytes to include directories (filter small directories)"
+                },
+                {
+                  "disabled": false,
+                  "key": "top_n_levels",
+                  "value": "<string>",
+                  "description": "Comma-separated top N values for each relative level (e.g., \"10,5,3\"). Each value 1-10. Aggregates rest as 'OTHERS' (optional)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8700d54a-9f7a-4921-ac14-a296b3382608",
+              "name": "Hierarchical directory tree with size statistics (all sizes in bytes)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "directoryTree"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "/"
+                    },
+                    {
+                      "key": "levels",
+                      "value": "2"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "min_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "top_n_levels",
+                      "value": "10,5,3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": false,\n  \"path\": \"string\",\n  \"levels\": 3252,\n  \"tree\": {\n    \"path\": \"string\",\n    \"depth\": 7451,\n    \"direct_size\": 3621,\n    \"direct_file_count\": 3005,\n    \"recursive_size\": 1312,\n    \"recursive_file_count\": 8455,\n    \"subdirectory_count\": 4370,\n    \"recursive_directory_count\": 8931,\n    \"subdirs\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "61b0cc0a-2df6-4645-9026-7d525fb5edf9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "directoryTree"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "/"
+                    },
+                    {
+                      "key": "levels",
+                      "value": "2"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "min_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "top_n_levels",
+                      "value": "10,5,3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0a870e6-58ac-4069-9099-5cf13f6b2f4d",
+              "name": "Catalog service unavailable or not configured",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "stats",
+                    "directoryTree"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "path",
+                      "value": "/"
+                    },
+                    {
+                      "key": "levels",
+                      "value": "2"
+                    },
+                    {
+                      "key": "point_in_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "min_size",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "top_n_levels",
+                      "value": "10,5,3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "78ed6ac3-dca1-4650-886a-42b98c450e19",
+          "name": "Get filesystem capacity metadata history",
+          "request": {
+            "name": "Get filesystem capacity metadata history",
+            "description": {
+              "content": "Query filesystem capacity metadata showing SSD and total capacity trends over time.\n**Time Range Options (mutually exclusive):**\n- Use `timeframe` for predefined ranges (7d, 30d, 90d, 180d, 365d, 1y)\n- OR use `start_time`/`end_time` for custom date ranges\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "filesystem",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "timeframe",
+                  "value": "<string>",
+                  "description": "Predefined timeframe (7d=last 7 days, 30d=last 30 days, etc.). Mutually exclusive with start_time/end_time."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<dateTime>",
+                  "description": "Start time for custom range (ISO format YYYY-MM-DDTHH:MM:SS). Mutually exclusive with timeframe."
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<dateTime>",
+                  "description": "End time for custom range (ISO format YYYY-MM-DDTHH:MM:SS). Mutually exclusive with timeframe."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Maximum number of records to return"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2a2a2fb2-1e51-4aa4-ad18-3396dec62f84",
+              "name": "Filesystem capacity metadata history",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "filesystem",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "326933be-23fe-b497-a50f-58774d6cbe4b"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "30d"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2024-10-01T00:00:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2024-11-10T23:59:59"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"used_ssd_capacity\": 500000000000,\n      \"used_total_capacity\": 1000000000000,\n      \"ssd_capacity\": 1000000000000,\n      \"total_capacity\": 10000000000000,\n      \"access_point\": \"@GMT-2025.10.16-06.48.29\",\n      \"timestamp\": \"2014-01-02T21:27:00.515Z\"\n    },\n    {\n      \"used_ssd_capacity\": 500000000000,\n      \"used_total_capacity\": 1000000000000,\n      \"ssd_capacity\": 1000000000000,\n      \"total_capacity\": 10000000000000,\n      \"access_point\": \"@GMT-2025.10.16-06.48.29\",\n      \"timestamp\": \"2000-06-26T20:05:02.185Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0ed1956-1de3-43ff-a2a7-fe9f9c407d0c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "filesystem",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "326933be-23fe-b497-a50f-58774d6cbe4b"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "30d"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2024-10-01T00:00:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2024-11-10T23:59:59"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7171b3c9-552c-4193-8ec0-3a22e466e3cb",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "filesystem",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "326933be-23fe-b497-a50f-58774d6cbe4b"
+                    },
+                    {
+                      "key": "timeframe",
+                      "value": "30d"
+                    },
+                    {
+                      "key": "start_time",
+                      "value": "2024-10-01T00:00:00"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "2024-11-10T23:59:59"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88ebc7cb-ee1e-45b0-b6fe-4973712996a9",
+          "name": "Get point-in-time filesystem capacity metadata",
+          "request": {
+            "name": "Get point-in-time filesystem capacity metadata",
+            "description": {
+              "content": "Query filesystem capacity metadata for a specific snapshot access point or the latest metadata.\n\n- If `access_point` is provided: returns metadata for that specific snapshot\n- If `access_point` is not provided: returns the latest (most recent) metadata\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "catalog",
+                "filesystem",
+                "metadata",
+                "point-in-time"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fs_uuid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem UUID"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_point",
+                  "value": "<string>",
+                  "description": "Snapshot access point (optional - if not provided, returns latest metadata)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae3431ed-2c2d-49ae-ae6f-b2566630df6a",
+              "name": "Point-in-time filesystem capacity metadata",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "filesystem",
+                    "metadata",
+                    "point-in-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "326933be-23fe-b497-a50f-58774d6cbe4b"
+                    },
+                    {
+                      "key": "access_point",
+                      "value": "@GMT-2025.10.16-06.48.29"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"used_ssd_capacity\": 500000000000,\n      \"used_total_capacity\": 1000000000000,\n      \"ssd_capacity\": 1000000000000,\n      \"total_capacity\": 10000000000000,\n      \"access_point\": \"@GMT-2025.10.16-06.48.29\"\n    },\n    {\n      \"used_ssd_capacity\": 500000000000,\n      \"used_total_capacity\": 1000000000000,\n      \"ssd_capacity\": 1000000000000,\n      \"total_capacity\": 10000000000000,\n      \"access_point\": \"@GMT-2025.10.16-06.48.29\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc34d210-9d56-413f-af32-2b2b9fbac61d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "filesystem",
+                    "metadata",
+                    "point-in-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "326933be-23fe-b497-a50f-58774d6cbe4b"
+                    },
+                    {
+                      "key": "access_point",
+                      "value": "@GMT-2025.10.16-06.48.29"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "147940b9-7918-40c4-bfef-d0ba18a2daec",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "catalog",
+                    "filesystem",
+                    "metadata",
+                    "point-in-time"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fs_uuid",
+                      "value": "326933be-23fe-b497-a50f-58774d6cbe4b"
+                    },
+                    {
+                      "key": "access_point",
+                      "value": "@GMT-2025.10.16-06.48.29"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bde158e4-892c-4993-afc3-b94e17daf2a0",
+    "name": "@weka-api Active Directory Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

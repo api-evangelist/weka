@@ -1,0 +1,359 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Tenant API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tenant",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check if multiple tenants exist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tenants/multipleTenantsExist"
+          },
+          "docs": "Checks if more than one tenant is configured in the cluster. This is useful for determining if multi-tenancy is active."
+        },
+        {
+          "info": {
+            "name": "Get a list of all tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tenants"
+          },
+          "docs": "Returns a list of all tenants configured in the cluster."
+        },
+        {
+          "info": {
+            "name": "Create a new tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tenants",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new tenant within the cluster. A tenant is a logical partition that isolates users and data for multi-tenancy."
+        },
+        {
+          "info": {
+            "name": "Get a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tenants/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific tenant, identified by its UID."
+        },
+        {
+          "info": {
+            "name": "Rename a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/tenants/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant to rename."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the name of a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Delete a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/tenants/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant to delete."
+              }
+            ]
+          },
+          "docs": "Removes a specific tenant from the cluster. This operation is only possible if the tenant does not contain any resources."
+        },
+        {
+          "info": {
+            "name": "Set or update tenant quotas",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/tenants/:uid/limits",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets or updates the storage capacity quotas for a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Update tenant options",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/tenants/:uid/options",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates enforcement options for a specific tenant, such as filesystem authentication and mount network space access enforcement."
+        },
+        {
+          "info": {
+            "name": "Get network spaces for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tenants/:uid/networkSpaces",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ]
+          },
+          "docs": "Returns a list of network spaces assigned to a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Add network spaces to a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tenants/:uid/networkSpaces/add",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns one or more network spaces to a specific tenant without affecting existing assignments."
+        },
+        {
+          "info": {
+            "name": "Remove network spaces from a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tenants/:uid/networkSpaces/remove",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes one or more network spaces from a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Revoke all user tokens for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/tenants/:uid/revoke",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ]
+          },
+          "docs": "Immediately invalidates all active login sessions (GUI, CLI, API) for all users within a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Get security policies for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tenants/:uid/securityPolicy",
+            "params": [
+              {
+                "name": "uid",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ]
+          },
+          "docs": "Returns a list of all security policies attached to a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Set security policies for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/tenants/:uid/securityPolicy",
+            "params": [
+              {
+                "name": "uid",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces all existing security policies on a tenant with a new set. Any policies not included in the request will be detached."
+        },
+        {
+          "info": {
+            "name": "Reset security policies for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/tenants/:uid/securityPolicy",
+            "params": [
+              {
+                "name": "uid",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ]
+          },
+          "docs": "Removes all attached security policies from a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Attach security policies to a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tenants/:uid/securityPolicy/attach",
+            "params": [
+              {
+                "name": "uid",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attaches one or more security policies to a specific tenant without affecting existing attachments."
+        },
+        {
+          "info": {
+            "name": "Detach security policies from a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tenants/:uid/securityPolicy/detach",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the tenant."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Detaches one or more security policies from a specific tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

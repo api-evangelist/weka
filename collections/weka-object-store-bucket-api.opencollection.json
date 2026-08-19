@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Object store bucket API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Object store bucket",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get object store bucket configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/objectStoreBuckets"
+          },
+          "docs": "Retrieves a list of all object store bucket configurations and status."
+        },
+        {
+          "info": {
+            "name": "Create an object store bucket configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/objectStoreBuckets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Establishes a new object store bucket configuration."
+        },
+        {
+          "info": {
+            "name": "Get a specific object store bucket configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/objectStoreBuckets/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the object store bucket."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific object store bucket configuration and status."
+        },
+        {
+          "info": {
+            "name": "Update an object store bucket configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/objectStoreBuckets/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the object store bucket to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing object store bucket configuration."
+        },
+        {
+          "info": {
+            "name": "Delete an object store bucket configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/objectStoreBuckets/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the object store bucket to delete."
+              }
+            ]
+          },
+          "docs": "Removes an existing object store bucket configuration if the bucket is not attached to a filesystem."
+        },
+        {
+          "info": {
+            "name": "Get object store bucket operations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/objectStoreBuckets/:uid/operations",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the object store bucket."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of live, low-level I/O operations (such as uploads and downloads) for a specific object store bucket."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

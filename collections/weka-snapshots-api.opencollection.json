@@ -1,0 +1,250 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Snapshots API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Snapshots",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all snapshots",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/snapshots",
+            "params": [
+              {
+                "name": "filesystem",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific filesystem."
+              }
+            ]
+          },
+          "docs": "Returns a list of all filesystem snapshots in the system. Snapshots are point-in-time copies used for backup, archiving, and testing. Filter results by filesystem using the query parameter."
+        },
+        {
+          "info": {
+            "name": "Create a new snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a point-in-time snapshot of an existing filesystem. Snapshots are read-only by default and do not impact system performance. Writable snapshots enable data modification for testing environments.<br> Snapshots consume minimal space based on 4KB granularity differences. Once created as writable, a snapshot cannot be converted to read-only."
+        },
+        {
+          "info": {
+            "name": "Get snapshot details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/snapshots/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the snapshot (UUID format)."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific snapshot, including creation timestamp, parent filesystem, size, and writability status."
+        },
+        {
+          "info": {
+            "name": "Update snapshot configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/snapshots/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the snapshot to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies snapshot name or access point. The snapshot's data and point-in-time state remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Delete a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/snapshots/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the snapshot to delete."
+              }
+            ]
+          },
+          "docs": "Permanently removes a snapshot from the system and frees storage space consumed by its unique data. If the snapshot has been downloaded to another filesystem, deletion may cause that filesystem to malfunction. Ensure downloaded snapshots are un-tiered or migrated before deletion."
+        },
+        {
+          "info": {
+            "name": "Create a copy of a snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots/:uid/copy",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source snapshot to copy."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a duplicate of an existing snapshot within the same filesystem. Useful for creating multiple versions or preserving snapshot state."
+        },
+        {
+          "info": {
+            "name": "Upload snapshot to object store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots/:uid/upload",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the snapshot to upload."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfers a snapshot to object storage using the Snap-To-Object feature. Consolidates all snapshot data, including filesystem metadata and files, for backup, archiving, or disaster recovery. Only read-only snapshots can be uploaded. Upload snapshots in chronological order for optimal efficiency."
+        },
+        {
+          "info": {
+            "name": "Download snapshot from object store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots/download",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Downloads a previously uploaded snapshot from object storage to a filesystem. Enables data restoration, disaster recovery, and filesystem migration. Snapshots are incrementally reconstructed on the target filesystem. Apply snapshots in chronological order for optimal consistency. Use the locator obtained during snapshot upload. Downloading snapshots from object stores within the same cluster is not supported."
+        },
+        {
+          "info": {
+            "name": "Restore filesystem from snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots/:fs_uid/:uid/restore",
+            "params": [
+              {
+                "name": "fs_uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the target filesystem to restore."
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the source snapshot."
+              }
+            ]
+          },
+          "docs": "Restores a filesystem to a previous state using a specified snapshot. This operation overwrites the current filesystem content. This operation is destructive. Ensure appropriate backups exist before proceeding. Consider creating a snapshot of the current filesystem state first."
+        },
+        {
+          "info": {
+            "name": "Get snapshot metadata from object store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots/locatorInfo",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns detailed metadata about a snapshot stored in object storage using its locator string. Queries the object store directly without requiring the snapshot to be downloaded."
+        },
+        {
+          "info": {
+            "name": "Initialize snapshot differential analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots/diff/prepare",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Prepares the system for computing differences between two snapshots by generating processing tokens (cookies). This is the first step in a two-phase operation for identifying changed, added, or deleted files. The operation divides the comparison workload into parallel chunks based on the requested parallelism. Use the returned cookies in subsequent getResults calls."
+        },
+        {
+          "info": {
+            "name": "Get snapshot differential results",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshots/diff/getResults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieves the actual differences between two snapshots, including changed, added, and deleted files. Must be called after preparing the differential analysis using the prepare endpoint. Supports efficient pagination through resume and stop tokens. Use resume_token from previous responses to continue where you left off."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

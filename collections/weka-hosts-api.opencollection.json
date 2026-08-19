@@ -1,0 +1,356 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Hosts API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all hosts - deprecated, use GET /containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/hosts"
+          },
+          "docs": "Get all hosts - deprecated, use GET /containers"
+        },
+        {
+          "info": {
+            "name": "Add host to cluster  - deprecated, use POST /containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add host to cluster  - deprecated, use POST /containers"
+        },
+        {
+          "info": {
+            "name": "Get single host - deprecated, use GET /containers/{uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/hosts/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ]
+          },
+          "docs": "Get single host - deprecated, use GET /containers/{uid}"
+        },
+        {
+          "info": {
+            "name": "Configure host - Need to apply host after - deprecated use PUT /containers/{uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/hosts/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configure host - Need to apply host after - deprecated use PUT /containers/{uid}"
+        },
+        {
+          "info": {
+            "name": "Remove host from cluster - deprecated use DELETE /containers/{uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/hosts/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ]
+          },
+          "docs": "Remove host from cluster - deprecated use DELETE /containers/{uid}"
+        },
+        {
+          "info": {
+            "name": "Apply hosts - deprecated use POST /containers/apply",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/apply",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Apply hosts - deprecated use POST /containers/apply"
+        },
+        {
+          "info": {
+            "name": "Apply host - deprecated, use /containers/{uid}/apply",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/:uid/apply",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ]
+          },
+          "docs": "Apply host - deprecated, use /containers/{uid}/apply"
+        },
+        {
+          "info": {
+            "name": "Clear host last failure - deprecated, use DELETE /containers/lastFailureReason/{uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/hosts/lastFailureReason/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ]
+          },
+          "docs": "Clear host last failure - deprecated, use DELETE /containers/lastFailureReason/{uid}"
+        },
+        {
+          "info": {
+            "name": "Get host resources - deprecated, use GET /containers/{uid}/resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/hosts/:uid/resources",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "resource type can be Staging or Stable (Staging if empty)."
+              }
+            ]
+          },
+          "docs": "Get host resources - deprecated, use GET /containers/{uid}/resources"
+        },
+        {
+          "info": {
+            "name": "Activate hosts - deprecated, use POST /containers/activate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/activate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activate hosts - deprecated, use POST /containers/activate"
+        },
+        {
+          "info": {
+            "name": "Activate host - deprecated, use POST /containers/{uid}/activate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/:uid/activate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ]
+          },
+          "docs": "Activate host - deprecated, use POST /containers/{uid}/activate"
+        },
+        {
+          "info": {
+            "name": "Deactivate hosts - deprecated, use POST /containers/deactivate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/deactivate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deactivate hosts - deprecated, use POST /containers/deactivate"
+        },
+        {
+          "info": {
+            "name": "Deactivate host - deprecated, use POST /containers/{uid}/deactivate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/:uid/deactivate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ]
+          },
+          "docs": "Deactivate host - deprecated, use POST /containers/{uid}/deactivate"
+        },
+        {
+          "info": {
+            "name": "Get all hosts network - deprecated, use GET /containers/netdevs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/hosts/netdevs"
+          },
+          "docs": "Get all hosts network - deprecated, use GET /containers/netdevs"
+        },
+        {
+          "info": {
+            "name": "Get host network - deprecated, use GET /containers/{uid}/netdevs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/hosts/:uid/netdevs",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ]
+          },
+          "docs": "Get host network - deprecated, use GET /containers/{uid}/netdevs"
+        },
+        {
+          "info": {
+            "name": "Create host network - Need to apply host after - deprecated, use POST /containers/{uid}/netdevs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/:uid/netdevs",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create host network - Need to apply host after - deprecated, use POST /containers/{uid}/netdevs"
+        },
+        {
+          "info": {
+            "name": "Remove host network - Need to apply host after - deprecated, use DELETE /containers/{uid}/netdevs/{netdev_uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/hosts/:uid/netdevs/:netdev_uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              },
+              {
+                "name": "netdev_uid",
+                "value": "",
+                "type": "path",
+                "description": "network device uid."
+              },
+              {
+                "name": "apply_host",
+                "value": "false",
+                "type": "query",
+                "description": "Apply the host after this change."
+              }
+            ]
+          },
+          "docs": "Remove host network - Need to apply host after - deprecated, use DELETE /containers/{uid}/netdevs/{netdev_uid}"
+        },
+        {
+          "info": {
+            "name": "get hosts infos from IPs - deprecated, use POST /containers/infos",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/hosts/infos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "get hosts infos from IPs - deprecated, use POST /containers/infos"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

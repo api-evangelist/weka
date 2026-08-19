@@ -1,0 +1,354 @@
+{
+  "item": [
+    {
+      "id": "71662fd2-bab5-4746-8ae0-0475a0974a70",
+      "name": "Nodes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca417c52-257c-4f59-914e-3a84d95b3967",
+          "name": "Get all nodes - deprecated, use GET /processes",
+          "request": {
+            "name": "Get all nodes - deprecated, use GET /processes",
+            "description": {},
+            "url": {
+              "path": [
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "580ce7a5-1622-4266-ac3d-11f5ff0908e2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"NodeId<61>\",\n      \"dpdk_port_info\": [\n        \"info\",\n        \"info\"\n      ],\n      \"network_mode\": \"DPDK\",\n      \"mode\": \"backend\",\n      \"container_name\": \"default\",\n      \"lowest_node_path_issue\": \"NodeId<INVALID>\",\n      \"last_fencing_reason\": \"INVALID\",\n      \"uid\": \"2689d12c-5b47-d867-6af4-928dfa152a45\",\n      \"hostname\": \"ip-172-31-38-126.support.local\",\n      \"ips\": [\n        \"172.31.41.173\",\n        \"172.31.41.173\"\n      ],\n      \"slot\": 1,\n      \"is_blacklisted\": false,\n      \"roles\": [\n        \"FRONTEND\",\n        \"FRONTEND\"\n      ],\n      \"missing_links\": {\n        \"missing\": 0,\n        \"self_report\": {\n          \"up\": {\n            \"missing\": 0,\n            \"synced\": 23,\n            \"required\": 23\n          },\n          \"joining\": {\n            \"missing\": 0,\n            \"synced\": 0,\n            \"required\": 0\n          },\n          \"syncing\": {\n            \"missing\": 0,\n            \"synced\": 0,\n            \"required\": 0\n          },\n          \"total\": 23\n        },\n        \"others_report\": {\n          \"syncing_reporters\": [\n            \"report\",\n            \"report\"\n          ],\n          \"up_reporters\": [\n            \"report\",\n            \"report\"\n          ],\n          \"joining_missing\": 0,\n          \"up_missing\": 0,\n          \"syncing_missing\": 0,\n          \"missing\": 0,\n          \"joining_reporters\": [\n            \"report\",\n            \"report\"\n          ],\n          \"reporters\": [\n            \"report\",\n            \"report\"\n          ]\n        }\n      },\n      \"is_ucx\": false,\n      \"cpu_is_dedicated\": true,\n      \"sw_version\": \"4.0.1.5908\",\n      \"cpu_core_id\": 1,\n      \"host_id\": \"HostId<3>\",\n      \"cpu_numa_node\": 0,\n      \"gds_mode\": \"mode\",\n      \"cpu_socket_id\": 0,\n      \"rdma_mode\": \"mode\",\n      \"memory\": 1476395008,\n      \"up_since\": \"2022-07-27T07:51:54.782895Z\",\n      \"trace_history_in_seconds\": 6367,\n      \"leadership_role\": \"role\",\n      \"mgmt_ips\": [\n        \"172.31.38.126\",\n        \"172.31.38.126\"\n      ],\n      \"last_fencing_time\": \"2021-11-22T08:44:15.725096Z\",\n      \"status\": \"UP\",\n      \"cpu_model\": \"Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz\",\n      \"dpdk_ip\": \"172.31.41.173\",\n      \"ucx_mode\": \"mode\",\n      \"dpdk_socket_info\": [\n        \"info\",\n        \"info\"\n      ],\n      \"mgmt_port\": 14000,\n      \"last_join_reject_reason\": \"NONE\",\n      \"is_dpdk\": true,\n      \"cpu_id\": 1\n    },\n    {\n      \"id\": \"NodeId<61>\",\n      \"dpdk_port_info\": [\n        \"info\",\n        \"info\"\n      ],\n      \"network_mode\": \"DPDK\",\n      \"mode\": \"backend\",\n      \"container_name\": \"default\",\n      \"lowest_node_path_issue\": \"NodeId<INVALID>\",\n      \"last_fencing_reason\": \"INVALID\",\n      \"uid\": \"2689d12c-5b47-d867-6af4-928dfa152a45\",\n      \"hostname\": \"ip-172-31-38-126.support.local\",\n      \"ips\": [\n        \"172.31.41.173\",\n        \"172.31.41.173\"\n      ],\n      \"slot\": 1,\n      \"is_blacklisted\": false,\n      \"roles\": [\n        \"FRONTEND\",\n        \"FRONTEND\"\n      ],\n      \"missing_links\": {\n        \"missing\": 0,\n        \"self_report\": {\n          \"up\": {\n            \"missing\": 0,\n            \"synced\": 23,\n            \"required\": 23\n          },\n          \"joining\": {\n            \"missing\": 0,\n            \"synced\": 0,\n            \"required\": 0\n          },\n          \"syncing\": {\n            \"missing\": 0,\n            \"synced\": 0,\n            \"required\": 0\n          },\n          \"total\": 23\n        },\n        \"others_report\": {\n          \"syncing_reporters\": [\n            \"report\",\n            \"report\"\n          ],\n          \"up_reporters\": [\n            \"report\",\n            \"report\"\n          ],\n          \"joining_missing\": 0,\n          \"up_missing\": 0,\n          \"syncing_missing\": 0,\n          \"missing\": 0,\n          \"joining_reporters\": [\n            \"report\",\n            \"report\"\n          ],\n          \"reporters\": [\n            \"report\",\n            \"report\"\n          ]\n        }\n      },\n      \"is_ucx\": false,\n      \"cpu_is_dedicated\": true,\n      \"sw_version\": \"4.0.1.5908\",\n      \"cpu_core_id\": 1,\n      \"host_id\": \"HostId<3>\",\n      \"cpu_numa_node\": 0,\n      \"gds_mode\": \"mode\",\n      \"cpu_socket_id\": 0,\n      \"rdma_mode\": \"mode\",\n      \"memory\": 1476395008,\n      \"up_since\": \"2022-07-27T07:51:54.782895Z\",\n      \"trace_history_in_seconds\": 6367,\n      \"leadership_role\": \"role\",\n      \"mgmt_ips\": [\n        \"172.31.38.126\",\n        \"172.31.38.126\"\n      ],\n      \"last_fencing_time\": \"2021-11-22T08:44:15.725096Z\",\n      \"status\": \"UP\",\n      \"cpu_model\": \"Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz\",\n      \"dpdk_ip\": \"172.31.41.173\",\n      \"ucx_mode\": \"mode\",\n      \"dpdk_socket_info\": [\n        \"info\",\n        \"info\"\n      ],\n      \"mgmt_port\": 14000,\n      \"last_join_reject_reason\": \"NONE\",\n      \"is_dpdk\": true,\n      \"cpu_id\": 1\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3390592b-11f5-457e-84a5-9cd89bbdb9e1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c7eb4f81-3dbd-49f2-aac7-657c96572c08",
+          "name": "Get node - deprecated, use GET /processes/{uid}",
+          "request": {
+            "name": "Get node - deprecated, use GET /processes/{uid}",
+            "description": {},
+            "url": {
+              "path": [
+                "nodes",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Node uid."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86d71948-9678-4939-a602-81f1ca0eb44d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Node uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"NodeId<61>\",\n    \"dpdk_port_info\": [\n      \"info\",\n      \"info\"\n    ],\n    \"network_mode\": \"DPDK\",\n    \"mode\": \"backend\",\n    \"container_name\": \"default\",\n    \"lowest_node_path_issue\": \"NodeId<INVALID>\",\n    \"last_fencing_reason\": \"INVALID\",\n    \"uid\": \"2689d12c-5b47-d867-6af4-928dfa152a45\",\n    \"hostname\": \"ip-172-31-38-126.support.local\",\n    \"ips\": [\n      \"172.31.41.173\",\n      \"172.31.41.173\"\n    ],\n    \"slot\": 1,\n    \"is_blacklisted\": false,\n    \"roles\": [\n      \"FRONTEND\",\n      \"FRONTEND\"\n    ],\n    \"missing_links\": {\n      \"missing\": 0,\n      \"self_report\": {\n        \"up\": {\n          \"missing\": 0,\n          \"synced\": 23,\n          \"required\": 23\n        },\n        \"joining\": {\n          \"missing\": 0,\n          \"synced\": 0,\n          \"required\": 0\n        },\n        \"syncing\": {\n          \"missing\": 0,\n          \"synced\": 0,\n          \"required\": 0\n        },\n        \"total\": 23\n      },\n      \"others_report\": {\n        \"syncing_reporters\": [\n          \"report\",\n          \"report\"\n        ],\n        \"up_reporters\": [\n          \"report\",\n          \"report\"\n        ],\n        \"joining_missing\": 0,\n        \"up_missing\": 0,\n        \"syncing_missing\": 0,\n        \"missing\": 0,\n        \"joining_reporters\": [\n          \"report\",\n          \"report\"\n        ],\n        \"reporters\": [\n          \"report\",\n          \"report\"\n        ]\n      }\n    },\n    \"is_ucx\": false,\n    \"cpu_is_dedicated\": true,\n    \"sw_version\": \"4.0.1.5908\",\n    \"cpu_core_id\": 1,\n    \"host_id\": \"HostId<3>\",\n    \"cpu_numa_node\": 0,\n    \"gds_mode\": \"mode\",\n    \"cpu_socket_id\": 0,\n    \"rdma_mode\": \"mode\",\n    \"memory\": 1476395008,\n    \"up_since\": \"2022-07-27T07:51:54.782895Z\",\n    \"trace_history_in_seconds\": 6367,\n    \"leadership_role\": \"role\",\n    \"mgmt_ips\": [\n      \"172.31.38.126\",\n      \"172.31.38.126\"\n    ],\n    \"last_fencing_time\": \"2021-11-22T08:44:15.725096Z\",\n    \"status\": \"UP\",\n    \"cpu_model\": \"Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz\",\n    \"dpdk_ip\": \"172.31.41.173\",\n    \"ucx_mode\": \"mode\",\n    \"dpdk_socket_info\": [\n      \"info\",\n      \"info\"\n    ],\n    \"mgmt_port\": 14000,\n    \"last_join_reject_reason\": \"NONE\",\n    \"is_dpdk\": true,\n    \"cpu_id\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36756042-a800-4131-b649-bf17edfd7f8c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Node uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fef3342-d43c-4bb1-a059-10208c58879c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nodes",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Node uid."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "785a70f3-f107-4967-87b7-0008d60b2d76",
+    "name": "@weka-api Active Directory Nodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

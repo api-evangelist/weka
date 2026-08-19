@@ -1,0 +1,77 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Servers API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get cluster server inventory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/servers",
+            "params": [
+              {
+                "name": "role",
+                "value": "BACKEND,NFS",
+                "type": "query",
+                "description": "Filter servers by assigned role (for example, BACKEND, CLIENT, NFS, SMB, S3).<br> Multiple roles can be specified to retrieve servers matching any of the provided values."
+              }
+            ]
+          },
+          "docs": "Returns a comprehensive list of all servers within the cluster.<br> Supports optional filtering by server role to narrow results to specific server types or functions within the cluster topology."
+        },
+        {
+          "info": {
+            "name": "Get individual server information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/servers/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "Unique identifier for the server in UUID format."
+              }
+            ]
+          },
+          "docs": "Returns detailed configuration, status, and operational information for a specific server identified by its unique identifier."
+        },
+        {
+          "info": {
+            "name": "Run action on multiple servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/servers/requestedAction",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiates a specified action across one or more servers in the cluster.<br> This endpoint allows administrators to perform coordinated operations such as stopping, restarting, or applying<br> resource configuration changes to containers running on the targeted servers. <br> Actions are queued and executed based on cluster policies and operational constraints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

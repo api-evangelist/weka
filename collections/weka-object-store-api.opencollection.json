@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Object store API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Object store",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update a specific object store",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/objectStores/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the object store to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the connection details for an existing object store."
+        },
+        {
+          "info": {
+            "name": "Get OBS bucket capacity utilization information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/objectStores/capacities",
+            "params": [
+              {
+                "name": "filesystem",
+                "value": "",
+                "type": "query",
+                "description": "Optional filesystem name to filter results."
+              },
+              {
+                "name": "force_fresh",
+                "value": "",
+                "type": "query",
+                "description": "Force refresh of capacity data."
+              }
+            ]
+          },
+          "docs": "Retrieves capacity usage details for object store buckets. This includes total consumed bytes, active user data, and reclaimable space percentages per filesystem. Use this endpoint to monitor tiered storage health and trigger data refreshes for accurate capacity reporting."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,372 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Quota API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Quota",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List directory quotas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:uid/quota",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem."
+              },
+              {
+                "name": "next_token",
+                "value": "",
+                "type": "query",
+                "description": "Token to get the next page."
+              }
+            ]
+          },
+          "docs": "Returns all quotas for directories within a specific filesystem."
+        },
+        {
+          "info": {
+            "name": "List default directory quotas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:uid/quota/default",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem."
+              }
+            ]
+          },
+          "docs": "Returns all default quotas for directories within a specific filesystem."
+        },
+        {
+          "info": {
+            "name": "Get directory quota details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:uid/quota/:inode_id",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem."
+              },
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the directory's inode."
+              }
+            ]
+          },
+          "docs": "Returns the quota parameters for a specific directory."
+        },
+        {
+          "info": {
+            "name": "Set a quota for a directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/fileSystems/:uid/quota/:inode_id",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              },
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "Directory's inode ID."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hard_limit_bytes",
+                "value": "",
+                "type": "query",
+                "description": "0 for unlimited."
+              },
+              {
+                "name": "soft_limit_bytes",
+                "value": "",
+                "type": "query",
+                "description": "0 for unlimited."
+              },
+              {
+                "name": "grace_seconds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Sets a quota for a directory. If Data Service is not enabled, use the CLI to set a quota for a non-empty directory."
+        },
+        {
+          "info": {
+            "name": "Update directory quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "/api/v2/fileSystems/:uid/quota/:inode_id",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              },
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "Directory's inode ID."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hard_limit_bytes",
+                "value": "",
+                "type": "query",
+                "description": "0 for unlimited."
+              },
+              {
+                "name": "soft_limit_bytes",
+                "value": "",
+                "type": "query",
+                "description": "0 for unlimited."
+              },
+              {
+                "name": "grace_seconds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Modifies specific settings, such as the grace period or limits, for an existing directory quota."
+        },
+        {
+          "info": {
+            "name": "Remove directory quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystems/:uid/quota/:inode_id",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              },
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "Directory's inode ID."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Removes a quota from a specific directory. If the Data Service is not enabled, use the CLI to remove a quota from a non-empty directory."
+        },
+        {
+          "info": {
+            "name": "Set or update a default directory quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/fileSystems/quota/:inode_id",
+            "params": [
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "Directory's inode ID."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "hard_limit_bytes",
+                "value": "",
+                "type": "query",
+                "description": "0 for unlimited."
+              },
+              {
+                "name": "soft_limit_bytes",
+                "value": "",
+                "type": "query",
+                "description": "0 for unlimited."
+              },
+              {
+                "name": "grace_seconds",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Establishes or changes the default quota that applies to all newly created subdirectories within a specified parent directory."
+        },
+        {
+          "info": {
+            "name": "Remove default quota from a directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystems/quota/:inode_id/default",
+            "params": [
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "Directory's inode ID."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Removes the default quota from a directory, preventing new subdirectories from inheriting its settings."
+        },
+        {
+          "info": {
+            "name": "Resolve path to inode ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:uid/resolvePath",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Path within the filesystem."
+              }
+            ]
+          },
+          "docs": "Returns the unique inode ID for a specified file or directory path."
+        },
+        {
+          "info": {
+            "name": "Get filesystem quota",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/quota",
+            "params": [
+              {
+                "name": "type",
+                "value": "directory",
+                "type": "query",
+                "description": "Quota type"
+              },
+              {
+                "name": "uid",
+                "value": "uid_string",
+                "type": "query",
+                "description": "Filesystem uid"
+              },
+              {
+                "name": "next_token",
+                "value": "",
+                "type": "query",
+                "description": "Token to get the next page"
+              }
+            ]
+          },
+          "docs": "Get filesystem quota"
+        },
+        {
+          "info": {
+            "name": "Get a batch of quotas",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/quota/batch",
+            "params": [
+              {
+                "name": "inode_ids",
+                "value": "",
+                "type": "query",
+                "description": "List of quotas to query"
+              }
+            ]
+          },
+          "docs": "Get a batch of quotas"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

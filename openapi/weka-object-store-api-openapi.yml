@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Object store API'
   version: '5.1'
@@ -192,6 +192,23 @@ paths:
           $ref: '#/components/responses/401'
 components:
   responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '404':
       description: Not Found
       content:
@@ -201,14 +218,6 @@ components:
               message:
                 type: string
                 example: error message
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -232,15 +241,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
   securitySchemes:
     bearerAuth:
       type: http

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory License API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "License",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get license details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/license"
+          },
+          "docs": "Returns details about the configured cluster license, including resource usage and validity."
+        },
+        {
+          "info": {
+            "name": "Set license",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/license",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Installs a new cluster license for continued operation. The license is a text-based file generated via get.weka.io for a specific cluster."
+        },
+        {
+          "info": {
+            "name": "Remove license",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/license"
+          },
+          "docs": "Deactivates the existing license and returns the cluster to unlicensed mode."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

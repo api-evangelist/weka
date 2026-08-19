@@ -1,0 +1,474 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Filesystem API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Filesystem",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all filesystems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems",
+            "params": [
+              {
+                "name": "force_fresh",
+                "value": "",
+                "type": "query",
+                "description": "Refresh the capacities to ensure they are current."
+              }
+            ]
+          },
+          "docs": "Returns a list of all filesystems in the cluster."
+        },
+        {
+          "info": {
+            "name": "Create filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystems",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new filesystem in the cluster."
+        },
+        {
+          "info": {
+            "name": "Get filesystem details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem."
+              },
+              {
+                "name": "force_fresh",
+                "value": "",
+                "type": "query",
+                "description": "Refresh the capacities to ensure they are current."
+              }
+            ]
+          },
+          "docs": "Returns detailed information about a specific filesystem, such as its size, quota, and usage."
+        },
+        {
+          "info": {
+            "name": "Update a filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/fileSystems/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the settings of an existing filesystem."
+        },
+        {
+          "info": {
+            "name": "Remove a filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystems/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem."
+              },
+              {
+                "name": "purge_from_obs",
+                "value": "",
+                "type": "query",
+                "description": "Delete the filesystem's objects from Object Storage, making all uploaded snapshots unusable."
+              }
+            ]
+          },
+          "docs": "Removes a specified filesystem and its data from the cluster."
+        },
+        {
+          "info": {
+            "name": "Obtain mount token for filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystems/:uid/mountToken",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem uid"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a long-lived authentication token to mount a specific filesystem. This token enables persistent access and supports controlled permissions, such as read-only access or defined expiration periods."
+        },
+        {
+          "info": {
+            "name": "Attach an object store bucket (Deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystems/:uid/objectStores",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint is deprecated. Use POST /fileSystems/{uid}/objectStoreBuckets instead."
+        },
+        {
+          "info": {
+            "name": "Attach an object store bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystems/:uid/objectStoreBuckets",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the filesystem."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Links an object store bucket to a filesystem, allowing tiered data access."
+        },
+        {
+          "info": {
+            "name": "Detach an object store bucket (Deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystems/:uid/objectStores/:obs_uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              },
+              {
+                "name": "obs_uid",
+                "value": "",
+                "type": "path",
+                "description": "Object store system UID."
+              }
+            ]
+          },
+          "docs": "This endpoint is deprecated. Use DELETE /fileSystems/{uid}/objectStoreBuckets/{obs_uid} instead."
+        },
+        {
+          "info": {
+            "name": "Get path by inode ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:inode_id/getPath",
+            "params": [
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the inode."
+              }
+            ]
+          },
+          "docs": "Returns the full path of a file or directory using its inode ID."
+        },
+        {
+          "info": {
+            "name": "Get filesystem by inode ID (Deprecated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:inode_id/resolve",
+            "params": [
+              {
+                "name": "inode_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the inode."
+              }
+            ]
+          },
+          "docs": "This endpoint is deprecated. Use GET /fileSystems/{inode_id}/getPath instead."
+        },
+        {
+          "info": {
+            "name": "Detach object store bucket from filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystems/:uid/objectStoreBuckets/:obs_uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              },
+              {
+                "name": "obs_uid",
+                "value": "",
+                "type": "path",
+                "description": "Object store system UID."
+              }
+            ]
+          },
+          "docs": "Disconnects an object store bucket from a filesystem, separating their data access."
+        },
+        {
+          "info": {
+            "name": "Download filesystem from object store",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystems/download",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new filesystem based on a saved snapshot stored in an object store bucket."
+        },
+        {
+          "info": {
+            "name": "Get thin-provisioning reserve status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/thinProvisionReserve"
+          },
+          "docs": "Returns the existing allocated thin-provisioning space reserved for your organization within the cluster."
+        },
+        {
+          "info": {
+            "name": "Set thin-provisioning reserve",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/fileSystems/thinProvisionReserve/:org_uid",
+            "params": [
+              {
+                "name": "org_uid",
+                "value": "",
+                "type": "path",
+                "description": "Organization UID to set the thin-provisioning space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the thin-provisioning space for your organization's filesystems."
+        },
+        {
+          "info": {
+            "name": "Remove thin-provisioning reserve",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystems/thinProvisionReserve/:org_uid",
+            "params": [
+              {
+                "name": "org_uid",
+                "value": "",
+                "type": "path",
+                "description": "Organization UID."
+              }
+            ]
+          },
+          "docs": "Removes the existing reserved thin-provisioning space allocated for your organization's filesystems."
+        },
+        {
+          "info": {
+            "name": "Get security policies for a filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/:uid/securityPolicy",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              }
+            ]
+          },
+          "docs": "Returns a list of all security policies attached to a specific filesystem."
+        },
+        {
+          "info": {
+            "name": "Set filesystem security policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/fileSystems/:uid/securityPolicy",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces all security policies on a filesystem with a new, specified set of policies."
+        },
+        {
+          "info": {
+            "name": "Remove all security policies from a filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/fileSystems/:uid/securityPolicy",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UID."
+              }
+            ]
+          },
+          "docs": "Detaches all security policies from a specific filesystem."
+        },
+        {
+          "info": {
+            "name": "Attach security policies to a filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystems/:uid/securityPolicy/attach",
+            "params": [
+              {
+                "name": "uid",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "path",
+                "description": "Filesystem UID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds one or more security policies to a filesystem's existing policy list."
+        },
+        {
+          "info": {
+            "name": "Detach security policies from a filesystem",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/fileSystems/:uid/securityPolicy/detach",
+            "params": [
+              {
+                "name": "uid",
+                "value": "00000000-0000-0000-0000-000000000000",
+                "type": "path",
+                "description": "Filesystem UID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes one or more specified security policies from a filesystem."
+        },
+        {
+          "info": {
+            "name": "Get available space in an organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/fileSystems/freeSpaceInOrg"
+          },
+          "docs": "Returns the total unprovisioned and reclaimable SSD space available for new or existing filesystems within the user's organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

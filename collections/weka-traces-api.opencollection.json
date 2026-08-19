@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Traces API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Traces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get trace configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/traces"
+          },
+          "docs": "Returns the current trace collection settings, including status and storage limits for both server and client traces."
+        },
+        {
+          "info": {
+            "name": "Configure trace collection settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/traces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates trace collection parameters, including storage allocation limits and free space thresholds for server and client trace data."
+        },
+        {
+          "info": {
+            "name": "Reset trace configuration to defaults",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/traces"
+          },
+          "docs": "Restores all trace collection settings to their factory default values, including storage limits and collection status."
+        },
+        {
+          "info": {
+            "name": "Get trace freeze period",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/traces/freeze"
+          },
+          "docs": "Returns the configured freeze period during which trace data is preserved and protected from automatic deletion to support troubleshooting and investigation activities."
+        },
+        {
+          "info": {
+            "name": "Set trace freeze period",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/traces/freeze",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures a time range during which trace data is preserved and protected from deletion. This ensures diagnostic data remains available for analysis and troubleshooting of specific incidents or issues."
+        },
+        {
+          "info": {
+            "name": "Clear trace freeze period",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/traces/freeze"
+          },
+          "docs": "Removes the active trace freeze configuration and allows frozen trace data to be subject to normal retention policies. This action clears all freeze period settings and releases preserved traces."
+        },
+        {
+          "info": {
+            "name": "Set trace verbosity level",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/traces/level",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adjusts the granularity of trace data collection. LOW level captures essential information suitable for routine troubleshooting with minimal storage impact. HIGH level captures comprehensive diagnostic details required for complex issue analysis and root cause investigation."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

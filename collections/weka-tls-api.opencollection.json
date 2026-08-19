@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory TLS API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "TLS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get TLS status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tls"
+          },
+          "docs": "Returns the current TLS configuration, including certificate details and status."
+        },
+        {
+          "info": {
+            "name": "Configure TLS certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/tls",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads and enables a new TLS certificate and key for the cluster."
+        },
+        {
+          "info": {
+            "name": "Disable TLS certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/tls"
+          },
+          "docs": "Removes the current TLS certificate configuration from the cluster."
+        },
+        {
+          "info": {
+            "name": "Get TLS certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/tls/certificate"
+          },
+          "docs": "Returns the full TLS certificate configured for the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

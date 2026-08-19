@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Telemetry API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Telemetry",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get telemetry configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/telemetry"
+          },
+          "docs": "Returns the cluster-wide telemetry configuration, including audit and forwarding settings."
+        },
+        {
+          "info": {
+            "name": "Update telemetry configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/telemetry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies cluster-wide telemetry settings, including enabling/disabling audit logging and configuring tracked operations."
+        },
+        {
+          "info": {
+            "name": "Get all telemetry exports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/telemetry/exports"
+          },
+          "docs": "Returns all configured export destinations for telemetry data (for example, Splunk, S3, Kafka)."
+        },
+        {
+          "info": {
+            "name": "Create a telemetry export",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/telemetry/exports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures a new export destination to forward telemetry events to an external system."
+        },
+        {
+          "info": {
+            "name": "Get a telemetry export",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/telemetry/exports/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique export identifier (UUID format)."
+              }
+            ]
+          },
+          "docs": "Returns the configuration and status of a specific export destination."
+        },
+        {
+          "info": {
+            "name": "Update a telemetry export",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/telemetry/exports/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique export identifier (UUID format)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the configuration of an existing export destination (for example, endpoint URL, authentication credentials)."
+        },
+        {
+          "info": {
+            "name": "Delete a telemetry export",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/telemetry/exports/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique export identifier (UUID format)."
+              }
+            ]
+          },
+          "docs": "Removes an export destination, stopping all telemetry forwarding to that endpoint."
+        },
+        {
+          "info": {
+            "name": "Attach data sources to export",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/telemetry/exports/:uid/sources",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique export identifier (UUID format)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associates one or more data sources (for example, 'Audit') with an export destination to begin forwarding that data type."
+        },
+        {
+          "info": {
+            "name": "Detach data sources from export",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/telemetry/exports/:uid/sources",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Unique export identifier (UUID format)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes one or more data sources from an export destination, stopping the forwarding of that data type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

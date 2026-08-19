@@ -1,0 +1,1478 @@
+{
+  "item": [
+    {
+      "id": "fb62e3ed-f3dc-4fc4-86c8-0c8d80344816",
+      "name": "Alerts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dc34c309-a7b6-4ae2-b75d-8e74896ca58c",
+          "name": "Get all cluster alerts",
+          "request": {
+            "name": "Get all cluster alerts",
+            "description": {
+              "content": "Returns a list of active cluster alerts to monitor the system's health. The list includes silenced alerts and can be filtered by severity level.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "severity",
+                  "value": "<string>",
+                  "description": "Filters alerts by a minimum severity level, including alerts of equal or higher severity.<br>The default is warning. Accepted values are debug, warning, minor, major, or critical."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e468491-9428-4ead-b199-4a8fb381ac7b",
+              "name": "A successful response returns a list of alert objects.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"AdminDefaultPassword\",\n      \"muted\": true,\n      \"fmt\": \"The admin password is still set to factory default, it should to be changed to ensure only authorized users can access the cluster\",\n      \"action\": \"Change the admin user password to using 'weka user passwd' to ensure only authorized users can access the cluster\",\n      \"title\": \"Default Password In Use\",\n      \"params\": {}\n    },\n    {\n      \"type\": \"AdminDefaultPassword\",\n      \"muted\": true,\n      \"fmt\": \"The admin password is still set to factory default, it should to be changed to ensure only authorized users can access the cluster\",\n      \"action\": \"Change the admin user password to using 'weka user passwd' to ensure only authorized users can access the cluster\",\n      \"title\": \"Default Password In Use\",\n      \"params\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e65e52e-b177-46f5-8a5a-ca3fbb7359b4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "severity",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9b55d43f-25dd-47a1-809e-0cab3e373219",
+          "name": "List all possible alert types",
+          "request": {
+            "name": "List all possible alert types",
+            "description": {
+              "content": "Returns a comprehensive list of all possible alert types that the system can generate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3142891-99da-49f1-b925-68447c6e22e1",
+              "name": "A successful response returns a list of all possible alert types.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    \"ClusterIsUpgrading\",\n    \"DataProtection\",\n    \"NodeDisconnected\",\n    \"NodeTieringConnectivity\",\n    \"DriveDown\",\n    \"DriveEndurancePercentageUsed\",\n    \"DriveEnduranceSparesRemaining\",\n    \"DriveNeedsPhaseout\",\n    \"JumboConnectivity\",\n    \"BucketHasNoQuorum\",\n    \"BucketUnresponsive\",\n    \"HangingIos\",\n    \"NotEnoughActiveDrives\",\n    \"PartiallyConnectedNode\",\n    \"NodeNetworkUnstable\",\n    \"NetworkInterfaceLinkDown\",\n    \"BondInterfaceCompromised\",\n    \"IPConflictDetected\",\n    \"ChokingDetected\",\n    \"PerformanceDegradedLowRAM\",\n    \"ApproachingClientsUnavailability\",\n    \"ClockSkew\",\n    \"AgentNotRunning\",\n    \"OfedVersions\",\n    \"DedicatedWatchdog\",\n    \"BackendNumaBalancingEnabled\",\n    \"ClientNumaBalancingEnabled\",\n    \"CloudHealth\",\n    \"AdminDefaultPassword\",\n    \"NoClusterLicense\",\n    \"LicenseError\",\n    \"HighDrivesCapacity\",\n    \"NegativeUnprovisionedCapacity\",\n    \"FilesystemHasTooManyFiles\",\n    \"MismatchedDriveFailureDomain\",\n    \"KMSError\",\n    \"AutoRemoveTimeoutTooLow\",\n    \"NodeBlacklisted\",\n    \"UdpModePerformanceWarning\",\n    \"ResourcesNotApplied\",\n    \"PartialConnectivityTrackingDisabled\",\n    \"TLSCertificateExpiresSoon\",\n    \"TLSCertificateExpired\",\n    \"ClusterInitializationError\",\n    \"TracesDisabled\",\n    \"ManualOverridesActive\",\n    \"NodeRDMANotActive\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c82ff2ce-7dc9-45ff-8b07-ab3c239af0fd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d4c3388-d0c4-416d-9153-836700bed803",
+          "name": "List alert descriptions and recommended actions",
+          "request": {
+            "name": "List alert descriptions and recommended actions",
+            "description": {
+              "content": "Returns detailed descriptions and recommended troubleshooting actions for all possible alert types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                "description"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fe2876d-3306-48d5-aea5-d15f2761d4b9",
+              "name": "A successful response returns a list of alert types with their descriptions and recommended actions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "description"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"ExampleAlert\",\n      \"action\": \"Disable this alert by running the set_example_alert_off manhole\",\n      \"title\": \"Example Alert\"\n    },\n    {\n      \"type\": \"ExampleAlert\",\n      \"action\": \"Disable this alert by running the set_example_alert_off manhole\",\n      \"title\": \"Example Alert\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0b303ee-9daa-4469-842d-8aa64760fd8d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "description"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5919f544-2d8d-49bc-93bd-141522e3e665",
+          "name": "List all active alert mute rules",
+          "request": {
+            "name": "List all active alert mute rules",
+            "description": {
+              "content": "Returns all currently active alert mute rules. Muted alerts do not generate notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                "muteList"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eab19852-8d6e-443b-b43f-db97e01306a4",
+              "name": "A list of muted alert rules was successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "muteList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"type\": \"ExampleAlert\",\n      \"alert_filter_type\": \"FILTER_TYPE_HOSTNAME\",\n      \"mute_time_remaining\": 604800,\n      \"description\": \"Alert is muted for the whole system\",\n      \"mute_reason\": \"Maintenance window\"\n    },\n    {\n      \"type\": \"ExampleAlert\",\n      \"alert_filter_type\": \"FILTER_TYPE_HOSTNAME\",\n      \"mute_time_remaining\": 604800,\n      \"description\": \"Alert is muted for the whole system\",\n      \"mute_reason\": \"Maintenance window\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd482eaa-f62d-4094-8264-b974380cfff8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    "muteList"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ed4b43b-9c6e-4f8e-a388-cabc85c67136",
+          "name": "Mute alerts by type",
+          "request": {
+            "name": "Mute alerts by type",
+            "description": {
+              "content": "Creates a rule to temporarily mute a specific type of alert.<br> This is useful for preventing notifications during maintenance or for known, non-critical issues.<br> The mute can be applied globally to an alert type or filtered to specific servers, containers, or processes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":alert_type",
+                "mute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alert_type",
+                  "description": "(Required) The type of alert to silence. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"duration\": 604800,\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "070c6327-8e9d-4d06-9886-8c6646e0e898",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "mute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) The type of alert to silence. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"duration\": 604800,\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d63dd1d-4879-4ada-90a8-cb445c4dbbe9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "mute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) The type of alert to silence. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"duration\": 604800,\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7042b11-101b-451b-adea-3a2294d76a07",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "mute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) The type of alert to silence. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"duration\": 604800,\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"comment\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15674f29-0228-4c7a-af1c-0617df7e59c2",
+          "name": "Add parameters to alert mute",
+          "request": {
+            "name": "Add parameters to alert mute",
+            "description": {
+              "content": "Expands the scope of an existing alert mute by adding specific processes, containers, or servers. This action allows for granular suppression of notifications for a particular alert type without modifying the entire entry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":alert_type",
+                "muteAdd"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alert_type",
+                  "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef3fed3d-7da5-4388-b5d6-a7fb57f0199e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "muteAdd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f4569d0-b01e-4dc2-8e3d-9289b6bb42d4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "muteAdd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f448281-a5dc-439c-89dd-2ad8a8135d02",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "muteAdd"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57133a68-cd31-4348-984c-4a8413bb3e61",
+          "name": "Remove parameters from alert mute",
+          "request": {
+            "name": "Remove parameters from alert mute",
+            "description": {
+              "content": "Selectively restore alerts for processes, containers, or servers by removing them from an active alert mute. This action reactivates notifications for the specified identifiers while keeping other components under the same alert type silenced.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":alert_type",
+                "muteRemove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alert_type",
+                  "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f9edfe9-fdfd-47ef-935d-52f48d7c757c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "muteRemove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f7d3b43-67e9-44b9-9771-30ad3e16979b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "muteRemove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc34a7c9-1322-4009-a1dd-2642b6358866",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "muteRemove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) Specifies the alert type to mute. Run `weka alerts types` to list all possible types."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"process\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"container\": [\n    \"<number>\",\n    \"<number>\"\n  ],\n  \"hostname\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "123873f2-146e-42eb-a9ff-32b885cc313b",
+          "name": "Unmute alerts by type",
+          "request": {
+            "name": "Unmute alerts by type",
+            "description": {
+              "content": "Removes all active mute rules for a specific alert type, causing it to generate notifications again.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":alert_type",
+                "unmute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alert_type",
+                  "description": "(Required) The type of alert to reactivate. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d45b4265-26e2-485a-858b-84efa91e1024",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "unmute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) The type of alert to reactivate. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6c4d7ee-cb97-43da-a20c-2c94049a6163",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "unmute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) The type of alert to reactivate. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a734e572-cc43-4eb5-86bc-f26a94039985",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alert_type",
+                    "unmute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alert_type",
+                      "description": "(Required) The type of alert to reactivate. A list of all possible alert types can be retrieved from the GET /alerts/types endpoint."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cf6d05b0-0fd6-4605-bb93-d3afe21db3fd",
+    "name": "@weka-api Active Directory Alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

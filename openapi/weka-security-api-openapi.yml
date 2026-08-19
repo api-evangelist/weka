@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Security API'
   version: '5.1'
@@ -916,14 +916,6 @@ paths:
           $ref: '#/components/responses/401'
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -933,6 +925,14 @@ components:
               message:
                 type: string
                 example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -966,6 +966,15 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
+    userRole:
+      type: string
+      enum:
+      - ClusterAdmin
+      - TenantAdmin
+      - ReadOnly
+      - Regular
+      - S3
+      - CSI
     securityPolicy:
       type: object
       properties:
@@ -1050,15 +1059,6 @@ components:
         uid:
           type: string
           example: fe98008e-397d-227b-a095-577783714006
-    userRole:
-      type: string
-      enum:
-      - ClusterAdmin
-      - TenantAdmin
-      - ReadOnly
-      - Regular
-      - S3
-      - CSI
   securitySchemes:
     bearerAuth:
       type: http

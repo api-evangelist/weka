@@ -1,0 +1,685 @@
+{
+  "item": [
+    {
+      "id": "e3432662-952e-465e-af73-a2db71212f55",
+      "name": "Cluster",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "efc6bba5-10cc-42ec-86e2-56fcd8d2017d",
+          "name": "Create a cluster",
+          "request": {
+            "name": "Create a cluster",
+            "description": {
+              "content": "Forms a new WEKA cluster from a list of specified servers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cluster"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"hosts_hostnames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"hosts_ips\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"join_secret\": \"<string>\",\n  \"admin_password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea984c38-a0cb-4063-aa02-70c627cdc575",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hosts_hostnames\": [\n    \"host-1\",\n    \"host-2\"\n  ],\n  \"hosts_ips\": [\n    \"<host-ip>\",\n    \"<host-ip2>\"\n  ],\n  \"join_secret\": \"some-secret\",\n  \"admin_password\": \"Admin123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"guid\": \"string\",\n    \"success\": {},\n    \"failures\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a50489ea-8311-4ffb-853c-23636674ba8d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hosts_hostnames\": [\n    \"host-1\",\n    \"host-2\"\n  ],\n  \"hosts_ips\": [\n    \"<host-ip>\",\n    \"<host-ip2>\"\n  ],\n  \"join_secret\": \"some-secret\",\n  \"admin_password\": \"Admin123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7308e1fb-c828-49ff-9af8-fc9aad3980ae",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"hosts_hostnames\": [\n    \"host-1\",\n    \"host-2\"\n  ],\n  \"hosts_ips\": [\n    \"<host-ip>\",\n    \"<host-ip2>\"\n  ],\n  \"join_secret\": \"some-secret\",\n  \"admin_password\": \"Admin123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4aa58994-5d86-43ce-aa17-0e56a33dc1bf",
+          "name": "Update cluster configuration",
+          "request": {
+            "name": "Update cluster configuration",
+            "description": {
+              "content": "Modifies the configuration settings of an existing cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cluster"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster_name\": \"<string>\",\n  \"data_drives\": \"<number>\",\n  \"parity_drives\": \"<number>\",\n  \"scrubber_bytes_per_sec\": \"<number>\",\n  \"hotspare_failure_domains\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "895b0b5f-8aff-4aff-ab7e-67e3c67d2c12",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"new_name\",\n  \"data_drives\": 5,\n  \"parity_drives\": 2,\n  \"scrubber_bytes_per_sec\": 100000000,\n  \"hotspare_failure_domains\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4b8f48f-bce9-461b-b4cc-9bbd4b4562e5",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"new_name\",\n  \"data_drives\": 5,\n  \"parity_drives\": 2,\n  \"scrubber_bytes_per_sec\": 100000000,\n  \"hotspare_failure_domains\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63cbcbee-54da-4175-84cb-8fb47451bc34",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster_name\": \"new_name\",\n  \"data_drives\": 5,\n  \"parity_drives\": 2,\n  \"scrubber_bytes_per_sec\": 100000000,\n  \"hotspare_failure_domains\": 2\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6920e943-cf19-48d2-a8eb-0b08b5b6b880",
+          "name": "Get cluster status",
+          "request": {
+            "name": "Get cluster status",
+            "description": {
+              "content": "Returns a comprehensive status report for the cluster, including health, performance metrics, and capacity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cluster"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c435227-3e8b-479f-86c6-392c1f965a93",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"overlay\": {\n      \"client_nodes_safety_histogram\": [\n        0,\n        0,\n        10,\n        1\n      ],\n      \"branching_factor\": 40,\n      \"clients_branching_factor\": 100,\n      \"backend_nodes_safety_histogram\": [\n        0,\n        0,\n        10,\n        1\n      ],\n      \"client_nodes_at_risk\": 0,\n      \"client_nodes_not_supported\": 0\n    },\n    \"activity\": {\n      \"obs_upload_bytes_per_second\": 0,\n      \"sum_bytes_read\": 0,\n      \"num_writes\": 0,\n      \"obs_download_bytes_per_second\": 0,\n      \"sum_bytes_written\": 0,\n      \"num_reads\": 0,\n      \"num_ops\": 0\n    },\n    \"hot_spare\": 1,\n    \"io_status\": \"STARTED\",\n    \"status\": \"OK\",\n    \"last_init_failure\": \"\",\n    \"drives\": {\n      \"active\": 7,\n      \"total\": 7\n    },\n    \"name\": \"stewie\",\n    \"deployment_mode\": \"CONVERGED\",\n    \"upgrade\": \"\",\n    \"io_status_changed_time\": \"2021-03-10T09:46:02.245149Z\",\n    \"short_drive_grace_on_failure_secs\": 10,\n    \"io_nodes\": {\n      \"active\": 7,\n      \"total\": 7\n    },\n    \"cloud\": {\n      \"enabled\": true,\n      \"healthy\": true,\n      \"proxy\": \"\"\n    },\n    \"release_hash\": \"d79aaa56d95d9beb02b15783dede1ec79d4c273b\",\n    \"rebuild\": {\n      \"requiredFDsForRebuild\": 4,\n      \"unavailablePercent\": 0,\n      \"enoughActiveFDs\": true,\n      \"totalCopiesMiB\": 0,\n      \"unavailableMiB\": 0,\n      \"progressPercent\": 0,\n      \"stripeDisks\": 7,\n      \"numActiveFDs\": 7,\n      \"totalCopiesDoneMiB\": 0,\n      \"protectionState\": [\n        {\n          \"percent\": 100,\n          \"numFailures\": 0,\n          \"MiB\": 403200\n        },\n        {\n          \"percent\": 100,\n          \"numFailures\": 0,\n          \"MiB\": 403200\n        }\n      ]\n    },\n    \"init_stage\": \"INITIALIZED\",\n    \"failure_domains_enabled\": true,\n    \"long_drive_grace_on_failure_secs\": 360,\n    \"hosts\": {\n      \"total_count\": 7,\n      \"backends\": {\n        \"active\": 7,\n        \"total\": 7\n      },\n      \"active_count\": 7,\n      \"clients\": {\n        \"active\": 0,\n        \"total\": 0\n      }\n    },\n    \"last_init_failure_code\": \"\",\n    \"stripe_data_drives\": 5,\n    \"release\": \"3.11.1.6926-f6e1fbb96d03ef76b64bfd4d8c2c366a\",\n    \"buckets_info\": {\n      \"averageFillLevelPPMMinSinceLastEvent\": 0,\n      \"thinProvisionState\": {\n        \"usableWritable\": 521109504,\n        \"totalSSDBudgets\": 446644224,\n        \"shrinkageFactor\": {\n          \"val\": 4096\n        }\n      },\n      \"averageFillLevelPPM\": 5269,\n      \"shrunkAtGeneration\": \"ConfigGeneration<INVALID>\",\n      \"placementAllocationThresholdPPM\": 450000,\n      \"maxPrefetchRPCs\": 256\n    },\n    \"active_alerts_count\": 0,\n    \"time\": {\n      \"cluster_time\": \"2021-03-10T09:52:14.5068161Z\",\n      \"allowed_clock_skew_secs\": 60,\n      \"cluster_local_utc_offset_seconds\": 1800,\n      \"cluster_local_utc_offset\": \"+03:00\"\n    },\n    \"net\": {\n      \"link_layer\": \"ETH\"\n    },\n    \"buckets\": {\n      \"active\": 105,\n      \"global_flush_generation\": 1,\n      \"global_flush_status\": \"NONE\",\n      \"total\": 105,\n      \"flush_finished\": 105,\n      \"shutdown_finished\": 105\n    },\n    \"scrubber_bytes_per_sec\": 134217728,\n    \"init_stage_changed_time\": \"2021-03-10T09:45:42.599016Z\",\n    \"capacity\": {\n      \"total_bytes\": 1829454741504,\n      \"hot_spare_bytes\": 305009786880,\n      \"unprovisioned_bytes\": 0\n    },\n    \"is_cluster\": true,\n    \"block_upgrade_task\": {\n      \"type\": \"INVALID\",\n      \"progress\": 0,\n      \"taskId\": \"BlockTaskId<0>\",\n      \"state\": \"IDLE\"\n    },\n    \"grim_reaper\": {\n      \"enabled\": true,\n      \"is_cluster_fully_connected\": true,\n      \"node_with_least_links\": \"\"\n    },\n    \"stripe_protection_drives\": 2,\n    \"guid\": \"9724f5ec-a68c-437d-8411-03c8425c06b8\",\n    \"start_io_starting_drives_grace_secs\": 60,\n    \"start_io_starting_io_nodes_grace_secs\": 30,\n    \"hanging_ios\": {\n      \"event_driver_frontend_threshold_secs\": 1800,\n      \"last_emitted_backend_no_longer_detected_event\": \"\",\n      \"alerts_threshold_secs\": 900,\n      \"last_emitted_backend_event\": \"\",\n      \"event_backend_threshold_secs\": 1800,\n      \"last_emitted_driver_frontend_no_longer_detected_event\": \"\",\n      \"last_emitted_driver_frontend_event\": \"\",\n      \"event_nfs_frontend_threshold_secs\": 1800,\n      \"last_emitted_nfs_frontend_event\": \"\",\n      \"last_emitted_nfs_frontend_no_longer_detected_event\": \"\"\n    },\n    \"last_init_failure_time\": \"\",\n    \"nodes\": {\n      \"blacklisted\": 0,\n      \"total\": 14\n    },\n    \"licensing\": {\n      \"mode\": \"Classic\",\n      \"usage\": {\n        \"drive_capacity_gb\": 3324,\n        \"usable_capacity_gb\": 1829,\n        \"obs_capacity_gb\": 0\n      },\n      \"license\": \"license_key\",\n      \"limits\": {\n        \"drive_capacity_gb\": 3324,\n        \"usable_capacity_gb\": 18446744073709552000,\n        \"obs_capacity_gb\": 1000000000000000,\n        \"valid_from\": \"2021-03-10T09:46:18Z\",\n        \"expires_at\": \"2021-04-09T09:46:18Z\"\n      },\n      \"next_check\": \"2021-03-10T10:46:20Z\",\n      \"error\": \"\",\n      \"check_interval_secs\": 3600\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8b9ea15-643a-4e3d-bd6d-9c4ebaa54766",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7947b421-6f16-4083-ac0e-00d3b82b5626",
+          "name": "Get capacity reduction details",
+          "request": {
+            "name": "Get capacity reduction details",
+            "description": {
+              "content": "Returns data reduction statistics for the cluster, including the total saved bytes and the reduction ratio.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cluster",
+                "capacity_reduction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "370a69fa-8ef0-442c-ac8b-12d460c6e01d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster",
+                    "capacity_reduction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"data_reduction_saved_bytes\": 1829454741504,\n    \"data_reduction_ratio\": 2.53\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "62c184f1-f503-4911-a851-95728ddb8306",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cluster",
+                    "capacity_reduction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff623ef9-1578-48ed-b28d-a74087e5c2f3",
+    "name": "@weka-api Active Directory Cluster API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

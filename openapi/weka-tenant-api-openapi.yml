@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Tenant API'
   version: '5.1'
@@ -641,14 +641,6 @@ paths:
         description: The unique identifier (UID) of the tenant.
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -658,6 +650,14 @@ components:
               message:
                 type: string
                 example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -691,18 +691,6 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
-    securityPolicyInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: remoteAdmins
-        id:
-          type: string
-          example: SecurityPolicy<5>
-        uid:
-          type: string
-          example: fe98008e-397d-227b-a095-577783714006
     organization:
       type: object
       properties:
@@ -752,6 +740,18 @@ components:
         id:
           type: string
           example: NetspaceId<0>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
         uid:
           type: string
           example: fe98008e-397d-227b-a095-577783714006

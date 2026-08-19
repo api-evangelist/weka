@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Cluster API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cluster",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get cluster status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/cluster"
+          },
+          "docs": "Returns a comprehensive status report for the cluster, including health, performance metrics, and capacity."
+        },
+        {
+          "info": {
+            "name": "Create a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/cluster",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forms a new WEKA cluster from a list of specified servers."
+        },
+        {
+          "info": {
+            "name": "Update cluster configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/cluster",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the configuration settings of an existing cluster."
+        },
+        {
+          "info": {
+            "name": "Get capacity reduction details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/cluster/capacity_reduction"
+          },
+          "docs": "Returns data reduction statistics for the cluster, including the total saved bytes and the reduction ratio."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

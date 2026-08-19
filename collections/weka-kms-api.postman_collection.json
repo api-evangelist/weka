@@ -1,0 +1,874 @@
+{
+  "item": [
+    {
+      "id": "6a95d219-3a4d-4c10-a59f-4c6e8a173542",
+      "name": "KMS",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6991fe0-87aa-4f40-b554-9fc3916814a5",
+          "name": "Get KMS configuration",
+          "request": {
+            "name": "Get KMS configuration",
+            "description": {
+              "content": "Returns the Key Management Service (KMS) configuration for the specified organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "org",
+                  "value": "<string>",
+                  "description": "Organization name or ID. Defaults to the callers organization."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38512c92-c97c-4b9d-8da3-11b6d87a3e0f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"params\": {\n      \"master_key_name\": \"cluster_key\",\n      \"base_url\": \"https://company.com:4000\",\n      \"auth_method\": \"RoleId/SecretId\"\n    },\n    \"kms_type\": \"HashiCorpVault\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c915853-addc-423f-bc93-c51bc5045cc1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de53dfb3-dd8a-45b6-a7e2-ec897ed5607f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00d803f2-e52d-473a-bb66-ca1ce7fed065",
+          "name": "Set KMS configuration",
+          "request": {
+            "name": "Set KMS configuration",
+            "description": {
+              "content": "Sets a new Key Management Service (KMS) configuration (Hashicorp Vault or KMIP) for the specified organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"org\": \"<string>\",\n  \"base_url\": \"<string>\",\n  \"master_key_name\": \"<string>\",\n  \"token\": \"<string>\",\n  \"server_endpoint\": \"<string>\",\n  \"key_uid\": \"<string>\",\n  \"client_cert_pem\": \"<string>\",\n  \"client_key_pem\": \"<string>\",\n  \"ca_cert_pem\": \"<string>\",\n  \"namespace\": \"<string>\",\n  \"role_id\": \"<string>\",\n  \"secret_id\": \"<string>\",\n  \"convert_to_cluster_key\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e9f2ff7-91d7-46af-ac42-1da0c0e5ca79",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"org\": \"my_organization\",\n  \"base_url\": \"https://compney.com:4000\",\n  \"master_key_name\": \"cluster_key\",\n  \"token\": \"s.token_string\",\n  \"server_endpoint\": \"<string>\",\n  \"key_uid\": \"<string>\",\n  \"client_cert_pem\": \"<string>\",\n  \"client_key_pem\": \"<string>\",\n  \"ca_cert_pem\": \"<string>\",\n  \"namespace\": \"namespace1\",\n  \"role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"convert_to_cluster_key\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "880ca748-90c4-4e74-87f9-d2893865be6b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"org\": \"my_organization\",\n  \"base_url\": \"https://compney.com:4000\",\n  \"master_key_name\": \"cluster_key\",\n  \"token\": \"s.token_string\",\n  \"server_endpoint\": \"<string>\",\n  \"key_uid\": \"<string>\",\n  \"client_cert_pem\": \"<string>\",\n  \"client_key_pem\": \"<string>\",\n  \"ca_cert_pem\": \"<string>\",\n  \"namespace\": \"namespace1\",\n  \"role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"convert_to_cluster_key\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3169324-2034-44b3-8fdb-09e0033b03d5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"org\": \"my_organization\",\n  \"base_url\": \"https://compney.com:4000\",\n  \"master_key_name\": \"cluster_key\",\n  \"token\": \"s.token_string\",\n  \"server_endpoint\": \"<string>\",\n  \"key_uid\": \"<string>\",\n  \"client_cert_pem\": \"<string>\",\n  \"client_key_pem\": \"<string>\",\n  \"ca_cert_pem\": \"<string>\",\n  \"namespace\": \"namespace1\",\n  \"role_id\": \"d4b9fcf3-8fae-4f2d-b9ae-4899aff66fe8\",\n  \"secret_id\": \"b99052e6-8bf1-4f0a-a3d0-969f90698d28\",\n  \"convert_to_cluster_key\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc3024dd-96c0-4d8d-8a5d-6d9753c55851",
+          "name": "Delete KMS configuration",
+          "request": {
+            "name": "Delete KMS configuration",
+            "description": {
+              "content": "Removes the KMS configuration for the specified organization. For tenant KMS deletion with encrypted filesystems, use force_delete to switch to cluster-wide KMS, or allow_downgrade to fall back to local encryption if no cluster KMS exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "org",
+                  "value": "<string>",
+                  "description": "Organization name or ID. Defaults to the callers organization."
+                },
+                {
+                  "disabled": false,
+                  "key": "force_delete",
+                  "value": "<boolean>",
+                  "description": "For tenant KMS deletion, allows switching encrypted filesystems to use the cluster-wide KMS configuration. Requires a cluster-wide KMS to be configured."
+                },
+                {
+                  "disabled": false,
+                  "key": "allow_downgrade",
+                  "value": "<boolean>",
+                  "description": "Allows downgrading encrypted filesystems to local encryption. Required when deleting cluster-wide KMS with encrypted filesystems, or when deleting tenant KMS without a cluster-wide KMS configured."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4aa62761-a6db-44aa-8b5c-ed6858daedcc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "force_delete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "allow_downgrade",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c44576cb-be6e-478d-8839-19efe93a82b2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "force_delete",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "allow_downgrade",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d6aef36-e811-4a3d-8505-77ac5743012c",
+          "name": "Get KMS type",
+          "request": {
+            "name": "Get KMS type",
+            "description": {
+              "content": "Returns the configured KMS type (HashiCorp Vault or KMIP) for the specified organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kms",
+                "type"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "org",
+                  "value": "<string>",
+                  "description": "Organization name or ID. Defaults to the callers organization."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ced210b7-c344-4690-b445-cc17d55974e7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms",
+                    "type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"HashiCorpVault\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66cf28c7-6460-415b-a6f1-caf79a77c54a",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms",
+                    "type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34b7bae2-b127-4800-82a7-e6c690061fdb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms",
+                    "type"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a8191cb-adc3-46de-b15c-231c4fa7833e",
+          "name": "Rewrap KMS key",
+          "request": {
+            "name": "Rewrap KMS key",
+            "description": {
+              "content": "Updates the encryption keys for existing filesystems with a new KMS master key for the specified organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "kms",
+                "rewrap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"org\": \"<string>\",\n  \"new_key_uid\": \"<string>\",\n  \"rewrapAll\": \"<boolean>\",\n  \"convert_to_cluster_key\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "58f60829-5439-4304-a15d-bf10c89a83b4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "kms",
+                    "rewrap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"org\": \"my_organization\",\n  \"new_key_uid\": \"<string>\",\n  \"rewrapAll\": true,\n  \"convert_to_cluster_key\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3262e255-65a0-4406-a8d4-832364fd71af",
+    "name": "@weka-api Active Directory KMS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

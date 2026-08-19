@@ -1,0 +1,421 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Containers API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Containers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/containers",
+            "params": [
+              {
+                "name": "filter_type",
+                "value": "",
+                "type": "query",
+                "description": "Filters the list of containers. Use 'ByContainer' to specify a list of container IDs."
+              },
+              {
+                "name": "container_ids",
+                "value": "",
+                "type": "query",
+                "description": "A list of container IDs to retrieve. Required when 'filter_type' is 'ByContainer'."
+              },
+              {
+                "name": "council",
+                "value": "",
+                "type": "query",
+                "description": "If true, query the cluster leadership members."
+              }
+            ]
+          },
+          "docs": "Returns a list of all containers in the cluster."
+        },
+        {
+          "info": {
+            "name": "Add a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new container to the cluster. The container configuration must be applied to activate it."
+        },
+        {
+          "info": {
+            "name": "Get container details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/containers/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ]
+          },
+          "docs": "Returns the details, including resources and state, for a specific container."
+        },
+        {
+          "info": {
+            "name": "Update container configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/containers/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the staged configuration for a specific container. Any resource configuration change, such as memory or cores, requires an apply action to take effect."
+        },
+        {
+          "info": {
+            "name": "Remove a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/containers/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ]
+          },
+          "docs": "Deactivates and removes a container from the cluster."
+        },
+        {
+          "info": {
+            "name": "Perform action on protocol containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/manageProtoContainers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Performs an action, such as a restart, on specified protocol containers."
+        },
+        {
+          "info": {
+            "name": "Apply configuration updates to multiple containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/apply",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Applies staged configuration changes to a specified list of containers."
+        },
+        {
+          "info": {
+            "name": "Apply configuration updates to a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/:uid/apply",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ]
+          },
+          "docs": "Applies staged configuration changes to a specific container."
+        },
+        {
+          "info": {
+            "name": "Clear last failure for a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/containers/lastFailureReason/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ]
+          },
+          "docs": "Resets the last failure reason for a specific container."
+        },
+        {
+          "info": {
+            "name": "Get container resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/containers/:uid/resources",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The resource type to retrieve, either 'Staging' or 'Stable'. Defaults to 'Staging'."
+              }
+            ]
+          },
+          "docs": "Returns the resource allocation (CPU, memory) for a specific container."
+        },
+        {
+          "info": {
+            "name": "Activate containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/activate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Activates a list of specified containers, bringing them online."
+        },
+        {
+          "info": {
+            "name": "Activate a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/:uid/activate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ]
+          },
+          "docs": "Activates a specific container, bringing it online."
+        },
+        {
+          "info": {
+            "name": "Deactivate containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/deactivate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deactivates a list of specified containers."
+        },
+        {
+          "info": {
+            "name": "Perform container deactivation check",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/deactivation-check",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulates container deactivation to assess whether the operation can be performed safely without impacting the cluster."
+        },
+        {
+          "info": {
+            "name": "Deactivate a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/:uid/deactivate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ]
+          },
+          "docs": "Deactivates a specific container."
+        },
+        {
+          "info": {
+            "name": "Get network devices for all containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/containers/netdevs"
+          },
+          "docs": "Returns the network device configurations for all containers in the cluster."
+        },
+        {
+          "info": {
+            "name": "Get network devices for a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/containers/:uid/netdevs",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ]
+          },
+          "docs": "Returns the network device configurations for a specific container."
+        },
+        {
+          "info": {
+            "name": "Add a dedicated network device to a container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/:uid/netdevs",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allocates a dedicated network device to a specific container. The change must be applied to take effect."
+        },
+        {
+          "info": {
+            "name": "Remove a dedicated network device",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/containers/:uid/netdevs/:netdev_uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              },
+              {
+                "name": "netdev_uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the network device."
+              },
+              {
+                "name": "apply_container",
+                "value": "false",
+                "type": "query",
+                "description": "If true, applies the configuration change to the container immediately."
+              }
+            ]
+          },
+          "docs": "Removes a dedicated network device from a container. The change must be applied to take effect."
+        },
+        {
+          "info": {
+            "name": "Get container hardware information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/containers/infos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns hardware information for one or more containers, specified by IP or hostname."
+        },
+        {
+          "info": {
+            "name": "Set a requested action on containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/containers/requestedAction",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets a requested action, such as STOP or RESTART, to be performed on one or more containers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

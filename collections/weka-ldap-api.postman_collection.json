@@ -1,0 +1,483 @@
+{
+  "item": [
+    {
+      "id": "c461b25e-3e98-457c-98b7-ae922c665d20",
+      "name": "LDAP",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3ce4281-b653-4971-8ee3-ac0fe794a478",
+          "name": "Get LDAP configuration",
+          "request": {
+            "name": "Get LDAP configuration",
+            "description": {
+              "content": "Returns the LDAP configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ldap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d03e28fa-710c-4e7f-9fb2-ab3d520da702",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"enabled\": true,\n    \"group_object_class\": \"group\",\n    \"ignore_start_tls_failure\": false,\n    \"group_membership_attribute\": \"member\",\n    \"server_timeout_secs\": 10,\n    \"user_id_attribute\": \"sAMAccountName\",\n    \"start_tls\": false,\n    \"protocol_version\": 3,\n    \"reader_username\": \"username@ad.com\",\n    \"group_id_attribute\": \"cn\",\n    \"base_dn\": \"DC=ad,DC=company,DC=io\",\n    \"user_object_class\": \"user\",\n    \"role_groups\": {\n      \"OrgAdmin\": \"Enterprise Admins\",\n      \"ClusterAdmin\": \"Enterprise Admins\",\n      \"ReadOnly\": \"\",\n      \"Regular\": \"\",\n      \"S3\": \"\"\n    },\n    \"server_type\": \"LDAP\",\n    \"user_revocation_attribute\": \"\",\n    \"domain\": \"\",\n    \"server_uri\": \"company.io\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5387169-2a62-4921-9f5d-b1fa6832b09f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b59d5f80-ddde-4753-8af0-58c0c88f211c",
+          "name": "Update LDAP configuration",
+          "request": {
+            "name": "Update LDAP configuration",
+            "description": {
+              "content": "Modifies the configuration for connecting to your LDAP server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ldap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"enabled\": \"<boolean>\",\n  \"server_uri\": \"<string>\",\n  \"start_tls\": \"<boolean>\",\n  \"ignore_start_tls_failure\": \"<boolean>\",\n  \"server_timeout_secs\": \"<number>\",\n  \"protocol_version\": \"<number>\",\n  \"base_dn\": \"<string>\",\n  \"user_object_class\": \"<string>\",\n  \"user_id_attribute\": \"<string>\",\n  \"user_revocation_attribute\": \"<string>\",\n  \"group_object_class\": \"<string>\",\n  \"group_membership_attribute\": \"<string>\",\n  \"group_id_attribute\": \"<string>\",\n  \"reader_username\": \"<string>\",\n  \"reader_password\": \"<string>\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"<string>\",\n    \"OrgAdmin\": \"<string>\",\n    \"Regular\": \"<string>\",\n    \"ReadOnly\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "31edcb1a-6e44-4eac-b34e-708645e104a9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_uri\": \"ad.company.io\",\n  \"start_tls\": true,\n  \"ignore_start_tls_failure\": true,\n  \"server_timeout_secs\": 30,\n  \"protocol_version\": 3,\n  \"base_dn\": \"DC=ad,DC=company,DC=io\",\n  \"user_object_class\": \"person\",\n  \"user_id_attribute\": \"sAMAccountName\",\n  \"user_revocation_attribute\": \"isRevoked\",\n  \"group_object_class\": \"groupOfNames\",\n  \"group_membership_attribute\": \"member\",\n  \"group_id_attribute\": \"cn\",\n  \"reader_username\": \"user@ad.io\",\n  \"reader_password\": \"pass.io\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"Enterprise admins\",\n    \"OrgAdmin\": \"\",\n    \"Regular\": \"WekaGroup\",\n    \"ReadOnly\": \"TestGroup\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db539b55-d2cc-40f4-a99b-d023fd834900",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_uri\": \"ad.company.io\",\n  \"start_tls\": true,\n  \"ignore_start_tls_failure\": true,\n  \"server_timeout_secs\": 30,\n  \"protocol_version\": 3,\n  \"base_dn\": \"DC=ad,DC=company,DC=io\",\n  \"user_object_class\": \"person\",\n  \"user_id_attribute\": \"sAMAccountName\",\n  \"user_revocation_attribute\": \"isRevoked\",\n  \"group_object_class\": \"groupOfNames\",\n  \"group_membership_attribute\": \"member\",\n  \"group_id_attribute\": \"cn\",\n  \"reader_username\": \"user@ad.io\",\n  \"reader_password\": \"pass.io\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"Enterprise admins\",\n    \"OrgAdmin\": \"\",\n    \"Regular\": \"WekaGroup\",\n    \"ReadOnly\": \"TestGroup\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7efccc5-6733-4ffa-8baf-81974784d57f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"enabled\": true,\n  \"server_uri\": \"ad.company.io\",\n  \"start_tls\": true,\n  \"ignore_start_tls_failure\": true,\n  \"server_timeout_secs\": 30,\n  \"protocol_version\": 3,\n  \"base_dn\": \"DC=ad,DC=company,DC=io\",\n  \"user_object_class\": \"person\",\n  \"user_id_attribute\": \"sAMAccountName\",\n  \"user_revocation_attribute\": \"isRevoked\",\n  \"group_object_class\": \"groupOfNames\",\n  \"group_membership_attribute\": \"member\",\n  \"group_id_attribute\": \"cn\",\n  \"reader_username\": \"user@ad.io\",\n  \"reader_password\": \"pass.io\",\n  \"role_groups\": {\n    \"ClusterAdmin\": \"Enterprise admins\",\n    \"OrgAdmin\": \"\",\n    \"Regular\": \"WekaGroup\",\n    \"ReadOnly\": \"TestGroup\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "060eeb2c-899e-4a28-a4e9-1de78782d159",
+          "name": "Disable LDAP configuration",
+          "request": {
+            "name": "Disable LDAP configuration",
+            "description": {
+              "content": "Deactivates the integration with your LDAP server for user authentication.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ldap"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0d7dd6b-39df-476c-9bbe-c503e637b0ce",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bedf54f2-8a12-4302-a598-805d27fdba84",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ldap"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64bdaa47-3386-42d5-ad68-b488d1d54cf5",
+    "name": "@weka-api Active Directory LDAP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

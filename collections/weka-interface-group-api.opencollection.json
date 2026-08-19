@@ -1,0 +1,305 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Interface group API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Interface group",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get interface groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/interfaceGroups"
+          },
+          "docs": "Returns a list of all interface groups that manage floating IPs for NFS server resiliency."
+        },
+        {
+          "info": {
+            "name": "Create an interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/interfaceGroups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an interface group to manage floating IPs for NFS resiliency. <br> An interface group defines a collection of servers, network ports, and <br> floating IPs that work together to ensure continuous service."
+        },
+        {
+          "info": {
+            "name": "Get interface group details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/interfaceGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interface group."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific interface group, including its assigned servers, ports, and floating IP ranges."
+        },
+        {
+          "info": {
+            "name": "Update an interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/interfaceGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interface group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the gateway and subnet of an existing interface group."
+        },
+        {
+          "info": {
+            "name": "Delete an interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/interfaceGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interface group."
+              }
+            ]
+          },
+          "docs": "Removes an interface group, including its collection of servers, ports, and floating IPs."
+        },
+        {
+          "info": {
+            "name": "Add IP range to interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/interfaceGroups/:uid/ips",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interface group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a range of floating IP addresses to an interface group.<br> These IPs can migrate between servers in the group to maintain service availability."
+        },
+        {
+          "info": {
+            "name": "Add port to interface group - deprecated, use POST /interfaceGroups/{uid}/ports/{container_uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/interfaceGroups/:uid/ports/:host_uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Interface group uid."
+              },
+              {
+                "name": "host_uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add port to interface group - deprecated, use POST /interfaceGroups/{uid}/ports/{container_uid}"
+        },
+        {
+          "info": {
+            "name": "Add a port to an interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/interfaceGroups/:uid/ports/:container_uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interface group."
+              },
+              {
+                "name": "container_uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a network port from a specific container to an interface group,<br> making that container a potential host for the group's floating IPs."
+        },
+        {
+          "info": {
+            "name": "Delete port from interface group - deprecated, use DELETE /interfaceGroups/{uid}/ports/{container_uid}/{port}",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/interfaceGroups/:uid/ports/:host_uid/:port",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Interface group uid."
+              },
+              {
+                "name": "host_uid",
+                "value": "",
+                "type": "path",
+                "description": "Host uid."
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "path",
+                "description": "Host:Port to delete from Interface Group."
+              }
+            ]
+          },
+          "docs": "Delete port from interface group - deprecated, use DELETE /interfaceGroups/{uid}/ports/{container_uid}/{port}"
+        },
+        {
+          "info": {
+            "name": "Remove a port from an interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/interfaceGroups/:uid/ports/:container_uid/:port",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interface group."
+              },
+              {
+                "name": "container_uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the container."
+              },
+              {
+                "name": "port",
+                "value": "",
+                "type": "path",
+                "description": "The port to remove from the interface group."
+              }
+            ]
+          },
+          "docs": "Removes a container's network port from an interface group, preventing it from hosting the group's floating IPs."
+        },
+        {
+          "info": {
+            "name": "Remove an IP range from an interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/interfaceGroups/:uid/ips/:ips",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the interface group."
+              },
+              {
+                "name": "ips",
+                "value": "",
+                "type": "path",
+                "description": "The IP or IP range to remove."
+              }
+            ]
+          },
+          "docs": "Removes a floating IP address range from an interface group."
+        },
+        {
+          "info": {
+            "name": "Get floating IP assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/interfaceGroups/listAssignment"
+          },
+          "docs": "Returns a list of all floating IPs and shows which container and port in the interface group currently host each IP."
+        },
+        {
+          "info": {
+            "name": "Add a port to an interface group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/interfaceGroups/port",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigns a network port from a specific server to an interface group,<br> making that server a potential host for the group's floating IPs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,487 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory NFS API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "NFS",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all NFS permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/permissions",
+            "params": [
+              {
+                "name": "fs_uid",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier (UID) of the filesystem to filter the results."
+              }
+            ]
+          },
+          "docs": "Returns a list of NFS permissions for client groups across all filesystems."
+        },
+        {
+          "info": {
+            "name": "Create an NFS permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/nfs/permissions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Grants a client group access to an NFS share by creating a new permission rule."
+        },
+        {
+          "info": {
+            "name": "Get a specific NFS permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/permissions/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the permission."
+              }
+            ]
+          },
+          "docs": "Returns the access control rules for a specific NFS permission, identified by its unique identifier (UID)."
+        },
+        {
+          "info": {
+            "name": "Update an NFS permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/permissions/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the permission."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies an existing NFS permission to change access controls for a client group."
+        },
+        {
+          "info": {
+            "name": "Remove an NFS permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/nfs/permissions/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the permission."
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "The path of the shared directory. The default is `/`."
+              }
+            ]
+          },
+          "docs": "Revokes a client group's access to a filesystem by removing a specific NFS permission."
+        },
+        {
+          "info": {
+            "name": "Get all NFS client groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/clientGroups"
+          },
+          "docs": "Returns a list of all client groups used for managing NFS access controls."
+        },
+        {
+          "info": {
+            "name": "Create an NFS client group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/nfs/clientGroups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new client group to manage access controls for NFS mounts."
+        },
+        {
+          "info": {
+            "name": "Get a specific NFS client group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/clientGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the client group."
+              }
+            ]
+          },
+          "docs": "Returns the details of a specific NFS client group."
+        },
+        {
+          "info": {
+            "name": "Remove an NFS client group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/nfs/clientGroups/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the client group."
+              }
+            ]
+          },
+          "docs": "Removes an existing NFS client group."
+        },
+        {
+          "info": {
+            "name": "Create a rule for an NFS client group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/nfs/clientGroups/:uid/rules",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the client group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a DNS or IP-based rule to a client group. Clients matching the rule are granted access."
+        },
+        {
+          "info": {
+            "name": "Remove a rule from an NFS client group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/nfs/clientGroups/:uid/rules/:rule_uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the client group."
+              },
+              {
+                "name": "rule_uid",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier (UID) of the rule."
+              }
+            ]
+          },
+          "docs": "Removes a DNS or IP-based rule from an NFS client group."
+        },
+        {
+          "info": {
+            "name": "Get the global NFS configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/globalConfig"
+          },
+          "docs": "Returns the cluster-wide NFS configuration, including ports, the configuration filesystem, and supported versions."
+        },
+        {
+          "info": {
+            "name": "Update the global NFS configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/globalConfig",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies cluster-wide NFS parameters, including ports, the configuration filesystem, supported versions, and ACL settings."
+        },
+        {
+          "info": {
+            "name": "Get the NFS debug level",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/debug"
+          },
+          "docs": "Returns the logging verbosity level for the container processes in the NFS cluster."
+        },
+        {
+          "info": {
+            "name": "Set the NFS debug level",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/nfs/debug",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adjusts the logging verbosity for container processes in the NFS cluster to control the level of detail in logs."
+        },
+        {
+          "info": {
+            "name": "Get the NFS-Kerberos service configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/kerberosService"
+          },
+          "docs": "Returns the NFS-Kerberos service configuration details. Integrating NFS with Kerberos enhances security by allowing mounts only from clients with valid Kerberos tickets."
+        },
+        {
+          "info": {
+            "name": "Set up the NFS-Kerberos service",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/kerberosService",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures the NFS-Kerberos service. Integrating NFS with Kerberos enhances security by allowing mounts only from clients with valid Kerberos tickets."
+        },
+        {
+          "info": {
+            "name": "Register NFS with MIT Kerberos",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/kerberosMitRegistration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers NFS Kerberos service with MIT KDC. Running this endpoint with the restart option can disrupt the IO service for connected NFS clients."
+        },
+        {
+          "info": {
+            "name": "Register NFS with Active Directory Kerberos",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/kerberosActiveDirectoryRegistration",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers NFS Kerberos service with Microsoft Active Directory (AD). Running this endpoint with the restart option can disrupt the IO service for connected NFS clients."
+        },
+        {
+          "info": {
+            "name": "Get the NFS-Kerberos registration configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/kerberosRegistration"
+          },
+          "docs": "Returns the NFS-Kerberos service registration details."
+        },
+        {
+          "info": {
+            "name": "Reset the Kerberos configuration for NFS",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/kerberosReset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes the Kerberos service configuration data, allowing for a new integration to be set up."
+        },
+        {
+          "info": {
+            "name": "Set up host-based LDAP resolution for NFS",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/useOnHostLdapClient",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enables NFS group resolution through the server's LDAP client. This supports over 16 groups by using host providers like SSSD."
+        },
+        {
+          "info": {
+            "name": "Set up NFS with OpenLDAP",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/openLdapService",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures NFS to use an OpenLDAP service for user and group information, typically used with an MIT Kerberos integration."
+        },
+        {
+          "info": {
+            "name": "Set up NFS with Active Directory LDAP",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/activeDirectoryLdapService",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures NFS to use the LDAP service within Active Directory (AD) for user and group lookups."
+        },
+        {
+          "info": {
+            "name": "Set up Active Directory LDAP for ACLs (without Kerberos)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/activeDirectoryNoKrbLdapService",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures NFS to use LDAP for ACLs when Kerberos authentication is not in use."
+        },
+        {
+          "info": {
+            "name": "Get the LDAP configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nfs/ldapService"
+          },
+          "docs": "Returns the LDAP configuration for the NFS service."
+        },
+        {
+          "info": {
+            "name": "Reset the LDAP configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/ldapReset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes the NFS-LDAP configuration from the system."
+        },
+        {
+          "info": {
+            "name": "Import an LDAP configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/nfs/ldapImport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports an OpenLDAP configuration from a file and applies it to the NFS service."
+        },
+        {
+          "info": {
+            "name": "Export an LDAP configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/nfs/ldapExport",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports the OpenLDAP configuration for the NFS service to a file for backup or migration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

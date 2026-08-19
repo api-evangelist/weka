@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Nodes API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all nodes - deprecated, use GET /processes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nodes"
+          },
+          "docs": "Get all nodes - deprecated, use GET /processes"
+        },
+        {
+          "info": {
+            "name": "Get node - deprecated, use GET /processes/{uid}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/nodes/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Node uid."
+              }
+            ]
+          },
+          "docs": "Get node - deprecated, use GET /processes/{uid}"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

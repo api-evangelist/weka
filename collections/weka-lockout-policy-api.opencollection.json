@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Lockout policy API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lockout policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get lockout policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/lockoutPolicy"
+          },
+          "docs": "Returns the account lockout threshold policy details."
+        },
+        {
+          "info": {
+            "name": "Update lockout policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/lockoutPolicy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the account lockout threshold policy."
+        },
+        {
+          "info": {
+            "name": "Reset lockout policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/lockoutPolicy"
+          },
+          "docs": "Clears the failed login attempts counter and unlocks any currently locked accounts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

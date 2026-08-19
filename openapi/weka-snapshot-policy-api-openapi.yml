@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: '@weka-api Active Directory Snapshot Policy API'
   version: '5.1'
@@ -445,134 +445,6 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
-    snapshotPolicy:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: fe08008e-397d-237b-a095-577783714006
-        id:
-          type: string
-          example: SnapPolicyId<1>
-        name:
-          type: string
-          example: Backup
-        description:
-          type: string
-          example: Periodic filesystem backup
-        enable:
-          type: boolean
-          example: true
-        filesystems:
-          type: array
-          items:
-            type: string
-            example: default
-    snapshotPolicyTemplate:
-      type: object
-      properties:
-        daily:
-          type: object
-          properties:
-            days:
-              type: string
-              example: all
-            enable:
-              type: boolean
-              example: true
-            retention:
-              type: number
-              example: 7
-            time:
-              type: string
-              example: '22:05'
-            upload:
-              type: string
-              example: local
-        hourly:
-          type: object
-          properties:
-            days:
-              type: string
-              example: monday, tuesday, wednesday, thursday, friday
-            enable:
-              type: boolean
-              example: true
-            hours:
-              type: string
-              example: 09, 10, 11, 12, 13, 14, 15, 16, 17, 18
-            minuteOffset:
-              type: number
-              example: 5
-            retention:
-              type: number
-              example: 10
-            upload:
-              type: string
-              example: none
-        monthly:
-          type: object
-          properties:
-            days:
-              type: string
-              example: '07'
-            enable:
-              type: boolean
-              example: true
-            months:
-              type: string
-              example: all
-            retention:
-              type: number
-              example: 12
-            time:
-              type: string
-              example: 00:05
-            upload:
-              type: string
-              example: local
-        periodic:
-          type: object
-          properties:
-            days:
-              type: string
-              example: monday, tuesday, wednesday, thursday, friday
-            enable:
-              type: boolean
-              example: false
-            end_time:
-              type: string
-              example: '18:00'
-            interval:
-              type: number
-              example: 30
-            retention:
-              type: number
-              example: 4
-            start_time:
-              type: string
-              example: 09:00
-            upload:
-              type: string
-              example: none
-        weekly:
-          type: object
-          properties:
-            days:
-              type: string
-              example: saturday
-            enable:
-              type: boolean
-              example: true
-            retention:
-              type: number
-              example: 4
-            time:
-              type: string
-              example: '23:05'
-            upload:
-              type: string
-              example: local
     snapshotPolicyInfo:
       type: object
       properties:
@@ -695,6 +567,134 @@ components:
             upload:
               type: string
               example: local
+    snapshotPolicyTemplate:
+      type: object
+      properties:
+        daily:
+          type: object
+          properties:
+            days:
+              type: string
+              example: all
+            enable:
+              type: boolean
+              example: true
+            retention:
+              type: number
+              example: 7
+            time:
+              type: string
+              example: '22:05'
+            upload:
+              type: string
+              example: local
+        hourly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: monday, tuesday, wednesday, thursday, friday
+            enable:
+              type: boolean
+              example: true
+            hours:
+              type: string
+              example: 09, 10, 11, 12, 13, 14, 15, 16, 17, 18
+            minuteOffset:
+              type: number
+              example: 5
+            retention:
+              type: number
+              example: 10
+            upload:
+              type: string
+              example: none
+        monthly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: '07'
+            enable:
+              type: boolean
+              example: true
+            months:
+              type: string
+              example: all
+            retention:
+              type: number
+              example: 12
+            time:
+              type: string
+              example: 00:05
+            upload:
+              type: string
+              example: local
+        periodic:
+          type: object
+          properties:
+            days:
+              type: string
+              example: monday, tuesday, wednesday, thursday, friday
+            enable:
+              type: boolean
+              example: false
+            end_time:
+              type: string
+              example: '18:00'
+            interval:
+              type: number
+              example: 30
+            retention:
+              type: number
+              example: 4
+            start_time:
+              type: string
+              example: 09:00
+            upload:
+              type: string
+              example: none
+        weekly:
+          type: object
+          properties:
+            days:
+              type: string
+              example: saturday
+            enable:
+              type: boolean
+              example: true
+            retention:
+              type: number
+              example: 4
+            time:
+              type: string
+              example: '23:05'
+            upload:
+              type: string
+              example: local
+    snapshotPolicy:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: fe08008e-397d-237b-a095-577783714006
+        id:
+          type: string
+          example: SnapPolicyId<1>
+        name:
+          type: string
+          example: Backup
+        description:
+          type: string
+          example: Periodic filesystem backup
+        enable:
+          type: boolean
+          example: true
+        filesystems:
+          type: array
+          items:
+            type: string
+            example: default
   securitySchemes:
     bearerAuth:
       type: http

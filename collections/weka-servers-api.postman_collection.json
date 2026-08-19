@@ -1,0 +1,650 @@
+{
+  "item": [
+    {
+      "id": "23ca0fe6-94d7-4a53-8a75-3d16073bbc25",
+      "name": "Servers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "af7596fc-0dbb-4f29-b3da-45c751ab3645",
+          "name": "Get cluster server inventory",
+          "request": {
+            "name": "Get cluster server inventory",
+            "description": {
+              "content": "Returns a comprehensive list of all servers within the cluster.<br> Supports optional filtering by server role to narrow results to specific server types or functions within the cluster topology.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "Filter servers by assigned role (for example, BACKEND, CLIENT, NFS, SMB, S3).<br> Multiple roles can be specified to retrieve servers matching any of the provided values."
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "Filter servers by assigned role (for example, BACKEND, CLIENT, NFS, SMB, S3).<br> Multiple roles can be specified to retrieve servers matching any of the provided values."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b837741-750b-4c44-936b-96115cba6fc5",
+              "name": "Server inventory retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "BACKEND"
+                    },
+                    {
+                      "key": "role",
+                      "value": "NFS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n      \"roles\": [\n        \"BACKEND\",\n        \"BACKEND\"\n      ],\n      \"name\": \"server_hostname\",\n      \"primary_ip_address\": \"1.2.3.4\",\n      \"primary_port\": 4091.395801535207,\n      \"deployment_mode\": \"CONVERGED\",\n      \"status\": \"DEGRADED\",\n      \"up_since\": \"2021-10-26T07:56:41.818Z\",\n      \"up_since_time\": {\n        \"usecs\": 1699258299451\n      },\n      \"nodesCounter\": {\n        \"count\": 2,\n        \"monitored\": 2\n      },\n      \"load\": 2304.231398563669,\n      \"processes\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        }\n      ],\n      \"versions\": [\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\",\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\"\n      ],\n      \"ram_allocated\": 5959.920141841309,\n      \"drives\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        }\n      ]\n    },\n    {\n      \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n      \"roles\": [\n        \"BACKEND\",\n        \"BACKEND\"\n      ],\n      \"name\": \"server_hostname\",\n      \"primary_ip_address\": \"1.2.3.4\",\n      \"primary_port\": 177.96381410735808,\n      \"deployment_mode\": \"CONVERGED\",\n      \"status\": \"DEGRADED\",\n      \"up_since\": \"2021-10-26T07:56:41.818Z\",\n      \"up_since_time\": {\n        \"usecs\": 1699258299451\n      },\n      \"nodesCounter\": {\n        \"count\": 2,\n        \"monitored\": 2\n      },\n      \"load\": 9553.615202611225,\n      \"processes\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\",\n          \"roles\": [\n            \"MGMT\",\n            \"MGMT\"\n          ],\n          \"dedicated_core\": false\n        }\n      ],\n      \"versions\": [\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\",\n        \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\"\n      ],\n      \"ram_allocated\": 8325.067130886073,\n      \"drives\": [\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        },\n        {\n          \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n          \"status\": \"OK\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "097b7e8e-9579-4242-8a96-281f9f68e4f9",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "BACKEND"
+                    },
+                    {
+                      "key": "role",
+                      "value": "NFS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cb36988-7a58-4a9b-8b54-94635d9beaa7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "BACKEND"
+                    },
+                    {
+                      "key": "role",
+                      "value": "NFS"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d32f71b-9a5c-486d-964c-54572a91b627",
+          "name": "Get individual server information",
+          "request": {
+            "name": "Get individual server information",
+            "description": {
+              "content": "Returns detailed configuration, status, and operational information for a specific server identified by its unique identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servers",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Unique identifier for the server in UUID format."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc751e5f-ef53-49c6-9e3a-f1a1792651cc",
+              "name": "Server information retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier for the server in UUID format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n    \"roles\": [\n      \"BACKEND\",\n      \"BACKEND\"\n    ],\n    \"name\": \"server_hostname\",\n    \"primary_ip_address\": \"1.2.3.4\",\n    \"primary_port\": 14000,\n    \"deployment_mode\": \"CONVERGED\",\n    \"status\": \"DEGRADED\",\n    \"up_since_time\": {\n      \"usecs\": -1\n    },\n    \"nodesCounter\": {\n      \"count\": 2,\n      \"monitored\": 2\n    },\n    \"up_since\": \"2021-10-26T07:56:41.818Z\",\n    \"load\": 55,\n    \"processes\": [\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"status\": \"OK\",\n        \"id\": 41,\n        \"roles\": [\n          \"MGMT\",\n          \"MGMT\"\n        ],\n        \"container_uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"container_name\": \"default\",\n        \"executable\": \"wekanode\",\n        \"ip_addresses\": [\n          \"172.31.17.71\",\n          \"172.31.17.71\"\n        ],\n        \"socket_id\": 0,\n        \"core_id\": 0,\n        \"dedicated_core\": false\n      },\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"status\": \"OK\",\n        \"id\": 41,\n        \"roles\": [\n          \"MGMT\",\n          \"MGMT\"\n        ],\n        \"container_uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"container_name\": \"default\",\n        \"executable\": \"wekanode\",\n        \"ip_addresses\": [\n          \"172.31.17.71\",\n          \"172.31.17.71\"\n        ],\n        \"socket_id\": 0,\n        \"core_id\": 0,\n        \"dedicated_core\": false\n      }\n    ],\n    \"versions\": [\n      \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\",\n      \"3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6\"\n    ],\n    \"ram_allocated\": 343597383680,\n    \"drives\": [\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"uuid\": \"11d0c5f9-7b68-4d81-be41-2025c8368913\",\n        \"status\": \"OK\",\n        \"should_be_active\": true,\n        \"id\": 1,\n        \"model\": \"OK\",\n        \"vendor\": \"OK\",\n        \"raw_capacity\": \"OK\"\n      },\n      {\n        \"uid\": \"c4c4de54-3593-11ec-8768-3f4687e5d883\",\n        \"uuid\": \"11d0c5f9-7b68-4d81-be41-2025c8368913\",\n        \"status\": \"OK\",\n        \"should_be_active\": true,\n        \"id\": 1,\n        \"model\": \"OK\",\n        \"vendor\": \"OK\",\n        \"raw_capacity\": \"OK\"\n      }\n    ],\n    \"containers\": [\n      {\n        \"id\": \"HostId<0>\",\n        \"uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"name\": \"default\",\n        \"type\": \"weka\",\n        \"ram_allocated\": 1493172224,\n        \"failure_domain_uid\": \"<some_uid>\",\n        \"failure_domain\": \"DOM-004\",\n        \"dedicated_memory\": false,\n        \"bandwidth\": 6412,\n        \"ips\": [\n          \"123.33.42.12\",\n          \"123.33.42.12\"\n        ],\n        \"version\": \"3.15.1.326\",\n        \"version_string\": \"3.15.1.326-58a3655fb45d16d2f8802afa112cce96\"\n      },\n      {\n        \"id\": \"HostId<0>\",\n        \"uid\": \"f396c7b8-37b8-bcad-da62-b7346f00fa93\",\n        \"name\": \"default\",\n        \"type\": \"weka\",\n        \"ram_allocated\": 1493172224,\n        \"failure_domain_uid\": \"<some_uid>\",\n        \"failure_domain\": \"DOM-004\",\n        \"dedicated_memory\": false,\n        \"bandwidth\": 6412,\n        \"ips\": [\n          \"123.33.42.12\",\n          \"123.33.42.12\"\n        ],\n        \"version\": \"3.15.1.326\",\n        \"version_string\": \"3.15.1.326-58a3655fb45d16d2f8802afa112cce96\"\n      }\n    ],\n    \"network_devices\": [\n      {\n        \"model\": \"Elastic Network Adapter (ENA)\",\n        \"vendor\": \"Amazon.com, Inc.\",\n        \"link_layer_type\": \"ETH\",\n        \"speed\": 1493172224,\n        \"driver\": \"igb_uio\",\n        \"pci_address\": \"00:08.0\",\n        \"device_name\": \"enx00e04c68049c\"\n      },\n      {\n        \"model\": \"Elastic Network Adapter (ENA)\",\n        \"vendor\": \"Amazon.com, Inc.\",\n        \"link_layer_type\": \"ETH\",\n        \"speed\": 1493172224,\n        \"driver\": \"igb_uio\",\n        \"pci_address\": \"00:08.0\",\n        \"device_name\": \"enx00e04c68049c\"\n      }\n    ],\n    \"processors\": {\n      \"socket_count\": 9104.105897389574,\n      \"architecture\": \"x86_64\",\n      \"model\": \"Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz\",\n      \"vendor\": \"GenuineIntel\"\n    },\n    \"platform\": {\n      \"vendor_code\": \"hp\",\n      \"vendor\": \"Hewlett Packard\",\n      \"is_physical\": true,\n      \"vendor_specific_info\": {\n        \"family\": \"server family\",\n        \"model\": \"server_model\",\n        \"instance_id\": \"aws_instance_id\",\n        \"instance_type\": \"aws_instance_type\",\n        \"availability_zone\": \"aws_availability_zone\"\n      }\n    },\n    \"services\": {\n      \"smb\": {\n        \"administrative_state\": \"ENABLED\",\n        \"status\": \"OK\"\n      },\n      \"nfs\": {\n        \"administrative_state\": \"ENABLED\",\n        \"status\": \"OK\"\n      },\n      \"s3\": {\n        \"administrative_state\": \"ENABLED\",\n        \"status\": \"OK\"\n      }\n    },\n    \"operating_system\": \"Ubuntu 20.04\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d51d5697-952c-43dc-a937-f85288df6e88",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier for the server in UUID format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf139fe0-3ec4-498f-a464-a0a61cc85518",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Unique identifier for the server in UUID format."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "244c5996-aac9-4e50-a3b2-4d9280c13ca2",
+          "name": "Run action on multiple servers",
+          "request": {
+            "name": "Run action on multiple servers",
+            "description": {
+              "content": "Initiates a specified action across one or more servers in the cluster.<br> This endpoint allows administrators to perform coordinated operations such as stopping, restarting, or applying<br> resource configuration changes to containers running on the targeted servers. <br> Actions are queued and executed based on cluster policies and operational constraints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "servers",
+                "requestedAction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"server_identifiers\": [\n    \"<string>\"\n  ],\n  \"requested_action\": \"<string>\",\n  \"timeout\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8f731fc6-e51c-4b32-b54c-61445ab13ede",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers",
+                    "requestedAction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"server_identifiers\": [\n    \"server1.example.com\",\n    \"192.168.1.100\",\n    \"compute-node-02\"\n  ],\n  \"requested_action\": \"RESTART\",\n  \"timeout\": 300\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "792d5ea7-a94b-4cbe-ab84-1a6e05a7a4b2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers",
+                    "requestedAction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"server_identifiers\": [\n    \"server1.example.com\",\n    \"192.168.1.100\",\n    \"compute-node-02\"\n  ],\n  \"requested_action\": \"RESTART\",\n  \"timeout\": 300\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd0d2a09-1fc9-4e50-92dd-b9cb159fd279",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "servers",
+                    "requestedAction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"server_identifiers\": [\n    \"server1.example.com\",\n    \"192.168.1.100\",\n    \"compute-node-02\"\n  ],\n  \"requested_action\": \"RESTART\",\n  \"timeout\": 300\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4eb2eb4b-845c-420c-afee-5dc97c722acc",
+    "name": "@weka-api Active Directory Servers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

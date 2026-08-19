@@ -1,0 +1,388 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Catalog API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Run catalog query with nested filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/catalog/query",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute a catalog query over the catalog view with nested AND/OR criteria."
+        },
+        {
+          "info": {
+            "name": "Compare two point-in-time snapshots and return differences",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/catalog/query/diff",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Compare two point-in-time snapshots and return the differences.\nThis API shows what changed between two snapshots using FsOperationType values:\n- FILE_CREATE, DIR_CREATE, SYMLINK_CREATE: New entries in the newer snapshot\n- FILE_DELETE, DIR_DELETE, SYMLINK_DELETE: Entries removed in the newer snapshot\n- FILE_MODIFY, DIR_MODIFY, SYMLINK_MODIFY: Entries with changed attributes\n\nWhen `show_changed_fields=true`, MODIFY records include a `changed_fields` object\nshowing old/new values for ALL modified "
+        },
+        {
+          "info": {
+            "name": "Get filesystem usage statistics by user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/stats/usageByUser",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "point_in_time",
+                "value": "",
+                "type": "query",
+                "description": "Snapshot access point for point-in-time query"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by user ID"
+              },
+              {
+                "name": "gid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by group ID"
+              },
+              {
+                "name": "filepath",
+                "value": "",
+                "type": "query",
+                "description": "Filter by directory path"
+              }
+            ]
+          },
+          "docs": "Query filesystem usage statistics grouped by user"
+        },
+        {
+          "info": {
+            "name": "Get filesystem usage statistics by group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/stats/usageByGroup",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "point_in_time",
+                "value": "",
+                "type": "query",
+                "description": "Snapshot access point for point-in-time query"
+              },
+              {
+                "name": "filepath",
+                "value": "",
+                "type": "query",
+                "description": "Filter by directory path"
+              }
+            ]
+          },
+          "docs": "Query filesystem usage statistics grouped by group name"
+        },
+        {
+          "info": {
+            "name": "Get list of snapshot metadata available for a filesystem in the catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/snapshots/:fs_uuid",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "path",
+                "description": "Filesystem UUID"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of snapshot metadata available for a filesystem in the catalog"
+        },
+        {
+          "info": {
+            "name": "Get file distribution by extension",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/stats/distributionByExtension",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "point_in_time",
+                "value": "",
+                "type": "query",
+                "description": "Snapshot access point for point-in-time query"
+              },
+              {
+                "name": "filepath",
+                "value": "",
+                "type": "query",
+                "description": "Filter by directory path"
+              }
+            ]
+          },
+          "docs": "Query file count distribution grouped by file extension"
+        },
+        {
+          "info": {
+            "name": "Get files by size buckets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/stats/filesBySize",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "point_in_time",
+                "value": "",
+                "type": "query",
+                "description": "Snapshot access point for point-in-time query"
+              },
+              {
+                "name": "filepath",
+                "value": "",
+                "type": "query",
+                "description": "Filter by directory path"
+              }
+            ]
+          },
+          "docs": "Query file distribution grouped by size ranges (0-1KB, 1KB-10KB, 10KB-100KB, 100KB-1MB, 1MB-10MB, 10MB-100MB, 100MB-1GB, 1GB-10GB, 10GB-100GB, 100GB-1TB, 1TB-10TB, 10TB+)"
+        },
+        {
+          "info": {
+            "name": "Get capacity by file age",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/stats/capacityByFileAge",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "point_in_time",
+                "value": "",
+                "type": "query",
+                "description": "Snapshot access point for point-in-time query"
+              },
+              {
+                "name": "filepath",
+                "value": "",
+                "type": "query",
+                "description": "Filter by directory path"
+              }
+            ]
+          },
+          "docs": "Query total file capacity grouped by file age based on modification time (< 1 week, 1 week - 1 month, 1-3 months, 3-6 months, 6-12 months, 1-2 years, 2-5 years, 5+ years)"
+        },
+        {
+          "info": {
+            "name": "Get dashboard statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/stats/dashboard",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "point_in_time",
+                "value": "",
+                "type": "query",
+                "description": "Snapshot access point for point-in-time query"
+              },
+              {
+                "name": "filepath",
+                "value": "",
+                "type": "query",
+                "description": "Filter by directory path"
+              }
+            ]
+          },
+          "docs": "Get combined statistics including quick stats, top users, and file types"
+        },
+        {
+          "info": {
+            "name": "Get hierarchical directory tree with size statistics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/stats/directoryTree",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "query",
+                "description": "Starting directory path"
+              },
+              {
+                "name": "levels",
+                "value": "",
+                "type": "query",
+                "description": "Number of directory levels to return (1-5)"
+              },
+              {
+                "name": "point_in_time",
+                "value": "",
+                "type": "query",
+                "description": "Snapshot access point for point-in-time query"
+              },
+              {
+                "name": "min_size",
+                "value": "",
+                "type": "query",
+                "description": "Minimum recursive size in bytes to include directories (filter small directories)"
+              },
+              {
+                "name": "top_n_levels",
+                "value": "10,5,3",
+                "type": "query",
+                "description": "Comma-separated top N values for each relative level (e.g., \"10,5,3\"). Each value 1-10. Aggregates rest as 'OTHERS' (optional)"
+              }
+            ]
+          },
+          "docs": "Retrieve directory tree showing multiple levels with direct and recursive size aggregations. All sizes returned in bytes."
+        },
+        {
+          "info": {
+            "name": "Get filesystem capacity metadata history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/filesystem/metadata",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "326933be-23fe-b497-a50f-58774d6cbe4b",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "timeframe",
+                "value": "30d",
+                "type": "query",
+                "description": "Predefined timeframe (7d=last 7 days, 30d=last 30 days, etc.). Mutually exclusive with start_time/end_time."
+              },
+              {
+                "name": "start_time",
+                "value": "2024-10-01T00:00:00",
+                "type": "query",
+                "description": "Start time for custom range (ISO format YYYY-MM-DDTHH:MM:SS). Mutually exclusive with timeframe."
+              },
+              {
+                "name": "end_time",
+                "value": "2024-11-10T23:59:59",
+                "type": "query",
+                "description": "End time for custom range (ISO format YYYY-MM-DDTHH:MM:SS). Mutually exclusive with timeframe."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              }
+            ]
+          },
+          "docs": "Query filesystem capacity metadata showing SSD and total capacity trends over time.\n**Time Range Options (mutually exclusive):**\n- Use `timeframe` for predefined ranges (7d, 30d, 90d, 180d, 365d, 1y)\n- OR use `start_time`/`end_time` for custom date ranges\n"
+        },
+        {
+          "info": {
+            "name": "Get point-in-time filesystem capacity metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/catalog/filesystem/metadata/point-in-time",
+            "params": [
+              {
+                "name": "fs_uuid",
+                "value": "326933be-23fe-b497-a50f-58774d6cbe4b",
+                "type": "query",
+                "description": "Filesystem UUID"
+              },
+              {
+                "name": "access_point",
+                "value": "@GMT-2025.10.16-06.48.29",
+                "type": "query",
+                "description": "Snapshot access point (optional - if not provided, returns latest metadata)"
+              }
+            ]
+          },
+          "docs": "Query filesystem capacity metadata for a specific snapshot access point or the latest metadata.\n\n- If `access_point` is provided: returns metadata for that specific snapshot\n- If `access_point` is not provided: returns the latest (most recent) metadata\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

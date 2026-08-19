@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Snapshot Policy API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Snapshot Policy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all snapshot policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/snapshotPolicy"
+          },
+          "docs": "Returns a complete list of all snapshot policies configured in the cluster with their current settings and status."
+        },
+        {
+          "info": {
+            "name": "Create snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshotPolicy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new snapshot policy with specified scheduling parameters, retention rules, and configuration settings for automated point-in-time data copies."
+        },
+        {
+          "info": {
+            "name": "Get a snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/snapshotPolicy/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "snapshot policy uid."
+              }
+            ]
+          },
+          "docs": "Returns detailed configuration for a specific snapshot policy, including schedule definitions, retention parameters, and attached filesystem associations."
+        },
+        {
+          "info": {
+            "name": "Update snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/snapshotPolicy/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot policy uid."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates configuration settings for an existing snapshot policy, including name, description, schedule parameters, retention rules, and activation status."
+        },
+        {
+          "info": {
+            "name": "Delete snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/snapshotPolicy/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot policy uid."
+              }
+            ]
+          },
+          "docs": "Permanently removes a snapshot policy from the system. All filesystems must be detached from the policy before deletion can proceed."
+        },
+        {
+          "info": {
+            "name": "List filesystems attached to a snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/snapshotPolicy/:uid/filesystems",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot policy uid."
+              }
+            ]
+          },
+          "docs": "Returns a list of all filesystem identifiers currently associated with a specific snapshot policy."
+        },
+        {
+          "info": {
+            "name": "Attach filesystems to snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshotPolicy/:uid/filesystems/attach",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot policy uid."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associates one or more filesystems with a snapshot policy, applying the policy's scheduling and retention rules to the specified filesystems."
+        },
+        {
+          "info": {
+            "name": "Detach filesystems from snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshotPolicy/:uid/filesystems/detach",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot policy UID."
+              },
+              {
+                "name": "remove_waiting_tasks",
+                "value": "",
+                "type": "query",
+                "description": "Allow to delete all waiting tasks corresponding to the filesystems."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes the association between a snapshot policy and one or more filesystems, discontinuing automated snapshot operations for those filesystems."
+        },
+        {
+          "info": {
+            "name": "Duplicate a snapshot policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshotPolicy/:uid/duplicate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot policy uid."
+              },
+              {
+                "name": "include_attached_filesystems",
+                "value": "",
+                "type": "query",
+                "description": "Define whether or not to include the attached filesystems."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a copy of an existing snapshot policy with its configuration settings, optionally including filesystem associations. Useful for establishing similar policies with minor variations."
+        },
+        {
+          "info": {
+            "name": "Run the snapshot policy schedule once",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "/api/v2/snapshotPolicy/:uid/runOnce",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot policy uid"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs a specified schedule type immediately, creating snapshots for all attached filesystems without waiting for the scheduled time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1380 @@
+{
+  "item": [
+    {
+      "id": "869fadc8-04b4-4559-b2ce-0e84b7a49990",
+      "name": "Quota",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2989f7c8-defc-4c8f-ab9c-73663fafa3b5",
+          "name": "List directory quotas",
+          "request": {
+            "name": "List directory quotas",
+            "description": {
+              "content": "Returns all quotas for directories within a specific filesystem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "quota"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "next_token",
+                  "value": "<string>",
+                  "description": "Token to get the next page."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the filesystem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8baf2883-4d98-4e16-a632-daa92a55747e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "quota"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "next_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"quota_id\": \"0x3558c7ffd0770000:0\",\n      \"inode_id\": 10092623495168,\n      \"full_path\": \"default:/testdir/dir8\",\n      \"total_bytes\": 8192,\n      \"time_over_soft_limit\": 100,\n      \"owner\": \"user\",\n      \"data_blocks\": 0,\n      \"grace_seconds\": 5598.093493377904,\n      \"hard_limit_bytes\": 1000001536,\n      \"path\": \"/testdir/dir8\",\n      \"fsName\": \"default\"\n    },\n    {\n      \"quota_id\": \"0x3558c7ffd0770000:0\",\n      \"inode_id\": 10092623495168,\n      \"full_path\": \"default:/testdir/dir8\",\n      \"total_bytes\": 8192,\n      \"time_over_soft_limit\": 100,\n      \"owner\": \"user\",\n      \"data_blocks\": 0,\n      \"grace_seconds\": 3739.4228259145802,\n      \"hard_limit_bytes\": 1000001536,\n      \"path\": \"/testdir/dir8\",\n      \"fsName\": \"default\"\n    }\n  ],\n  \"next_token\": 3214121\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d317bd67-d5b0-4f5f-b3a4-650f42459405",
+          "name": "List default directory quotas",
+          "request": {
+            "name": "List default directory quotas",
+            "description": {
+              "content": "Returns all default quotas for directories within a specific filesystem.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "quota",
+                "default"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the filesystem."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "417336af-11a8-4f3f-8bb2-e1873e8fa9cd",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "quota",
+                    "default"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"48117142192129\",\n      \"fsName\": \"default\",\n      \"graceSeconds\": 8192,\n      \"hard_limit_bytes\": 18446744073,\n      \"owner\": \"admin\",\n      \"path\": \"/dir1\",\n      \"snapName\": \"string\",\n      \"soft_limit_bytes\": 18446744073\n    },\n    {\n      \"id\": \"48117142192129\",\n      \"fsName\": \"default\",\n      \"graceSeconds\": 8192,\n      \"hard_limit_bytes\": 18446744073,\n      \"owner\": \"admin\",\n      \"path\": \"/dir1\",\n      \"snapName\": \"string\",\n      \"soft_limit_bytes\": 18446744073\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b8cbe4d-b51e-408d-aa79-6072e1c2d2d5",
+          "name": "Get directory quota details",
+          "request": {
+            "name": "Get directory quota details",
+            "description": {
+              "content": "Returns the quota parameters for a specific directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "quota",
+                ":inode_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) The unique identifier of the filesystem."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) The unique identifier of the directory's inode."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e5f58b06-ef83-4880-a95a-f82866895b03",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "quota",
+                    ":inode_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) The unique identifier of the filesystem."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) The unique identifier of the directory's inode."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"inode_id\": 10092623495168,\n    \"total_bytes\": 8192,\n    \"owner\": \"user\",\n    \"data_blocks\": 0,\n    \"time_over_soft_limit\": 100,\n    \"grace_seconds\": 9237.199944128637,\n    \"hard_limit_bytes\": 1000001536,\n    \"snap_view_id\": 0,\n    \"metadata_blocks\": 2,\n    \"soft_limit_bytes\": 1276,\n    \"status\": \"ACTIVE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "106d4c85-a596-4eb1-87b5-c946c05d896c",
+          "name": "Set a quota for a directory",
+          "request": {
+            "name": "Set a quota for a directory",
+            "description": {
+              "content": "Sets a quota for a directory. If Data Service is not enabled, use the CLI to set a quota for a non-empty directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "quota",
+                ":inode_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "hard_limit_bytes",
+                  "value": "<long>",
+                  "description": "(Required) 0 for unlimited."
+                },
+                {
+                  "disabled": false,
+                  "key": "soft_limit_bytes",
+                  "value": "<long>",
+                  "description": "(Required) 0 for unlimited."
+                },
+                {
+                  "disabled": false,
+                  "key": "grace_seconds",
+                  "value": "<number>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) Directory's inode ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2fad57b0-b58f-4e90-97a4-66e79924466c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "quota",
+                    ":inode_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hard_limit_bytes",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "soft_limit_bytes",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "grace_seconds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) Directory's inode ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"inode_id\": 10092623495168,\n    \"total_bytes\": 8192,\n    \"owner\": \"user\",\n    \"data_blocks\": 0,\n    \"grace_seconds\": 903.00084663266,\n    \"hard_limit_bytes\": 1000001536,\n    \"time_over_soft_limit\": 100,\n    \"snap_view_id\": 0,\n    \"metadata_blocks\": 2,\n    \"soft_limit_bytes\": 0,\n    \"status\": \"ACTIVE\",\n    \"cw_task_id\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "358f6a78-61cd-4f4d-b5d4-1d7ad3cf2232",
+          "name": "Update directory quota",
+          "request": {
+            "name": "Update directory quota",
+            "description": {
+              "content": "Modifies specific settings, such as the grace period or limits, for an existing directory quota.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "quota",
+                ":inode_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "hard_limit_bytes",
+                  "value": "<long>",
+                  "description": "0 for unlimited."
+                },
+                {
+                  "disabled": false,
+                  "key": "soft_limit_bytes",
+                  "value": "<long>",
+                  "description": "0 for unlimited."
+                },
+                {
+                  "disabled": false,
+                  "key": "grace_seconds",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) Directory's inode ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54833e8c-8d8a-43c6-bb55-c33a413fd935",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "quota",
+                    ":inode_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hard_limit_bytes",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "soft_limit_bytes",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "grace_seconds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) Directory's inode ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"inode_id\": 10092623495168,\n    \"total_bytes\": 8192,\n    \"owner\": \"user\",\n    \"data_blocks\": 0,\n    \"grace_seconds\": 9617.63811590044,\n    \"hard_limit_bytes\": 1000001536,\n    \"snap_view_id\": 0,\n    \"metadata_blocks\": 2,\n    \"soft_limit_bytes\": 2005,\n    \"status\": \"ACTIVE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88e9516d-50cd-46ca-9eea-6d9404dced2a",
+          "name": "Remove directory quota",
+          "request": {
+            "name": "Remove directory quota",
+            "description": {
+              "content": "Removes a quota from a specific directory. If the Data Service is not enabled, use the CLI to remove a quota from a non-empty directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "quota",
+                ":inode_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) Directory's inode ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "557cc8e9-8d50-4b10-8b74-34c6aa45cd44",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "quota",
+                    ":inode_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) Directory's inode ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"inode_id\": 10092623495168,\n    \"total_bytes\": 8192,\n    \"owner\": \"user\",\n    \"data_blocks\": 0,\n    \"grace_seconds\": 5954.445843915849,\n    \"hard_limit_bytes\": 1000001536,\n    \"snap_view_id\": 0,\n    \"metadata_blocks\": 2,\n    \"soft_limit_bytes\": 161,\n    \"status\": \"ACTIVE\",\n    \"cw_task_id\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "047b9af9-a811-48c0-a96f-5375d77fff5c",
+          "name": "Set or update a default directory quota",
+          "request": {
+            "name": "Set or update a default directory quota",
+            "description": {
+              "content": "Establishes or changes the default quota that applies to all newly created subdirectories within a specified parent directory.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                "quota",
+                ":inode_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "hard_limit_bytes",
+                  "value": "<long>",
+                  "description": "0 for unlimited."
+                },
+                {
+                  "disabled": false,
+                  "key": "soft_limit_bytes",
+                  "value": "<long>",
+                  "description": "0 for unlimited."
+                },
+                {
+                  "disabled": false,
+                  "key": "grace_seconds",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "owner",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) Directory's inode ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17ecf41f-0d50-412e-ac25-c4c7677e55c7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "quota",
+                    ":inode_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "hard_limit_bytes",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "soft_limit_bytes",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "grace_seconds",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "owner",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) Directory's inode ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"inode_id\": 10092623495168,\n    \"total_bytes\": 8192,\n    \"owner\": \"user\",\n    \"data_blocks\": 0,\n    \"grace_seconds\": 2840.6034647808688,\n    \"hard_limit_bytes\": 1000001536,\n    \"snap_view_id\": 0,\n    \"metadata_blocks\": 2,\n    \"soft_limit_bytes\": 0,\n    \"status\": \"ACTIVE\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27ad57f3-fea9-48ba-860c-41340c3cd07e",
+          "name": "Remove default quota from a directory",
+          "request": {
+            "name": "Remove default quota from a directory",
+            "description": {
+              "content": "Removes the default quota from a directory, preventing new subdirectories from inheriting its settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                "quota",
+                ":inode_id",
+                "default"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inode_id",
+                  "description": "(Required) Directory's inode ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e01707ca-0ae8-4de3-bf2f-4f247355abaf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    "quota",
+                    ":inode_id",
+                    "default"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inode_id",
+                      "description": "(Required) Directory's inode ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"fsName\": \"user\",\n    \"path\": \"default\",\n    \"graceSeconds\": 828.3238302533091,\n    \"hard_limit_bytes\": 1000001536,\n    \"owner\": 0,\n    \"snapName\": 0,\n    \"soft_limit_bytes\": 1000001536\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2ff5184-51ee-4b51-a128-4792d7a01f78",
+          "name": "Resolve path to inode ID",
+          "request": {
+            "name": "Resolve path to inode ID",
+            "description": {
+              "content": "Returns the unique inode ID for a specified file or directory path.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fileSystems",
+                ":uid",
+                "resolvePath"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "path",
+                  "value": "<string>",
+                  "description": "(Required) Path within the filesystem."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Filesystem UID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7c3adba-5f27-4489-b8fe-568b65a63487",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fileSystems",
+                    ":uid",
+                    "resolvePath"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "path",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Filesystem UID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"inode_id\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28fcc6d9-1fef-4e86-ab0f-9cd3f0d1e8f0",
+          "name": "Get filesystem quota",
+          "request": {
+            "name": "Get filesystem quota",
+            "description": {},
+            "url": {
+              "path": [
+                "quota"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Quota type"
+                },
+                {
+                  "disabled": false,
+                  "key": "uid",
+                  "value": "<string>",
+                  "description": "(Required) Filesystem uid"
+                },
+                {
+                  "disabled": false,
+                  "key": "next_token",
+                  "value": "<string>",
+                  "description": "Token to get the next page"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de386489-58f3-489c-8a8c-d74f5ad88fee",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quota"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "directory"
+                    },
+                    {
+                      "key": "uid",
+                      "value": "uid_string"
+                    },
+                    {
+                      "key": "next_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"0x0000092ddf3d0000:0\": {\n      \"inodeId\": 10092623495168,\n      \"total_bytes\": 8192,\n      \"owner\": \"user\",\n      \"data_blocks\": 0,\n      \"grace_seconds\": 4294967295,\n      \"hard_limit_bytes\": 1000001536,\n      \"snap_view_id\": 0,\n      \"metadata_blocks\": 2,\n      \"soft_limit_bytes\": 18446744073709548000,\n      \"status\": \"ACTIVE\"\n    }\n  },\n  \"next_token\": 3214121\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce584581-4ea7-4f02-9a94-b7bd6c125794",
+          "name": "Get a batch of quotas",
+          "request": {
+            "name": "Get a batch of quotas",
+            "description": {},
+            "url": {
+              "path": [
+                "quota",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "inode_ids",
+                  "value": "<number>",
+                  "description": "(Required) List of quotas to query"
+                },
+                {
+                  "disabled": false,
+                  "key": "inode_ids",
+                  "value": "<number>",
+                  "description": "(Required) List of quotas to query"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "88a76ce6-14f8-4b8a-8213-a855aa193743",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "quota",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "inode_ids",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "inode_ids",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"0x0000092ddf3d0000:0\": {\n      \"inodeId\": 10092623495168,\n      \"total_bytes\": 8192,\n      \"owner\": \"user\",\n      \"data_blocks\": 0,\n      \"grace_seconds\": 4294967295,\n      \"hard_limit_bytes\": 1000001536,\n      \"snap_view_id\": 0,\n      \"metadata_blocks\": 2,\n      \"soft_limit_bytes\": 18446744073709548000,\n      \"status\": \"ACTIVE\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bd3a22cc-76ea-46fc-941f-b9b576ee0bff",
+    "name": "@weka-api Active Directory Quota API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}

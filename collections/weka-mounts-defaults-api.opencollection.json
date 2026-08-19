@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "@weka-api Active Directory Mounts Defaults API",
+    "version": "5.1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mounts Defaults",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get default mount options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "/api/v2/mountDefaults"
+          },
+          "docs": "Returns the configured default mount options applied to all filesystems across the cluster."
+        },
+        {
+          "info": {
+            "name": "Set default mount options",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "/api/v2/mountDefaults",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Configures default mount options applied to all filesystems across the cluster."
+        },
+        {
+          "info": {
+            "name": "Reset default mount options",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "/api/v2/mountDefaults",
+            "params": [
+              {
+                "name": "qos_max_throughput_mbps",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "qos_preferred_throughput_mbps",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Reverts the default mount options to initial settings for all filesystems in the cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

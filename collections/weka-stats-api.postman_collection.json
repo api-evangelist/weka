@@ -1,0 +1,976 @@
+{
+  "item": [
+    {
+      "id": "52c2c5b2-9b25-44d5-9548-e6232300f9bf",
+      "name": "Stats",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48d2bd09-3625-404d-857c-79611d2a926e",
+          "name": "Get statistics",
+          "request": {
+            "name": "Get statistics",
+            "description": {
+              "content": "Returns statistics related to the cluster's performance and resource usage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_time",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "interval",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Array of categories."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Array of categories."
+                },
+                {
+                  "disabled": false,
+                  "key": "stat",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "stat",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "resolution_secs",
+                  "value": "<number>"
+                },
+                {
+                  "disabled": false,
+                  "key": "accumulated",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_process",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "process_uids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "process_uids",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "param[<param_key>][0]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "param[<param_key>][1]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "no_zeroes",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "show_internal",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "acaa755a-f600-4c4e-bdda-8acf9895f9a7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resolution_secs",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "accumulated",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "per_process",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "process_uids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "process_uids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "param[<param_key>][0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "param[<param_key>][1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no_zeroes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"all\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c263f3a4-8df3-4984-9c42-09bb42cbd66b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resolution_secs",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "accumulated",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "per_process",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "process_uids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "process_uids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "param[<param_key>][0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "param[<param_key>][1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no_zeroes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"error message\",\n  \"data\": {\n    \"missing_params\": [\n      \"param1\",\n      \"param1\"\n    ],\n    \"param\": \"param2\",\n    \"error\": \"param2 has an error\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9dc1101b-34b3-443f-8070-63c0e794357c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "end_time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "interval",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "stat",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resolution_secs",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "accumulated",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "per_process",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "process_uids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "process_uids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "param[<param_key>][0]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "param[<param_key>][1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "no_zeroes",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "show_internal",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e7a90d5-0fb7-44de-bbc7-a2b3043ecf6c",
+          "name": "Get statistic descriptions",
+          "request": {
+            "name": "Get statistic descriptions",
+            "description": {
+              "content": "Returns detailed information about the statistics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "description"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bfda0d06-5d81-4975-a859-7bf36c514311",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "description"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"RESPONSE_COUNT_LENGTH_REQUIRED\": {\n      \"is_histogram\": false,\n      \"parameters\": [\n        \"hTTPCode\",\n        \"hTTPCode\"\n      ],\n      \"permission\": \"USER\",\n      \"for_process_type\": \"IO\",\n      \"label\": \"Response Count LENGTH_REQUIRED(total)\",\n      \"description\": \"Number of HTTP LENGTH_REQUIRED responses per second\",\n      \"type\": \"Rate\",\n      \"unit\": \"Responses/Sec\",\n      \"can_accumulate\": true\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dec3ef3-e0f0-4e29-8eb5-2379220d5716",
+          "name": "Get real-time statistics",
+          "request": {
+            "name": "Get real-time statistics",
+            "description": {
+              "content": "Returns live statistics for the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "realtime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c794950-f903-44ee-a2bc-3987795610e7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"ProcessId<121>\",\n      \"hostname\": \"backend-0\",\n      \"cpu_utilization_percentage\": 10.597062895894386,\n      \"reads_per_second\": 0,\n      \"read_latency_usecs\": 0,\n      \"writes_per_second\": 0,\n      \"rdmaTX_bytes_per_second\": 0,\n      \"L6RX_bytes_per_second\": 230401.41501184125,\n      \"obs_upload_bytes_per_second\": 0,\n      \"read_bytes_per_second\": 0,\n      \"ops_per_second\": 0,\n      \"write_latency_usecs\": 0,\n      \"L6TX_bytes_per_second\": 281357.40098772035,\n      \"obs_download_bytes_per_second\": 0,\n      \"rdmaRX_bytes_per_second\": 0,\n      \"write_bytes_per_second\": 0\n    },\n    {\n      \"id\": \"ProcessId<121>\",\n      \"hostname\": \"backend-0\",\n      \"cpu_utilization_percentage\": 10.597062895894386,\n      \"reads_per_second\": 0,\n      \"read_latency_usecs\": 0,\n      \"writes_per_second\": 0,\n      \"rdmaTX_bytes_per_second\": 0,\n      \"L6RX_bytes_per_second\": 230401.41501184125,\n      \"obs_upload_bytes_per_second\": 0,\n      \"read_bytes_per_second\": 0,\n      \"ops_per_second\": 0,\n      \"write_latency_usecs\": 0,\n      \"L6TX_bytes_per_second\": 281357.40098772035,\n      \"obs_download_bytes_per_second\": 0,\n      \"rdmaRX_bytes_per_second\": 0,\n      \"write_bytes_per_second\": 0\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a715dae0-4cea-4b4a-a1de-69a0e2e0aff9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "realtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c633d64-b8d1-4b8a-804c-5eb889c9bd29",
+          "name": "Get statistics retention and disk usage",
+          "request": {
+            "name": "Get statistics retention and disk usage",
+            "description": {
+              "content": "Returns the retention period of statistics and the estimated disk space required for their storage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "retention"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "retention_duration",
+                  "value": "<string>",
+                  "description": "Duration (format - 1 minute 2 seconds, options - weeks, days, hours, minutes, seconds)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb3eff9b-c7aa-4957-a377-fbd9f6cf8c10",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "retention_duration",
+                      "value": "1 day"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"server_estimated_bytes\": 136205240,\n    \"retention_secs\": 86400,\n    \"client_estimated_bytes\": 0,\n    \"client_estimation_result_type\": \"NO_CLIENTS\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5edc529-39ce-467d-8fad-839465d20f22",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "retention_duration",
+                      "value": "1 day"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "571b0e87-0dad-4400-b9b8-f8566f22bb10",
+          "name": "Set statistics retention",
+          "request": {
+            "name": "Set statistics retention",
+            "description": {
+              "content": "Sets the duration for which statistics are retained in storage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "stats",
+                "retention"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"retention_duration\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "997df4dd-f632-4ea8-873f-56738c2c2746",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"retention_duration\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"server_estimated_bytes\": 136205240,\n    \"retention_secs\": 86400,\n    \"client_estimated_bytes\": 0,\n    \"client_estimation_result_type\": \"NO_CLIENTS\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56384325-3517-4eea-ad05-3256f7dbdfa0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "stats",
+                    "retention"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"retention_duration\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2ff31f1a-bb20-4cbf-9946-f8bb404a1825",
+    "name": "@weka-api Active Directory Stats API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>",
+      "type": "text/plain"
+    }
+  }
+}
