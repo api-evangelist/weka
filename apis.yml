@@ -37,6 +37,15 @@ tags:
 - AI Storage
 - Data Platform
 - High Performance Computing
+- Filesystem
+- Object Storage
+- Kubernetes
+- Cloud Infrastructure
+tags_raw:
+- Company
+- AI Storage
+- Data Platform
+- High Performance Computing
 - File System
 - Object Storage
 - Kubernetes
@@ -163,6 +172,8 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
+  - Data Service
+  tags_raw:
   - DataService
   properties:
   - type: OpenAPI
@@ -207,6 +218,8 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
+  - Drives
+  tags_raw:
   - Drive
   properties:
   - type: OpenAPI
@@ -229,6 +242,8 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -603,6 +618,8 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
+  - Object Store
+  tags_raw:
   - Object store
   properties:
   - type: OpenAPI
@@ -889,6 +906,8 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
