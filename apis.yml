@@ -1,14 +1,12 @@
 aid: weka
 name: Weka
-description: >-
-  WEKA (WekaIO, Inc.) builds NeuralMesh, a software-defined, high-performance
-  data platform for AI, machine learning, and HPC workloads. Its container-native
-  storage system delivers a unified namespace across NVMe SSD and object storage,
-  running on bare metal and across AWS, Azure, GCP, and OCI. WEKA clusters expose
-  a RESTful management API (served at /api/v2 on port 14000) that automates
-  filesystems, quotas, snapshots, S3 buckets, multi-tenancy, users, KMS, alerts,
-  and events, with a first-party CLI, Kubernetes CSI driver and operator, and
-  Terraform modules. The company is backed by Norwest Venture Partners and others.
+description: WEKA (WekaIO, Inc.) builds NeuralMesh, a software-defined, high-performance data platform
+  for AI, machine learning, and HPC workloads. Its container-native storage system delivers a unified
+  namespace across NVMe SSD and object storage, running on bare metal and across AWS, Azure, GCP, and
+  OCI. WEKA clusters expose a RESTful management API (served at /api/v2 on port 14000) that automates
+  filesystems, quotas, snapshots, S3 buckets, multi-tenancy, users, KMS, alerts, and events, with a first-party
+  CLI, Kubernetes CSI driver and operator, and Terraform modules. The company is backed by Norwest Venture
+  Partners and others.
 url: https://raw.githubusercontent.com/api-evangelist/weka/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -44,7 +42,7 @@ x-tier: profiled
 x-tier-reason: enriched-from-public-api
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 tags:
 - Company
 - AI Storage
@@ -1048,7 +1046,7 @@ apis:
   - type: Conformance
     url: conformance/weka-conformance.yml
 - aid: weka:weka-weka-home-api
-  name: Weka Weka home API
+  name: Weka home API
   description: The Weka home API from Weka — 6 operation(s) for weka home.
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
@@ -1093,7 +1091,10 @@ common:
   url: cli/weka-cli.yml
 - type: X-MCPServerCandidate
   url: mcp/weka-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: AgentSkill
   url: skills/_index.yml
 - type: LLMsTxt
