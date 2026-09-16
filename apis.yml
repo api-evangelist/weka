@@ -177,30 +177,6 @@ apis:
     url: data-model/weka-data-model.yml
   - type: Conformance
     url: conformance/weka-conformance.yml
-- aid: weka:weka-dataservice-api
-  name: Weka DataService API
-  description: The DataService API from Weka — 1 operation(s) for dataservice.
-  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
-  baseURL: https://api.docs.weka.io/api/v2
-  tags:
-  - Data Service
-  tags_raw:
-  - DataService
-  properties:
-  - type: OpenAPI
-    url: openapi/weka-dataservice-api-openapi.yml
-  - type: Documentation
-    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
-  - type: APIReference
-    url: https://api.docs.weka.io/
-  - type: Conventions
-    url: conventions/weka-conventions.yml
-  - type: ErrorCatalog
-    url: errors/weka-problem-types.yml
-  - type: DataModel
-    url: data-model/weka-data-model.yml
-  - type: Conformance
-    url: conformance/weka-conformance.yml
 - aid: weka:weka-default-network-api
   name: Weka Default network API
   description: The Default network API from Weka — 1 operation(s) for default network.
@@ -1055,6 +1031,28 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/weka-weka-home-api-openapi.yml
+  - type: Documentation
+    url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  - type: APIReference
+    url: https://api.docs.weka.io/
+  - type: Conventions
+    url: conventions/weka-conventions.yml
+  - type: ErrorCatalog
+    url: errors/weka-problem-types.yml
+  - type: DataModel
+    url: data-model/weka-data-model.yml
+  - type: Conformance
+    url: conformance/weka-conformance.yml
+- aid: weka:weka-data-service-api
+  name: Weka Data Service API
+  description: The Data Service API from Weka — 1 operation(s) for data service.
+  humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
+  baseURL: https://api.docs.weka.io/api/v2
+  tags:
+  - Data Service
+  properties:
+  - type: OpenAPI
+    url: openapi/weka-data-service-api-openapi.yml
   - type: Documentation
     url: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   - type: APIReference
