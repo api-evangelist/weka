@@ -583,6 +583,8 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
+  - Node
+  tags_raw:
   - Nodes
   properties:
   - type: OpenAPI
@@ -939,6 +941,8 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
+  - Tenants
+  tags_raw:
   - Tenant
   properties:
   - type: OpenAPI
