@@ -1,0 +1,218 @@
+slug: weka
+provider: Weka
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 21
+edges:
+- tag: Filesystem
+  spec_file: weka-filesystem-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST /fileSystems createFileSystem Create filesystem; POST /fileSystems/{uid}/objectStoreBuckets
+    attachObsBucketToFs Attach an object store bucket
+  reason: Creation and configuration of filesystems and attached object stores is core storage infrastructure
+    provisioning, not data governance of business information.
+- tag: User
+  spec_file: weka-user-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.85
+  evidence: POST /users "Create a new local user"; PUT /users/{uid}/password "Set user password (admin)";
+    DELETE /users/{uid}/revoke "Revoke all user sessions"; schema userRole
+  reason: Local user accounts, roles, passwords, session revocation and S3 credential reset — plainly
+    identity and access management for the platform.
+- tag: Cluster
+  spec_file: weka-cluster-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.82
+  evidence: POST /cluster  createCluster  Create a cluster; GET /cluster/capacity_reduction  Get capacity
+    reduction details
+  reason: Creation, configuration and status of a software-defined storage cluster — provisioning and
+    stewardship of compute/storage infrastructure (BC-600.50).
+- tag: Drive
+  spec_file: weka-drive-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.82
+  evidence: POST /drives provisionDrives Add a drive; POST /drives/{uid}/identify Identify a drive
+  reason: Provisioning and lifecycle of physical NVMe drives in the cluster is storage infrastructure
+    management.
+- tag: Containers
+  spec_file: weka-containers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /containers addContainer Add a container; GET /containers/{uid}/resources Get container
+    resources
+  reason: WEKA containers are the compute/service units of the storage cluster; add/remove/apply/activate
+    operations are infrastructure provisioning and configuration, i.e. IT infrastructure management, not
+    a business capability.
+- tag: Filesystem group
+  spec_file: weka-filesystem-group-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.8
+  evidence: POST /fileSystemGroups createFileSystemGroup Create a filesystem group
+  reason: Grouping constructs for filesystem tiering/policy within the storage cluster — infrastructure
+    configuration.
+- tag: Default network
+  spec_file: weka-default-network-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /defaultNet setDefaultNetwork Set default network settings
+  reason: Configures cluster default networking — network infrastructure configuration for the storage
+    platform.
+- tag: Hosts
+  spec_file: weka-hosts-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /hosts addHost Add host to cluster - deprecated, use POST /containers
+  reason: 'Deprecated equivalent of the containers surface: adding, configuring and activating cluster
+    hosts is server/infrastructure management.'
+- tag: Interface group
+  spec_file: weka-interface-group-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /interfaceGroups/{uid}/ips crateInterfaceGroupIp Add IP range to interface group; GET
+    /interfaceGroups/listAssignment Get floating IP assignments
+  reason: Management of network interface groups, ports and floating IP ranges is network infrastructure
+    configuration.
+- tag: NetworkSpace
+  spec_file: weka-networkspace-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /networkSpaces  addNetworkSpace  Add a network space; GET /networkSpaces/{name}/usage  Show
+    network space usage
+  reason: Creation and stewardship of network spaces (IP/network configuration) for the storage cluster
+    — network infrastructure management.
+- tag: S3
+  spec_file: weka-s3-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /s3 createS3Cluster Create an S3 cluster; POST /s3/buckets createS3Bucket Add an S3 bucket
+  reason: Provisioning and configuration of object-storage clusters, buckets and IAM policies on the storage
+    platform — compute/storage infrastructure management.
+- tag: SMB
+  spec_file: weka-smb-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: POST /smb setSamba Create a new SMB cluster; POST /smb/shares addShareToSamba Add SMB share
+  reason: Configuration of SMB file-sharing services and shares on the storage cluster — storage/infrastructure
+    service management.
+- tag: Servers
+  spec_file: weka-servers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.78
+  evidence: GET /servers getServers Get cluster server inventory
+  reason: Inventory and actions on cluster servers — compute infrastructure management for the storage
+    platform.
+- tag: NFS
+  spec_file: weka-nfs-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: GET /nfs/permissions  Get all NFS permissions; POST /nfs/clientGroups  createClientGroup  Create
+    an NFS client group
+  reason: Manages NFS export permissions, client groups and global NFS configuration — storage/network
+    protocol service configuration within IT infrastructure management, not a business-domain capability.
+- tag: Alerts
+  spec_file: weka-alerts-api-openapi.yml
+  capability_id: BC-600.40
+  capability_id_l1: BC-600
+  capability_name: IT Operations Management
+  confidence: 0.72
+  evidence: GET /alerts  getAlerts  Get all cluster alerts; PUT /alerts/{alert_type}/mute  muteAlertByType  Mute
+    alerts by type
+  reason: These are infrastructure monitoring alerts raised by a storage cluster, with mute-rule administration
+    — operational monitoring of IT infrastructure (BC-600.40 IT Operations Management), not financial-crime
+    or business alerting. Confidence moderated because it could also be read as observability tooling.
+- tag: Object store bucket
+  spec_file: weka-object-store-bucket-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: POST /objectStoreBuckets  createObsBucket  Create an object store bucket configuration
+  reason: CRUD over object-store bucket configurations used as a tier of the storage platform — storage
+    infrastructure management.
+- tag: Quota
+  spec_file: weka-quota-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.72
+  evidence: PUT /fileSystems/{uid}/quota/{inode_id} putQuota Set a quota for a directory
+  reason: Directory/filesystem storage quotas on a software-defined storage cluster — configuration of
+    storage infrastructure capacity, not API consumption quotas or a commercial entitlement.
+- tag: Catalog
+  spec_file: weka-catalog-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /catalog/stats/usageByUser  Get filesystem usage statistics by user; GET /catalog/stats/capacityByFileAge  Get
+    capacity by file age
+  reason: Filesystem capacity and usage analytics over a storage cluster — reporting on compute/storage
+    infrastructure, i.e. IT Infrastructure Management. It is not business data governance despite the
+    word 'Catalog'; confidence held at 0.7 because the analytics framing could arguably sit under IT operations
+    instead.
+- tag: LDAP
+  spec_file: weka-ldap-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: GET /ldap  getLdap  Get LDAP configuration; PUT /ldap  updateLdap  Update LDAP configuration
+  reason: Configures the cluster's LDAP directory integration, i.e. directory-backed authentication/authorisation
+    of users — identity and access management plumbing for the platform. Mapped at moderate confidence
+    since it is a single config endpoint rather than a full IAM surface.
+- tag: Machines
+  spec_file: weka-machines-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /machines  getMachines  Get all machines - deprecated, use GET /servers
+  reason: Read-only inventory of the physical/virtual servers making up the storage cluster — compute
+    infrastructure inventory. Deprecated read-only surface, so moderate confidence.
+- tag: Object store
+  spec_file: weka-object-store-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /objectStores/capacities  getObsCapacities  Get OBS bucket capacity utilization information
+  reason: Configuration and capacity utilisation of attached object stores — storage infrastructure management.
+    Could arguably touch capacity management but the surface is infrastructure configuration.
