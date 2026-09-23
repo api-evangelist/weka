@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: '@weka-api Active Directory Snapshots API'
+  title: '@weka-api Snapshots API'
   version: '5.1'
-  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+  description: 'The WEKA system provides a RESTful API, enabling efficient
+
+    automation and integration into existing workflows or monitoring systems.'
 servers:
 - url: /api/v2
 security:
@@ -41,7 +43,9 @@ paths:
       tags:
       - Snapshots
       summary: Create a new snapshot
-      description: Creates a point-in-time snapshot of an existing filesystem. Snapshots are read-only by default and do not impact system performance. Writable snapshots enable data modification for testing environments.<br> Snapshots consume minimal space based on 4KB granularity differences. Once created as writable, a snapshot cannot be converted to read-only.
+      description: 'Creates a point-in-time snapshot of an existing filesystem. Snapshots are read-only by default and do not impact system performance. Writable snapshots enable data modification for testing environments.
+
+        Snapshots consume minimal space based on 4KB granularity differences. Once created as writable, a snapshot cannot be converted to read-only.'
       operationId: createSnapshot
       responses:
         '200':
@@ -177,6 +181,8 @@ paths:
         schema:
           type: string
         description: Unique identifier of the snapshot to delete.
+      operationId: deleteSnapshotsByUid
+      x-operation-id-source: derived
   /snapshots/{uid}/copy:
     post:
       tags:
@@ -628,14 +634,6 @@ paths:
                   description: Include full filesystem path for each entry. Useful for reports, but adds processing overhead.
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -668,6 +666,14 @@ components:
                   error:
                     type: string
                     example: param2 has an error
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '401':
       description: Unauthorized
       content:
@@ -678,94 +684,6 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
-    cookielist:
-      type: array
-      items:
-        type: string
-        example: 8-0-0-6-5-0-0
-    snapshot:
-      type: object
-      properties:
-        id:
-          type: string
-          example: SnapViewId<10>
-        isWritable:
-          type: boolean
-          example: false
-        uploadSize:
-          type: object
-          properties:
-            LOCAL:
-              type: number
-              example: 0
-            REMOTE:
-              type: number
-              example: 0
-        task_ids:
-          type: array
-          items:
-            type: string
-            example: task_id
-        remoteStowInfo:
-          type: object
-          properties:
-            stowProgress:
-              type: string
-              example: 100%
-            locator:
-              type: string
-              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-            stowStatus:
-              type: string
-              example: SYNCHRONIZED
-        filesystemId:
-          type: string
-          example: FSId<0>
-        locator:
-          type: string
-          example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-        isRemoving:
-          type: boolean
-          example: false
-        filesystemUid:
-          type: string
-          example: 7a6bfe5e-9944-4bf4-b799-527e9b5c2a13
-        name:
-          type: string
-          example: base
-        filesystem:
-          type: string
-          example: default
-        uid:
-          type: string
-          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
-        localStowInfo:
-          type: object
-          properties:
-            stowProgress:
-              type: string
-              example: 100%
-            locator:
-              type: string
-              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-            stowStatus:
-              type: string
-              example: SYNCHRONIZED
-        accessPoint:
-          type: string
-          example: '@GMT-2022.07.27-10.41.09'
-        stowStatus:
-          type: string
-          example: SYNCHRONIZED
-        creationTime:
-          type: string
-          example: '2022-07-27T10:41:10Z'
-        objectProgress:
-          type: string
-          example: 100%
-        estReclaimableSize:
-          type: number
-          example: 0
     snapshotEdit:
       type: object
       properties:
@@ -869,6 +787,156 @@ components:
           type: string
           format: date-time
           example: '2022-07-27T10:41:10Z'
+    cookielist:
+      type: array
+      items:
+        type: string
+        example: 8-0-0-6-5-0-0
+    diff_list:
+      type: object
+      properties:
+        results_count:
+          type: number
+          example: 1
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              inode:
+                type: string
+                example: InodeContext<4270850748147367937>
+              parent_inode:
+                type: string
+                example: InodeContext<55996090941441>
+              op_type:
+                type: string
+                example: FILE_CREATE
+              path:
+                type: string
+                example: /dir1/dir2/file1
+              prev_path:
+                type: string
+                example: null
+              renamed:
+                type: boolean
+                example: false
+              size:
+                type: number
+                example: 0
+              mode:
+                type: number
+                example: 33188
+              modify_time_secs:
+                type: number
+                example: 1740744251
+              access_time_secs:
+                type: number
+                example: 1740744251
+              change_time_secs:
+                type: number
+                example: 1740744251
+              blocks:
+                type: number
+                example: 0
+              rdev:
+                type: number
+                example: 0
+              uid:
+                type: number
+                example: 0
+              gid:
+                type: number
+                example: 0
+              nlinks:
+                type: number
+                example: 0
+        next_resume_token:
+          type: string
+          example: 8-1-A72EAA20-3-2-0-0
+    snapshot:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SnapViewId<10>
+        isWritable:
+          type: boolean
+          example: false
+        uploadSize:
+          type: object
+          properties:
+            LOCAL:
+              type: number
+              example: 0
+            REMOTE:
+              type: number
+              example: 0
+        task_ids:
+          type: array
+          items:
+            type: string
+            example: task_id
+        remoteStowInfo:
+          type: object
+          properties:
+            stowProgress:
+              type: string
+              example: 100%
+            locator:
+              type: string
+              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+            stowStatus:
+              type: string
+              example: SYNCHRONIZED
+        filesystemId:
+          type: string
+          example: FSId<0>
+        locator:
+          type: string
+          example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+        isRemoving:
+          type: boolean
+          example: false
+        filesystemUid:
+          type: string
+          example: 7a6bfe5e-9944-4bf4-b799-527e9b5c2a13
+        name:
+          type: string
+          example: base
+        filesystem:
+          type: string
+          example: default
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        localStowInfo:
+          type: object
+          properties:
+            stowProgress:
+              type: string
+              example: 100%
+            locator:
+              type: string
+              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+            stowStatus:
+              type: string
+              example: SYNCHRONIZED
+        accessPoint:
+          type: string
+          example: '@GMT-2022.07.27-10.41.09'
+        stowStatus:
+          type: string
+          example: SYNCHRONIZED
+        creationTime:
+          type: string
+          example: '2022-07-27T10:41:10Z'
+        objectProgress:
+          type: string
+          example: 100%
+        estReclaimableSize:
+          type: number
+          example: 0
     snapshotLocatorInfoDetails:
       type: object
       properties:
@@ -1036,68 +1104,6 @@ components:
         fs_id:
           type: string
           example: FSId<8>
-    diff_list:
-      type: object
-      properties:
-        results_count:
-          type: number
-          example: 1
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              inode:
-                type: string
-                example: InodeContext<4270850748147367937>
-              parent_inode:
-                type: string
-                example: InodeContext<55996090941441>
-              op_type:
-                type: string
-                example: FILE_CREATE
-              path:
-                type: string
-                example: /dir1/dir2/file1
-              prev_path:
-                type: string
-                example: null
-              renamed:
-                type: boolean
-                example: false
-              size:
-                type: number
-                example: 0
-              mode:
-                type: number
-                example: 33188
-              modify_time_secs:
-                type: number
-                example: 1740744251
-              access_time_secs:
-                type: number
-                example: 1740744251
-              change_time_secs:
-                type: number
-                example: 1740744251
-              blocks:
-                type: number
-                example: 0
-              rdev:
-                type: number
-                example: 0
-              uid:
-                type: number
-                example: 0
-              gid:
-                type: number
-                example: 0
-              nlinks:
-                type: number
-                example: 0
-        next_resume_token:
-          type: string
-          example: 8-1-A72EAA20-3-2-0-0
   securitySchemes:
     bearerAuth:
       type: http

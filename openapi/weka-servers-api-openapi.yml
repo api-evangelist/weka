@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: '@weka-api Active Directory Servers API'
+  title: '@weka-api Servers API'
   version: '5.1'
-  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+  description: 'The WEKA system provides a RESTful API, enabling efficient
+
+    automation and integration into existing workflows or monitoring systems.'
 servers:
 - url: /api/v2
 security:
@@ -15,7 +17,9 @@ paths:
       tags:
       - Servers
       summary: Get cluster server inventory
-      description: Returns a comprehensive list of all servers within the cluster.<br> Supports optional filtering by server role to narrow results to specific server types or functions within the cluster topology.
+      description: 'Returns a comprehensive list of all servers within the cluster.
+
+        Supports optional filtering by server role to narrow results to specific server types or functions within the cluster topology.'
       operationId: getServers
       responses:
         '200':
@@ -78,7 +82,13 @@ paths:
       tags:
       - Servers
       summary: Run action on multiple servers
-      description: Initiates a specified action across one or more servers in the cluster.<br> This endpoint allows administrators to perform coordinated operations such as stopping, restarting, or applying<br> resource configuration changes to containers running on the targeted servers. <br> Actions are queued and executed based on cluster policies and operational constraints.
+      description: 'Initiates a specified action across one or more servers in the cluster.
+
+        This endpoint allows administrators to perform coordinated operations such as stopping, restarting, or applying
+
+        resource configuration changes to containers running on the targeted servers.
+
+        Actions are queued and executed based on cluster policies and operational constraints.'
       responses:
         '200':
           description: Action request submitted successfully and queued for execution.
@@ -121,16 +131,10 @@ paths:
                   example: 300
                   minimum: 1
                   maximum: 3600
+      operationId: putServersRequestedAction
+      x-operation-id-source: derived
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -154,6 +158,14 @@ components:
                   error:
                     type: string
                     example: param2 has an error
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '401':
       description: Unauthorized
       content:
@@ -164,6 +176,96 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
+    servers:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: c4c4de54-3593-11ec-8768-3f4687e5d883
+        roles:
+          type: array
+          items:
+            type: string
+            example: BACKEND
+        name:
+          type: string
+          example: server_hostname
+        primary_ip_address:
+          type: string
+          example: 1.2.3.4
+        primary_port:
+          type: number
+          example: '14000'
+        deployment_mode:
+          type: string
+          enum:
+          - BACKEND
+          - CLIENT
+          - CONVERGED
+          - UNKNOWN
+          example: CONVERGED
+        status:
+          type: string
+          example: DEGRADED
+        up_since:
+          type: string
+          example: '2021-10-26T07:56:41.818Z'
+        up_since_time:
+          type: object
+          properties:
+            usecs:
+              type: number
+              example: 1699258299451
+        nodesCounter:
+          type: object
+          properties:
+            count:
+              type: number
+              example: 2
+            monitored:
+              type: number
+              example: 2
+        load:
+          type: number
+          example: '55'
+        processes:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
+              roles:
+                type: array
+                items:
+                  type: string
+                  example: MGMT
+              dedicated_core:
+                type: boolean
+                example: false
+        versions:
+          type: array
+          items:
+            type: string
+            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
+        ram_allocated:
+          type: number
+          example: '343597383680'
+        drives:
+          type: array
+          items:
+            type: object
+            properties:
+              uid:
+                type: string
+                example: c4c4de54-3593-11ec-8768-3f4687e5d883
+              status:
+                type: string
+                example: OK
     server:
       type: object
       properties:
@@ -442,96 +544,6 @@ components:
         operating_system:
           type: string
           example: Ubuntu 20.04
-    servers:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: c4c4de54-3593-11ec-8768-3f4687e5d883
-        roles:
-          type: array
-          items:
-            type: string
-            example: BACKEND
-        name:
-          type: string
-          example: server_hostname
-        primary_ip_address:
-          type: string
-          example: 1.2.3.4
-        primary_port:
-          type: number
-          example: '14000'
-        deployment_mode:
-          type: string
-          enum:
-          - BACKEND
-          - CLIENT
-          - CONVERGED
-          - UNKNOWN
-          example: CONVERGED
-        status:
-          type: string
-          example: DEGRADED
-        up_since:
-          type: string
-          example: '2021-10-26T07:56:41.818Z'
-        up_since_time:
-          type: object
-          properties:
-            usecs:
-              type: number
-              example: 1699258299451
-        nodesCounter:
-          type: object
-          properties:
-            count:
-              type: number
-              example: 2
-            monitored:
-              type: number
-              example: 2
-        load:
-          type: number
-          example: '55'
-        processes:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                example: c4c4de54-3593-11ec-8768-3f4687e5d883
-              status:
-                type: string
-                example: OK
-              roles:
-                type: array
-                items:
-                  type: string
-                  example: MGMT
-              dedicated_core:
-                type: boolean
-                example: false
-        versions:
-          type: array
-          items:
-            type: string
-            example: 3.14.1.36-6c0de5d42626970079f7e0c6f1416ea6
-        ram_allocated:
-          type: number
-          example: '343597383680'
-        drives:
-          type: array
-          items:
-            type: object
-            properties:
-              uid:
-                type: string
-                example: c4c4de54-3593-11ec-8768-3f4687e5d883
-              status:
-                type: string
-                example: OK
   securitySchemes:
     bearerAuth:
       type: http

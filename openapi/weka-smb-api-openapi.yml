@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: '@weka-api Active Directory SMB API'
+  title: '@weka-api SMB API'
   version: '5.1'
-  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+  description: 'The WEKA system provides a RESTful API, enabling efficient
+
+    automation and integration into existing workflows or monitoring systems.'
 servers:
 - url: /api/v2
 security:
@@ -15,7 +17,13 @@ paths:
       tags:
       - SMB
       summary: Get SMB cluster configuration
-      description: Returns comprehensive details about the existing SMB cluster, including<br> domain membership status, container assignments, ID mapping configuration,<br> encryption settings, and feature enablement flags.<br> Use this endpoint to audit the current cluster state or verify configuration changes.
+      description: 'Returns comprehensive details about the existing SMB cluster, including
+
+        domain membership status, container assignments, ID mapping configuration,
+
+        encryption settings, and feature enablement flags.
+
+        Use this endpoint to audit the current cluster state or verify configuration changes.'
       operationId: getSamba
       responses:
         '200':
@@ -82,7 +90,9 @@ paths:
       tags:
       - SMB
       summary: Create a new SMB cluster
-      description: Creates a new SMB cluster and establishes its foundational configuration. This includes setting the domain association, assigning containers to serve the SMB protocol, and defining security policies.<br> This operation creates the cluster structure but does not join it to an Active Directory domain. After the cluster is created, use the POST /smb/activeDirectory endpoint to complete the domain integration.
+      description: 'Creates a new SMB cluster and establishes its foundational configuration. This includes setting the domain association, assigning containers to serve the SMB protocol, and defining security policies.
+
+        This operation creates the cluster structure but does not join it to an Active Directory domain. After the cluster is created, use the POST /smb/activeDirectory endpoint to complete the domain integration.'
       operationId: setSamba
       responses:
         '200':
@@ -166,7 +176,11 @@ paths:
       tags:
       - SMB
       summary: Modify SMB cluster settings
-      description: Updates cluster-wide configuration parameters for an existing SMB deployment.<br> Supports modification of encryption policy and floating IP address assignments.<br> Changing the encryption policy affects new connections. Existing connections maintain their original encryption state until reconnection.
+      description: 'Updates cluster-wide configuration parameters for an existing SMB deployment.
+
+        Supports modification of encryption policy and floating IP address assignments.
+
+        Changing the encryption policy affects new connections. Existing connections maintain their original encryption state until reconnection.'
       operationId: updateSamba
       responses:
         '200':
@@ -199,7 +213,9 @@ paths:
       tags:
       - SMB
       summary: Disable SMB cluster
-      description: Disables the SMB cluster and removes its configuration. This action terminates all active client sessions, removes associated floating IPs, and automatically disconnects the cluster from its Active Directory domain, if joined.<br> The underlying filesystem data is preserved. This operation only removes network access through the SMB protocol.
+      description: 'Disables the SMB cluster and removes its configuration. This action terminates all active client sessions, removes associated floating IPs, and automatically disconnects the cluster from its Active Directory domain, if joined.
+
+        The underlying filesystem data is preserved. This operation only removes network access through the SMB protocol.'
       operationId: clearSamba
       responses:
         '200':
@@ -211,7 +227,11 @@ paths:
       tags:
       - SMB
       summary: Get trusted domain list
-      description: Returns all trusted domains configured within the SMB cluster.<br> Trusted domains enable cross-domain authentication and resource access in multi-domain<br> Active Directory environments. Each domain includes ID mapping range specifications.
+      description: 'Returns all trusted domains configured within the SMB cluster.
+
+        Trusted domains enable cross-domain authentication and resource access in multi-domain
+
+        Active Directory environments. Each domain includes ID mapping range specifications.'
       operationId: setSambaDomains
       responses:
         '200':
@@ -231,7 +251,13 @@ paths:
       tags:
       - SMB
       summary: Add trusted domain to cluster
-      description: Registers a new trusted domain with the SMB cluster and configures its ID mapping range.<br> Trusted domains allow users and groups from additional Active Directory domains to access SMB resources.<br> This operation automatically restarts SMB services to apply the new trust configuration, which may cause a brief service interruption.<br> Ensure the specified ID mapping range (mapping_from_id–mapping_to_id) does not overlap with existing domain ranges.
+      description: 'Registers a new trusted domain with the SMB cluster and configures its ID mapping range.
+
+        Trusted domains allow users and groups from additional Active Directory domains to access SMB resources.
+
+        This operation automatically restarts SMB services to apply the new trust configuration, which may cause a brief service interruption.
+
+        Ensure the specified ID mapping range (mapping_from_id–mapping_to_id) does not overlap with existing domain ranges.'
       operationId: addSambaDomain
       responses:
         '200':
@@ -298,7 +324,11 @@ paths:
       tags:
       - SMB
       summary: Get all SMB shares
-      description: Returns a comprehensive list of all shares configured within the SMB cluster.<br> Each share includes access permissions, encryption settings, filesystem mappings,<br> user access lists, and configuration parameters.
+      description: 'Returns a comprehensive list of all shares configured within the SMB cluster.
+
+        Each share includes access permissions, encryption settings, filesystem mappings,
+
+        user access lists, and configuration parameters.'
       operationId: setSambaShares
       responses:
         '200':
@@ -318,7 +348,11 @@ paths:
       tags:
       - SMB
       summary: Add SMB share
-      description: Provisions a new share within the SMB cluster, mapping a filesystem path to a network-accessible share.<br> The share becomes immediately available to authorized users upon creation.<br> For access control, use the user_list_type and users parameters to define initial access permissions. After creating a user, additional users can be added using the POST /smb/users endpoint. For ACL options, use the map_acls parameter to determine how Windows ACLs are translated to filesystem permissions (posix, windows, or hybrid mode).
+      description: 'Provisions a new share within the SMB cluster, mapping a filesystem path to a network-accessible share.
+
+        The share becomes immediately available to authorized users upon creation.
+
+        For access control, use the user_list_type and users parameters to define initial access permissions. After creating a user, additional users can be added using the POST /smb/users endpoint. For ACL options, use the map_acls parameter to determine how Windows ACLs are translated to filesystem permissions (posix, windows, or hybrid mode).'
       operationId: addShareToSamba
       responses:
         '200':
@@ -425,7 +459,11 @@ paths:
       tags:
       - SMB
       summary: Join Active Directory domain
-      description: Joins the SMB cluster to the Active Directory domain specified during the initial cluster creation.<br> This operation creates the necessary computer account in Active Directory, establishes trust, and enables authentication for domain users and groups.<br> Before using this endpoint, you must first create the SMB cluster using POST /smb.
+      description: 'Joins the SMB cluster to the Active Directory domain specified during the initial cluster creation.
+
+        This operation creates the necessary computer account in Active Directory, establishes trust, and enables authentication for domain users and groups.
+
+        Before using this endpoint, you must first create the SMB cluster using POST /smb.'
       operationId: setSambaActiveDirectory
       responses:
         '200':
@@ -474,7 +512,11 @@ paths:
       tags:
       - SMB
       summary: Disconnect from Active Directory domain
-      description: Disconnects the SMB cluster from the Active Directory domain.<br> This action deletes the cluster account from Active Directory and terminates domain-based authentication, making shares immediately inaccessible to all domain users. Before leaving the domain, configure an alternative authentication method if you require continued access to the shares.<br> Administrator credentials may be necessary to complete the operation.
+      description: 'Disconnects the SMB cluster from the Active Directory domain.
+
+        This action deletes the cluster account from Active Directory and terminates domain-based authentication, making shares immediately inaccessible to all domain users. Before leaving the domain, configure an alternative authentication method if you require continued access to the shares.
+
+        Administrator credentials may be necessary to complete the operation.'
       operationId: deleteSambaActiveDirectory
       responses:
         '200':
@@ -511,7 +553,9 @@ paths:
       tags:
       - SMB
       summary: Configure SMB container logging verbosity
-      description: Adjusts the debug logging level for SMB container processes on specified containers.<br> Higher debug levels increase logging verbosity, which is useful for troubleshooting but may impact performance.
+      description: 'Adjusts the debug logging level for SMB container processes on specified containers.
+
+        Higher debug levels increase logging verbosity, which is useful for troubleshooting but may impact performance.'
       operationId: setSambaDebug
       responses:
         '200':
@@ -545,7 +589,11 @@ paths:
       tags:
       - SMB
       summary: Modify share configuration
-      description: Updates operational parameters for an existing SMB share.<br> Changes take effect immediately and apply to new client connections. Active sessions may need to reconnect to observe changes.<br> Only a subset of share properties can be modified after creation. To change immutable properties (for example, filesystem, sub_path), delete and recreate the share.
+      description: 'Updates operational parameters for an existing SMB share.
+
+        Changes take effect immediately and apply to new client connections. Active sessions may need to reconnect to observe changes.
+
+        Only a subset of share properties can be modified after creation. To change immutable properties (for example, filesystem, sub_path), delete and recreate the share.'
       operationId: updateSambaShare
       responses:
         '200':
@@ -596,7 +644,11 @@ paths:
       tags:
       - SMB
       summary: Remove SMB share
-      description: Removes an SMB share from the cluster, terminating network access to the associated filesystem path.<br> Active client connections to this share are forcibly disconnected.<br> Underlying filesystem data remains intact. Only the SMB network share configuration is removed.
+      description: 'Removes an SMB share from the cluster, terminating network access to the associated filesystem path.
+
+        Active client connections to this share are forcibly disconnected.
+
+        Underlying filesystem data remains intact. Only the SMB network share configuration is removed.'
       operationId: deleteSambaShare
       responses:
         '200':
@@ -617,7 +669,9 @@ paths:
       tags:
       - SMB
       summary: Remove trusted domain
-      description: Removes a trusted domain from the SMB cluster, revoking authentication and access rights for all users and groups within that domain.<br> This operation triggers a background restart of the SMB services, which may cause a brief service interruption. Before removing a domain, ensure no active share permissions reference its users or groups.
+      description: 'Removes a trusted domain from the SMB cluster, revoking authentication and access rights for all users and groups within that domain.
+
+        This operation triggers a background restart of the SMB services, which may cause a brief service interruption. Before removing a domain, ensure no active share permissions reference its users or groups.'
       operationId: deleteSambaDomain
       responses:
         '200':
@@ -638,7 +692,9 @@ paths:
       tags:
       - SMB
       summary: Grant share access to users
-      description: Adds specified users or groups to a share's access control list with designated permission level.<br> Users can be Active Directory users, groups, or domain aliases.
+      description: 'Adds specified users or groups to a share''s access control list with designated permission level.
+
+        Users can be Active Directory users, groups, or domain aliases.'
       operationId: addUserToSamba
       responses:
         '200':
@@ -677,7 +733,13 @@ paths:
       tags:
       - SMB
       summary: Remove all users from the access list
-      description: Removes all users and groups from the specified access permission category for a given share.<br> This is a bulk operation that clears the entire user list for the specified category.<br> Useful when reconfiguring share permissions from scratch or removing all entries before applying a new access control policy.<br> To remove individual users, use DELETE /smb/users/{share_uid}/{user_type}/{user} instead.
+      description: 'Removes all users and groups from the specified access permission category for a given share.
+
+        This is a bulk operation that clears the entire user list for the specified category.
+
+        Useful when reconfiguring share permissions from scratch or removing all entries before applying a new access control policy.
+
+        To remove individual users, use DELETE /smb/users/{share_uid}/{user_type}/{user} instead.'
       operationId: resetSambaUsers
       responses:
         '200':
@@ -704,7 +766,9 @@ paths:
       tags:
       - SMB
       summary: Remove specific user from share access
-      description: Removes an individual user or group from the specified access permission category.<br> The user immediately loses the associated permissions, but may retain access through other permission categories or group memberships.
+      description: 'Removes an individual user or group from the specified access permission category.
+
+        The user immediately loses the associated permissions, but may retain access through other permission categories or group memberships.'
       operationId: deleteSambaUser
       responses:
         '200':
@@ -737,7 +801,11 @@ paths:
       tags:
       - SMB
       summary: Verify SMB container readiness
-      description: Checks the operational readiness of all containers participating in the SMB cluster.<br> The response indicates whether each container SMB process is fully operational and ready to serve client requests.<br> Use this endpoint to monitor cluster health or to verify that configuration changes have been applied successfully.
+      description: 'Checks the operational readiness of all containers participating in the SMB cluster.
+
+        The response indicates whether each container SMB process is fully operational and ready to serve client requests.
+
+        Use this endpoint to monitor cluster health or to verify that configuration changes have been applied successfully.'
       operationId: getSambaContainersAreReady
       responses:
         '200':
@@ -766,7 +834,13 @@ paths:
       tags:
       - SMB
       summary: Add containers to SMB cluster
-      description: Expands the SMB cluster by adding containers to distribute the SMB service load.<br> Newly added containers immediately handle SMB requests and participate in HA failover.<br> Requires properly configured hosts and sufficient floating IPs.<br> Used to scale SMB capacity for increased load or improved fault tolerance.
+      description: 'Expands the SMB cluster by adding containers to distribute the SMB service load.
+
+        Newly added containers immediately handle SMB requests and participate in HA failover.
+
+        Requires properly configured hosts and sufficient floating IPs.
+
+        Used to scale SMB capacity for increased load or improved fault tolerance.'
       operationId: addSambaServers
       responses:
         '200':
@@ -791,7 +865,11 @@ paths:
       tags:
       - SMB
       summary: Remove containers from SMB cluster
-      description: Removes specified containers from the SMB cluster. Client connections on the removed containers migrate to the remaining active containers in the cluster.<br> Use this operation to decommission containers for maintenance or to reduce the cluster size during periods of low demand.<br> Before proceeding, ensure that at least one container remains in the cluster and that the removal does not violate the cluster's minimum redundancy requirements.
+      description: 'Removes specified containers from the SMB cluster. Client connections on the removed containers migrate to the remaining active containers in the cluster.
+
+        Use this operation to decommission containers for maintenance or to reduce the cluster size during periods of low demand.
+
+        Before proceeding, ensure that at least one container remains in the cluster and that the removal does not violate the cluster''s minimum redundancy requirements.'
       operationId: deleteSambaServers
       responses:
         '200':
@@ -818,14 +896,6 @@ components:
               message:
                 type: string
                 example: error message
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -849,6 +919,14 @@ components:
                   error:
                     type: string
                     example: param2 has an error
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '401':
       description: Unauthorized
       content:
@@ -859,27 +937,6 @@ components:
                 type: string
                 example: Unauthorized
   schemas:
-    smbDomain:
-      type: object
-      properties:
-        id:
-          type: string
-          example: SMBTrustedDomainId<0>
-        uid:
-          type: string
-          example: uid_string
-        idmapBackend:
-          type: string
-          example: rfc2307
-        mappingFromId:
-          type: number
-          example: 4291000001
-        mappingToId:
-          type: number
-          example: 4294967294
-        domainName:
-          type: string
-          example: ad.company.com
     smbShare:
       type: object
       properties:
@@ -962,6 +1019,27 @@ components:
         mapAcls:
           type: string
           example: posix
+    smbDomain:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SMBTrustedDomainId<0>
+        uid:
+          type: string
+          example: uid_string
+        idmapBackend:
+          type: string
+          example: rfc2307
+        mappingFromId:
+          type: number
+          example: 4291000001
+        mappingToId:
+          type: number
+          example: 4294967294
+        domainName:
+          type: string
+          example: ad.company.com
   securitySchemes:
     bearerAuth:
       type: http

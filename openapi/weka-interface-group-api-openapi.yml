@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: '@weka-api Active Directory Interface group API'
+  title: '@weka-api Interface group API'
   version: '5.1'
-  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+  description: 'The WEKA system provides a RESTful API, enabling efficient
+
+    automation and integration into existing workflows or monitoring systems.'
 servers:
 - url: /api/v2
 security:
@@ -35,7 +37,11 @@ paths:
       tags:
       - Interface group
       summary: Create an interface group
-      description: Creates an interface group to manage floating IPs for NFS resiliency. <br> An interface group defines a collection of servers, network ports, and <br> floating IPs that work together to ensure continuous service.
+      description: 'Creates an interface group to manage floating IPs for NFS resiliency.
+
+        An interface group defines a collection of servers, network ports, and
+
+        floating IPs that work together to ensure continuous service.'
       operationId: createInterfaceGroup
       responses:
         '200':
@@ -170,7 +176,9 @@ paths:
       tags:
       - Interface group
       summary: Add IP range to interface group
-      description: Adds a range of floating IP addresses to an interface group.<br> These IPs can migrate between servers in the group to maintain service availability.
+      description: 'Adds a range of floating IP addresses to an interface group.
+
+        These IPs can migrate between servers in the group to maintain service availability.'
       operationId: crateInterfaceGroupIp
       parameters:
       - in: path
@@ -204,7 +212,7 @@ paths:
       deprecated: true
       tags:
       - Interface group
-      summary: Add port to interface group - deprecated, use POST /interfaceGroups/{uid}/ports/{container_uid}
+      summary: Add port to interface group - deprecated, use POST…
       operationId: addPortToInterfaceGroupDeprecated
       parameters:
       - in: path
@@ -244,7 +252,9 @@ paths:
       tags:
       - Interface group
       summary: Add a port to an interface group
-      description: Assigns a network port from a specific container to an interface group,<br> making that container a potential host for the group's floating IPs.
+      description: 'Assigns a network port from a specific container to an interface group,
+
+        making that container a potential host for the group''s floating IPs.'
       operationId: addPortToInterfaceGroup
       parameters:
       - in: path
@@ -284,7 +294,7 @@ paths:
       deprecated: true
       tags:
       - Interface group
-      summary: Delete port from interface group - deprecated, use DELETE /interfaceGroups/{uid}/ports/{container_uid}/{port}
+      summary: Delete port from interface group - deprecated, use DELETE…
       operationId: deletePortFromInterfaceGroupDeprecated
       parameters:
       - in: path
@@ -427,7 +437,9 @@ paths:
       tags:
       - Interface group
       summary: Add a port to an interface group
-      description: Assigns a network port from a specific server to an interface group,<br> making that server a potential host for the group's floating IPs.
+      description: 'Assigns a network port from a specific server to an interface group,
+
+        making that server a potential host for the group''s floating IPs.'
       operationId: interfaceGroupAddPort
       requestBody:
         required: true
@@ -460,14 +472,6 @@ paths:
           $ref: '#/components/responses/404'
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -500,6 +504,14 @@ components:
                   error:
                     type: string
                     example: param2 has an error
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '401':
       description: Unauthorized
       content:

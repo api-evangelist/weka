@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: '@weka-api Active Directory Organization API'
+  title: '@weka-api Organization API'
   version: '5.1'
-  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+  description: 'The WEKA system provides a RESTful API, enabling efficient
+
+    automation and integration into existing workflows or monitoring systems.'
 servers:
 - url: /api/v2
 security:
@@ -15,7 +17,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Check if multiple organizations exist - deprecated, use GET /tenants/multipleTenantsExist
+      summary: Check if multiple organizations exist - deprecated, use GET…
       description: Checks if more than one organization is configured in the cluster. This is useful for determining if multi-tenancy is active.
       operationId: getMultipleOrgExist
       responses:
@@ -301,7 +303,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Get network spaces for an organization - deprecated, use GET /tenants/{uid}/networkSpaces
+      summary: Get network spaces for an organization - deprecated, use GET…
       description: Returns a list of network spaces assigned to a specific organization.
       operationId: getOrganizationNetworkSpaces
       responses:
@@ -335,7 +337,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Add network spaces to an organization - deprecated, use POST /tenants/{uid}/networkSpaces/add
+      summary: Add network spaces to an organization - deprecated, use POST…
       description: Assigns one or more network spaces to a specific organization without affecting existing assignments.
       operationId: addOrganizationNetworkSpaces
       responses:
@@ -391,7 +393,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Remove network spaces from an organization - deprecated, use POST /tenants/{uid}/networkSpaces/remove
+      summary: Remove network spaces from an organization - deprecated, use POST…
       description: Removes one or more network spaces from a specific organization.
       operationId: removeOrganizationNetworkSpaces
       responses:
@@ -446,7 +448,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Revoke all user tokens for an organization - deprecated, use DELETE /tenants/{uid}/revoke
+      summary: Revoke all user tokens for an organization - deprecated, use DELETE…
       description: Immediately invalidates all active login sessions (GUI, CLI, API) for all users within a specific organization.
       operationId: revokeOrganizationTokens
       responses:
@@ -470,7 +472,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Reset security policies for an organization - deprecated, use DELETE /tenants/{uid}/securityPolicy
+      summary: Reset security policies for an organization - deprecated, use DELETE…
       description: Removes all attached security policies from a specific organization.
       operationId: resetOrganizationSecurityPolicies
       responses:
@@ -502,7 +504,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Get security policies for an organization - deprecated, use GET /tenants/{uid}/securityPolicy
+      summary: Get security policies for an organization - deprecated, use GET…
       description: Returns a list of all security policies attached to a specific organization.
       operationId: getOrganizationSecurityPolicies
       responses:
@@ -534,7 +536,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Set security policies for an organization - deprecated, use PUT /tenants/{uid}/securityPolicy
+      summary: Set security policies for an organization - deprecated, use PUT…
       description: Replaces all existing security policies on an organization with a new set. Any policies not included in the request will be detached.
       operationId: setOrganizationSecurityPolicies
       responses:
@@ -580,7 +582,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Attach security policies to an organization - deprecated, use POST /tenants/{uid}/securityPolicy/attach
+      summary: Attach security policies to an organization - deprecated, use POST…
       description: Attaches one or more security policies to a specific organization without affecting existing attachments.
       operationId: attachOrganizationSecurityPolicies
       responses:
@@ -626,7 +628,7 @@ paths:
       deprecated: true
       tags:
       - Organization
-      summary: Detach security policies from an organization - deprecated, use POST /tenants/{uid}/securityPolicy/detach
+      summary: Detach security policies from an organization - deprecated, use POST…
       description: Detaches one or more security policies from a specific organization.
       operationId: detachOrganizationSecurityPolicies
       responses:
@@ -677,14 +679,6 @@ components:
               message:
                 type: string
                 example: error message
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -708,6 +702,14 @@ components:
                   error:
                     type: string
                     example: param2 has an error
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '401':
       description: Unauthorized
       content:
@@ -758,18 +760,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/networkSpaceInfo'
-    networkSpaceInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: netspace-1
-        id:
-          type: string
-          example: NetspaceId<0>
-        uid:
-          type: string
-          example: fe98008e-397d-227b-a095-577783714006
     securityPolicyInfo:
       type: object
       properties:
@@ -779,6 +769,18 @@ components:
         id:
           type: string
           example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
+    networkSpaceInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: netspace-1
+        id:
+          type: string
+          example: NetspaceId<0>
         uid:
           type: string
           example: fe98008e-397d-227b-a095-577783714006

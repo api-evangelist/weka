@@ -1,8 +1,10 @@
 openapi: 3.2.0
 info:
-  title: '@weka-api Active Directory Catalog API'
+  title: '@weka-api Catalog API'
   version: '5.1'
-  description: "\n<div>\n  The WEKA system provides a RESTful API, enabling efficient\n  automation and integration into existing workflows or monitoring systems. To access\n  the REST API documentation within the cluster, navigate to <code>/api/v2/docs</code>\n  on port 14000 (e.g.,\n  <code>https://weka01:14000/api/v2/docs</code>).\n  <br>\n  <br>\n  For detailed guidance on using the REST API, including CLI command equivalents and related concepts, refer to the official\n  documentation:\n  <a href=\"https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api\">Getting Started with the WEKA REST API</a>.\n  <br>\n  <br>\n  <div style=\"margin-top: 15px;\">\n    <b>Important:</b>\n    WEKA uses 64-bit numbers, which requires careful handling when interacting with the API across different programming languages.\n    In JavaScript, for instance, the\n    <code>\"json-bigint\"</code>\n    library is recommended.\n  </div>\n</div>"
+  description: 'The WEKA system provides a RESTful API, enabling efficient
+
+    automation and integration into existing workflows or monitoring systems.'
 servers:
 - url: /api/v2
 security:
@@ -148,9 +150,7 @@ paths:
 
         When `show_changed_fields=true`, MODIFY records include a `changed_fields` object
 
-        showing old/new values for ALL modified fields (not just select_fields).
-
-        '
+        showing old/new values for ALL modified fields (not just select_fields).'
       requestBody:
         required: true
         content:
@@ -770,9 +770,7 @@ paths:
 
         - Use `timeframe` for predefined ranges (7d, 30d, 90d, 180d, 365d, 1y)
 
-        - OR use `start_time`/`end_time` for custom date ranges
-
-        '
+        - OR use `start_time`/`end_time` for custom date ranges'
       parameters:
       - in: query
         name: fs_uuid
@@ -868,9 +866,7 @@ paths:
 
         - If `access_point` is provided: returns metadata for that specific snapshot
 
-        - If `access_point` is not provided: returns the latest (most recent) metadata
-
-        '
+        - If `access_point` is not provided: returns the latest (most recent) metadata'
       parameters:
       - in: query
         name: fs_uuid
