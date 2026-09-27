@@ -519,7 +519,7 @@ paths:
         schema:
           type: string
         description: The unique identifier of the inode.
-      operationId: filesystemResolveInode
+      operationId: getFileSystemsByInodeIdResolve
       responses:
         '200':
           description: ''
@@ -534,6 +534,8 @@ paths:
           $ref: '#/components/responses/401'
         '404':
           $ref: '#/components/responses/404'
+      x-operation-id-source: normalized
+      x-operation-id-original: filesystemResolveInode
   /fileSystems/{uid}/objectStoreBuckets/{obs_uid}:
     delete:
       tags:
@@ -987,24 +989,6 @@ paths:
           $ref: '#/components/responses/404'
 components:
   responses:
-    '403':
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Forbidden
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '400':
       description: Bad Request
       content:
@@ -1028,14 +1012,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '401':
       description: Unauthorized
       content:
@@ -1045,19 +1021,33 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '403':
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Forbidden
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   schemas:
-    securityPolicyInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: remoteAdmins
-        id:
-          type: string
-          example: SecurityPolicy<5>
-        uid:
-          type: string
-          example: fe98008e-397d-227b-a095-577783714006
     fileSystem:
       type: object
       properties:
@@ -1225,22 +1215,6 @@ components:
         kms_role:
           type: string
           example: 11bc2535-671a-63ad-c4f4-93b21afe8cd6
-    ThinProvisionReserve:
-      type: object
-      properties:
-        id:
-          type: number
-          example: 0
-        uid:
-          type: string
-          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
-        name:
-          type: string
-          example: Root
-        ssd_reserve:
-          type: integer
-          format: int64
-          example: 0
     filesystemInodeGetPath:
       type: object
       properties:
@@ -1265,6 +1239,34 @@ components:
         snap_view_id:
           type: string
           example: SnapViewId<1>
+    ThinProvisionReserve:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 0
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        name:
+          type: string
+          example: Root
+        ssd_reserve:
+          type: integer
+          format: int64
+          example: 0
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
     filesystemResolve:
       type: object
       properties:

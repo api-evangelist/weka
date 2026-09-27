@@ -476,15 +476,6 @@ paths:
         description: The unique identifier (UID) of the object store bucket.
 components:
   responses:
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '400':
       description: Bad Request
       content:
@@ -508,14 +499,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '401':
       description: Unauthorized
       content:
@@ -525,6 +508,23 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   schemas:
     objectStoreBucket:
       type: object

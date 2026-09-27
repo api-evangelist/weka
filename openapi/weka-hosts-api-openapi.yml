@@ -688,15 +688,6 @@ paths:
                     - OFED
 components:
   responses:
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '400':
       description: Bad Request
       content:
@@ -720,14 +711,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '401':
       description: Unauthorized
       content:
@@ -737,6 +720,23 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   schemas:
     host:
       type: object
@@ -927,110 +927,6 @@ components:
         requested_action_failure_time:
           type: string
           example: '2021-03-10T09:47:04.927107Z'
-    netdev:
-      type: object
-      properties:
-        id:
-          type: string
-          example: NetDevId<3>
-        id_type:
-          type: string
-          example: INVALID
-        netmask_bits:
-          type: number
-          example: 20
-        owner_nodes:
-          type: array
-          items:
-            type: string
-            example: NodeId<1>
-        name:
-          type: string
-          example: '0000:00:04.0'
-        uid:
-          type: string
-          example: uid_str
-        hostname:
-          type: string
-          example: stewie-0
-        net_devices:
-          type: array
-          items:
-            type: object
-            properties:
-              mac_address:
-                type: string
-                example: 02:5a:d7:de:50:5c
-              mtu:
-                type: number
-                example: 0
-              is_virtual:
-                type: boolean
-                example: true
-              interface_alias:
-                type: string
-                example: 'some alias '
-              numa:
-                type: number
-                example: -1
-              aws:
-                type: object
-                properties:
-                  netmask_bits:
-                    type: number
-                    example: 20
-                  ip:
-                    type: string
-                    example: 172.31.12.149
-                  gateway:
-                    type: string
-                    example: 172.31.0.1
-              interface_name:
-                type: string
-                example: some name
-              max_vfs_num:
-                type: number
-                example: 0
-              vendor:
-                type: string
-                example: Amazon.com, Inc.
-              slave_devices:
-                type: array
-                items:
-                  type: string
-                  example: some_devices
-              pci_slot:
-                type: string
-                example: '0000:00:04.0'
-              device:
-                type: string
-                example: Elastic Network Adapter (ENA)
-              driver:
-                type: string
-                example: igb_uio
-        ips:
-          type: array
-          items:
-            type: string
-            example: 172.31.12.149
-        max_cores:
-          type: number
-          example: 1
-        vlan_id:
-          type: string
-          example: some_id
-        gateway:
-          type: string
-          example: 172.31.0.1
-        host_id:
-          type: string
-          example: HostId<0>
-        identifier:
-          type: string
-          example: '0000:00:04.0'
-        network_label:
-          type: string
-          example: label
     hostResource:
       type: object
       properties:
@@ -1159,6 +1055,110 @@ components:
         mask_interrupts:
           type: boolean
           example: true
+    netdev:
+      type: object
+      properties:
+        id:
+          type: string
+          example: NetDevId<3>
+        id_type:
+          type: string
+          example: INVALID
+        netmask_bits:
+          type: number
+          example: 20
+        owner_nodes:
+          type: array
+          items:
+            type: string
+            example: NodeId<1>
+        name:
+          type: string
+          example: '0000:00:04.0'
+        uid:
+          type: string
+          example: uid_str
+        hostname:
+          type: string
+          example: stewie-0
+        net_devices:
+          type: array
+          items:
+            type: object
+            properties:
+              mac_address:
+                type: string
+                example: 02:5a:d7:de:50:5c
+              mtu:
+                type: number
+                example: 0
+              is_virtual:
+                type: boolean
+                example: true
+              interface_alias:
+                type: string
+                example: 'some alias '
+              numa:
+                type: number
+                example: -1
+              aws:
+                type: object
+                properties:
+                  netmask_bits:
+                    type: number
+                    example: 20
+                  ip:
+                    type: string
+                    example: 172.31.12.149
+                  gateway:
+                    type: string
+                    example: 172.31.0.1
+              interface_name:
+                type: string
+                example: some name
+              max_vfs_num:
+                type: number
+                example: 0
+              vendor:
+                type: string
+                example: Amazon.com, Inc.
+              slave_devices:
+                type: array
+                items:
+                  type: string
+                  example: some_devices
+              pci_slot:
+                type: string
+                example: '0000:00:04.0'
+              device:
+                type: string
+                example: Elastic Network Adapter (ENA)
+              driver:
+                type: string
+                example: igb_uio
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.12.149
+        max_cores:
+          type: number
+          example: 1
+        vlan_id:
+          type: string
+          example: some_id
+        gateway:
+          type: string
+          example: 172.31.0.1
+        host_id:
+          type: string
+          example: HostId<0>
+        identifier:
+          type: string
+          example: '0000:00:04.0'
+        network_label:
+          type: string
+          example: label
   securitySchemes:
     bearerAuth:
       type: http

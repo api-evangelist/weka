@@ -702,7 +702,7 @@ paths:
       tags:
       - Quota
       summary: Get a batch of quotas
-      operationId: getQuota
+      operationId: getQuotaBatch
       responses:
         '200':
           description: ''
@@ -756,6 +756,8 @@ paths:
             type: number
         required: true
         description: List of quotas to query
+      x-operation-id-source: normalized
+      x-operation-id-original: getQuota
 components:
   securitySchemes:
     bearerAuth:

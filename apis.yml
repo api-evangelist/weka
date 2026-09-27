@@ -785,7 +785,7 @@ apis:
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2
   tags:
-  - SMB
+  - Server Message Block
   properties:
   - type: OpenAPI
     url: openapi/weka-smb-api-openapi.yml
@@ -1026,7 +1026,7 @@ apis:
   - type: Conformance
     url: conformance/weka-conformance.yml
 - aid: weka:weka-weka-home-api
-  name: Weka home API
+  name: Weka Home API
   description: The Weka home API from Weka — 6 operation(s) for weka home.
   humanURL: https://docs.weka.io/getting-started-with-weka/getting-started-with-weka-rest-api.md
   baseURL: https://api.docs.weka.io/api/v2

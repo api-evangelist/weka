@@ -633,57 +633,95 @@ paths:
                   type: boolean
                   description: Include full filesystem path for each entry. Useful for reports, but adds processing overhead.
 components:
-  responses:
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
   schemas:
+    cookielist:
+      type: array
+      items:
+        type: string
+        example: 8-0-0-6-5-0-0
+    snapshot:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SnapViewId<10>
+        isWritable:
+          type: boolean
+          example: false
+        uploadSize:
+          type: object
+          properties:
+            LOCAL:
+              type: number
+              example: 0
+            REMOTE:
+              type: number
+              example: 0
+        task_ids:
+          type: array
+          items:
+            type: string
+            example: task_id
+        remoteStowInfo:
+          type: object
+          properties:
+            stowProgress:
+              type: string
+              example: 100%
+            locator:
+              type: string
+              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+            stowStatus:
+              type: string
+              example: SYNCHRONIZED
+        filesystemId:
+          type: string
+          example: FSId<0>
+        locator:
+          type: string
+          example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+        isRemoving:
+          type: boolean
+          example: false
+        filesystemUid:
+          type: string
+          example: 7a6bfe5e-9944-4bf4-b799-527e9b5c2a13
+        name:
+          type: string
+          example: base
+        filesystem:
+          type: string
+          example: default
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        localStowInfo:
+          type: object
+          properties:
+            stowProgress:
+              type: string
+              example: 100%
+            locator:
+              type: string
+              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+            stowStatus:
+              type: string
+              example: SYNCHRONIZED
+        accessPoint:
+          type: string
+          example: '@GMT-2022.07.27-10.41.09'
+        stowStatus:
+          type: string
+          example: SYNCHRONIZED
+        creationTime:
+          type: string
+          example: '2022-07-27T10:41:10Z'
+        objectProgress:
+          type: string
+          example: 100%
+        estReclaimableSize:
+          type: number
+          example: 0
     snapshotEdit:
       type: object
       properties:
@@ -787,11 +825,6 @@ components:
           type: string
           format: date-time
           example: '2022-07-27T10:41:10Z'
-    cookielist:
-      type: array
-      items:
-        type: string
-        example: 8-0-0-6-5-0-0
     diff_list:
       type: object
       properties:
@@ -854,89 +887,6 @@ components:
         next_resume_token:
           type: string
           example: 8-1-A72EAA20-3-2-0-0
-    snapshot:
-      type: object
-      properties:
-        id:
-          type: string
-          example: SnapViewId<10>
-        isWritable:
-          type: boolean
-          example: false
-        uploadSize:
-          type: object
-          properties:
-            LOCAL:
-              type: number
-              example: 0
-            REMOTE:
-              type: number
-              example: 0
-        task_ids:
-          type: array
-          items:
-            type: string
-            example: task_id
-        remoteStowInfo:
-          type: object
-          properties:
-            stowProgress:
-              type: string
-              example: 100%
-            locator:
-              type: string
-              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-            stowStatus:
-              type: string
-              example: SYNCHRONIZED
-        filesystemId:
-          type: string
-          example: FSId<0>
-        locator:
-          type: string
-          example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-        isRemoving:
-          type: boolean
-          example: false
-        filesystemUid:
-          type: string
-          example: 7a6bfe5e-9944-4bf4-b799-527e9b5c2a13
-        name:
-          type: string
-          example: base
-        filesystem:
-          type: string
-          example: default
-        uid:
-          type: string
-          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
-        localStowInfo:
-          type: object
-          properties:
-            stowProgress:
-              type: string
-              example: 100%
-            locator:
-              type: string
-              example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-            stowStatus:
-              type: string
-              example: SYNCHRONIZED
-        accessPoint:
-          type: string
-          example: '@GMT-2022.07.27-10.41.09'
-        stowStatus:
-          type: string
-          example: SYNCHRONIZED
-        creationTime:
-          type: string
-          example: '2022-07-27T10:41:10Z'
-        objectProgress:
-          type: string
-          example: 100%
-        estReclaimableSize:
-          type: number
-          example: 0
     snapshotLocatorInfoDetails:
       type: object
       properties:
@@ -1104,6 +1054,56 @@ components:
         fs_id:
           type: string
           example: FSId<8>
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   securitySchemes:
     bearerAuth:
       type: http

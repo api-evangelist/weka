@@ -83,26 +83,7 @@ paths:
           example: false
           description: Reset QoS preferred throughput to default.
 components:
-  schemas:
-    mountDefaults:
-      type: object
-      properties:
-        qos_max_throughput:
-          type: number
-          example: '100240444'
-        qos_preferred_throughput:
-          type: number
-          example: '100240444'
   responses:
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '401':
       description: Unauthorized
       content:
@@ -120,6 +101,25 @@ components:
             properties:
               data:
                 example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+  schemas:
+    mountDefaults:
+      type: object
+      properties:
+        qos_max_throughput:
+          type: number
+          example: '100240444'
+        qos_preferred_throughput:
+          type: number
+          example: '100240444'
   securitySchemes:
     bearerAuth:
       type: http

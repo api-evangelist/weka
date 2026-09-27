@@ -105,15 +105,6 @@ paths:
           $ref: '#/components/responses/404'
 components:
   responses:
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '400':
       description: Bad Request
       content:
@@ -146,6 +137,15 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
   schemas:
     process:
       type: object
