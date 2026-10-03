@@ -642,57 +642,19 @@ paths:
           format: uuid
         description: The unique identifier (UID) of the tenant.
 components:
-  responses:
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
   schemas:
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
     organization:
       type: object
       properties:
@@ -733,18 +695,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/networkSpaceInfo'
-    securityPolicyInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: remoteAdmins
-        id:
-          type: string
-          example: SecurityPolicy<5>
-        uid:
-          type: string
-          example: fe98008e-397d-227b-a095-577783714006
     networkSpaceInfo:
       type: object
       properties:
@@ -757,6 +707,56 @@ components:
         uid:
           type: string
           example: fe98008e-397d-227b-a095-577783714006
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   securitySchemes:
     bearerAuth:
       type: http

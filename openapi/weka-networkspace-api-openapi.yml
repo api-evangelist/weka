@@ -226,15 +226,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
     '404':
       description: Not Found
       content:
@@ -244,6 +235,15 @@ components:
               message:
                 type: string
                 example: error message
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
     '200':
       description: Success
       content:
@@ -253,6 +253,25 @@ components:
               data:
                 example: null
   schemas:
+    networkSpaceUsage:
+      type: object
+      properties:
+        hostId:
+          type: integer
+          example: 0
+          description: Container ID.
+        ip:
+          type: string
+          example: 10.0.0.1
+          description: Network space IP assigned to this container.
+        netspaceIpIdx:
+          type: integer
+          example: 0
+          description: Index in the IP range.
+        hostMode:
+          type: string
+          example: Backend
+          description: 'Container mode: Backend or Client.'
     networkSpace:
       type: object
       properties:
@@ -284,25 +303,6 @@ components:
           type: integer
           example: 24
           description: Subnet mask bits.
-    networkSpaceUsage:
-      type: object
-      properties:
-        hostId:
-          type: integer
-          example: 0
-          description: Container ID.
-        ip:
-          type: string
-          example: 10.0.0.1
-          description: Network space IP assigned to this container.
-        netspaceIpIdx:
-          type: integer
-          example: 0
-          description: Index in the IP range.
-        hostMode:
-          type: string
-          example: Backend
-          description: 'Container mode: Backend or Client.'
   securitySchemes:
     bearerAuth:
       type: http

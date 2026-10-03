@@ -829,185 +829,7 @@ paths:
                   - APPLY_RESOURCES
                   example: RESTART
 components:
-  responses:
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
   schemas:
-    containerResource:
-      type: object
-      properties:
-        mode:
-          type: string
-          example: BACKEND
-        memory:
-          type: number
-          example: 0
-        format:
-          type: number
-          example: 3
-        bandwidth:
-          type: number
-          example: 2000
-        drives:
-          type: array
-          items:
-            type: string
-            example: some_drive
-        failure_domain:
-          type: string
-          example: ''
-        hardware_watchdog:
-          type: boolean
-          example: false
-        wait_io_nodes_timeout:
-          type: number
-          example: 300
-        backend_endpoints:
-          type: array
-          items:
-            type: object
-            properties:
-              ip:
-                type: string
-                example: 172.31.13.97
-              port:
-                type: number
-                example: 14000
-        hostname:
-          type: string
-          example: ''
-        reserve_1g_hugepages:
-          type: boolean
-          example: true
-        net_devices:
-          type: array
-          items:
-            type: string
-            example: eth0
-        dedicate_memory:
-          type: boolean
-          example: true
-        ips:
-          type: array
-          items:
-            type: string
-            example: 172.31.11.41
-        ui_enabled:
-          type: boolean
-          example: true
-        join_secret:
-          type: array
-          items:
-            type: string
-            example: secret
-        nodes:
-          type: object
-          properties:
-            '0':
-              type: object
-              properties:
-                roles:
-                  type: array
-                  items:
-                    type: string
-                    example: MANAGEMENT
-                core_id:
-                  type: number
-                  example: 4294967295
-                http_port:
-                  type: number
-                  example: 14000
-                dedicate_core:
-                  type: boolean
-                  example: false
-                rpc_port:
-                  type: number
-                  example: 14010
-                dedicated_mode:
-                  type: string
-                  example: FULL
-            '1':
-              type: object
-              properties:
-                roles:
-                  type: array
-                  items:
-                    type: string
-                    example: FRONTEND
-                core_id:
-                  type: number
-                  example: 4294967295
-                http_port:
-                  type: number
-                  example: 14000
-                dedicate_core:
-                  type: boolean
-                  example: true
-                rpc_port:
-                  type: number
-                  example: 14011
-                dedicated_mode:
-                  type: string
-                  example: FULL
-        container_id:
-          type: number
-          example: 65535
-        auto_remove_timeout:
-          type: number
-          example: 0
-        disable_numa_balancing:
-          type: boolean
-          example: true
-        mask_interrupts:
-          type: boolean
-          example: true
     netdevContainer:
       type: object
       properties:
@@ -1301,6 +1123,184 @@ components:
         requested_action_failure_time:
           type: string
           example: '2021-03-10T09:47:04.927107Z'
+    containerResource:
+      type: object
+      properties:
+        mode:
+          type: string
+          example: BACKEND
+        memory:
+          type: number
+          example: 0
+        format:
+          type: number
+          example: 3
+        bandwidth:
+          type: number
+          example: 2000
+        drives:
+          type: array
+          items:
+            type: string
+            example: some_drive
+        failure_domain:
+          type: string
+          example: ''
+        hardware_watchdog:
+          type: boolean
+          example: false
+        wait_io_nodes_timeout:
+          type: number
+          example: 300
+        backend_endpoints:
+          type: array
+          items:
+            type: object
+            properties:
+              ip:
+                type: string
+                example: 172.31.13.97
+              port:
+                type: number
+                example: 14000
+        hostname:
+          type: string
+          example: ''
+        reserve_1g_hugepages:
+          type: boolean
+          example: true
+        net_devices:
+          type: array
+          items:
+            type: string
+            example: eth0
+        dedicate_memory:
+          type: boolean
+          example: true
+        ips:
+          type: array
+          items:
+            type: string
+            example: 172.31.11.41
+        ui_enabled:
+          type: boolean
+          example: true
+        join_secret:
+          type: array
+          items:
+            type: string
+            example: secret
+        nodes:
+          type: object
+          properties:
+            '0':
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+                    example: MANAGEMENT
+                core_id:
+                  type: number
+                  example: 4294967295
+                http_port:
+                  type: number
+                  example: 14000
+                dedicate_core:
+                  type: boolean
+                  example: false
+                rpc_port:
+                  type: number
+                  example: 14010
+                dedicated_mode:
+                  type: string
+                  example: FULL
+            '1':
+              type: object
+              properties:
+                roles:
+                  type: array
+                  items:
+                    type: string
+                    example: FRONTEND
+                core_id:
+                  type: number
+                  example: 4294967295
+                http_port:
+                  type: number
+                  example: 14000
+                dedicate_core:
+                  type: boolean
+                  example: true
+                rpc_port:
+                  type: number
+                  example: 14011
+                dedicated_mode:
+                  type: string
+                  example: FULL
+        container_id:
+          type: number
+          example: 65535
+        auto_remove_timeout:
+          type: number
+          example: 0
+        disable_numa_balancing:
+          type: boolean
+          example: true
+        mask_interrupts:
+          type: boolean
+          example: true
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   securitySchemes:
     bearerAuth:
       type: http

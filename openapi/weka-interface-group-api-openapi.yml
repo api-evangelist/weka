@@ -471,56 +471,6 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 components:
-  responses:
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
   schemas:
     interfaceGroup:
       type: object
@@ -568,6 +518,56 @@ components:
         status:
           type: string
           example: OK
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   securitySchemes:
     bearerAuth:
       type: http

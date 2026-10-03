@@ -318,6 +318,39 @@ components:
               data:
                 example: null
   schemas:
+    eventDescription:
+      type: object
+      properties:
+        dedup_parameters:
+          type: array
+          items:
+            type: string
+        parameters:
+          type: array
+          items:
+            type: string
+            example: username
+        severity:
+          type: string
+          example: INFO
+        is_dedup_event:
+          type: boolean
+          example: false
+        permission:
+          type: string
+          example: User
+        category:
+          type: string
+          example: User
+        type:
+          type: string
+          example: UserLoginFailed
+        description:
+          type: string
+          example: User login failed
+        formatString:
+          type: string
+          example: '`{username}` failed logging-in: {reason}'
     event:
       type: object
       properties:
@@ -388,39 +421,6 @@ components:
         type:
           type: string
           example: FilesystemAdded
-    eventDescription:
-      type: object
-      properties:
-        dedup_parameters:
-          type: array
-          items:
-            type: string
-        parameters:
-          type: array
-          items:
-            type: string
-            example: username
-        severity:
-          type: string
-          example: INFO
-        is_dedup_event:
-          type: boolean
-          example: false
-        permission:
-          type: string
-          example: User
-        category:
-          type: string
-          example: User
-        type:
-          type: string
-          example: UserLoginFailed
-        description:
-          type: string
-          example: User login failed
-        formatString:
-          type: string
-          example: '`{username}` failed logging-in: {reason}'
   securitySchemes:
     bearerAuth:
       type: http

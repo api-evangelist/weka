@@ -1755,15 +1755,14 @@ components:
           type: string
           example: default
   responses:
-    '401':
-      description: Unauthorized
+    '200':
+      description: Success
       content:
         application/json:
           schema:
             properties:
               data:
-                type: string
-                example: Unauthorized
+                example: null
     '400':
       description: Bad Request
       content:
@@ -1787,14 +1786,15 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '200':
-      description: Success
+    '401':
+      description: Unauthorized
       content:
         application/json:
           schema:
             properties:
               data:
-                example: null
+                type: string
+                example: Unauthorized
   securitySchemes:
     bearerAuth:
       type: http

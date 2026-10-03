@@ -211,6 +211,23 @@ paths:
                   description: (Vault-only) Convert all filesystem custom settings to use cluster key.
 components:
   responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
     '400':
       description: Bad Request
       content:
@@ -234,23 +251,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
   securitySchemes:
     bearerAuth:
       type: http
