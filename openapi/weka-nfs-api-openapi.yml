@@ -1316,36 +1316,57 @@ paths:
                   description: The domain of the LDAP server.
                   example: weka.io
 components:
-  schemas:
-    clientGroup:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: '242'
-        rules:
-          type: array
-          items:
-            type: object
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
             properties:
-              type:
+              data:
+                example: null
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
                 type: string
-                example: IP
-              uid:
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
                 type: string
-                example: '244'
-              rule:
+                example: Unauthorized
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
                 type: string
-                example: 0.0.0.0/0.0.0.0
-              id:
-                type: string
-                example: NfsClientGroupRuleId<0>
-        id:
-          type: string
-          example: NfsClientGroupId<0>
-        name:
-          type: string
-          example: DefaultClientGroup
+                example: error message
+  schemas:
     nfsPermission:
       type: object
       properties:
@@ -1410,56 +1431,35 @@ components:
           items:
             type: string
             example: KRB5
-  responses:
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
+    clientGroup:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: '242'
+        rules:
+          type: array
+          items:
+            type: object
             properties:
-              message:
+              type:
                 type: string
-                example: error message
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
+                example: IP
+              uid:
                 type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
+                example: '244'
+              rule:
                 type: string
-                example: Unauthorized
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
+                example: 0.0.0.0/0.0.0.0
+              id:
+                type: string
+                example: NfsClientGroupRuleId<0>
+        id:
+          type: string
+          example: NfsClientGroupId<0>
+        name:
+          type: string
+          example: DefaultClientGroup
   securitySchemes:
     bearerAuth:
       type: http

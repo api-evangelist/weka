@@ -519,6 +519,14 @@ components:
           type: string
           example: OK
   responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -542,15 +550,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '401':
       description: Unauthorized
       content:
@@ -560,14 +559,15 @@ components:
               data:
                 type: string
                 example: Unauthorized
-    '200':
-      description: Success
+    '404':
+      description: Not Found
       content:
         application/json:
           schema:
             properties:
-              data:
-                example: null
+              message:
+                type: string
+                example: error message
   securitySchemes:
     bearerAuth:
       type: http

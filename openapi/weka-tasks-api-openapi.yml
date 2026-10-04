@@ -201,14 +201,6 @@ paths:
                   description: CPU percentage to allocate for background tasks (0-100).
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '401':
       description: Unauthorized
       content:
@@ -218,6 +210,14 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   securitySchemes:
     bearerAuth:
       type: http

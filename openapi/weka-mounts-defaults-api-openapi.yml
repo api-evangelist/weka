@@ -93,14 +93,6 @@ components:
               data:
                 type: string
                 example: Unauthorized
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '404':
       description: Not Found
       content:
@@ -110,6 +102,14 @@ components:
               message:
                 type: string
                 example: error message
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   schemas:
     mountDefaults:
       type: object

@@ -62,25 +62,6 @@ paths:
         '404':
           $ref: '#/components/responses/404'
 components:
-  responses:
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
   schemas:
     node:
       type: object
@@ -289,6 +270,25 @@ components:
         cpu_id:
           type: number
           example: 1
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
   securitySchemes:
     bearerAuth:
       type: http

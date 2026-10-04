@@ -116,24 +116,6 @@ paths:
         '401':
           $ref: '#/components/responses/401'
 components:
-  responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
   schemas:
     tlsCertificate:
       type: object
@@ -147,6 +129,24 @@ components:
         certificate:
           type: string
           example: '-----BEGIN CERTIFICATE-----\n<all_the_content_of_cert.pem_with_\n>\n-----END CERTIFICATE-----"'
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   securitySchemes:
     bearerAuth:
       type: http

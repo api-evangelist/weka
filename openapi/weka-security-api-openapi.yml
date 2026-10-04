@@ -936,15 +936,6 @@ components:
         uid:
           type: string
           example: fe98008e-397d-227b-a095-577783714006
-    userRole:
-      type: string
-      enum:
-      - ClusterAdmin
-      - TenantAdmin
-      - ReadOnly
-      - Regular
-      - S3
-      - CSI
     securityPolicy:
       type: object
       properties:
@@ -1017,7 +1008,24 @@ components:
           type: string
           example: PosixGID<65534>
           description: The anonymous group identifier (GID) for squashed users. Applies only when `squash_mode` is not `none`
+    userRole:
+      type: string
+      enum:
+      - ClusterAdmin
+      - TenantAdmin
+      - ReadOnly
+      - Regular
+      - S3
+      - CSI
   responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -1041,15 +1049,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '401':
       description: Unauthorized
       content:
@@ -1059,14 +1058,15 @@ components:
               data:
                 type: string
                 example: Unauthorized
-    '200':
-      description: Success
+    '404':
+      description: Not Found
       content:
         application/json:
           schema:
             properties:
-              data:
-                example: null
+              message:
+                type: string
+                example: error message
   securitySchemes:
     bearerAuth:
       type: http

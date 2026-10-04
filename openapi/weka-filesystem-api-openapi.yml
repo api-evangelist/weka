@@ -1001,7 +1001,7 @@ components:
         uid:
           type: string
           example: fe98008e-397d-227b-a095-577783714006
-    filesystemResolve:
+    filesystemInodeGetPath:
       type: object
       properties:
         access_point:
@@ -1013,12 +1013,9 @@ components:
         fs_name:
           type: string
           example: default
-        inode_context:
-          type: string
-          example: InodeContext<1>
         inode_id:
           type: string
-          example: InodeId<1>
+          example: '10092623495168'
         path:
           type: string
           example: /
@@ -1028,22 +1025,6 @@ components:
         snap_view_id:
           type: string
           example: SnapViewId<1>
-    ThinProvisionReserve:
-      type: object
-      properties:
-        id:
-          type: number
-          example: 0
-        uid:
-          type: string
-          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
-        name:
-          type: string
-          example: Root
-        ssd_reserve:
-          type: integer
-          format: int64
-          example: 0
     fileSystem:
       type: object
       properties:
@@ -1211,7 +1192,23 @@ components:
         kms_role:
           type: string
           example: 11bc2535-671a-63ad-c4f4-93b21afe8cd6
-    filesystemInodeGetPath:
+    ThinProvisionReserve:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 0
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        name:
+          type: string
+          example: Root
+        ssd_reserve:
+          type: integer
+          format: int64
+          example: 0
+    filesystemResolve:
       type: object
       properties:
         access_point:
@@ -1223,9 +1220,12 @@ components:
         fs_name:
           type: string
           example: default
+        inode_context:
+          type: string
+          example: InodeContext<1>
         inode_id:
           type: string
-          example: '10092623495168'
+          example: InodeId<1>
         path:
           type: string
           example: /
@@ -1236,6 +1236,14 @@ components:
           type: string
           example: SnapViewId<1>
   responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '403':
       description: Forbidden
       content:
@@ -1245,15 +1253,6 @@ components:
               data:
                 type: string
                 example: Forbidden
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
     '400':
       description: Bad Request
       content:
@@ -1286,14 +1285,15 @@ components:
               data:
                 type: string
                 example: Unauthorized
-    '200':
-      description: Success
+    '404':
+      description: Not Found
       content:
         application/json:
           schema:
             properties:
-              data:
-                example: null
+              message:
+                type: string
+                example: error message
   securitySchemes:
     bearerAuth:
       type: http

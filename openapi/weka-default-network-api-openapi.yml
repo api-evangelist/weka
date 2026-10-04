@@ -92,14 +92,6 @@ paths:
           $ref: '#/components/responses/401'
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '401':
       description: Unauthorized
       content:
@@ -109,6 +101,14 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
   schemas:
     defaultNet:
       type: object
