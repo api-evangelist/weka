@@ -1,17 +1,32 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/weka-openapi-original.json
+source: openapi/weka-active-directory-api-openapi.yml, openapi/weka-alerts-api-openapi.yml,
+  openapi/weka-catalog-api-openapi.yml, openapi/weka-cluster-api-openapi.yml, openapi/weka-containers-api-openapi.yml,
+  openapi/weka-data-service-api-openapi.yml, openapi/weka-default-network-api-openapi.yml, openapi/weka-drive-api-openapi.yml,
+  openapi/weka-events-api-openapi.yml, openapi/weka-failure-domains-api-openapi.yml, openapi/weka-filesystem-api-openapi.yml,
+  openapi/weka-filesystem-group-api-openapi.yml, openapi/weka-health-api-openapi.yml, openapi/weka-hosts-api-openapi.yml,
+  openapi/weka-interface-group-api-openapi.yml, openapi/weka-kms-api-openapi.yml, openapi/weka-ldap-api-openapi.yml,
+  openapi/weka-license-api-openapi.yml, openapi/weka-lockout-policy-api-openapi.yml, openapi/weka-login-api-openapi.yml,
+  openapi/weka-machines-api-openapi.yml, openapi/weka-mounts-defaults-api-openapi.yml, openapi/weka-networkspace-api-openapi.yml,
+  openapi/weka-nfs-api-openapi.yml, openapi/weka-nodes-api-openapi.yml, openapi/weka-object-store-api-openapi.yml,
+  openapi/weka-object-store-bucket-api-openapi.yml, openapi/weka-organization-api-openapi.yml,
+  openapi/weka-processes-api-openapi.yml, openapi/weka-quota-api-openapi.yml, openapi/weka-s3-api-openapi.yml,
+  openapi/weka-security-api-openapi.yml, openapi/weka-servers-api-openapi.yml, openapi/weka-smb-api-openapi.yml,
+  openapi/weka-snapshot-policy-api-openapi.yml, openapi/weka-snapshots-api-openapi.yml, openapi/weka-stats-api-openapi.yml,
+  openapi/weka-system-io-api-openapi.yml, openapi/weka-tasks-api-openapi.yml, openapi/weka-telemetry-api-openapi.yml,
+  openapi/weka-tenant-api-openapi.yml, openapi/weka-tls-api-openapi.yml, openapi/weka-traces-api-openapi.yml,
+  openapi/weka-user-api-openapi.yml, openapi/weka-weka-home-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 412
   by_action_class:
-    acting: 264
-    connected: 148
+    acting: 259
+    connected: 153
   by_consequence:
-    write: 236
-    read: 148
+    write: 231
+    read: 153
     safety-critical: 25
     physical: 3
   human_in_the_loop_required: 25
@@ -268,109 +283,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /wekaHome
-  method: get
-  operationId: getCloud
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /wekaHome/proxy
-  method: get
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /wekaHome/proxy
-  method: post
-  operationId: setCloudProxy
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /wekaHome/uploadRate
-  method: get
-  operationId: getCloudUploadRate
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /wekaHome/uploadRate
-  method: put
-  operationId: updateCloudUploadRate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /wekaHome/url
-  method: get
-  operationId: getCloudUrl
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /wekaHome/enable
-  method: post
-  operationId: enableCloud
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /wekaHome/disable
-  method: post
-  operationId: disableCloud
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
 - path: /cluster
   method: post
   operationId: createCluster
@@ -701,18 +613,12 @@ operations:
   method: post
   operationId: getContainersInfo
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /containers/requestedAction
   method: put
   operationId: setContainerRequestedAction
@@ -1107,84 +1013,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /fileSystems/{uid}/quota
-  method: get
-  operationId: listQuotas
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fileSystems/{uid}/quota/default
-  method: get
-  operationId: listDefaultQuotas
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fileSystems/{uid}/quota/{inode_id}
-  method: get
-  operationId: getQuota
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /fileSystems/{uid}/quota/{inode_id}
-  method: put
-  operationId: putQuota
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /fileSystems/{uid}/quota/{inode_id}
-  method: patch
-  operationId: patchQuota
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /fileSystems/{uid}/quota/{inode_id}
-  method: delete
-  operationId: deleteQuota
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /fileSystems/{inode_id}/getPath
   method: get
   operationId: filesystemResolveInode
@@ -1205,38 +1033,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /fileSystems/quota/{inode_id}
-  method: put
-  operationId: putDefaultQuota
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /fileSystems/quota/{inode_id}/default
-  method: delete
-  operationId: deleteDefaultQuota
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /fileSystems/{uid}/objectStoreBuckets/{obs_uid}
   method: delete
   operationId: detachObsBucketFromFS
@@ -1315,16 +1111,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /fileSystems/{uid}/resolvePath
-  method: get
-  operationId: resolvePath
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /fileSystems/{uid}/securityPolicy
   method: delete
   operationId: resetFsSecurityPolicies
@@ -1743,18 +1529,12 @@ operations:
   method: post
   operationId: getHostsInfo
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /interfaceGroups
   method: get
   operationId: getInterfaceGroups
@@ -3097,6 +2877,126 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /fileSystems/{uid}/quota
+  method: get
+  operationId: listQuotas
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fileSystems/{uid}/quota/default
+  method: get
+  operationId: listDefaultQuotas
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fileSystems/{uid}/quota/{inode_id}
+  method: get
+  operationId: getQuota
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /fileSystems/{uid}/quota/{inode_id}
+  method: put
+  operationId: putQuota
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fileSystems/{uid}/quota/{inode_id}
+  method: patch
+  operationId: patchQuota
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fileSystems/{uid}/quota/{inode_id}
+  method: delete
+  operationId: deleteQuota
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fileSystems/quota/{inode_id}
+  method: put
+  operationId: putDefaultQuota
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fileSystems/quota/{inode_id}/default
+  method: delete
+  operationId: deleteDefaultQuota
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /fileSystems/{uid}/resolvePath
+  method: get
+  operationId: resolvePath
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /quota
   method: get
   operationId: getQuotaDeprecated
@@ -4029,6 +3929,7 @@ operations:
     audit: none
 - path: /security/policies
   method: post
+  operationId: postSecurityPolicies
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -4080,6 +3981,7 @@ operations:
     audit: required
 - path: /security/policies/{policy}
   method: patch
+  operationId: patchSecurityPoliciesByPolicy
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -4095,6 +3997,7 @@ operations:
     audit: required
 - path: /security/policies/{policy}/duplicate
   method: post
+  operationId: postSecurityPoliciesByPolicyDuplicate
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -4256,6 +4159,7 @@ operations:
     audit: none
 - path: /servers/requestedAction
   method: put
+  operationId: putServersRequestedAction
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -4771,6 +4675,7 @@ operations:
     audit: required
 - path: /snapshots/{uid}
   method: delete
+  operationId: deleteSnapshotsByUid
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -4852,18 +4757,12 @@ operations:
   method: post
   operationId: locatorInfo
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /snapshots/diff/prepare
   method: post
   operationId: diffPrepare
@@ -4884,18 +4783,12 @@ operations:
   method: post
   operationId: diffList
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /stats
   method: get
   operationId: getStats
@@ -4940,18 +4833,12 @@ operations:
   method: post
   operationId: getStatsRetention
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /io/start
   method: post
   operationId: startIO
@@ -5707,6 +5594,110 @@ operations:
 - path: /users/{uid}/s3/resetCredentials
   method: post
   operationId: resetUserS3Credentials
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /wekaHome
+  method: get
+  operationId: getCloud
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wekaHome/proxy
+  method: get
+  operationId: getWekaHomeProxy
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wekaHome/proxy
+  method: post
+  operationId: setCloudProxy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /wekaHome/uploadRate
+  method: get
+  operationId: getCloudUploadRate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wekaHome/uploadRate
+  method: put
+  operationId: updateCloudUploadRate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /wekaHome/url
+  method: get
+  operationId: getCloudUrl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wekaHome/enable
+  method: post
+  operationId: enableCloud
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /wekaHome/disable
+  method: post
+  operationId: disableCloud
   x-agentic-access:
     action-class: acting
     consequence: safety-critical
