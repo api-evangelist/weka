@@ -170,14 +170,6 @@ paths:
         description: The unique identifier of the filesystem group.
 components:
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -210,6 +202,14 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '404':
       description: Not Found
       content:

@@ -100,16 +100,6 @@ paths:
                   description: Refresh token expiration time.
                   example: 300
 components:
-  responses:
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
   schemas:
     tokens:
       type: object
@@ -129,6 +119,16 @@ components:
         password_change_required:
           type: boolean
           example: false
+  responses:
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
   securitySchemes:
     bearerAuth:
       type: http

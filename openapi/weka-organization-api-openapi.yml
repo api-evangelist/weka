@@ -670,6 +670,18 @@ paths:
         description: The unique identifier (UID) of the organization.
 components:
   schemas:
+    networkSpaceInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: netspace-1
+        id:
+          type: string
+          example: NetspaceId<0>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
     securityPolicyInfo:
       type: object
       properties:
@@ -722,27 +734,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/networkSpaceInfo'
-    networkSpaceInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: netspace-1
-        id:
-          type: string
-          example: NetspaceId<0>
-        uid:
-          type: string
-          example: fe98008e-397d-227b-a095-577783714006
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -775,6 +767,14 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '404':
       description: Not Found
       content:

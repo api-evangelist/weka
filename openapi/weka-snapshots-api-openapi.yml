@@ -633,7 +633,160 @@ paths:
                   type: boolean
                   description: Include full filesystem path for each entry. Useful for reports, but adds processing overhead.
 components:
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
   schemas:
+    snapshotEdit:
+      type: object
+      properties:
+        id:
+          type: string
+          example: SnapViewId<10>
+        stowInfo:
+          type: object
+          properties:
+            LOCAL:
+              type: object
+              properties:
+                stowProgress:
+                  type: string
+                  example: 100%
+                locator:
+                  type: string
+                  example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+                multiObs:
+                  type: boolean
+                  example: false
+                locatorInfo:
+                  type: object
+                  properties:
+                    guid:
+                      type: string
+                      example: 00000000-0000-0000-0000-000000000000
+                    snapLayerId:
+                      type: string
+                      example: SnapLayerId<0>
+                stowStatus:
+                  type: string
+                  example: SYNCHRONIZED
+                stowVersion:
+                  type: string
+                  example: StowVersion<INVALID>
+                generation:
+                  type: string
+                  example: SnapLayerStowGeneration<INVALID>
+                isDownloaded:
+                  type: string
+                  example: 'no'
+            REMOTE:
+              type: object
+              properties:
+                stowProgress:
+                  type: string
+                  example: 100%
+                locator:
+                  type: string
+                  example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
+                multiObs:
+                  type: boolean
+                  example: false
+                locatorInfo:
+                  type: object
+                  properties:
+                    guid:
+                      type: string
+                      example: 00000000-0000-0000-0000-000000000000
+                    snapLayerId:
+                      type: string
+                      example: SnapLayerId<0>
+                stowStatus:
+                  type: string
+                  example: SYNCHRONIZED
+                stowVersion:
+                  type: string
+                  example: StowVersion<INVALID>
+                generation:
+                  type: string
+                  example: SnapLayerStowGeneration<INVALID>
+                isDownloaded:
+                  type: string
+                  example: 'no'
+        isWritable:
+          type: boolean
+          example: false
+        filesystemId:
+          type: string
+          example: FSId<0>
+        isRemoving:
+          type: boolean
+          example: false
+        name:
+          type: string
+          example: base
+        filesystem:
+          type: string
+          example: default
+        uid:
+          type: string
+          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
+        accessPoint:
+          type: string
+          example: '@GMT-2022.07.27-10.41.09'
+        snapLayerId:
+          type: string
+          example: SnapLayerId<1>
+        creationTime:
+          type: string
+          format: date-time
+          example: '2022-07-27T10:41:10Z'
     diff_list:
       type: object
       properties:
@@ -868,109 +1021,6 @@ components:
         fs_id:
           type: string
           example: FSId<8>
-    snapshotEdit:
-      type: object
-      properties:
-        id:
-          type: string
-          example: SnapViewId<10>
-        stowInfo:
-          type: object
-          properties:
-            LOCAL:
-              type: object
-              properties:
-                stowProgress:
-                  type: string
-                  example: 100%
-                locator:
-                  type: string
-                  example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-                multiObs:
-                  type: boolean
-                  example: false
-                locatorInfo:
-                  type: object
-                  properties:
-                    guid:
-                      type: string
-                      example: 00000000-0000-0000-0000-000000000000
-                    snapLayerId:
-                      type: string
-                      example: SnapLayerId<0>
-                stowStatus:
-                  type: string
-                  example: SYNCHRONIZED
-                stowVersion:
-                  type: string
-                  example: StowVersion<INVALID>
-                generation:
-                  type: string
-                  example: SnapLayerStowGeneration<INVALID>
-                isDownloaded:
-                  type: string
-                  example: 'no'
-            REMOTE:
-              type: object
-              properties:
-                stowProgress:
-                  type: string
-                  example: 100%
-                locator:
-                  type: string
-                  example: 0c295aa9/d/s/7/spec/0906-4408-aecd-34fd7f8ad498
-                multiObs:
-                  type: boolean
-                  example: false
-                locatorInfo:
-                  type: object
-                  properties:
-                    guid:
-                      type: string
-                      example: 00000000-0000-0000-0000-000000000000
-                    snapLayerId:
-                      type: string
-                      example: SnapLayerId<0>
-                stowStatus:
-                  type: string
-                  example: SYNCHRONIZED
-                stowVersion:
-                  type: string
-                  example: StowVersion<INVALID>
-                generation:
-                  type: string
-                  example: SnapLayerStowGeneration<INVALID>
-                isDownloaded:
-                  type: string
-                  example: 'no'
-        isWritable:
-          type: boolean
-          example: false
-        filesystemId:
-          type: string
-          example: FSId<0>
-        isRemoving:
-          type: boolean
-          example: false
-        name:
-          type: string
-          example: base
-        filesystem:
-          type: string
-          example: default
-        uid:
-          type: string
-          example: d4d24f1f-1d4b-58bc-c3de-169055ee6b95
-        accessPoint:
-          type: string
-          example: '@GMT-2022.07.27-10.41.09'
-        snapLayerId:
-          type: string
-          example: SnapLayerId<1>
-        creationTime:
-          type: string
-          format: date-time
-          example: '2022-07-27T10:41:10Z'
     snapshot:
       type: object
       properties:
@@ -1054,56 +1104,6 @@ components:
         estReclaimableSize:
           type: number
           example: 0
-  responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
   securitySchemes:
     bearerAuth:
       type: http

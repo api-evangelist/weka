@@ -1735,26 +1735,15 @@ paths:
         '401':
           $ref: '#/components/responses/401'
 components:
-  schemas:
-    s3Bucket:
-      type: object
-      properties:
-        name:
-          type: string
-          example: bucket1
-        hard_limit_bytes:
-          type: number
-          example: 10000003072
-        path:
-          type: string
-          example: /path
-        used_bytes:
-          type: number
-          example: 4096
-        fs:
-          type: string
-          example: default
   responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -1787,14 +1776,25 @@ components:
               data:
                 type: string
                 example: Unauthorized
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
+  schemas:
+    s3Bucket:
+      type: object
+      properties:
+        name:
+          type: string
+          example: bucket1
+        hard_limit_bytes:
+          type: number
+          example: 10000003072
+        path:
+          type: string
+          example: /path
+        used_bytes:
+          type: number
+          example: 4096
+        fs:
+          type: string
+          example: default
   securitySchemes:
     bearerAuth:
       type: http

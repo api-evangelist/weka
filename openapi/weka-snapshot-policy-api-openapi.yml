@@ -397,29 +397,6 @@ paths:
                   - MONTHLY
 components:
   schemas:
-    snapshotPolicy:
-      type: object
-      properties:
-        uid:
-          type: string
-          example: fe08008e-397d-237b-a095-577783714006
-        id:
-          type: string
-          example: SnapPolicyId<1>
-        name:
-          type: string
-          example: Backup
-        description:
-          type: string
-          example: Periodic filesystem backup
-        enable:
-          type: boolean
-          example: true
-        filesystems:
-          type: array
-          items:
-            type: string
-            example: default
     snapshotPolicyTemplate:
       type: object
       properties:
@@ -647,15 +624,30 @@ components:
             upload:
               type: string
               example: local
+    snapshotPolicy:
+      type: object
+      properties:
+        uid:
+          type: string
+          example: fe08008e-397d-237b-a095-577783714006
+        id:
+          type: string
+          example: SnapPolicyId<1>
+        name:
+          type: string
+          example: Backup
+        description:
+          type: string
+          example: Periodic filesystem backup
+        enable:
+          type: boolean
+          example: true
+        filesystems:
+          type: array
+          items:
+            type: string
+            example: default
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -688,6 +680,14 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '404':
       description: Not Found
       content:

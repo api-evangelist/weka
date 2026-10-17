@@ -226,6 +226,21 @@ paths:
           $ref: '#/components/responses/401'
 components:
   schemas:
+    tracesFreeze:
+      type: object
+      properties:
+        start_time:
+          type: string
+          example: '2022-01-01T00:00:00.000Z'
+        end_time:
+          type: string
+          example: '2022-01-01T00:00:00.000Z'
+        retention:
+          type: number
+          example: 0
+        comment:
+          type: string
+          example: WEKAPP-XXXXX
     traces:
       type: object
       properties:
@@ -265,21 +280,6 @@ components:
             value:
               type: number
               example: 3000000000
-    tracesFreeze:
-      type: object
-      properties:
-        start_time:
-          type: string
-          example: '2022-01-01T00:00:00.000Z'
-        end_time:
-          type: string
-          example: '2022-01-01T00:00:00.000Z'
-        retention:
-          type: number
-          example: 0
-        comment:
-          type: string
-          example: WEKAPP-XXXXX
   responses:
     '400':
       description: Bad Request

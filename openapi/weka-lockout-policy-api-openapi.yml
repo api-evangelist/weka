@@ -70,6 +70,14 @@ paths:
           $ref: '#/components/responses/401'
 components:
   responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '400':
       description: Bad Request
       content:
@@ -93,14 +101,6 @@ components:
                   error:
                     type: string
                     example: param2 has an error
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '401':
       description: Unauthorized
       content:

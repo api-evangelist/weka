@@ -475,56 +475,6 @@ paths:
           type: string
         description: The unique identifier (UID) of the object store bucket.
 components:
-  responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
-    '400':
-      description: Bad Request
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
-              data:
-                type: object
-                properties:
-                  missing_params:
-                    type: array
-                    items:
-                      type: string
-                      example: param1
-                  param:
-                    type: string
-                    example: param2
-                  error:
-                    type: string
-                    example: param2 has an error
-    '401':
-      description: Unauthorized
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            properties:
-              message:
-                type: string
-                example: error message
   schemas:
     objectStoreBucket:
       type: object
@@ -668,6 +618,56 @@ components:
           items:
             type: string
             example: NodeId<60>
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
+              data:
+                type: object
+                properties:
+                  missing_params:
+                    type: array
+                    items:
+                      type: string
+                      example: param1
+                  param:
+                    type: string
+                    example: param2
+                  error:
+                    type: string
+                    example: param2 has an error
+    '401':
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                type: string
+                example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
+    '404':
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            properties:
+              message:
+                type: string
+                example: error message
   securitySchemes:
     bearerAuth:
       type: http

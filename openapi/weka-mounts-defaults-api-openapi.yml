@@ -84,15 +84,14 @@ paths:
           description: Reset QoS preferred throughput to default.
 components:
   responses:
-    '401':
-      description: Unauthorized
+    '200':
+      description: Success
       content:
         application/json:
           schema:
             properties:
               data:
-                type: string
-                example: Unauthorized
+                example: null
     '404':
       description: Not Found
       content:
@@ -102,14 +101,15 @@ components:
               message:
                 type: string
                 example: error message
-    '200':
-      description: Success
+    '401':
+      description: Unauthorized
       content:
         application/json:
           schema:
             properties:
               data:
-                example: null
+                type: string
+                example: Unauthorized
   schemas:
     mountDefaults:
       type: object

@@ -924,18 +924,6 @@ paths:
           $ref: '#/components/responses/401'
 components:
   schemas:
-    securityPolicyInfo:
-      type: object
-      properties:
-        name:
-          type: string
-          example: remoteAdmins
-        id:
-          type: string
-          example: SecurityPolicy<5>
-        uid:
-          type: string
-          example: fe98008e-397d-227b-a095-577783714006
     securityPolicy:
       type: object
       properties:
@@ -1017,15 +1005,19 @@ components:
       - Regular
       - S3
       - CSI
+    securityPolicyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          example: remoteAdmins
+        id:
+          type: string
+          example: SecurityPolicy<5>
+        uid:
+          type: string
+          example: fe98008e-397d-227b-a095-577783714006
   responses:
-    '200':
-      description: Success
-      content:
-        application/json:
-          schema:
-            properties:
-              data:
-                example: null
     '400':
       description: Bad Request
       content:
@@ -1058,6 +1050,14 @@ components:
               data:
                 type: string
                 example: Unauthorized
+    '200':
+      description: Success
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                example: null
     '404':
       description: Not Found
       content:
